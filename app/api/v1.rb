@@ -1,39 +1,23 @@
 class V1 < Grape::API
   helpers do
-    def project_params
-      ActionController::Parameters.new(params).require(:project).permit(:name)
+    def authenticate_error!
+      h = {'Access-Control-Allow-Origin' => "*",
+           'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(",")}
+      error!('Please signin first.', 401, h)
     end
+
+    def authenticate_user!
+      uid = request.headers['Uid']
+      token = request.headers['Access-Token']
+      client = request.headers['Client']
+      @user = User.find_by_uid(uid)
+
+      unless @user && @user.valid_token?(token, client)
+        authenticate_error!
+      end
+    end
+
   end
-
-  resource :projects do
-    get do
-      Project.all.limit 10
-    end
-
-    params do
-      requires :project, type: Hash do
-        requires :name, type: String
-        requires :description, type: String
-      end
-    end
-
-    post do
-      proj = Project.create project_params
-      proj.to_json
-    end
-
-    resource ':id' do
-      patch do
-        proj = Project.find(params[:id])
-        proj.update project_params
-        proj.to_json
-      end
-
-      delete do
-        proj = Project.find(params[:id])
-        proj.destroy
-        {}
-      end
-    end
-  end
+  mount V1::ProjectsAPI
+  mount V1::UsersAPI
 end

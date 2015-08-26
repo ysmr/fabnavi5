@@ -1,0 +1,2 @@
+class PhotoList < Content
+end

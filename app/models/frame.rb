@@ -1,0 +1,2 @@
+class Flame < Figure
+end

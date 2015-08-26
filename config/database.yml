@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password: password
+  socket: /run/mysql-fabnavi/mysqld.sock
+
+development:
+  <<: *default
+  database: fabnavi5_development
+
+test:
+  <<: *default
+  database: fabnavi5_test
+
+production:
+  <<: *default
+  database: fabnavi5_production
+  username: fabnavi5
+  password: <%= ENV['FABNAVI5_DATABASE_PASSWORD'] %>

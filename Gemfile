@@ -12,6 +12,16 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'config'
+gem 'bourbon'
+gem 'neat'
+gem 'slim-rails'
+gem 'carrierwave'
+gem 'react-rails'
+gem 'grape'
+gem 'devise'
+gem 'devise_token_auth'
+gem 'grape'
+gem 'omniauth', '>= 1.0.0'
 
 group :development, :test do
   gem 'byebug'

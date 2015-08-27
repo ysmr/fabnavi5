@@ -1,13 +1,14 @@
 class V1::ProjectsAPI < V1::BaseAPI
   helpers do
     def project_params
-      ActionController::Parameters.new(params).require(:project).permit(:name)
+      ActionController::Parameters.new(params)
+        .require(:project).permit *(Project.acceptable_attributes)
     end
   end
 
   resource :projects do
     get do
-      Project.all.limit 10
+      Project.order(id: :desc).page(params[:page])
     end
 
     params do

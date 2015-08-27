@@ -23,6 +23,8 @@ gem 'devise_token_auth'
 gem 'grape'
 gem 'omniauth', '>= 1.0.0'
 gem 'rails-erd'
+gem 'kaminari'
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   gem 'byebug'

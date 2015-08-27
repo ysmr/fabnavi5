@@ -36,6 +36,20 @@ class V1::ProjectsAPI < V1::BaseAPI
         proj.destroy
         {}
       end
+
+      patch 'like' do
+        authenticate_user!
+        proj = Project.find(params[:id])
+        proj.liked_by current_user
+        {}
+      end
+
+      patch 'unlike' do
+        authenticate_user!
+        proj = Project.find(params[:id])
+        proj.unliked_by current_user
+        {}
+      end
     end
   end
 end

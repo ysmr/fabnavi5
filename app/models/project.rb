@@ -3,6 +3,7 @@ class Project < ActiveRecord::Base
   has_one :content
 
   acts_as_taggable
+  acts_as_votable
 
   accepts_nested_attributes_for :content
 

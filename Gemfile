@@ -25,6 +25,7 @@ gem 'omniauth', '>= 1.0.0'
 gem 'rails-erd'
 gem 'kaminari'
 gem 'acts-as-taggable-on'
+gem 'acts_as_votable'
 
 group :development, :test do
   gem 'byebug'

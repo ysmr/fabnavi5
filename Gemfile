@@ -28,7 +28,7 @@ gem 'acts-as-taggable-on'
 gem 'acts_as_votable'
 
 group :development, :test do
-  gem 'byebug'
+  gem 'pry-byebug'
 
   gem 'rspec-rails'
   gem 'guard-rspec', require: false

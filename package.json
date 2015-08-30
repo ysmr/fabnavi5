@@ -1,0 +1,16 @@
+{
+  "name": "fabnavi5",
+  "dependencies" : {
+    "browserify"            : "~> 10.2.4",
+    "browserify-incremental": "^3.0.1",
+    "react"                 : "~> 0.13.3",
+    "react-router"          : "~> 0.13.3",
+    "flux"                  : "~> 2.1.1",
+    "machina"               : "~> 1.1.2"
+  },
+    
+  "license": "MIT",
+  "engines": {
+    "node" : ">= 0.12"
+  }
+}

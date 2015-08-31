@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20150830125740) do
   end
 
   create_table "contents", force: :cascade do |t|
-    t.string   "movie",      limit: 255
+    t.string   "type",       limit: 255
     t.integer  "project_id", limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false

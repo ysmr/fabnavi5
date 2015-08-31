@@ -5,7 +5,7 @@ class Figure < ActiveRecord::Base
 
   class << self
     def acceptable_attributes
-      %i(attachment_id)
+      %i(_destroy attachment_id)
     end
   end
 end

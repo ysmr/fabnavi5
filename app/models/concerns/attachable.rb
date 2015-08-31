@@ -3,7 +3,7 @@ module Attachable
   included do
     attr_accessor :attachment_id
 
-    has_one :attachment, as: :attachable
+    has_one :attachment, as: :attachable, dependent: :destroy
 
     before_save :attach
 
@@ -12,8 +12,8 @@ module Attachable
 
   private
   def attach
-    if attachment_id.present?
-      self.attachment = Attachment.unattached.find attachment_id
+    if att = Attachment.unattached.find_by(attachable_id: id)
+      self.attachment = att
     end
   end
 end

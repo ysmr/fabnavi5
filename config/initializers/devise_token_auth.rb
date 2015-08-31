@@ -1,4 +1,8 @@
+require 'devise_token_auth_persona'
+
 DeviseTokenAuth.setup do |config|
+  config.persona_audience_url = 'http://192.168.33.10:3000'
+
   # By default the authorization headers will change after each request. The
   # client is responsible for keeping track of the changing tokens. Change
   # this to false to prevent the Authorization header from changing after

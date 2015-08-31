@@ -23,5 +23,5 @@ class V1 < Grape::API
   end
   mount V1::ProjectsAPI
   mount V1::UsersAPI
-  mount V1::UploadedFilesAPI
+  mount V1::AttachmentsAPI
 end

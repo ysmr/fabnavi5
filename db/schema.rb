@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827081657) do
+ActiveRecord::Schema.define(version: 20150830125740) do
 
   create_table "contents", force: :cascade do |t|
     t.string   "movie",      limit: 255
@@ -71,6 +71,12 @@ ActiveRecord::Schema.define(version: 20150827081657) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+
+  create_table "uploaded_files", force: :cascade do |t|
+    t.string   "file",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               limit: 255,   default: "email", null: false

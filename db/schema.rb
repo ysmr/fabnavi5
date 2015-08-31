@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150830125740) do
 
   create_table "figures", force: :cascade do |t|
     t.string   "image",      limit: 255
+    t.string   "type",       limit: 255
     t.integer  "content_id", limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false

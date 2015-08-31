@@ -1,9 +1,9 @@
 class Project < ActiveRecord::Base
-  belongs_to :user
-  has_one :content
-
   acts_as_taggable
   acts_as_votable
+
+  belongs_to :user
+  has_one :content
 
   accepts_nested_attributes_for :content
 

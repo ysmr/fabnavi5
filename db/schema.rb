@@ -13,6 +13,14 @@
 
 ActiveRecord::Schema.define(version: 20150830125740) do
 
+  create_table "attachments", force: :cascade do |t|
+    t.string   "file",            limit: 255
+    t.integer  "attachable_id",   limit: 4
+    t.string   "attachable_type", limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
   create_table "contents", force: :cascade do |t|
     t.string   "movie",      limit: 255
     t.integer  "project_id", limit: 4
@@ -30,16 +38,6 @@ ActiveRecord::Schema.define(version: 20150830125740) do
   end
 
   add_index "figures", ["content_id"], name: "index_figures_on_content_id", using: :btree
-
-  create_table "likes", force: :cascade do |t|
-    t.integer  "project_id", limit: 4
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-  end
-
-  add_index "likes", ["project_id"], name: "index_likes_on_project_id", using: :btree
-  add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -71,12 +69,6 @@ ActiveRecord::Schema.define(version: 20150830125740) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
-
-  create_table "uploaded_files", force: :cascade do |t|
-    t.string   "file",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               limit: 255,   default: "email", null: false
@@ -124,7 +116,5 @@ ActiveRecord::Schema.define(version: 20150830125740) do
 
   add_foreign_key "contents", "projects"
   add_foreign_key "figures", "contents"
-  add_foreign_key "likes", "projects"
-  add_foreign_key "likes", "users"
   add_foreign_key "projects", "users"
 end

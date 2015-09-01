@@ -1,5 +1,3 @@
-require 'devise_token_auth_persona'
-
 DeviseTokenAuth.setup do |config|
   config.persona_audience_url = 'http://192.168.33.10:3000'
 

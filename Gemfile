@@ -22,7 +22,7 @@ gem 'grape-swagger'
 gem 'grape-swagger-rails'
 gem 'devise'
 gem "devise_browserid_authenticatable"
-gem 'devise_token_auth'
+gem 'devise_token_auth', github: 'fabnavi/devise_token_auth', branch: 'persona'
 gem 'grape'
 gem 'rails-erd'
 gem 'kaminari'

@@ -9,7 +9,7 @@ module DeviseTokenAuth::Persona
 end
 DeviseTokenAuth.include DeviseTokenAuth::Persona
 
-module DeviseTokenAuth::PersonaSessionsController
+DeviseTokenAuth::SessionsController.class_eval do
   def create
     # Check
     field = (resource_params.keys.map(&:to_sym) & resource_class.authentication_keys).first
@@ -84,4 +84,3 @@ module DeviseTokenAuth::PersonaSessionsController
     [authentication['email'], authentication['issuer']]
   end
 end
-DeviseTokenAuth::SessionsController.prepend DeviseTokenAuth::PersonaSessionsController

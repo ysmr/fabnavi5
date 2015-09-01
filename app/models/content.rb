@@ -1,4 +1,6 @@
 class Content < ActiveRecord::Base
+  include Attachable
+
   belongs_to :project
   has_many :figures
 
@@ -6,7 +8,7 @@ class Content < ActiveRecord::Base
 
   class << self
     def acceptable_attributes
-      %i(type description _destroy) + [figures_attributes: Figure.acceptable_attributes]
+      %i(id description attachment_id) + [figures_attributes: Figure.acceptable_attributes]
     end
   end
 end

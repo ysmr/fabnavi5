@@ -22,10 +22,11 @@ ActiveRecord::Schema.define(version: 20150830125740) do
   end
 
   create_table "contents", force: :cascade do |t|
-    t.string   "type",       limit: 255
-    t.integer  "project_id", limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "type",        limit: 255
+    t.text     "description", limit: 65535
+    t.integer  "project_id",  limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   add_index "contents", ["project_id"], name: "index_contents_on_project_id", using: :btree

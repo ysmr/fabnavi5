@@ -5,14 +5,16 @@ module Attachable
 
     has_one :attachment, as: :attachable, dependent: :destroy
 
-    before_save :attach
-
     accepts_nested_attributes_for :attachment, allow_destroy: true
   end
 
-  private
-  def attach
-    if att = Attachment.unattached.find_by(attachable_id: id)
+  def to_be_attached?
+    attachment_id.present?
+  end
+
+  def attach!
+    return unless attachment_id
+    if att = Attachment.unattached.find_by(id: attachment_id)
       self.attachment = att
     end
   end

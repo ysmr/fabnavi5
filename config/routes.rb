@@ -5,6 +5,4 @@ Rails.application.routes.draw do
     mount API => '/'
     mount GrapeSwaggerRails::Engine => '/v1/swagger'
   end
-
-  root "application#index"
 end

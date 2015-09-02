@@ -7,6 +7,8 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_one :content, dependent: :destroy
 
+  validates :name, presence: true
+
   accepts_nested_attributes_for :content
 
   after_commit :link_attachments!, on: :update

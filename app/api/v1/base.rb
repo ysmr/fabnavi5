@@ -1,4 +1,4 @@
-class V1::BaseAPI < Grape::API
+class V1::Base < Grape::API
   AUTH_HEADERS = {
     "Client" => {
       required: true

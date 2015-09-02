@@ -21,9 +21,8 @@ class V1 < Grape::API
       @current_user
     end
   end
-  mount V1::ProjectsAPI
-  mount V1::UsersAPI
-  mount V1::AttachmentsAPI
+  mount V1::Projects
+  mount V1::Attachments
   add_swagger_documentation(
     base_path: "/api/v1",
     hide_documentation_path: true

@@ -6,7 +6,8 @@
     "react"                 : "~> 0.13.3",
     "react-router"          : "~> 0.13.3",
     "flux"                  : "~> 2.1.1",
-    "machina"               : "~> 1.1.2"
+    "machina"               : "~> 1.1.2",
+    "parseUri"              : "~> 1.2.3-2"
   },
     
   "license": "MIT",

@@ -18,17 +18,20 @@ gem 'slim-rails'
 gem 'carrierwave'
 gem 'react-rails'
 gem 'grape'
+gem 'grape-swagger'
+gem 'grape-swagger-rails'
 gem 'devise'
-gem 'devise_token_auth'
+gem "devise_browserid_authenticatable"
+gem 'devise_token_auth', github: 'fabnavi/devise_token_auth', branch: 'persona'
 gem 'grape'
-gem 'omniauth', '>= 1.0.0'
 gem 'rails-erd'
 gem 'kaminari'
 gem 'acts-as-taggable-on'
 gem 'browserify-rails'
+gem 'acts_as_votable'
 
 group :development, :test do
-  gem 'byebug'
+  gem 'pry-byebug'
 
   gem 'rspec-rails'
   gem 'guard-rspec', require: false

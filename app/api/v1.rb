@@ -10,14 +10,22 @@ class V1 < Grape::API
       uid = request.headers['Uid']
       token = request.headers['Access-Token']
       client = request.headers['Client']
-      @user = User.find_by_uid(uid)
+      @current_user = User.find_by_uid(uid)
 
-      unless @user && @user.valid_token?(token, client)
+      unless @current_user && @current_user.valid_token?(token, client)
         authenticate_error!
       end
     end
 
+    def current_user
+      @current_user
+    end
   end
   mount V1::ProjectsAPI
   mount V1::UsersAPI
+  mount V1::AttachmentsAPI
+  add_swagger_documentation(
+    base_path: "/api/v1",
+    hide_documentation_path: true
+  )
 end

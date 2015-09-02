@@ -14,7 +14,7 @@ module Attachable
 
   def attach!
     return unless attachment_id
-    if att = Attachment.unattached.find_by(id: attachment_id)
+    if att = current_user.attachments.unattached.find_by(id: attachment_id)
       self.attachment = att
     end
   end

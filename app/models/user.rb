@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :projects, dependent: :destroy
+  has_many :attachments, dependent: :destroy
 
   class << self
     def authentication_keys

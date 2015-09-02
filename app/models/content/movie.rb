@@ -1,4 +1,4 @@
-class Movie < Content
+class Content::Movie < Content
   class << self
     def acceptable_attributes
       super + %i(attachable_id)

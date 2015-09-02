@@ -8,7 +8,7 @@ class V1::AttachmentsAPI < V1::BaseAPI
     end
     post do
       authenticate_user!
-      att = Attachment.create file: params[:attachment][:file]
+      att = current_user.attachments.create_with_type params[:attachment][:file]
       att.to_json
     end
   end

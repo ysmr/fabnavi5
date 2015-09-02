@@ -21,8 +21,9 @@ class V1::ProjectsAPI < V1::BaseAPI
     params do
       requires :project, type: Hash do
         requires :name, type: String
-        requires :description, type: String
-        requires :content_type, type: String
+        requires :content_attributes, type: Hash do
+          requires :type, type: String
+        end
       end
     end
     post do
@@ -42,11 +43,13 @@ class V1::ProjectsAPI < V1::BaseAPI
           optional :name, type: String
           optional :description, type: String
           optional :tag_list, type: String
+          optional :attachment_id, type: Integer
           optional :content_attributes, type: Hash do
             optional :description, type: String
             optional :attachment_id, type: Integer
             optional :figures_attributes, type: Array do
               optional :id, type: Integer
+              optional :type, type: String
               optional :_destroy, type: Boolean
               optional :attachment_id, type: Integer
             end

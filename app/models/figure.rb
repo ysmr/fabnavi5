@@ -3,16 +3,17 @@ class Figure < ActiveRecord::Base
 
   belongs_to :content
 
-  #before_save :set_type
+  validates :type, presence: true
+  validate :validate_parent_model
 
   private
-  def set_type
-    content.type
+  def validate_parent_model
+    raise NotImprementedError, 'Use inherited classes.'
   end
 
   class << self
     def acceptable_attributes
-      %i(_destroy id attachment_id)
+      %i(_destroy id type attachment_id)
     end
   end
 end

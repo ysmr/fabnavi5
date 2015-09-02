@@ -12,9 +12,9 @@ module Attachable
     attachment_id.present?
   end
 
-  def attach!
+  def attach! option = {}
     return unless attachment_id
-    if att = current_user.attachments.unattached.find_by(id: attachment_id)
+    if att = option[:attachment_owner].attachments.unattached.find_by(id: attachment_id)
       self.attachment = att
     end
   end

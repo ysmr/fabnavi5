@@ -12,10 +12,10 @@ class Project < ActiveRecord::Base
   after_commit :link_attachments!, on: :update
 
   def link_attachments!
-    attach! if to_be_attached?
-    content.attach! if content.to_be_attached?
+    attach! attachment_owner: user if to_be_attached?
+    content.attach! attachment_owner: user if content.to_be_attached?
     content.figures.each do |figure|
-      figure.attach! if figure.to_be_attached?
+      figure.attach! attachment_owner: user if figure.to_be_attached?
     end
   end
 

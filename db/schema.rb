@@ -14,12 +14,16 @@
 ActiveRecord::Schema.define(version: 20150830125740) do
 
   create_table "attachments", force: :cascade do |t|
+    t.string   "type",            limit: 255
     t.string   "file",            limit: 255
     t.integer  "attachable_id",   limit: 4
     t.string   "attachable_type", limit: 255
+    t.integer  "user_id",         limit: 4
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
+
+  add_index "attachments", ["user_id"], name: "index_attachments_on_user_id", using: :btree
 
   create_table "contents", force: :cascade do |t|
     t.string   "type",        limit: 255
@@ -116,6 +120,7 @@ ActiveRecord::Schema.define(version: 20150830125740) do
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
+  add_foreign_key "attachments", "users"
   add_foreign_key "contents", "projects"
   add_foreign_key "figures", "contents"
   add_foreign_key "projects", "users"

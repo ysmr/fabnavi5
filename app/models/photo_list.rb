@@ -1,2 +1,0 @@
-class PhotoList < Content
-end

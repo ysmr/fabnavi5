@@ -1,44 +1,34 @@
 class Project < ActiveRecord::Base
+  include Attachable
+
   acts_as_taggable
   acts_as_votable
-  attr_accessor :content_type
 
   belongs_to :user
   has_one :content, dependent: :destroy
-  validates :content_type, on: :create, inclusion: [PhotoList.name, Movie.name]
+
+  validates :name, presence: true
 
   accepts_nested_attributes_for :content
 
-  before_create :build_content_with_type
-  after_commit :attach!, on: :update
+  after_commit :link_attachments!, on: :update
 
-  def attach!
-    content.attach! if content.to_be_attached?
+  def link_attachments!
+    attach! attachment_owner: user if to_be_attached?
+    content.attach! attachment_owner: user if content.to_be_attached?
     content.figures.each do |figure|
-      figure.attach! if figure.to_be_attached?
+      figure.attach! attachment_owner: user if figure.to_be_attached?
     end
   end
 
   private
-  def build_content_with_type
-    content = build_content
-    case content_type
-    when PhotoList.name
-      content.type = PhotoList.name
-    when Movie.name
-      content.type = Movie.name
-    else
-      raise 'Unknown content type.'
-    end
-  end
-
   class << self
     def acceptable_attributes_for_create
-      %i(name description content_type)
+      %i(name content_attributes) + [content_attributes: Content.acceptable_attributes_for_create]
     end
 
     def acceptable_attributes_for_update
-      %i(tag_list name description) + [content_attributes: Content.acceptable_attributes]
+      %i(tag_list name description attachment_id) + [content_attributes: Content.acceptable_attributes_for_update]
     end
   end
 end

@@ -1,4 +1,4 @@
-class V1::AttachmentsAPI < V1::BaseAPI
+class V1::Attachments < V1::Base
   resource :attachments do
     desc 'Upload a file', {headers: AUTH_HEADERS}
     params do
@@ -6,10 +6,10 @@ class V1::AttachmentsAPI < V1::BaseAPI
         requires :file, type: Rack::Multipart::UploadedFile
       end
     end
-    post do
+    post jbuilder: 'v1/attachments/create' do
       authenticate_user!
-      att = Attachment.create file: params[:attachment][:file]
-      att.to_json
+      @attachment = current_user.attachments
+        .create_with_type params[:attachment][:file]
     end
   end
 end

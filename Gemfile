@@ -6,7 +6,6 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'therubyracer', platforms: :ruby
-gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -17,7 +16,6 @@ gem 'neat'
 gem 'slim-rails'
 gem 'mini_magick'
 gem 'carrierwave'
-gem 'react-rails'
 gem 'grape'
 gem 'grape-swagger'
 gem 'grape-swagger-rails'
@@ -25,15 +23,14 @@ gem 'grape-jbuilder'
 gem 'devise'
 gem "devise_browserid_authenticatable"
 gem 'devise_token_auth', github: 'fabnavi/devise_token_auth', branch: 'persona'
-gem 'grape'
 gem 'rails-erd'
 gem 'kaminari'
 gem 'acts-as-taggable-on'
+gem 'browserify-rails'
 gem 'acts_as_votable'
 
 group :development, :test do
   gem 'pry-byebug'
-
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
   gem 'database_cleaner'

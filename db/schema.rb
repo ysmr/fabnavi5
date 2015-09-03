@@ -26,24 +26,32 @@ ActiveRecord::Schema.define(version: 20150830125740) do
   add_index "attachments", ["user_id"], name: "index_attachments_on_user_id", using: :btree
 
   create_table "contents", force: :cascade do |t|
-    t.string   "type",        limit: 255
-    t.text     "description", limit: 65535
-    t.integer  "project_id",  limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "movie",      limit: 255
+    t.integer  "project_id", limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "contents", ["project_id"], name: "index_contents_on_project_id", using: :btree
 
   create_table "figures", force: :cascade do |t|
     t.string   "image",      limit: 255
-    t.string   "type",       limit: 255
     t.integer  "content_id", limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
   add_index "figures", ["content_id"], name: "index_figures_on_content_id", using: :btree
+
+  create_table "likes", force: :cascade do |t|
+    t.integer  "project_id", limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "likes", ["project_id"], name: "index_likes_on_project_id", using: :btree
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -123,5 +131,7 @@ ActiveRecord::Schema.define(version: 20150830125740) do
   add_foreign_key "attachments", "users"
   add_foreign_key "contents", "projects"
   add_foreign_key "figures", "contents"
+  add_foreign_key "likes", "projects"
+  add_foreign_key "likes", "users"
   add_foreign_key "projects", "users"
 end

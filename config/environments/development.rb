@@ -38,4 +38,12 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  #
+  config.browserify_rails.paths = [ /app\/assets\/javascripts\/fabnavi.js/,
+                                    /vendor\/assets\/javascripts\/module\.js/]
+  config.browserify_rails.source_map_environments << "development"
+  config.browserify_rails.evaluate_node_modules = true
+  config.browserify_rails.force = true 
+  config.browserify_rails.commandline_options = ["--fast"]
+
 end

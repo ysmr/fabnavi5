@@ -21,7 +21,6 @@ gem 'grape-swagger-rails'
 gem 'devise'
 gem "devise_browserid_authenticatable"
 gem 'devise_token_auth', github: 'fabnavi/devise_token_auth', branch: 'persona'
-gem 'grape'
 gem 'rails-erd'
 gem 'kaminari'
 gem 'acts-as-taggable-on'
@@ -30,7 +29,6 @@ gem 'acts_as_votable'
 
 group :development, :test do
   gem 'pry-byebug'
-
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
   gem 'database_cleaner'

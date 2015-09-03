@@ -1,4 +1,4 @@
-var Footer = React.createClass({
+module.exports = React.createClass({
 
   propTypes : {
   },

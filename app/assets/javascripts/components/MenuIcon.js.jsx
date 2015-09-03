@@ -1,5 +1,4 @@
-
-var MenuIcon = React.createClass({
+module.exports =  React.createClass({
 
   propTypes : {
     act   : React.PropTypes.string.isRequired,

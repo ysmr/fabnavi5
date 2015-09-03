@@ -1,4 +1,5 @@
-var Navigation = React.createClass({
+var MenuIcon = require('./MenuIcon.js.jsx');
+module.exports = React.createClass({
 
   getStateFromStores : function getStateFromStores() {
     return {

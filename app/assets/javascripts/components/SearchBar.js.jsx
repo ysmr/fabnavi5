@@ -1,4 +1,4 @@
-var SearchBar = React.createClass({
+module.exports = React.createClass({
 
   propTypes : {
   },

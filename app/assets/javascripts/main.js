@@ -3,7 +3,8 @@ var ProjectStore = require('stores/ProjectStore');
 var ProjectSelectorStore = require('stores/ProjectSelectorStore');
 var AppDispatcher = require('dispatcher/AppDispatcher');
 var KeyActionCreator = require('actions/KeyActionCreator');
-var FabnaviApp = require('components/FabnaviApp');
+var FabnaviApp = require('components/FabnaviApp.js.jsx');
+var React = require('react');
 
 module.exports = function ( ) {
   AccountStore.init();

@@ -1,4 +1,4 @@
-var ProjectElement = React.createClass({
+module.exports = React.createClass({
 
   propTypes : {
   },

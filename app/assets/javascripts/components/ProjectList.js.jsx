@@ -1,4 +1,4 @@
-var ProjectList = React.createClass({
+module.exports = React.createClass({
 
   propTypes : {
 

@@ -1,3 +1,5 @@
+var ActionTypes = require('constants/ActionTypes');
+var AppDispatcher = require('dispatcher/AppDispatcher');
 module.exports = KeyActionCreator = {
   handleKeyDown : function ( event ) {
     if(event.metaKey) return 0;

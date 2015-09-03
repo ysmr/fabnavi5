@@ -8,7 +8,8 @@
     "jquery-ujs": "^1.0.4",
     "machina": "^1.1.2",
     "react": "^0.13.3",
-    "react-router": "^0.13.3"
+    "react-router": "^0.13.3",
+    "reactify": "^1.1.1"
   },
   "license": "MIT",
   "engines": {

@@ -1,0 +1,153 @@
+@import "../var.scss";
+@import "bourbon";
+@import "neat";
+body {
+  background-color: $black;
+  color: $white;
+}
+
+a,
+a:active,
+a:visited,
+a:link {
+  color: $white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $brown;
+  text-decoration: none;
+}
+
+body {
+  z-index:0;
+}
+header {
+ margin-top:-10px;
+ z-index:100;
+  position:fixed;
+
+  background-color:#231815;
+  width:100%;
+} 
+.header {
+  @include outer-container;
+  width:100%;
+
+}
+
+.menu {
+   margin-top:20px;
+  @include span-columns(8);
+}
+
+
+
+.menu-action {
+  @include span-columns(1.5 of 8);
+  img {
+    width:100%;
+    background-color:$white;
+  }
+  border-radius: 20px;
+}
+
+.current-page {
+  img {
+    background-color:$selected-color;
+  }
+}
+
+.nav-action {
+ img{
+    border:solid 4px $white;
+    border-radius: 20px;
+   }
+}
+.nav-action :hover {
+  border:solid 4px $hover-color;
+}
+.selected-nav-action {
+ img{
+  border:solid 4px $selected-color;
+  border-radius: 20px;
+ }
+}
+
+.logo {
+  @include span-columns(3);
+}
+// User edit
+
+.avatar {
+  max-width:400px;
+  max-height:400px;
+}
+
+//nav
+
+.nav {
+  margin-top:30px;
+  @include outer-container;
+ .notice {
+  position:relative;
+  .pin {
+    margin:0 auto;
+    position:absolute;
+    width:80%;
+    bottom:45pt;
+  }
+    border: 10px outset #D78324;
+    float:left;
+    font-size:20pt;
+    margin:10px;
+    padding: 10px 30px;
+    background-color:#3D3A39;
+  }
+}
+
+.padding-box {
+  height:200px;
+}
+
+.belt {
+  @include outer-container(100%);
+  background-color: $brown;
+  padding-bottom: 20px;
+}
+.search-bar {
+  width: $ct-width;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top:5px;
+  height: $belt-height;
+  form {
+    position: absolute;
+    right: 0;
+    margin-right: (100% - $ct-width) / 8;
+    width: $ct-width / 3;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: none;
+
+    input {
+      box-shadow: none;
+      line-height: $belt-height;
+      background: none;
+      border: none;
+      width: 80%;
+      font-size:14pt;
+      float:right;
+      font-style:italic;
+    }
+    .search-icon {
+      margin:5px 0;
+      margin-left : 5px;
+      height:$belt-height;
+      width:$belt-height;
+      display:block;
+      background: url("/images/search_icon.png") no-repeat scroll 0 0;;
+    }
+  }
+}

@@ -13,5 +13,4 @@
 window.machina = require('machina');
 window.EventEmitter = require('events');
 window.React = require('react');
-window.Flux = require('flux');
-
+window.onload = require('main');

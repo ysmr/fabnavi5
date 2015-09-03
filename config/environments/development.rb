@@ -44,6 +44,6 @@ Rails.application.configure do
   config.browserify_rails.source_map_environments << "development"
   config.browserify_rails.evaluate_node_modules = true
   config.browserify_rails.force = true 
-  config.browserify_rails.commandline_options = ["--fast"]
+  config.browserify_rails.commandline_options = "-t reactify  --extension=.jsx --fast"
 
 end

@@ -1,9 +1,9 @@
-var AppDispatcher = require('dispatcher/AppDispatcher');
+var AppDispatcher = require('../dispatcher/AppDispatcher');
 var _projects = {};
-var EventTypes = require('constants/EventTypes');
-var ActionTypes = require('constants/ActionTypes');
+var EventTypes = require('../constants/EventTypes');
+var ActionTypes = require('../constants/ActionTypes');
 
-module.exports = ProjectStore = Object.assign({}, EventEmitter.prototype, {
+var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     _projects = [];
     this.emitChange();
@@ -33,3 +33,6 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
   };
 
 });
+
+ProjectStore.init();
+module.exports = ProjectStore;

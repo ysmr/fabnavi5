@@ -1,9 +1,10 @@
 var _accountInfo = {};
-var AppDispatcher = require('dispatcher/AppDispatcher');
-var EventTypes = require('constants/EventTypes');
-var ActionTypes = require('constants/ActionTypes');
+var AppDispatcher = require('../dispatcher/AppDispatcher');
+var EventTypes = require('../constants/EventTypes');
+var ActionTypes = require('../constants/ActionTypes');
 
-module.exports = AccountStore = Object.assign({}, EventEmitter.prototype, {
+
+var AccountStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     _accountInfo.email = (window.hasOwnProperty('CURRENT_USER') && window.CURRENT_USER) || "";
   }, 
@@ -72,3 +73,6 @@ AccountStore.dispatchToken = AppDispatcher.register(function( action ){
 
 });
 
+
+AccountStore.init();
+module.exports = AccountStore;

@@ -1,4 +1,4 @@
-var MenuIcon = require('./MenuIcon.js.jsx');
+var MenuIcon = require('./MenuIcon.react.js');
 module.exports = React.createClass({
 
   getStateFromStores : function getStateFromStores() {

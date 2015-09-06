@@ -1,3 +1,5 @@
+var ActionTypes = require('../constants/ActionTypes');
+var AppDispatcher = require('../dispatcher/AppDispatcher');
 var ServerActionCreator = {
   signIn: function ( email ) {
     AppDispatcher.dispatch ({

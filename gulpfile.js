@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var watchify = require('gulp-watchify');
 var reactify = require('reactify');
+var plumber = require('gulp-plumber');
 
 var SRC_CLIENT =  [
     'app/assets/javascripts/client/dispatcher/*',
@@ -14,11 +15,13 @@ var DIST_CLIENT = "app/assets/javascripts/dist/client";
 
 gulp.task('default', watchify(function(watchify){
   return gulp.src(SRC_CLIENT)
+  .pipe(plumber())
   .pipe(watchify({
     transform : ['reactify'],
     extensions: ['.js'],
     debug : true,
-    watching: true
+    poll  : true,
+    watch : true
   }))
   .pipe(gulp.dest(DIST_CLIENT));
 }));

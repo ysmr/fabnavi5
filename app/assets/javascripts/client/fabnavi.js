@@ -1,4 +1,4 @@
-var FabnaviApp = require('../components/FabnaviApp.react');
+var FabnaviApp = require('./components/FabnaviApp.react');
 var React = require('react');
 global.$ = global.jQuery = require('jquery');
 require('jquery-ujs');

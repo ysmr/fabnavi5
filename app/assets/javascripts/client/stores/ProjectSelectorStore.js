@@ -1,8 +1,11 @@
+var EventEmitter = require('events');
+var machina = require('machina');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var _selector  = {
 };
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
+
 
 var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
@@ -127,5 +130,5 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
   };
 });
 
-ProjectSelectorState.init();
+ProjectSelectorStore.init();
 module.exports = ProjectSelectorStore;

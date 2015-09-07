@@ -1,4 +1,6 @@
+var React = require('react');
 var MenuIcon = require('./MenuIcon.react.js');
+var AccountStore = require('../stores/AccountStore');
 module.exports = React.createClass({
 
   getStateFromStores : function getStateFromStores() {

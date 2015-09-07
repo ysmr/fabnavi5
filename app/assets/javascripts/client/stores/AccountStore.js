@@ -2,6 +2,7 @@ var _accountInfo = {};
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
+var EventEmitter = require('events');
 
 
 var AccountStore = Object.assign({}, EventEmitter.prototype, {

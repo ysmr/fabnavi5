@@ -1,9 +1,12 @@
 {
   "name": "fabnavi5",
   "dependencies": {
-    "browserify": "~> 10.2.4",
-    "browserify-incremental": "^3.0.1",
+    "browserify": "^9.0.8",
     "flux": "^2.1.1",
+    "gulp": "^3.9.0",
+    "gulp-notify": "^2.2.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-watchify": "^0.5.0",
     "jquery": "^2.1.4",
     "jquery-ujs": "^1.0.4",
     "machina": "^1.1.2",
@@ -14,5 +17,8 @@
   "license": "MIT",
   "engines": {
     "node": ">= 0.12"
+  },
+  "scripts": {
+    "start": "gulp"
   }
 }

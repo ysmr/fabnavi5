@@ -1,3 +1,5 @@
+var ActionTypes = require('../constants/ActionTypes');
+var AppDispatcher = require('../dispatcher/AppDispatcher');
 var NavigationViewActionCreator = {
 
   search : function ( act, text ) {

@@ -26,7 +26,6 @@ gem 'devise_token_auth', github: 'fabnavi/devise_token_auth', branch: 'persona'
 gem 'rails-erd'
 gem 'kaminari'
 gem 'acts-as-taggable-on'
-gem 'browserify-rails'
 gem 'acts_as_votable'
 
 group :development, :test do

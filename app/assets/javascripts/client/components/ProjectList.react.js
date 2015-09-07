@@ -1,3 +1,6 @@
+var React = require('react');
+var ProjectStore = require('../stores/ProjectStore');
+var ProjectSelectorStore = require('../stores/ProjectSelectorStore');
 module.exports = React.createClass({
 
   propTypes : {

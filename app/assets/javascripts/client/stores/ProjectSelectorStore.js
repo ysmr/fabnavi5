@@ -1,10 +1,13 @@
-var AppDispatcher = require('dispatcher/AppDispatcher');
+var EventEmitter = require('events');
+var machina = require('machina');
+var AppDispatcher = require('../dispatcher/AppDispatcher');
 var _selector  = {
 };
-var EventTypes = require('constants/EventTypes');
-var ActionTypes = require('constants/ActionTypes');
+var EventTypes = require('../constants/EventTypes');
+var ActionTypes = require('../constants/ActionTypes');
 
-module.exports = ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
+
+var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     _selector = {
       index : 0,
@@ -126,3 +129,6 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
   };
 });
+
+ProjectSelectorStore.init();
+module.exports = ProjectSelectorStore;

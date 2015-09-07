@@ -1,8 +1,7 @@
-module.exports =  React.createClass({
+var React = require('react');
+module.exports = React.createClass({
 
   propTypes : {
-    act   : React.PropTypes.string.isRequired,
-    src   : React.PropTypes.string.isRequired,
   },
 
   getInitialState: function() {
@@ -18,40 +17,31 @@ module.exports =  React.createClass({
 
   render : function(){
     return (
-      <a className="menu-action nav-action" >
-         <img src={this.props.src} onClick={this.onclick}/>
-      </a>
-     );
+      <footer className="belt">
+      </footer>
+    );
+  },
+
+  handleChange: function ( event ){
   },
 
   onclick : function() {
-    NavigationViewActionCreator.menuSelect(this.props.act); 
   },
 
   componentWillMount : function() {
-    return {
-    };
   },
 
   componentDidMount : function () {
-
   },
 
   componentWillUpdate : function() {
-    return {
-    };
   },
 
   componentDidUpdate : function() {
-    return {
-    };
   },
 
   componentWillUnmount : function() {
-    return {
-    };
   },
-
 
 });
 

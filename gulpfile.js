@@ -5,7 +5,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 
 var browserify = require('browserify');
-var reactify = require('reactify');
 var watchify = require('watchify');
 var fromArgs = require('watchify/bin/args');
 var source = require('vinyl-source-stream');

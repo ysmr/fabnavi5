@@ -26,7 +26,6 @@
     "react": "^0.13.3",
     "react-jade": "^2.4.0",
     "react-router": "^0.13.3",
-    "reactify": "^1.1.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.4.0"

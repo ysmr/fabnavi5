@@ -1,5 +1,6 @@
 class Figure < ActiveRecord::Base
   include Attachable
+  acts_as_list scope: :content
 
   belongs_to :content
 
@@ -13,7 +14,7 @@ class Figure < ActiveRecord::Base
 
   class << self
     def acceptable_attributes
-      %i(_destroy id type attachment_id)
+      %i(_destroy id type attachment_id position)
     end
   end
 end

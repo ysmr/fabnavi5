@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908004950) do
+ActiveRecord::Schema.define(version: 20150908013040) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "type",            limit: 255
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150908004950) do
     t.integer  "content_id", limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.integer  "position",   limit: 4
   end
 
   add_index "figures", ["content_id"], name: "index_figures_on_content_id", using: :btree

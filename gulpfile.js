@@ -10,7 +10,7 @@ var watchify = require('watchify');
 var fromArgs = require('watchify/bin/args');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
-var assign = require('lodash').assign;
+var _ = require('lodash');
 var glob = require('glob');
 
 var SRC_CLIENT = glob.sync('app/assets/javascripts/client/**/*.js');
@@ -18,14 +18,13 @@ var SRC_CLIENT = glob.sync('app/assets/javascripts/client/**/*.js');
 var DIST_CLIENT = "app/assets/javascripts/dist/client";
 
 
-var options = assign({}, watchify.args, {
-    transform : ['reactify'],
-    extensions: ['.js'],
+var options = _.assign({}, watchify.args, {
+    transform : ['react-jade'],
+    extensions: ['.js','jade'],
     debug : true,
     poll  : true,
     entries : SRC_CLIENT
 });
-
 
 gulp.task('build', build);
 gulp.task('start', watch);
@@ -36,10 +35,13 @@ function watch(){
   b.on('log', gutil.log);
   b.on('update', bundle);
   b.on('data', bundle);
-  b.on('error', gutil.log.bind(gutil, 'Browserify Error'));
 
   function bundle(){
     return b.bundle()
+    .on('error', function(e){
+      //gutil.log('Browserify Error',_.omit(e,"stream"));
+      gutil.log('Browserify Error',e);
+    })
     .pipe(source("bundle.js"))
     .pipe(buffer())
     .pipe(plumber())

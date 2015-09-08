@@ -3,7 +3,7 @@ var React = require('react');
 var jade = require('react-jade');
 var menuIcon = jade.compileFile(__dirname + '/../templates/MenuIcon.jade');
 
-module.exports =  React.createClass({
+var MenuIcon  =  React.createClass({
 
   propTypes : {
     act   : React.PropTypes.string.isRequired,
@@ -54,4 +54,4 @@ module.exports =  React.createClass({
 
 });
 
-
+module.exports = MenuIcon;

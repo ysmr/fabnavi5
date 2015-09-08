@@ -1,7 +1,7 @@
 var React = require('react');
 var jade = require('react-jade');
 var projectElement = jade.compileFile(__dirname + '/../templates/ProjectElement.jade');
-module.exports = React.createClass({
+var ProjectElement = React.createClass({
 
   propTypes : {
   },
@@ -68,4 +68,5 @@ module.exports = React.createClass({
 
 });
 
+module.exports = ProjectElement;
 

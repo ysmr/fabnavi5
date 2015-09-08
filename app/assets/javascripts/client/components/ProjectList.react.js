@@ -3,7 +3,7 @@ var ProjectStore = require('../stores/ProjectStore');
 var ProjectSelectorStore = require('../stores/ProjectSelectorStore');
 var jade = require('react-jade');
 var projectList= jade.compileFile(__dirname + '/../templates/ProjectList.jade');
-module.exports = React.createClass({
+var ProjectList = React.createClass({
 
   propTypes : {
 
@@ -59,4 +59,4 @@ module.exports = React.createClass({
 
 });
 
-
+module.exports = ProjectList;

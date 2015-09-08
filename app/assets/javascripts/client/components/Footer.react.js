@@ -1,4 +1,6 @@
 var React = require('react');
+var jade = require('react-jade');
+var footer = jade.compileFile(__dirname + '/../templates/footer.jade');
 module.exports = React.createClass({
 
   propTypes : {
@@ -15,12 +17,7 @@ module.exports = React.createClass({
      };
    },
 
-  render : function(){
-    return (
-      <footer className="belt">
-      </footer>
-    );
-  },
+  render : footer,
 
   handleChange: function ( event ){
   },

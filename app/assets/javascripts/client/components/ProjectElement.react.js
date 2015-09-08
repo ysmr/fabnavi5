@@ -1,4 +1,6 @@
 var React = require('react');
+var jade = require('react-jade');
+var projectElement = jade.compileFile(__dirname + '/../templates/ProjectElement.jade');
 module.exports = React.createClass({
 
   propTypes : {
@@ -41,35 +43,7 @@ module.exports = React.createClass({
     return src;
   },
 
-  render : function(){
-    return (
-      <div className={"project-box " + (this.props.isSelected  ? "selected-project" : "project")}>
-        <div className="thumbnail">
-          <img src={this.getThumbnailSrc()} />
-        </div>
-
-        <div className="project-name">
-          {this.props.project.project_name} 
-        </div>
-
-        <div className="box">
-
-          <img className="user-icon" src={this.getUserIconSrc()}  />
-
-          <div className="username">
-            {this.props.project.user.name}
-          </div>
-
-          <div className="date">
-            {this.props.project.updated_at} 
-          </div>
-        </div>
-
-        <ul className="actions hide">
-        </ul>
-      </div>
-    );
-  },
+  render : projectElement,
 
   handleChange: function ( event ){
   },

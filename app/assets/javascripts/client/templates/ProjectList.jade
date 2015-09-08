@@ -1,0 +1,10 @@
+-  var projects = [];
+   for(var i in this.state.projects )
+      projects.push(<ProjectElement
+        project={this.state.projects[i]}
+        isSelected={this.state.selected.index == i}
+        />);
+    }
+.projects
+  - for (var i in this.state.projects )
+    ProjectElement(project={this.state.projects[i] isSelected={this.state.selected.inde == i})

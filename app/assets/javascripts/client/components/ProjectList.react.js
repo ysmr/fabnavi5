@@ -1,6 +1,8 @@
 var React = require('react');
 var ProjectStore = require('../stores/ProjectStore');
 var ProjectSelectorStore = require('../stores/ProjectSelectorStore');
+var jade = require('react-jade');
+var projectList= jade.compileFile(__dirname + '/../templates/ProjectList.jade');
 module.exports = React.createClass({
 
   propTypes : {
@@ -28,21 +30,8 @@ module.exports = React.createClass({
      };
    },
 
-  render : function(){
-    var projects = [];
-    for( var i in this.state.projects ){
-      projects.push(<ProjectElement
-        project={this.state.projects[i]}
-        isSelected={this.state.selected.index == i}
-        />);
-    }
-    return (
-     <div className="projects">
-        {projects} 
-     </div>
-    );
-  },
-
+  render : projectList,  
+  
   handleChange: function ( event ){
   },
 

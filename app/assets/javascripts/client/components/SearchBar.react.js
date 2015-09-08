@@ -17,7 +17,7 @@ module.exports = React.createClass({
      };
    },
 
-  render : seachBar,
+  render : searchBar,
   handleChange: function ( event ){
     NavigationViewActionCreator.search( event.target.value );
   },

@@ -53,6 +53,7 @@ class V1::Projects < V1::Base
               optional :type, type: String
               optional :_destroy, type: Boolean
               optional :attachment_id, type: Integer
+              optional :position, type: Integer
             end
           end
         end

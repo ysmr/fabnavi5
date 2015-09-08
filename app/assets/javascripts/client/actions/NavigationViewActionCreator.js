@@ -20,3 +20,5 @@ var NavigationViewActionCreator = {
   },
 }
 
+module.exports = NavigationViewActionCreator;
+

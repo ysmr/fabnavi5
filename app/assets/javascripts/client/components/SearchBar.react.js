@@ -1,3 +1,4 @@
+var NavigationViewActionCreator = require('../actions/NavigationViewActionCreator');
 var React = require('react');
 var jade = require('react-jade');
 var searchBar = jade.compileFile(__dirname + '/../templates/SearchBar.jade');

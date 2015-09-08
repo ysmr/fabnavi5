@@ -1,3 +1,4 @@
+var NavigationViewActionCreator = require('../actions/NavigationViewActionCreator');
 var React = require('react');
 var jade = require('react-jade');
 var menuIcon = jade.compileFile(__dirname + '/../templates/MenuIcon.jade');

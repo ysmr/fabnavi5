@@ -11,6 +11,8 @@
 /log/*
 !/log/.keep
 /tmp
+erd.pdf
+*.swp
 
 config/settings.local.yml
 config/settings/*.local.yml

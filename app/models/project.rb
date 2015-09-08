@@ -5,6 +5,7 @@ class Project < ActiveRecord::Base
   acts_as_votable
 
   belongs_to :user
+  belongs_to :lisence
   has_one :content, dependent: :destroy
 
   validates :name, presence: true
@@ -28,7 +29,7 @@ class Project < ActiveRecord::Base
     end
 
     def acceptable_attributes_for_update
-      %i(tag_list name description attachment_id) + [content_attributes: Content.acceptable_attributes_for_update]
+      %i(tag_list name description attachment_id lisence_id) + [content_attributes: Content.acceptable_attributes_for_update]
     end
   end
 end

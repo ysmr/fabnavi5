@@ -1,4 +1,7 @@
+var NavigationViewActionCreator = require('../actions/NavigationViewActionCreator');
 var React = require('react');
+var jade = require('react-jade');
+var searchBar = jade.compileFile(__dirname + '/../templates/SearchBar.jade');
 module.exports = React.createClass({
 
   propTypes : {
@@ -15,19 +18,7 @@ module.exports = React.createClass({
      };
    },
 
-  render : function(){
-    return (
-      <section className="belt" >
-        <div className="menu-action search-bar">
-          <form >
-            <input id="search-box" onChange={this.handleChange} />
-            <span className="search-icon" ></span>
-          </form>
-        </div>
-      </section>
-    );
-  },
-
+  render : searchBar,
   handleChange: function ( event ){
     NavigationViewActionCreator.search( event.target.value );
   },

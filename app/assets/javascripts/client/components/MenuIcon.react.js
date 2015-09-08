@@ -1,4 +1,8 @@
+var NavigationViewActionCreator = require('../actions/NavigationViewActionCreator');
 var React = require('react');
+var jade = require('react-jade');
+var menuIcon = jade.compileFile(__dirname + '/../templates/MenuIcon.jade');
+
 module.exports =  React.createClass({
 
   propTypes : {
@@ -17,13 +21,7 @@ module.exports =  React.createClass({
      };
    },
 
-  render : function(){
-    return (
-      <a className="menu-action nav-action" >
-         <img src={this.props.src} onClick={this.onclick}/>
-      </a>
-     );
-  },
+  render : menuIcon,
 
   onclick : function() {
     NavigationViewActionCreator.menuSelect(this.props.act); 

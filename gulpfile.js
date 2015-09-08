@@ -13,16 +13,7 @@ var buffer = require('vinyl-buffer');
 var assign = require('lodash').assign;
 var glob = require('glob');
 
-var SRC_CLIENT =  [
-/*
-    'app/assets/javascripts/client/dispatcher/*',
-    'app/assets/javascripts/client/stores/*',
-    'app/assets/javascripts/client/constants/*',
-    'app/assets/javascripts/client/actions/*',
-    */
-    glob.sync('app/assets/javascripts/client/**/*.js'),
-    'app/assets/javascripts/client/fabnavi.js'
-    ] ;
+var SRC_CLIENT = glob.sync('app/assets/javascripts/client/**/*.js');
 
 var DIST_CLIENT = "app/assets/javascripts/dist/client";
 

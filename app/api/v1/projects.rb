@@ -44,6 +44,7 @@ class V1::Projects < V1::Base
           optional :description, type: String
           optional :tag_list, type: String
           optional :attachment_id, type: Integer
+          optional :lisence_id, type: Integer
           optional :content_attributes, type: Hash do
             optional :description, type: String
             optional :attachment_id, type: Integer

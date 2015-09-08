@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150830125740) do
+ActiveRecord::Schema.define(version: 20150908004950) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "type",            limit: 255
@@ -53,6 +53,12 @@ ActiveRecord::Schema.define(version: 20150830125740) do
   add_index "likes", ["project_id"], name: "index_likes_on_project_id", using: :btree
   add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
+  create_table "lisences", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.boolean  "private"
@@ -60,8 +66,10 @@ ActiveRecord::Schema.define(version: 20150830125740) do
     t.integer  "user_id",     limit: 4
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "lisence_id",  limit: 4
   end
 
+  add_index "projects", ["lisence_id"], name: "index_projects_on_lisence_id", using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
   create_table "taggings", force: :cascade do |t|
@@ -133,5 +141,6 @@ ActiveRecord::Schema.define(version: 20150830125740) do
   add_foreign_key "figures", "contents"
   add_foreign_key "likes", "projects"
   add_foreign_key "likes", "users"
+  add_foreign_key "projects", "lisences"
   add_foreign_key "projects", "users"
 end

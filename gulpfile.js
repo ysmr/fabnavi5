@@ -8,7 +8,6 @@ var uglify = require('gulp-uglify');
 if(NOTIFICATION)var notifier = require('node-notifier');
 
 var browserify = require('browserify');
-var reactify = require('reactify');
 var watchify = require('watchify');
 var fromArgs = require('watchify/bin/args');
 var source = require('vinyl-source-stream');

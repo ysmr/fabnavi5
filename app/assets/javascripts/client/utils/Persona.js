@@ -15,8 +15,9 @@ var Persona = {
        onlogin: function(assertion){
           $.ajax({
               type:"POST",
-              url:"/users/auth/persona/callback",
+              url:"/api/v1/auth/sign_in",
               data:{assertion:assertion},
+              dataType:"json",
               success: function(res, status, xhr){
                 ServerActionCreator.signIn(JSON.parse(res).email);
               },

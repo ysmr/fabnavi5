@@ -1,3 +1,5 @@
+
+var ServerActionCreator = require('../actions/ServerActionCreator');
 var Persona = {
   signIn : function(){
     Persona.init();
@@ -19,7 +21,7 @@ var Persona = {
               data:{assertion:assertion},
               dataType:"json",
               success: function(res, status, xhr){
-                ServerActionCreator.signIn(JSON.parse(res).email);
+                ServerActionCreator.signIn(res.email);
               },
               error: function(res, status, xhr){
                 console.log(res,status,xhr);
@@ -29,7 +31,7 @@ var Persona = {
         onlogout: function(){
           $.ajax({
               type:"DELETE",
-              url:"/users/sign_out",
+              url:"/api/v1/auth/sign_out",
                 success: function(res, status, xhr){
                   ServerActionCreator.signOut(res);
               },

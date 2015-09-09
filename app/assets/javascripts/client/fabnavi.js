@@ -1,9 +1,12 @@
 var FabnaviApp = require('./components/FabnaviApp.react');
 var React = require('react');
+var Router = require('react-router'); 
 global.$ = global.jQuery = require('jquery');
 require('jquery-ujs');
 
 global.onload = function ( ) {
   console.log("Fabnavi boot");
-  React.render(React.createElement(FabnaviApp, null), document.body);
+  Router.run(FabnaviApp, function(Handler){
+    React.render(React.createElement(Handler, null), document.body);
+  });
 }

@@ -1,8 +1,11 @@
+var NOTIFICATION = false;
+
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');
 var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
+if(NOTIFICATION)var notifier = require('node-notifier');
 
 var browserify = require('browserify');
 var watchify = require('watchify');
@@ -40,6 +43,18 @@ function watch(){
     .on('error', function(e){
       //gutil.log('Browserify Error',_.omit(e,"stream"));
       gutil.log('Browserify Error',e);
+
+      if(NOTIFICATION){ 
+        try{
+          var message = e.path.replace(__dirname+"/app/assets/javascripts/client","");
+        } catch(error) {
+          var message = e;
+        }
+        notifier.notify({
+          title:"Browserify Error",
+          message: message
+        });
+      }
     })
     .pipe(source("bundle.js"))
     .pipe(buffer())

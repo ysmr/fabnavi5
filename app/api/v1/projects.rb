@@ -95,5 +95,31 @@ class V1::Projects < V1::Base
         body false
       end
     end
+
+    resource ':project_id' do
+      resource 'content' do
+        resource 'figures' do
+          resource ':id' do
+            desc 'Like a figure', {headers: AUTH_HEADERS}
+            patch 'like' do
+              authenticate_user!
+              proj = current_user.projects.find(params[:project_id])
+              figure = proj.content.figures.find(params[:id])
+              figure.liked_by current_user
+              body false
+            end
+
+            desc 'Unlike a figure', {headers: AUTH_HEADERS}
+            patch 'unlike' do
+              authenticate_user!
+              proj = current_user.projects.find(params[:project_id])
+              figure = proj.content.figures.find(params[:id])
+              figure.unliked_by current_user
+              body false
+            end
+          end
+        end
+      end
+    end
   end
 end

@@ -1,6 +1,7 @@
 class Figure < ActiveRecord::Base
   include Attachable
   acts_as_list scope: :content
+  acts_as_votable
 
   belongs_to :content
 

@@ -14,12 +14,18 @@ var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
-var fabnaviApp = jade.compileFile(__dirname + '/../templates/FabnaviApp.jade');
+var routes = (
+    React.createElement(Route, {handler: Frame, path: "/"}, 
+      React.createElement(DefaultRoute, {handler: Player}),
+      React.createElement(Route, {handler: ProjectManager, name: "manager"}),
+      React.createElement(Route, {handler: Player, name: "player"})
+     )
 
-/*
-var FabnaviApp = React.createClass({
-  render : fabnaviApp
-});
-*/
+);
 
-module.exports = fabnaviApp;
+global.onload = function ( ) {
+  console.log("Fabnavi boot");
+  Router.run(routes, function(Handler){
+    React.render(React.createElement(Handler, null), document.body);
+  });
+}

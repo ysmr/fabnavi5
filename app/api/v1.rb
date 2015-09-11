@@ -22,6 +22,7 @@ class V1 < Grape::API
     end
   end
   mount V1::Projects
+  mount V1::Calibrations
   mount V1::Attachments
   add_swagger_documentation(
     base_path: "/api/v1",

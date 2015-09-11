@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150908013040) do
+ActiveRecord::Schema.define(version: 20150911040026) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "type",            limit: 255
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 20150908013040) do
   end
 
   add_index "attachments", ["user_id"], name: "index_attachments_on_user_id", using: :btree
+
+  create_table "calibrations", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.integer  "user_id",    limit: 4
+    t.float    "x",          limit: 24
+    t.float    "y",          limit: 24
+    t.float    "width",      limit: 24
+    t.float    "height",     limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "calibrations", ["name", "user_id"], name: "index_calibrations_on_name_and_user_id", unique: true, using: :btree
+  add_index "calibrations", ["user_id"], name: "index_calibrations_on_user_id", using: :btree
 
   create_table "contents", force: :cascade do |t|
     t.string   "type",        limit: 255
@@ -130,6 +144,7 @@ ActiveRecord::Schema.define(version: 20150908013040) do
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
   add_foreign_key "attachments", "users"
+  add_foreign_key "calibrations", "users"
   add_foreign_key "contents", "projects"
   add_foreign_key "figures", "contents"
   add_foreign_key "projects", "lisences"

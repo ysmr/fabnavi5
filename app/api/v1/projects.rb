@@ -13,17 +13,17 @@ class V1::Projects < V1::Base
   end
 
   resource :projects do
-    paginate per_page: 20, max_per_page: 30, offset: 5
+    paginate per_page: 20
 
     desc 'Get all projects'
     get jbuilder: 'v1/projects/index' do
-      @projects = paginate Project.order(id: :desc).page(params[:page])
+      @projects = paginate Project.order(id: :desc)
     end
 
     desc 'Create a project', {headers: AUTH_HEADERS}
     params do
       requires :project, type: Hash do
-        optional :name, type: String
+        requires :name, type: String
         requires :content_attributes, type: Hash do
           requires :type, type: String
         end

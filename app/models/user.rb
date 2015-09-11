@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :projects, dependent: :destroy
   has_many :attachments, dependent: :destroy
+  has_many :calibrations, dependent: :destroy
 
   class << self
     def authentication_keys

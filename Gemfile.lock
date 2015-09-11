@@ -140,6 +140,9 @@ GEM
       jbuilder
       tilt
       tilt-jbuilder (>= 0.4.0)
+    grape-kaminari (0.1.8)
+      grape
+      kaminari
     grape-swagger (0.10.2)
       grape (>= 0.8.0)
       grape-entity
@@ -363,6 +366,7 @@ DEPENDENCIES
   devise_token_auth!
   grape
   grape-jbuilder
+  grape-kaminari
   grape-swagger
   grape-swagger-rails
   guard-livereload (~> 2.4)

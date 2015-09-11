@@ -1,4 +1,5 @@
 class V1::Projects < V1::Base
+ include Grape::Kaminari
   helpers do
     def project_params_for_create
       ActionController::Parameters.new(params)
@@ -12,9 +13,11 @@ class V1::Projects < V1::Base
   end
 
   resource :projects do
+    paginate per_page: 20, max_per_page: 30, offset: 5
+
     desc 'Get all projects'
     get jbuilder: 'v1/projects/index' do
-      @projects = Project.order(id: :desc).page(params[:page])
+      @projects = paginate Project.order(id: :desc).page(params[:page])
     end
 
     desc 'Create a project', {headers: AUTH_HEADERS}

@@ -2,7 +2,7 @@ var NavigationViewActionCreator = require('../actions/NavigationViewActionCreato
 var React = require('react');
 var jade = require('react-jade');
 var searchBar = jade.compileFile(__dirname + '/../templates/SearchBar.jade');
-module.exports = React.createClass({
+var SearchBar = React.createClass({
 
   propTypes : {
   },
@@ -43,4 +43,4 @@ module.exports = React.createClass({
 
 });
 
-
+module.exports = SearchBar;

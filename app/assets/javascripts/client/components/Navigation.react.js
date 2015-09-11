@@ -2,8 +2,14 @@ var React = require('react');
 var MenuIcon = require('./MenuIcon.react.js');
 var AccountStore = require('../stores/AccountStore');
 var jade = require('react-jade');
+
+var Router = require('react-router'); 
+var Link = Router.Link;
+
+
+
 var navigation = jade.compileFile(__dirname + '/../templates/Navigation.jade');
-module.exports = React.createClass({
+var Navigation = React.createClass({
 
   getStateFromStores : function getStateFromStores() {
     return {
@@ -50,4 +56,4 @@ module.exports = React.createClass({
 
 });
 
-
+module.exports = Navigation;

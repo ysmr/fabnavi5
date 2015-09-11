@@ -15,3 +15,4 @@ var ServerActionCreator = {
   },
 }
 
+module.exports = ServerActionCreator;

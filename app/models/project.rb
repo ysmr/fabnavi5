@@ -22,6 +22,10 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def lisenced?
+    lisence.present?
+  end
+
   private
   class << self
     def acceptable_attributes_for_create

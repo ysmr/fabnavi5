@@ -8,6 +8,12 @@ var Player = require('./Player.react.js');
 var Frame = require('./Frame.react.js');
 var Footer = require('./Footer.react.js');
 var jade = require('react-jade');
+
+var Router = require('react-router'); 
+var Link = Router.Link;
+
+
+
 var projectManager= jade.compileFile(__dirname + '/../templates/ProjectManager.jade');
 
 var ProjectManager = React.createClass({

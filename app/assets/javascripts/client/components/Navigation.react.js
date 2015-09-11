@@ -2,6 +2,12 @@ var React = require('react');
 var MenuIcon = require('./MenuIcon.react.js');
 var AccountStore = require('../stores/AccountStore');
 var jade = require('react-jade');
+
+var Router = require('react-router'); 
+var Link = Router.Link;
+
+
+
 var navigation = jade.compileFile(__dirname + '/../templates/Navigation.jade');
 var Navigation = React.createClass({
 

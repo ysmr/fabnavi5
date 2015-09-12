@@ -35,7 +35,7 @@ class V1::Projects < V1::Base
       requires :project, type: Hash do
         requires :name, type: String
         requires :content_attributes, type: Hash do
-          requires :type, type: String
+          requires :type, type: String # ex) Content::PhotoList
         end
       end
     end
@@ -63,7 +63,7 @@ class V1::Projects < V1::Base
             optional :attachment_id, type: Integer
             optional :figures_attributes, type: Array do
               optional :id, type: Integer
-              optional :type, type: String
+              optional :type, type: String # ex) Figure::Photo
               optional :_destroy, type: Boolean
               optional :attachment_id, type: Integer
               optional :position, type: Integer

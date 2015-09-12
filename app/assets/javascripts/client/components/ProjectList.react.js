@@ -1,6 +1,7 @@
 var React = require('react');
 var ProjectStore = require('../stores/ProjectStore');
 var ProjectSelectorStore = require('../stores/ProjectSelectorStore');
+var ProjectElement = require('../components/ProjectElement.react');
 var jade = require('react-jade');
 var projectList= jade.compileFile(__dirname + '/../templates/ProjectList.jade');
 var ProjectList = React.createClass({

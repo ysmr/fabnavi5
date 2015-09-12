@@ -50,7 +50,6 @@ ActiveRecord::Schema.define(version: 20150911040026) do
   add_index "contents", ["project_id"], name: "index_contents_on_project_id", using: :btree
 
   create_table "figures", force: :cascade do |t|
-    t.string   "image",      limit: 255
     t.string   "type",       limit: 255
     t.integer  "content_id", limit: 4
     t.datetime "created_at",             null: false

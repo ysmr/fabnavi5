@@ -16,8 +16,18 @@ class V1::Projects < V1::Base
     paginate per_page: 20
 
     desc 'Get all projects'
+    params do
+      optional :q, type: String
+    end
     get jbuilder: 'v1/projects/index' do
-      @projects = paginate Project.order(id: :desc)
+      if params[:q].present?
+        q = "%#{params[:q]}%"
+        @projects = paginate Project.joins(:user, {:taggings => :tag})
+          .where("projects.name like ? or projects.description like ? or tags.name like ?" , q, q, q)
+          .order(id: :desc)
+      else
+        @projects = paginate Project.order(id: :desc)
+      end
     end
 
     desc 'Create a project', {headers: AUTH_HEADERS}

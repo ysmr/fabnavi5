@@ -1,11 +1,35 @@
-var FabnaviAPIUtils = {
-  getProjects : function( page, per_page, offset ){
-    console.log("getProjects");
+var ProjectServerActionCreator = require('../actions/ProjectServerActionCreator');
+var $ = require('jquery');
 
+var WebAPIUtils = {
+  getAllProjects : function( page, per_page, offset ){
+    console.log("getProjects");
+    page = page || 0;
+    per_page = per_page || 20;
+    offset = offset || 0;
+    $.ajax({
+      dataType : "json",
+      data : {
+        page : page,
+        per_page : per_page,
+        offset : offset
+      },
+      type : "GET",
+      success : function(res){
+        ProjectServerActionCreator.receiveProjects( res );
+      },
+      error : function(err){
+        console.log("Error from getAllProjects");
+        console.log(err);
+      },
+      url : "/api/v1/projects.json"
+
+    });
   },
 
   createProject : function( name, content_attributes_type ){
     console.log("createProject");
+    
   },
 
   updateProject : function( name, 
@@ -58,4 +82,4 @@ var FabnaviAPIUtils = {
 };
 
 
-module.exports = FabnaviAPIUtils;
+module.exports = WebAPIUtils;

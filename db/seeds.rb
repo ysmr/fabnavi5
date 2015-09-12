@@ -4,18 +4,24 @@
 end
 
 tokens = [
+  # Client: ADbJwXx1RgaqQ3m_WD9_mg
+  # Access-Token: x9XcLOtpdQWDpa3tSmESjg
+  # Uid: user0@example.com
   {
-    "IiraXjGotDq1VHHx4oiacA" => {
-      "token" => "$2a$10$z0wDSm6IWw2EjMUrRW8gAemp92wb0YHb8nWVxm12W8RA6Js8HVoxa",
-      "expiry" => 1443243974,
-      "last_token" => "$2a$10$V52QhHHXzM/JPeYMmkJ47u.lKzN8Cy.bdbli7A4T6onAvNZYfWD1a",
-      "updated_at" => "2015-09-12T14:06:14.810+09:00"
+    "ADbJwXx1RgaqQ3m_WD9_mg" => {
+      "token" => "$2a$10$Z4I..3utPJzQ4u7CfBF4F.W9h5AKr0.IOeP4LSSSim6J.fiAN7iCG",
+      "expiry" => 3443245119,
+      "last_token" => "$2a$10$8/jCT8SYxQTXb6VdlSD5buTSzP69xGrNx3U11INm7MjQrMNM5btHO",
+      "updated_at"=>"2015-09-12T14:25:19.533+09:00"
     }
   },
+  # Client: 1E2cqbJxYbBb_gohA-qP1w
+  # Access-Token: VYmU5yvIwDeXCBsJUtvBkw
+  # Uid: user1@example.com
   {
     "1E2cqbJxYbBb_gohA-qP1w" => {
       "token" => "$2a$10$uD28iGILzWC1wSkz9DwuQe7ap.zz/aPmeYI9J.A6jzEAB7xjYBYaq",
-      "expiry" => 1443071103,
+      "expiry" => 3443071103,
       "last_token" => "$2a$10$qZqwyOiSAGl/wyAFJiPE7.4qgdfc2iAcDHH1iJX/q7ANY4jnttW..",
       "updated_at"=>"2015-09-10T14:05:03.692+09:00"
     }

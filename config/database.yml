@@ -19,3 +19,9 @@ production:
   database: fabnavi5_production
   username: fabnavi5
   password: <%= ENV['FABNAVI5_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: fabnavi5_staging
+  username: root
+  password: password

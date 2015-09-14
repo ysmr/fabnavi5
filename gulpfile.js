@@ -22,7 +22,7 @@ var DIST_CLIENT = "app/assets/javascripts/dist/client";
 
 var options = _.assign({}, watchify.args, {
     transform : ['react-jade'],
-    extensions: ['.js','jade'],
+    extensions: ['.js','.jade'],
     debug : true,
     poll  : true,
     entries : SRC_CLIENT
@@ -34,7 +34,13 @@ gulp.task('start', watch);
 function watch(){
   var b = watchify(browserify(options));
   bundle();
-  b.on('log', gutil.log);
+  b.on('log', function(res){
+    gutil.log(res);
+    notifier.notify({
+          title:"Browserify",
+          message:res 
+    });
+  });
   b.on('update', bundle);
   b.on('data', bundle);
 

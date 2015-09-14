@@ -11,6 +11,10 @@ var RouteHandler = Router.RouteHandler;
 var editProject = jade.compileFile(__dirname + '/../templates/EditProject.jade');
 var EditProject = React.createClass({
 
+  contextTypes: {
+      router: React.PropTypes.func
+  },
+
   getStateFromStores : function getStateFromStores() {
     return {
     };

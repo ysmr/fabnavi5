@@ -11,6 +11,10 @@ var RouteHandler = Router.RouteHandler;
 var projectDetail = jade.compileFile(__dirname + '/../templates/ProjectDetail.jade');
 var ProjectDetail= React.createClass({
 
+  contextTypes: {
+      router: React.PropTypes.func
+  },
+
   getStateFromStores : function getStateFromStores() {
     return {
     };

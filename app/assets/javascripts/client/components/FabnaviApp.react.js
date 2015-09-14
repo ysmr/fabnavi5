@@ -25,8 +25,8 @@ var routes = (
         React.createElement(DefaultRoute, { handler: ProjectList }),
         React.createElement(Route, {handler: ProjectList, name: "index"}),
         React.createElement(Route, {handler: CreateProject, name: "create"}),
-        React.createElement(Route, {handler: EditProject, name: "edit"}),
-        React.createElement(Route, {handler: ProjectDetail, name: "project"})
+        React.createElement(Route, {handler: EditProject, name: "edit", path: "edit/:projectId"}),
+        React.createElement(Route, {handler: ProjectDetail, name: "project", path:"project/:projectId"})
       ),
       React.createElement(Route, {handler: Player, name: "player"})
      )

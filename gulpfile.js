@@ -1,4 +1,4 @@
-var NOTIFICATION = true;
+var NOTIFICATION = false;
 
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');

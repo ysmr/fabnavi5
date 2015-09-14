@@ -18,12 +18,15 @@ var ProjectElement = React.createClass({
    },
 
   getThumbnailSrc: function () {
-    var thumbnailId = this.props.project.thumbnail_picture_id;
+    
     var src = null;
+    /*
+    var thumbnailId = this.props.project.thumbnail_picture_id;
     
     if ( this.props.project.photo.hasOwnProperty( thumbnailId ) ){
       src = this.props.project.photo[thumbnailId].thumbnail.url;
     }
+    */
 
     if ( src == null || src == "" ) {
       src = "/images/noimage.gif";
@@ -32,11 +35,13 @@ var ProjectElement = React.createClass({
   },
 
   getUserIconSrc: function () {
-    var maybeAvater = this.props.project.user.avatar;
     var src = null;
+    /*
+    var maybeAvater = this.props.project.user.avatar;
     if( maybeAvater != null && ( maybeAvater.url != null || maybeAvater.url != "" )) {
       src = maybeAvater.url;
     }
+    */
     if( src == null ){
       src = "/images/user_icon.png";
     }

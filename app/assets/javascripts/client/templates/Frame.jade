@@ -1,8 +1,18 @@
 div
-  h1 Frame
-  ul
-    li
-      Link(to="manager") Project
-    li  
-      Link(to="player") Player
+  .debug-frame
+    h1 Routing Test
+    ul
+      li
+        Link(to="manager") Project
+      li  
+        Link(to="player") Player
+      li  
+        Link(to="index") Show All Projects
+      li  
+        Link(to="create") CreateProject
+      li  
+        Link(to="edit" params={projectId : 0}) editProject
+      li  
+        Link(to="project" params={projectId : 0}) ProjectDetail
+
   RouteHandler

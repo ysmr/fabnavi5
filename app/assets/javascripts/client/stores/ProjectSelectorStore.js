@@ -1,6 +1,9 @@
 var EventEmitter = require('events');
 var machina = require('machina');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
+var ProjectStore = require('../stores/ProjectStore');
+
+
 var _selector  = {
 };
 var EventTypes = require('../constants/EventTypes');

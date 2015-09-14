@@ -1,12 +1,12 @@
 div(className="project-box " + (this.props.isSelected  ? "selected-project" : "project"))
   .thumbnail
-    img(src="")
+    img(src=this.getThumbnailSrc())
   .project-name
     = this.props.project.name
   .box
-    img.user-icon(src="")
+    img.user-icon(src=this.getUserIconSrc())
     .username
       | username
-    .date.
+    .date
       | date
   ul.actions.hide

@@ -11,6 +11,7 @@ var jade = require('react-jade');
 
 var Router = require('react-router'); 
 var Link = Router.Link;
+var RouteHandler = Router.RouteHandler;
 
 
 

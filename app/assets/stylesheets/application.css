@@ -13,3 +13,9 @@
  *= require_tree ./application
  *= require_self
  */
+
+.debug-frame {
+  position:fixed;
+  background-color:red;
+  right:0px;
+}

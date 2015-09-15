@@ -32,10 +32,23 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
+set :default_env, {
+  path: "/usr/local/lib/nodebrew/current/bin:$PATH"
+}
+
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
 namespace :deploy do
+  task :build_js do
+    on roles(:app) do
+      within release_path do
+        execute :npm, "install"
+        execute :npm, "run build"
+      end
+    end
+  end
+  before "assets:precompile", "build_js"
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

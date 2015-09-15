@@ -1,5 +1,10 @@
 DeviseTokenAuth.setup do |config|
-  config.persona_audience_url = 'http://192.168.33.10:3000'
+  case Rails.env
+  when "development"
+    config.persona_audience_url = 'http://192.168.33.10:3000'
+  else "staging", "production"
+    config.persona_audience_url = 'http://fabnavi.org'
+  end
 
   # By default the authorization headers will change after each request. The
   # client is responsible for keeping track of the changing tokens. Change

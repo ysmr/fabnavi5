@@ -1,6 +1,6 @@
 var React = require('react');
 var jade = require('react-jade');
-var footer = jade.compileFile(__dirname + '/../templates/footer.jade');
+var footer = jade.compileFile(__dirname + '/../templates/Footer.jade');
 var Footer = React.createClass({
 
   propTypes : {

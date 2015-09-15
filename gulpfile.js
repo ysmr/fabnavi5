@@ -36,10 +36,12 @@ function watch(){
   bundle();
   b.on('log', function(res){
     gutil.log(res);
-    notifier.notify({
-          title:"Browserify",
-          message:res 
-    });
+    if(NOTIFICATION){
+      notifier.notify({
+            title:"Browserify",
+            message:res 
+      });
+    }
   });
   b.on('update', bundle);
   b.on('data', bundle);

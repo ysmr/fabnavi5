@@ -1,1 +1,17 @@
-h1 CreateProject
+h1.form-title CreateProject
+form.form-box
+  .field
+    label Project Name
+    input.form-text
+  .field
+    label Project description
+    input.form-text(rows: 10)
+
+    center
+      | You need calibration sheet and Fixfox Addon !!
+      br
+      | Please print this PDF and install the Addon.
+    a.pdf(href="https://drive.google.com/folderview?id=0B9k4M70SGKlAQ0xtTTNnOWgwOXM&usp=sharing" target="_blank")
+      img(src="images/pdf.png")
+    a.pdf(href="http://crest-multimedia-web.s3.amazonaws.com/tsuka/fabnavi-preview/public/sonycameraremotecontroller.xpi" target="_blank")
+      img(src="images/firefox-extension.png")

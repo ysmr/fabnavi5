@@ -2,7 +2,7 @@ DeviseTokenAuth.setup do |config|
   case Rails.env
   when "development"
     config.persona_audience_url = 'http://192.168.33.10:3000'
-  else "staging", "production"
+  else
     config.persona_audience_url = 'http://fabnavi.org'
   end
 

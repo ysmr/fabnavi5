@@ -3,7 +3,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
 var EventEmitter = require('events');
-var Persona = require('../utils/Persona');
+var WebAPIUtils = require('../utils/WebAPIUtils');
 
 
 var AccountStore = Object.assign({}, EventEmitter.prototype, {
@@ -49,7 +49,7 @@ AccountStore.dispatchToken = AppDispatcher.register(function( action ){
     switch( action.type ){
 
       case ActionTypes.SIGN_IN : 
-        Persona.signIn();         
+        WebAPIUtils.signIn();         
         break; 
 
       case ActionTypes.SIGN_IN_SUCCESS : 
@@ -63,7 +63,7 @@ AccountStore.dispatchToken = AppDispatcher.register(function( action ){
         break; 
 
       case ActionTypes.SIGN_OUT :
-        Persona.signOut();
+        WebAPIUtils.signOut();
         break;
 
       case ActionTypes.CONFIG :

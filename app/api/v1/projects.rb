@@ -50,6 +50,11 @@ class V1::Projects < V1::Base
     end
 
     resource ':id' do
+      desc 'Describe a project'
+      get jbuilder: 'v1/projects/show' do
+        @project = Project.find(params[:id])
+      end
+
       desc 'Update a project', {headers: AUTH_HEADERS}
       params do
         requires :project, type: Hash do

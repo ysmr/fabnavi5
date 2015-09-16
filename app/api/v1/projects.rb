@@ -15,19 +15,23 @@ class V1::Projects < V1::Base
   resource :projects do
     paginate per_page: 20
 
-    desc 'Get all projects'
+    desc 'Get all projects', {headers: AUTH_HEADERS}
     params do
       optional :q, type: String
     end
     get jbuilder: 'v1/projects/index' do
+      query = Project
+      if signed_in?
+        query = query.showable_for current_user
+      else
+        query = query.public_projects
+      end
       if params[:q].present?
         q = "%#{params[:q]}%"
-        @projects = paginate Project.joins(:user, {:taggings => :tag})
+        query = paginate query.joins(:user, {:taggings => :tag})
           .where("projects.name like ? or projects.description like ? or tags.name like ?" , q, q, q)
-          .order(id: :desc)
-      else
-        @projects = paginate Project.order(id: :desc)
       end
+      @projects = paginate query.order(id: :desc)
     end
 
     desc 'Create a project', {headers: AUTH_HEADERS}
@@ -50,9 +54,10 @@ class V1::Projects < V1::Base
     end
 
     resource ':id' do
-      desc 'Describe a project'
+      desc 'Describe a project', {headers: AUTH_HEADERS}
       get jbuilder: 'v1/projects/show' do
-        @project = Project.find(params[:id])
+        authenticate_user!
+        @project = Project.showable_for(current_user).find params[:id]
       end
 
       desc 'Update a project', {headers: AUTH_HEADERS}
@@ -78,7 +83,7 @@ class V1::Projects < V1::Base
       end
       patch jbuilder: 'v1/projects/update' do
         authenticate_user!
-        @project = current_user.projects.find(params[:id])
+        @project = current_user.projects.find params[:id]
         if params[:project][:content_attributes]
           params[:project][:content_attributes][:id] = @project.content.id
         end
@@ -92,7 +97,7 @@ class V1::Projects < V1::Base
       desc 'Delete a project', {headers: AUTH_HEADERS}
       delete do
         authenticate_user!
-        proj = current_user.projects.find(params[:id])
+        proj = current_user.projects.find params[:id]
         proj.destroy
         body false
       end
@@ -100,7 +105,7 @@ class V1::Projects < V1::Base
       desc 'Like a project', {headers: AUTH_HEADERS}
       patch 'like' do
         authenticate_user!
-        proj = current_user.projects.find(params[:id])
+        proj = current_user.projects.find params[:id]
         proj.liked_by current_user
         body false
       end
@@ -108,7 +113,7 @@ class V1::Projects < V1::Base
       desc 'Unlike a project', {headers: AUTH_HEADERS}
       patch 'unlike' do
         authenticate_user!
-        proj = current_user.projects.find(params[:id])
+        proj = current_user.projects.find params[:id]
         proj.unliked_by current_user
         body false
       end
@@ -121,8 +126,8 @@ class V1::Projects < V1::Base
             desc 'Like a figure', {headers: AUTH_HEADERS}
             patch 'like' do
               authenticate_user!
-              proj = current_user.projects.find(params[:project_id])
-              figure = proj.content.figures.find(params[:id])
+              proj = current_user.projects.find params[:project_id]
+              figure = proj.content.figures.find params[:id]
               figure.liked_by current_user
               body false
             end
@@ -130,8 +135,8 @@ class V1::Projects < V1::Base
             desc 'Unlike a figure', {headers: AUTH_HEADERS}
             patch 'unlike' do
               authenticate_user!
-              proj = current_user.projects.find(params[:project_id])
-              figure = proj.content.figures.find(params[:id])
+              proj = current_user.projects.find params[:project_id]
+              figure = proj.content.figures.find params[:id]
               figure.unliked_by current_user
               body false
             end

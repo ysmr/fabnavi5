@@ -5,19 +5,33 @@ form.form-box
     input.form-text(
       onChange=this.handleNameChange 
       value=this.state.name
-      type="text")
+      type="text"
+      )
   .field
     label Project description
     input.form-text(
      onChange=this.handleDescriptionChange 
      value=this.state.description 
-     type="text")
-
-    center
-      | You need calibration sheet and Fixfox Addon !!
-      br
+     type="text"
+     )
+    center You need calibration sheet and Fixfox Addon !!
+      br 
       | Please print this PDF and install the Addon.
-    a.pdf(href="https://drive.google.com/folderview?id=0B9k4M70SGKlAQ0xtTTNnOWgwOXM&usp=sharing" target="_blank")
+    a.pdf(
+      href="https://drive.google.com/folderview?id=0B9k4M70SGKlAQ0xtTTNnOWgwOXM&usp=sharing" 
+      target="_blank"
+      )
       img(src="images/pdf.png")
-    a.pdf(href="http://crest-multimedia-web.s3.amazonaws.com/tsuka/fabnavi-preview/public/sonycameraremotecontroller.xpi" target="_blank")
+    a.pdf(
+      href="http://crest-multimedia-web.s3.amazonaws.com/tsuka/fabnavi-preview/public/sonycameraremotecontroller.xpi" 
+      target="_blank"
+      )
       img(src="images/firefox-extension.png")
+
+    .actions
+      input(
+        type="submit"
+        value="CreateProject"
+        onClick=this.handleSubmit
+        )
+

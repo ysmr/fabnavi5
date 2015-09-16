@@ -35,6 +35,11 @@ var CreateProject = React.createClass({
     this.setState({description : e.target.value});
   },
 
+  handleSubmit : function( e ) {
+    console.log(e);
+    console.log("Submit : ", this.state);
+  },
+
   render : createProject,
 
   componentWillMount : function() {

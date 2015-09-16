@@ -2,10 +2,16 @@ h1.form-title CreateProject
 form.form-box
   .field
     label Project Name
-    input.form-text
+    input.form-text(
+      onChange=this.handleNameChange 
+      value=this.state.name
+      type="text")
   .field
     label Project description
-    input.form-text(rows: 10)
+    input.form-text(
+     onChange=this.handleDescriptionChange 
+     value=this.state.description 
+     type="text")
 
     center
       | You need calibration sheet and Fixfox Addon !!

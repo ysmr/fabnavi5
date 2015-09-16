@@ -11,22 +11,29 @@ var RouteHandler = Router.RouteHandler;
 var createProject = jade.compileFile(__dirname + '/../templates/CreateProject.jade');
 var CreateProject = React.createClass({
 
-  getStateFromStores : function getStateFromStores() {
-    return {
-    };
-  },
-
   _onChange : function () {
-    this.setState(this.getStateFromStores());
   },
   getInitialState: function() {
-    return this.getStateFromStores();
+    return {
+      name : "",
+      description : ""
+    };
   },
 
   getDefaultProps: function() {
      return {
      };
    },
+
+  handleChange : function( e ) {
+  },
+
+  handleNameChange : function( e ) {
+    this.setState({name : e.target.value});
+  },
+  handleDescriptionChange : function( e ) {
+    this.setState({description : e.target.value});
+  },
 
   render : createProject,
 

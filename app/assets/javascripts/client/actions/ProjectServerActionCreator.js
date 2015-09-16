@@ -9,6 +9,13 @@ var ProjectServerActionCreator = {
       });
   }, 
 
+  createProjectSuccess : function( result ){
+      AppDispatcher.dispatch ({
+        type : ActionTypes.PROJECT_CREATE_SUCCESS,
+        result : result,
+      });
+  }, 
+
 
 };
 

@@ -11,6 +11,13 @@ var ProjectActionCreator = {
     WebAPIUtils.getAllProjects();
   }, 
 
+  createProject : function( payload ){
+    AppDispatcher.dispatch({
+      type : ActionTypes.PROJECT_CREATE
+    });
+    WebAPIUtils.createProject( payload.name, payload.contentAttributesType );
+  },
+
 
 };
 

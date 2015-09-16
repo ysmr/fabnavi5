@@ -128,7 +128,20 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
         keyMap[action.keyCode]();
       }  
       break;
+    case ActionTypes.MOVE_TOP:
+      location.hash = "#/"
+      break;
+    case ActionTypes.MOVE_MY_PROJECTS:
+      location.hash = "#/manager"
+      break;
+    case ActionTypes.MOVE_CONFIG:
+      location.hash = "#/manager/config"
+      break;
+    case ActionTypes.MOVE_NEW_PROJECT:
+      location.hash = "#/manager/create"
+      break;
     default:
+      console.log("Action fired : ", action );
       break;
   };
 });

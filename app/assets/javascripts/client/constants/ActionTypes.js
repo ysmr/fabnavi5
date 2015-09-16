@@ -1,15 +1,21 @@
-module.exports = {
-  SIGN_OUT  : "SIGN_OUT",
-  SIGN_IN   : "SIGN_IN",
-  CONFIG    : "CONFIG",
-  KEY_DOWN  : "KEY_DOWN",
-  KEY_PRESS : "KEY_PRESS",
-  KEY_UP    : "KEY_UP",
-  SIGN_IN_SUCCESS : "SIGN_IN_SUCCESS",
-  SIGN_IN_FAILURE : "SIGN_IN_FAILURE",
-  SIGN_OUT_FAILURE: "SIGN_OUT_FAILURE",
-  SIGN_OUT_SUCCESS: "SIGN_OUT_SUCCESS",
-  PROJECT_RECEIVE : "PROJECT_RECEIVE",
-  PROJECT_FETCH   : "PROJECT_FETCH",
-};
+var keyMirror = require('keymirror');
+module.exports = keyMirror({
+  SIGN_OUT  :null,
+  SIGN_IN   :null,
+  KEY_DOWN  :null,
+  KEY_PRESS :null,
+  KEY_UP    :null,
+  SIGN_IN_SUCCESS :null,
+  SIGN_IN_FAILURE :null,
+  SIGN_OUT_FAILURE:null,
+  SIGN_OUT_SUCCESS:null,
+  PROJECT_RECEIVE :null,
+  PROJECT_FETCH   :null,
+  PROJECT_CREATE  :null,
+  PROJECT_CREATE_SUCCESS  :null,
+  MOVE_TOP :null,
+  MOVE_MY_PROJECTS :null,
+  MOVE_CONFIG :null,
+  MOVE_NEW_PROJECT :null,
+});
 

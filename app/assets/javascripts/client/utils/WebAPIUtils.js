@@ -1,7 +1,21 @@
 var ProjectServerActionCreator = require('../actions/ProjectServerActionCreator');
+var ServerActionCreator = require('../actions/ServerActionCreator');
 var $ = require('jquery');
+var _accessToken = null;
+var _client = null;
+var _uid = null;
+
+function genHeader(){
+  if( _client == null || _uid == null || _accessToken == null) throw new Error("Not Authorized");
+  return {
+    "Client"        : _client,
+   "Uid"           : _uid,
+   "Access-Token"  : _accessToken
+ };
+}
 
 var WebAPIUtils = {
+
   getAllProjects : function( page, per_page, offset ){
     console.log("getProjects");
     page = page || 0;
@@ -27,9 +41,31 @@ var WebAPIUtils = {
     });
   },
 
-  createProject : function( name, content_attributes_type ){
+  createProject : function( name, contentAttributesType ){
     console.log("createProject");
     
+    $.ajax({
+      dataType : "json",
+      data : {
+        project : {
+          name : name,
+          content_attributes : {
+           type : "Content::PhotoList"
+          } 
+        }
+      },
+      headers : genHeader(),
+      type : "post",
+      success : function(res){
+        ProjectServerActionCreator.createProjectSuccess( res );
+      },
+      error : function(err){
+        console.log("Error from Create Project");
+        console.log(err);
+      },
+      url : "/api/v1/projects.json"
+
+    });
   },
 
   updateProject : function( name, 
@@ -78,8 +114,53 @@ var WebAPIUtils = {
 
   uploadFile : function( file ){
     console.log("uploadFile");
-  }
+  }, 
+
+  signIn : function(){
+    WebAPIUtils.initPersona();
+    navigator.id.request();
+  },
+
+  signOut : function () {
+    WebAPIUtils.initPersona();
+    navigator.id.logout();
+  },
+
+  initPersona : function () {
+    navigator.id.watch({
+       onlogin: function(assertion){
+          $.ajax({
+              type:"POST",
+              url:"/api/v1/auth/sign_in",
+              data:{assertion:assertion},
+              dataType:"json",
+              success: function(res, status, xhr){
+                _accessToken = xhr.getResponseHeader("Access-Token");
+                _uid = xhr.getResponseHeader("Uid");
+                _client = xhr.getResponseHeader("Client");
+                ServerActionCreator.signIn(res.email);
+              },
+              error: function(res, status, xhr){
+                console.log(res,status,xhr);
+              }
+          });
+        },
+        onlogout: function(){
+          $.ajax({
+              type:"DELETE",
+              url:"/api/v1/auth/sign_out",
+                success: function(res, status, xhr){
+                  ServerActionCreator.signOut(res);
+              },
+              error: function(res, status, xhr){
+                console.log(res,status,xhr);
+              }
+          });
+        }
+    });  
+  } 
 };
 
 
+global.api = WebAPIUtils;
 module.exports = WebAPIUtils;

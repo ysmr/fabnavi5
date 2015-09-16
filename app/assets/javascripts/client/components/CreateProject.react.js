@@ -9,24 +9,40 @@ var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
 var createProject = jade.compileFile(__dirname + '/../templates/CreateProject.jade');
+var ProjectActionCreator = require('../actions/ProjectActionCreator');
 var CreateProject = React.createClass({
 
-  getStateFromStores : function getStateFromStores() {
-    return {
-    };
-  },
 
   _onChange : function () {
-    this.setState(this.getStateFromStores());
   },
   getInitialState: function() {
-    return this.getStateFromStores();
+    return {
+      name : "",
+      description : ""
+    };
   },
 
   getDefaultProps: function() {
      return {
      };
    },
+
+  handleChange : function( e ) {
+  },
+
+  handleNameChange : function( e ) {
+    this.setState({name : e.target.value});
+  },
+  handleDescriptionChange : function( e ) {
+    this.setState({description : e.target.value});
+  },
+
+  handleSubmit : function( e ) {
+    ProjectActionCreator.createProject({
+      name : this.state.name, 
+      contentAttributesType : "Content::PhotoList"
+    });  
+  },
 
   render : createProject,
 

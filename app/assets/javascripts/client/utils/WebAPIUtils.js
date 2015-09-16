@@ -41,7 +41,7 @@ var WebAPIUtils = {
     });
   },
 
-  createProject : function( name, content_attributes_type ){
+  createProject : function( name, contentAttributesType ){
     console.log("createProject");
     
     $.ajax({

@@ -9,7 +9,9 @@ var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
 var createProject = jade.compileFile(__dirname + '/../templates/CreateProject.jade');
+var ProjectActionCreator = require('../actions/ProjectActionCreator');
 var CreateProject = React.createClass({
+
 
   _onChange : function () {
   },
@@ -36,8 +38,10 @@ var CreateProject = React.createClass({
   },
 
   handleSubmit : function( e ) {
-    console.log(e);
-    console.log("Submit : ", this.state);
+    ProjectActionCreator.createProject({
+      name : this.state.name, 
+      contentAttributesType : "Content::PhotoList"
+    });  
   },
 
   render : createProject,

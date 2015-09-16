@@ -15,6 +15,9 @@ class Project < ActiveRecord::Base
 
   after_commit :link_attachments!, on: :update
 
+  scope :public_projects, ->{where private: false}
+  scope :showable_for, ->user{where "projects.private = 0 or projects.user_id = ?", user.id}
+
   def link_attachments!
     attach! attachment_owner: user if to_be_attached?
     content.attach! attachment_owner: user if content.to_be_attached?

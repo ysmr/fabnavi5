@@ -43,7 +43,7 @@ tokens.each_with_index do |tok, i|
     # Project
     p = u.projects.create!(
       name: "User#{i}'s Project#{j}",
-      private: false,
+      private: (j % 2 == 0 ? true : false),
       description: "This is the description of User#{i}'s Project#{j}. This is the description of User#{i}'s Project#{j}. This is the description of User#{i}'s Project#{j}.",
       lisence_id: 1,
       content_attributes: {

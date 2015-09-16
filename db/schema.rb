@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150911040026) do
+ActiveRecord::Schema.define(version: 20150916031932) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "type",            limit: 255
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20150911040026) do
     t.text     "tokens",                 limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar",                 limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

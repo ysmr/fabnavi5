@@ -5,6 +5,15 @@ var _accessToken = null;
 var _client = null;
 var _uid = null;
 
+function genHeader(){
+  if( _client == null || _uid == null || _accessToken == null) throw new Error("Not Authorized");
+  return {
+    "Client"        : _client,
+   "Uid"           : _uid,
+   "Access-Token"  : _accessToken
+ };
+}
+
 var WebAPIUtils = {
 
   getAllProjects : function( page, per_page, offset ){
@@ -34,7 +43,6 @@ var WebAPIUtils = {
 
   createProject : function( name, content_attributes_type ){
     console.log("createProject");
-    if( _client == null || _uid == null || _accessToken == null) throw new Error("Not Authorized");
     
     $.ajax({
       dataType : "json",
@@ -46,11 +54,7 @@ var WebAPIUtils = {
           } 
         }
       },
-      headers : {
-        "Client"        : _client,
-        "Uid"           : _uid,
-        "Access-Token"  : _accessToken
-      },
+      headers : genHeader(),
       type : "post",
       success : function(res){
         ProjectServerActionCreator.receiveProjects( res );

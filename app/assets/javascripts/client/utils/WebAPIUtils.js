@@ -57,7 +57,7 @@ var WebAPIUtils = {
       headers : genHeader(),
       type : "post",
       success : function(res){
-        ProjectServerActionCreator.receiveProjects( res );
+        ProjectServerActionCreator.createProjectSuccess( res );
       },
       error : function(err){
         console.log("Error from Create Project");

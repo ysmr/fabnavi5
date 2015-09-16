@@ -3,12 +3,12 @@
     img(src=this.props.headerSrc)
   .menu  
     if this.state.account.email != ""
-      MenuIcon(act="TOP" src="images/h_top.png")
-      MenuIcon(act="MY_PROJECT" src="images/h_myproject.png")
-      MenuIcon(act="NEW_PROJECT" src="images/h_create.png")
-      MenuIcon(act="CONFIG" src="images/h_config.png")
+      MenuIcon(act="MOVE_TOP" src="images/h_top.png")
+      MenuIcon(act="MOVE_MY_PROJECTS" src="images/h_myproject.png")
+      MenuIcon(act="MOVE_NEW_PROJECT" src="images/h_create.png")
+      MenuIcon(act="MOVE_CONFIG" src="images/h_config.png")
       MenuIcon(act="SIGN_OUT" src="images/h_sign_out.png")
     else
-      MenuIcon(act="TOP" src="images/h_top.png")
+      MenuIcon(act="MOVE_TOP" src="images/h_top.png")
       MenuIcon(act="SIGN_IN" src="images/h_signin.png")
       

@@ -3,3 +3,9 @@ machine:
     Japan
   ruby:
     version: 2.2.3
+
+deployment:
+  production:
+    branch: release
+    commands:
+      - bundle exec cap production deploy

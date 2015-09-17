@@ -7,3 +7,7 @@ end
 json.user do
   json.partial! 'v1/projects/user', user: project.user
 end
+
+json.content do
+  json.partial! 'v1/projects/content', content: project.content
+end

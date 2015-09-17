@@ -36,7 +36,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
 ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
   switch(action.type){
-   case ActionTypes.PROJECT_RECEIVE: 
+   case ActionTypes.PROJECTS_RECEIVE: 
       ProjectStore.setProjects(action.projects);
       break;
     default : 

@@ -10,6 +10,7 @@ module.exports = keyMirror({
   SIGN_OUT_FAILURE:null,
   SIGN_OUT_SUCCESS:null,
   PROJECT_RECEIVE :null,
+  PROJECTS_RECEIVE :null,
   PROJECT_FETCH   :null,
   PROJECT_CREATE  :null,
   PROJECT_CREATE_SUCCESS  :null,

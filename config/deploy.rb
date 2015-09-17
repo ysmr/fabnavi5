@@ -4,6 +4,7 @@ lock '3.4.0'
 set :application, 'fabnavi5'
 set :repo_url, 'git@github.com:fabnavi/fabnavi5.git'
 set :rbenv_ruby, '2.2.3'
+set :branch, 'release'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -39,6 +40,10 @@ set :default_env, {
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+set :unicorn_pid, "#{shared_path}/tmp/pids/unicorn.pid"
+set :unicorn_rack_env, fetch(:stage) || "production"
+set :unicorn_config_path, "#{current_path}/config/unicorn.rb"
+
 namespace :deploy do
   task :build_js do
     on roles(:app) do
@@ -49,6 +54,13 @@ namespace :deploy do
     end
   end
   before "assets:precompile", "build_js"
+
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'unicorn:restart'
+    end
+  end
+  after :published, :restart
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

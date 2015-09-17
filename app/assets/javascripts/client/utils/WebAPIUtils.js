@@ -6,15 +6,38 @@ var _client = null;
 var _uid = null;
 
 function genHeader(){
-  if( _client == null || _uid == null || _accessToken == null) throw new Error("Not Authorized");
-  return {
-    "Client"        : _client,
-   "Uid"           : _uid,
-   "Access-Token"  : _accessToken
- };
+  if( _client == null || _uid == null || _accessToken == null){
+    return {
+    };
+
+  } else {
+    return {
+      "Client"        : _client,
+      "Uid"           : _uid,
+      "Access-Token"  : _accessToken
+    };
+  }
 }
 
 var WebAPIUtils = {
+
+  getProject : function( id ){
+    console.log("getProject : ",id);
+    $.ajax({
+      dataType : "json",
+      type : "GET",
+      success : function(res){
+        ProjectServerActionCreator.receiveProject( res );
+      },
+      error : function(err){
+        console.log("Error from getProject");
+        console.log(err);
+      },
+      headers : genHeader(),
+      url : "/api/v1/projects/" + id +".json"
+
+    });
+  },
 
   getAllProjects : function( page, per_page, offset ){
     console.log("getProjects");
@@ -114,6 +137,29 @@ var WebAPIUtils = {
 
   uploadFile : function( file ){
     console.log("uploadFile");
+
+    var fd = new FormData();
+    fd.append("attachment[file]",file, file.name);
+    
+    $.ajax({
+      dataType : "json",
+      data : fd,
+      processData: false, 
+      contentType: false,
+      headers : genHeader(),
+      type : "post",
+      success : function(res){
+        //ProjectServerActionCreator.uploadFileSuccess( res );
+        console.log("Uploaded file");
+        console.log( res );
+      },
+      error : function(err){
+        console.log("Error from Upload File");
+        console.log(err);
+      },
+      url : "/api/v1/attachments.json"
+
+    });
   }, 
 
   signIn : function(){

@@ -1,5 +1,5 @@
 var React = require('react');
-var ProjectStore = require('../stores/ProjectStore');
+var ProjectListStore = require('../stores/ProjectListStore');
 var jade = require('react-jade');
 
 var Router = require('react-router'); 

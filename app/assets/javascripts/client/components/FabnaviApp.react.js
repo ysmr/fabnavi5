@@ -20,7 +20,7 @@ var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 var routes = (
     React.createElement(Route, {handler: Frame, path: "/"}, 
-      React.createElement(DefaultRoute, { handler: Player }),
+      React.createElement(DefaultRoute, { handler: ProjectManager }),
       React.createElement(Route, {handler: ProjectManager, name: "manager"},
         React.createElement(DefaultRoute, { handler: ProjectList }),
         React.createElement(Route, {handler: ProjectList, name: "index"}),
@@ -28,7 +28,7 @@ var routes = (
         React.createElement(Route, {handler: EditProject, name: "edit", path: "edit/:projectId"}),
         React.createElement(Route, {handler: ProjectDetail, name: "project", path:"project/:projectId"})
       ),
-      React.createElement(Route, {handler: Player, name: "player"})
+      React.createElement(Route, {handler: Player, name: "player", path:"project/play/:projectId"})
      )
 
 );

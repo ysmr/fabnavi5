@@ -1,6 +1,8 @@
 var React = require('react');
 var jade = require('react-jade');
 var projectElement = jade.compileFile(__dirname + '/../templates/ProjectElement.jade');
+var ProjectActionCreator = require('../actions/ProjectActionCreator');
+
 var ProjectElement = React.createClass({
 
   propTypes : {
@@ -53,7 +55,8 @@ var ProjectElement = React.createClass({
   handleChange: function ( event ){
   },
 
-  onclick : function() {
+  handleClick : function( event ) {
+    ProjectActionCreator.playProject( this.props.project );
   },
 
   componentWillMount : function() {

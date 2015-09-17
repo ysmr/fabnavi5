@@ -1,5 +1,5 @@
 var React = require('react');
-var ProjectStore = require('../stores/ProjectStore');
+var ProjectListStore = require('../stores/ProjectListStore');
 var ProjectSelectorStore = require('../stores/ProjectSelectorStore');
 var ProjectElement = require('../components/ProjectElement.react');
 var jade = require('react-jade');
@@ -12,7 +12,7 @@ var ProjectList = React.createClass({
 
   getStateFromStores : function () {
     return {
-     projects : ProjectStore.getProjectsAll(),
+     projects : ProjectListStore.getProjectsAll(),
      selected : ProjectSelectorStore.getSelector(),
     };
   },
@@ -43,7 +43,7 @@ var ProjectList = React.createClass({
   },
 
   componentDidMount : function () {
-    ProjectStore.addChangeListener(this._onChange);
+    ProjectListStore.addChangeListener(this._onChange);
     ProjectSelectorStore.addChangeListener(this._onChange);
   },
 
@@ -54,7 +54,7 @@ var ProjectList = React.createClass({
   },
 
   componentWillUnmount : function() {
-    ProjectStore.removeChangeListener(this._onChange);
+    ProjectListStore.removeChangeListener(this._onChange);
     ProjectSelectorStore.removeChangeListener(this._onChange);
   },
 

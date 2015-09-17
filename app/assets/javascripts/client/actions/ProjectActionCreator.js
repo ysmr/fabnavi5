@@ -18,6 +18,14 @@ var ProjectActionCreator = {
     WebAPIUtils.createProject( payload.name, payload.contentAttributesType );
   },
 
+  playProject : function( payload ){
+    AppDispatcher.dispatch({
+      type : ActionTypes.PROJECT_PLAY,
+      id   : payload.id
+    });
+
+  },
+
 
 };
 

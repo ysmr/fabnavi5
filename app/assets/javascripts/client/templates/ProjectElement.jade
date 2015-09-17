@@ -1,4 +1,7 @@
-div(className="project-box " + (this.props.isSelected  ? "selected-project" : "project"))
+div(
+  className="project-box " + (this.props.isSelected  ? "selected-project" : "project") 
+  onClick=this.handleClick
+  )
   .thumbnail
     img(src=this.getThumbnailSrc())
   .project-name

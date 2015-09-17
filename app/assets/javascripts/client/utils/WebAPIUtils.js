@@ -114,6 +114,29 @@ var WebAPIUtils = {
 
   uploadFile : function( file ){
     console.log("uploadFile");
+
+    var fd = new FormData();
+    fd.append("attachment[file]",file, file.name);
+    
+    $.ajax({
+      dataType : "json",
+      data : fd,
+      processData: false, 
+      contentType: false,
+      headers : genHeader(),
+      type : "post",
+      success : function(res){
+        //ProjectServerActionCreator.uploadFileSuccess( res );
+        console.log("Uploaded file");
+        console.log( res );
+      },
+      error : function(err){
+        console.log("Error from Upload File");
+        console.log(err);
+      },
+      url : "/api/v1/attachments.json"
+
+    });
   }, 
 
   signIn : function(){

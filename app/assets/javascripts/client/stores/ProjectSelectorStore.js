@@ -1,7 +1,7 @@
 var EventEmitter = require('events');
 var machina = require('machina');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var ProjectStore = require('../stores/ProjectStore');
+var ProjectListStore = require('../stores/ProjectListStore');
 
 
 var _selector  = {
@@ -55,7 +55,7 @@ var ProjectSelectorState = new machina.Fsm({
     projects : {
       setSelectorByIndex : function setSelectorByIndex( index ){
         //validates selector
-        var projects = ProjectStore.getProjectsAll();
+        var projects = ProjectListStore.getProjectsAll();
         if( index >= projects.length ) {
           index = projects.length -1;
         } else if( index < 0 ) {

@@ -5,7 +5,7 @@ var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
-var ProjectStore = Object.assign({}, EventEmitter.prototype, {
+var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     _projects = [];
     ProjectActionCreator.getAllProjects();
@@ -34,10 +34,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   },
 });
 
-ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
+ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
   switch(action.type){
    case ActionTypes.PROJECTS_RECEIVE: 
-      ProjectStore.setProjects(action.projects);
+      ProjectListStore.setProjects(action.projects);
       break;
     default : 
       break;
@@ -45,5 +45,5 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
 
 });
 
-ProjectStore.init();
-module.exports = ProjectStore;
+ProjectListStore.init();
+module.exports = ProjectListStore;

@@ -3,13 +3,44 @@ var EventEmitter = require('events');
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
+var Camera = require('../player/Camera');
 
 var _project = null;
 var _current_page = 0;
+var keyMap = [];
+
 
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
+    Camera.init();
+    keyMap[13] = this.shoot;
     this.emitChange();
+  },
+
+  shoot : function(){
+    console.log("shoot");
+    Camera.shoot().then(function(url){
+      console.log(url);
+      ProjectStore.pushFigure( url );
+    });
+  },
+
+  pushFigure : function( url ){
+    _project.content.push({
+      figure : {
+        file : {
+          file : {
+            url : url,
+            thumb : {
+              url : null
+            },
+          },
+        },
+        id : null,
+        position : -1,
+      }
+    });
+    ProjectStore.emitChange();
   },
 
   emitChange : function(){
@@ -40,10 +71,16 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
 ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
   switch(action.type){
-   case ActionTypes.PROJECT_RECEIVE: 
+    case ActionTypes.KEY_DOWN:
+      if( keyMap.hasOwnProperty( action.keyCode ) ){
+        console.log(action);
+          keyMap[action.keyCode]();
+      }  
+      break;
+    case ActionTypes.PROJECT_RECEIVE: 
       ProjectStore.setProject( action.project );
       break;
-   case ActionTypes.PROJECT_PLAY: 
+    case ActionTypes.PROJECT_PLAY: 
       location.hash = "#/project/play/" + action.id;
       ProjectActionCreator.getProject({ id:action.id });
       break;
@@ -53,6 +90,5 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
 
 });
 
-ProjectStore.init();
 global.ProjectStore = ProjectStore;
 module.exports = ProjectStore;

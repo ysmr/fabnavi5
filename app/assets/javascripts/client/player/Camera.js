@@ -9,11 +9,8 @@ var Camera = function() {
       window.open("http://crest-multimedia-web.s3.amazonaws.com/tsuka/fabnavi-preview/public/sonycameraremotecontroller.xpi");
       return false;
     }
-    document.sonycameracontroller.setup({ipaddress: "10.0.0.1", port: 10000, version: "1.0"},false,true);
+    document.sonycameracontroller.setup({ipaddress: "10.0.0.1", port: 10000, version: "1.0"},true ,true);
 
-    heartbeat = window.setInterval(function(){
-        ping();
-    },5000);
     return true;
   }
 

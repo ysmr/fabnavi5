@@ -3,7 +3,7 @@ DeviseTokenAuth.setup do |config|
   when "development"
     config.persona_audience_url = 'http://192.168.33.10:3000'
   else
-    config.persona_audience_url = 'http://fabnavi.org'
+    config.persona_audience_url = 'http://52.69.0.74'
   end
 
   # By default the authorization headers will change after each request. The

@@ -1,13 +1,14 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events');
-var _project = {};
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
+var _project = null;
+var _current_page = 0;
+
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
-    _project = {};
     this.emitChange();
   },
 
@@ -17,6 +18,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
   getProject : function( ){
     return _project;
+  },
+
+  getCurrentPage: function(){
+    return _current_page;
   },
 
   setProject : function( project ){
@@ -49,4 +54,5 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
 });
 
 ProjectStore.init();
+global.ProjectStore = ProjectStore;
 module.exports = ProjectStore;

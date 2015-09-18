@@ -191,3 +191,5 @@ return {
   update:update,
 };
 } ();
+
+module.exprots = CalibrateController;

@@ -13,6 +13,7 @@ module.exports = keyMirror({
   PROJECT_PLAY:null,
   PROJECTS_RECEIVE :null,
   PROJECT_FETCH   :null,
+  PROJECTS_FETCH   :null,
   PROJECT_CREATE  :null,
   PROJECT_CREATE_SUCCESS  :null,
   MOVE_TOP :null,

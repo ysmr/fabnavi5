@@ -1,6 +1,8 @@
 var React = require('react');
 var jade = require('react-jade');
 
+var ProjectStore = require('../stores/ProjectStore');
+
 var Router = require('react-router'); 
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
@@ -21,6 +23,7 @@ var Player = React.createClass({
 
   getStateFromStores : function getStateFromStores() {
     return {
+     project : ProjectStore.getProject(),
     };
   },
 
@@ -51,6 +54,7 @@ var Player = React.createClass({
   },
 
   componentDidMount : function () {
+    ProjectStore.addChangeListener(this._onChange);
   },
 
   componentWillUpdate : function() {
@@ -64,6 +68,7 @@ var Player = React.createClass({
   },
 
   componentWillUnmount : function() {
+    ProjectStore.removeChangeListener(this._onChange);
   },
 
 });

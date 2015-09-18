@@ -2,6 +2,7 @@ var React = require('react');
 var jade = require('react-jade');
 
 var ProjectStore = require('../stores/ProjectStore');
+var MainView = require('../player/MainView');
 
 var Router = require('react-router'); 
 var DefaultRoute = Router.DefaultRoute;
@@ -55,11 +56,8 @@ var Player = React.createClass({
 
   componentDidMount : function () {
     ProjectStore.addChangeListener(this._onChange);
-    var cvs = React.findDOMNode(this.refs.mainCanvas);
-    console.log(cvs);
-    var ctx = cvs.getContext('2d');
-    ctx.fillStyle = "red";
-    ctx.fillRect(10,10,100,100);
+    MainView.init( React.findDOMNode(this.refs.mainCanvas));
+    MainView.showWaitMessage();
   },
 
   componentWillUpdate : function() {

@@ -4,8 +4,38 @@ var $ = require('jquery');
 var _accessToken = null;
 var _client = null;
 var _uid = null;
+var DEVELOPMENT = true;
+
+function setHeader(client,uid,accessToken){
+    localStorage.setItem("header",{
+      "Client"        : _client,
+      "Uid"           : _uid,
+      "AccessToken"  : _accessToken
+    }.toSource());
+}
+
+function clearHeader(){
+  localStorage.removeItem("header");
+}
+
+function loadHeader(){
+  var header = localStorage.getItem("header");
+  if( header == null || !DEVELOPMENT){
+    return null;
+  } else {
+    header = eval(header);
+    _client = header.Client;
+    _uid = header.Uid;
+    _accessToken = header.AccessToken;
+    setTimeout(function(){
+    ServerActionCreator.signIn(_uid);
+    },0);
+    return header;
+  }
+}
 
 function genHeader(){
+  loadHeader();
   if( _client == null || _uid == null || _accessToken == null){
     return {
     };
@@ -184,10 +214,12 @@ var WebAPIUtils = {
                 _accessToken = xhr.getResponseHeader("Access-Token");
                 _uid = xhr.getResponseHeader("Uid");
                 _client = xhr.getResponseHeader("Client");
+                setHeader();
                 ServerActionCreator.signIn(res.email);
               },
               error: function(res, status, xhr){
                 console.log(res,status,xhr);
+                clearHeader();
               }
           });
         },
@@ -197,9 +229,11 @@ var WebAPIUtils = {
               url:"/api/v1/auth/sign_out",
                 success: function(res, status, xhr){
                   ServerActionCreator.signOut(res);
+                  clearHeader();
               },
               error: function(res, status, xhr){
                 console.log(res,status,xhr);
+                clearHeader();
               }
           });
         }

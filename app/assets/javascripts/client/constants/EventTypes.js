@@ -1,6 +1,8 @@
-module.exports = {
-  ACCOUNT_CHANGE : "ACCOUNT_CHANGE",
-  PROJECT_LIST_CHANGE : "PROJECT_LIST_CHANGE",
-  PROJECT_SELECTOR_CHANGE : "PROJECT_SELECTOR_CHANGE"
-};
+var keyMirror = require('keymirror');
+module.exports = keyMirror({
+  ACCOUNT_CHANGE : null,
+  PROJECT_LIST_CHANGE : null,
+  PROJECT_SELECTOR_CHANGE :null,
+  PROJECT_CHANGE : null,
+});
 

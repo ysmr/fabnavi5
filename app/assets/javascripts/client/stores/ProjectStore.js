@@ -31,8 +31,21 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   pushPhotoFromCamera : function( url ){
-    _project.content.push({
+    var imgDeferred = $.Deferred();
+    var img = new Image();
+    img.src = url;
+    img.onload = function(img){
+      imgDeferred.resolve(img);
+    };
+    
+    var content = {
       figure : {
+        privateContent :{
+          img_promise : imgDeferred.promise(),
+          thumb_promise : null,
+          img : null,
+          thumb : null,
+        },
         file : {
           file : {
             url : url,
@@ -44,7 +57,8 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
         id : null,
         position : -1,
       }
-      });
+    };
+    _project.content.push( content );
     ProjectStore.emitChange();
   },
 

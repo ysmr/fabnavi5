@@ -55,14 +55,14 @@ var Player = React.createClass({
 
   updateCanvas : function(){
     if(this.state.project != null ){
-    var fig = this.state.project.content[this.state.page].figure;
-    var img = new Image();
-    img.src = fig.file.file.url;
-    img.onload = function(aImg){
-      console.log("Image loaded");
-      MainView.draw(img);
-    }
-    } 
+      var fig = this.state.project.content[this.state.page].figure;
+      var img = new Image();
+      img.src = fig.file.file.url;
+      img.onload = function(aImg){
+        console.log("Image loaded");
+        MainView.draw(img);
+      }
+    }   
   },
   
   componentWillMount : function() {

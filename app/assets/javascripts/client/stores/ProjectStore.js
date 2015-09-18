@@ -21,11 +21,16 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     console.log("shoot");
     Camera.shoot().then(function(url){
       console.log(url);
-      ProjectStore.pushFigure( url );
+      ProjectStore.pushPhotoFromCamera( url );
     });
   },
 
-  pushFigure : function( url ){
+  setProject : function( project ){
+    _project = project;
+    this.emitChange();
+  },
+
+  pushPhotoFromCamera : function( url ){
     _project.content.push({
       figure : {
         file : {
@@ -39,7 +44,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
         id : null,
         position : -1,
       }
-    });
+      });
     ProjectStore.emitChange();
   },
 
@@ -53,11 +58,6 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
   getCurrentPage: function(){
     return _current_page;
-  },
-
-  setProject : function( project ){
-    _project = project;
-    this.emitChange();
   },
 
   addChangeListener: function(callback) {

@@ -55,6 +55,11 @@ var Player = React.createClass({
 
   componentDidMount : function () {
     ProjectStore.addChangeListener(this._onChange);
+    var cvs = React.findDOMNode(this.refs.mainCanvas);
+    console.log(cvs);
+    var ctx = cvs.getContext('2d');
+    ctx.fillStyle = "red";
+    ctx.fillRect(10,10,100,100);
   },
 
   componentWillUpdate : function() {

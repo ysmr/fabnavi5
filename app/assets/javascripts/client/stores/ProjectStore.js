@@ -72,12 +72,16 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     var dst = ProjectStore.findFigureBySymbol( fig.sym );
     dst.figure.id = fig.id;
     dst.figure.file.file = fig.file;
+    ProjectStore.saveProject();
+    ProjectStore.emitChange();
+  },
+
+  saveProject : function(){
     setTimeout(function(){
       ProjectActionCreator.updateProject({
         project :  ProjectStore.getProject() 
       });
     },0);
-    ProjectStore.emitChange();
   },
 
   newFigure : function( ){

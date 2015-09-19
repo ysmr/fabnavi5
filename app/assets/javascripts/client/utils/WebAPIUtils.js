@@ -150,7 +150,6 @@ var WebAPIUtils = {
           content_attributes : {
             description : project.description,
             type : "Content::PhotoList",
-            figures_attributes : figures_attributes,
           } ,
         }
       },

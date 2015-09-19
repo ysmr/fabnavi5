@@ -23,6 +23,13 @@ var ProjectServerActionCreator = {
       });
   }, 
 
+  uploadAttachmentSuccess : function( result ){
+      AppDispatcher.dispatch ({
+        type : ActionTypes.UPLOAD_ATTACHMENT_SUCCESS,
+        result : result,
+      });
+  },
+
 
 };
 

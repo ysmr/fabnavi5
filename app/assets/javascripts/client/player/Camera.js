@@ -1,4 +1,4 @@
-
+var STUB = false;
 var Camera = function() {
   var connected = false,
       heartbeat = null;
@@ -26,17 +26,33 @@ var Camera = function() {
 
   function shoot () {
     var d = $.Deferred();
-    var t = window.setTimeout(function(){
-        d.reject("Camera Not Respond");        
-    },3000);
-    var listener = 
-    function (url,res) {
-      window.clearTimeout(t);
-      setTimeout(function(){
-        d.resolve(url);
-     },100);
-    };
-    document.sonycameracontroller.take(listener);
+    if(STUB) {
+     console.log("Stub");
+      var cvs = document.createElement('canvas');
+      var ctx = cvs.getContext('2d');
+      cvs.width = 1366;
+      cvs.height = 768;
+      ctx.fillStyle = "green";
+      ctx.font = "100px ArialRoundedMTBoldBold, serif";
+      ctx.rotate(Math.PI);
+      ctx.translate(-1500,-800);
+      ctx.fillText(Date.now(),400,400);
+      ctx.translate(1500,800);
+      ctx.rotate(-Math.PI);
+      d.resolve(cvs.toDataURL());
+    } else {
+      var t = window.setTimeout(function(){
+          d.reject("Camera Not Respond");        
+      },3000);
+      var listener = 
+      function (url,res) {
+        window.clearTimeout(t);
+        setTimeout(function(){
+          d.resolve(url);
+        },100);
+      };
+      document.sonycameracontroller.take(listener);
+    }
 
     return d.promise();
   }

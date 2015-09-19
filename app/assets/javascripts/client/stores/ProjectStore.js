@@ -33,9 +33,11 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
         .then(function(blob){
           console.log("blob created:" ,blob);
           console.log(blob);
+          if( url.length > 1000 ){ url = url.slice(30,40) + ".jpg";
+          }
           ProjectActionCreator.uploadAttachment({
             file : blob,
-    name : url.replace(/\?.*/,"").replace(/^.*\//,"")
+            name : url.replace(/\?.*/,"").replace(/^.*\//,"")
           });
         });
     });

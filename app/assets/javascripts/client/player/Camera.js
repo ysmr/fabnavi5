@@ -1,4 +1,4 @@
-var STUB = true;
+var STUB = false;
 var Camera = function() {
   var connected = false,
       heartbeat = null;

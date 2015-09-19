@@ -67,6 +67,14 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     ProjectStore.emitChange();
   },
 
+  mergeUploadedFigure : function( fig ){
+    console.log(fig);
+    var dst = ProjectStore.findFigureBySymbol( fig.sym );
+    dst.id = fig.id;
+    dst.figure.file.file = fig.file;
+    ProjectStore.emitChange();
+  },
+
   newFigure : function( ){
     return {
       figure : {
@@ -142,6 +150,13 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   removeChangeListener: function(callback) {
     this.removeListener(EventTypes.PROJECT_CHANGE, callback);
   },
+
+
+  findFigureBySymbol : function( sym ){
+     for( fig of ProjectStore.getProject().content ){
+        if( fig.figure.hasOwnProperty('sym') && fig.figure.sym == sym ) return fig;
+     } 
+  },
 });
 
 ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
@@ -158,6 +173,10 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
     case ActionTypes.PROJECT_PLAY: 
       location.hash = "#/project/play/" + action.id;
       ProjectActionCreator.getProject({ id:action.id });
+      break;
+    case ActionTypes.UPLOAD_ATTACHMENT_SUCCESS :
+      ProjectStore.mergeUploadedFigure( action.result );
+      ProjectStore.findFigureBySymbol(action.result.sym);
       break;
     default : 
       break;

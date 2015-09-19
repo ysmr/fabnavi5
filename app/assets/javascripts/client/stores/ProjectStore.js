@@ -34,7 +34,8 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
           console.log("blob created:" ,blob);
           console.log(blob);
           ProjectActionCreator.uploadAttachment({
-            file : blob 
+            file : blob,
+    name : url.replace(/\?.*/,"").replace(/^.*\//,"")
           });
         });
     });

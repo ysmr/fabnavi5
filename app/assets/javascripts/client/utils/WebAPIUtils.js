@@ -165,11 +165,11 @@ var WebAPIUtils = {
     console.log("deleteCalibrations");
   },
 
-  uploadFile : function( file ){
+  uploadFile : function( file, name ){
     console.log("uploadFile");
 
     var fd = new FormData();
-    fd.append("attachment[file]",file, file.name);
+    fd.append("attachment[file]",file, name);
     
     $.ajax({
       dataType : "json",

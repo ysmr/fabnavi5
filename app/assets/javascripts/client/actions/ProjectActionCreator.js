@@ -33,8 +33,9 @@ var ProjectActionCreator = {
     AppDispatcher.dispatch({
       type : ActionTypes.UPLOAD_ATTACHMENT,
       file   : payload.file,
+      name : payload.name,
     });
-    WebAPIUtils.uploadFile( payload.file );
+    WebAPIUtils.uploadFile( payload.file, payload.name );
   },
 
 

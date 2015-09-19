@@ -21,7 +21,9 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     console.log("shoot");
     Camera.shoot().then(function(url){
       console.log(url);
-      ProjectStore.pushPhotoFromCamera( url );
+      var fig = ProjectStore.newFigure();
+      ProjectStore.setImageToFigureFromCamera(fig, url);
+      ProjectStore.pushFigure( fig );
     });
   },
 
@@ -30,25 +32,25 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
-  pushPhotoFromCamera : function( url ){
-    var imgDeferred = $.Deferred();
-    var img = new Image();
-    img.src = url;
-    img.onload = function(img){
-      imgDeferred.resolve(img);
-    };
-    
-    var content = {
+  pushFigure : function( fig ){
+    _project.content.push(fig);
+    ProjectStore.emitChange();
+  },
+
+  newFigure : function( ){
+    return {
       figure : {
-        privateContent :{
-          img_promise : imgDeferred.promise(),
-          thumb_promise : null,
-          img : null,
-          thumb : null,
+        clientContent : {
+          dfdImage      : null,
+          dfdThumbnail  : null,
+        },
+        serverContent : {
+          dfdImage      : null,
+          dfdThumbnail  : null,
         },
         file : {
           file : {
-            url : url,
+            url : null,
             thumb : {
               url : null
             },
@@ -58,9 +60,36 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
         position : -1,
       }
     };
-    _project.content.push( content );
-    ProjectStore.emitChange();
   },
+
+  setImageToFigureFromCamera : function( fig, url ){
+   var src = null;
+    if( url ){
+      src = url;
+      fig.figure.file.file.url = url;
+    } else if( fig.figure.file.file.url ) {
+      src = fig.figure.file.file.url;
+    } else {
+      throw new Error("Figure url is not sed");
+    }
+
+    var img = new Image();
+    var d = $.Deferred();
+    img.src = src;
+    img.onload = function(){
+      d.resolve(img);
+    }
+    fig.figure.clientContent.dfdImage = d.promise();
+  },
+
+  setImageToFigureFromServer : function( fig, url ){
+
+  },
+
+  setThumbnailToFigureFromServer : function( fig, url ){
+
+  },
+
 
   emitChange : function(){
     this.emit(EventTypes.PROJECT_CHANGE);

@@ -27,7 +27,14 @@ var ProjectActionCreator = {
       type : ActionTypes.PROJECT_PLAY,
       id   : payload.id
     });
+  },
 
+  uploadAttachment : function( payload ){
+    AppDispatcher.dispatch({
+      type : ActionTypes.UPLOAD_ATTACHMENT,
+      file   : payload.file,
+    });
+    WebAPIUtils.uploadFile( payload.file );
   },
 
 

@@ -4,6 +4,7 @@ var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 var Camera = require('../player/Camera');
+var ImageConverter = require('../player/ImageConverter');
 
 var _project = null;
 var _current_page = 0;
@@ -26,6 +27,16 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
       var fig = ProjectStore.newFigure();
       ProjectStore.setImageToFigureFromCamera(fig, url);
       ProjectStore.pushFigure( fig );
+      console.log("pushed :" ,fig);
+      fig.figure.clientContent.dfdImage
+        .then(ImageConverter.toBlob)
+        .then(function(blob){
+          console.log("blob created:" ,blob);
+          console.log(blob);
+          ProjectActionCreator.uploadAttachment({
+            file : blob 
+          });
+        });
     });
   },
 
@@ -94,6 +105,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     var img = new Image();
     var d = $.Deferred();
     img.src = src;
+    img.crossOrigin='anonymous';
     img.onload = function(){
       d.resolve(img);
     }

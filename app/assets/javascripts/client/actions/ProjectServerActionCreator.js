@@ -1,4 +1,4 @@
-var ActionTypes = require('../constants/ActionTypes');
+  var ActionTypes = require('../constants/ActionTypes');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 var ProjectServerActionCreator = {
@@ -29,7 +29,6 @@ var ProjectServerActionCreator = {
         result : result,
       });
   },
-
 
 };
 

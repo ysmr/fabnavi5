@@ -165,7 +165,7 @@ var WebAPIUtils = {
     console.log("deleteCalibrations");
   },
 
-  uploadFile : function( file, name ){
+  uploadFile : function( file, name, sym ){
     console.log("uploadFile");
 
     var fd = new FormData();
@@ -179,12 +179,13 @@ var WebAPIUtils = {
       headers : genHeader(),
       type : "post",
       success : function(res){
-        //ProjectServerActionCreator.uploadFileSuccess( res );
         console.log("Uploaded file");
         console.log( res );
+        res.sym = sym;
+        ProjectServerActionCreator.uploadAttachmentSuccess( res );
       },
       error : function(err){
-        console.log("Error from Upload File");
+        console.log("Error from Upload File :sym", sym);
         console.log(err);
       },
       url : "/api/v1/attachments.json"

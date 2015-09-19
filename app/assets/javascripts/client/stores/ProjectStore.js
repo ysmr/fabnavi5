@@ -23,21 +23,19 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   shoot : function(){
     console.log("shoot");
     Camera.shoot().then(function(url){
-      console.log(url);
       var fig = ProjectStore.newFigure();
       ProjectStore.setImageToFigureFromCamera(fig, url);
       ProjectStore.pushFigure( fig );
-      console.log("pushed :" ,fig);
       fig.figure.clientContent.dfdImage
         .then(ImageConverter.toBlob)
         .then(function(blob){
-          console.log("blob created:" ,blob);
-          console.log(blob);
-          if( url.length > 1000 ){ url = url.slice(30,40) + ".jpg";
+          if( url.length > 1000 ){ 
+            url = url.slice(30,40) + ".jpg";
           }
           ProjectActionCreator.uploadAttachment({
             file : blob,
-            name : url.replace(/\?.*/,"").replace(/^.*\//,"")
+            name : url.replace(/\?.*/,"").replace(/^.*\//,""),
+            sym : fig.figure.sym
           });
         });
     });
@@ -72,6 +70,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   newFigure : function( ){
     return {
       figure : {
+        sym           : gensym(),
         clientContent : {
           dfdImage      : null,
           dfdThumbnail  : null,

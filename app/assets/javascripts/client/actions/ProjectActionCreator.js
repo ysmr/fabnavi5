@@ -34,8 +34,9 @@ var ProjectActionCreator = {
       type : ActionTypes.UPLOAD_ATTACHMENT,
       file   : payload.file,
       name : payload.name,
+      sym : payload.sym
     });
-    WebAPIUtils.uploadFile( payload.file, payload.name );
+    WebAPIUtils.uploadFile( payload.file, payload.name, payload.sym );
   },
 
 

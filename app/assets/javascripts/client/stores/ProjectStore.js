@@ -13,7 +13,9 @@ var keyMap = [];
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     Camera.init();
-    keyMap[13] = this.shoot;
+    keyMap[13] = ProjectStore.shoot;
+    keyMap[39] = ProjectStore.next;
+    keyMap[37] = ProjectStore.prev;
     this.emitChange();
   },
 
@@ -25,6 +27,22 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
       ProjectStore.setImageToFigureFromCamera(fig, url);
       ProjectStore.pushFigure( fig );
     });
+  },
+
+  next : function(){
+    _current_page++;
+    if( _project.content.length >= _current_page ) {
+        _current_page = _project.content.length -1 ;
+    }
+    ProjectStore.emitChange();
+  },
+
+  prev : function(){
+    _current_page--;
+    if( _current_page < 0 ) {
+        _current_page = 0;
+    }
+    ProjectStore.emitChange();
   },
 
   setProject : function( project ){

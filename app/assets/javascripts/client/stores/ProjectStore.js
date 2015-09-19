@@ -70,8 +70,13 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   mergeUploadedFigure : function( fig ){
     console.log(fig);
     var dst = ProjectStore.findFigureBySymbol( fig.sym );
-    dst.id = fig.id;
+    dst.figure.id = fig.id;
     dst.figure.file.file = fig.file;
+    setTimeout(function(){
+      ProjectActionCreator.updateProject({
+        project :  ProjectStore.getProject() 
+      });
+    },0);
     ProjectStore.emitChange();
   },
 
@@ -88,6 +93,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
           dfdThumbnail  : null,
         },
         file : {
+          id : null,
           file : {
             url : null,
             thumb : {
@@ -95,8 +101,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
             },
           },
         },
-        id : null,
-        position : -1,
+        position : 7,
       }
     };
   },

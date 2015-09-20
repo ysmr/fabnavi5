@@ -10,6 +10,7 @@ var CreateProject = require('./CreateProject.react.js');
 var EditProject = require('./EditProject.react.js');
 var ProjectDetail = require('./ProjectDetail.react.js');
 var ProjectList = require('./ProjectList.react.js');
+var ProjectStore = require('../stores/ProjectStore');
 
 var jade = require('react-jade');
 
@@ -35,6 +36,7 @@ var routes = (
 
 global.onload = function ( ) {
   console.log("Fabnavi boot");
+  ProjectStore.init();
   Router.run(routes, function(Handler){
     React.render(React.createElement(Handler, null), document.body);
   });

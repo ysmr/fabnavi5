@@ -1,4 +1,18 @@
+var ViewConfig = require('../player/ViewConfig');
 var ImageConverter = function(){
+
+  function toBlob(img){
+    var d = $.Deferred();
+    var cvs = document.createElement('canvas');
+    cvs.width =  img.naturalWidth;
+    cvs.height = img.naturalHeight;
+    ImageConverter.drawImage(img,cvs,ViewConfig.conf());
+    document.body.appendChild(cvs);
+    cvs.toBlob(function(blob){
+     d.resolve(blob);
+    });
+    return d.promise();
+  }
 
   function projectImgToCanvas(img,cvs,conf){
     var ctx = cvs.getContext('2d'),
@@ -61,6 +75,7 @@ var ImageConverter = function(){
 
   return {
     drawImage:projectImgToCanvas,
+    toBlob : toBlob,
   };
   }();
 

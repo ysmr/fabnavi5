@@ -3,6 +3,7 @@ var jade = require('react-jade');
 
 var ProjectStore = require('../stores/ProjectStore');
 var MainView = require('../player/MainView');
+var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 var Router = require('react-router'); 
 var DefaultRoute = Router.DefaultRoute;
@@ -54,18 +55,23 @@ var Player = React.createClass({
   },
 
   updateCanvas : function(){
-    if(this.state.project != null ){
-    var fig = this.state.project.content[this.state.page].figure;
-    var img = new Image();
-    img.src = fig.file.file.url;
-    img.onload = function(aImg){
-      console.log("Image loaded");
-      MainView.draw(img);
-    }
-    } 
+    if(this.state.project != null && this.state.project.content.length > 0){
+      var fig = this.state.project.content[this.state.page].figure;
+      var img = new Image();
+      img.src = fig.file.file.url;
+      img.onload = function(aImg){
+        console.log("Image loaded");
+        MainView.draw(img);
+      }
+      img.onerror = function(err){
+        console.log("Image load error : ", err, img);
+        throw new Error(err);
+      }
+    }   
   },
   
   componentWillMount : function() {
+    ProjectActionCreator.getProject({ id: this.context.router.getCurrentParams().projectId});
   },
 
   componentDidMount : function () {

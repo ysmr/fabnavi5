@@ -121,12 +121,55 @@ var WebAPIUtils = {
     });
   },
 
-  updateProject : function( name, 
-                            description, 
-                            tag_list, 
-                            attachment_id, 
-                            lisence_id){
+  updateProject : function( project ){
     console.log("updateProject");
+
+    console.log(project);
+
+    var figures_attributes = [];
+    
+    for( var figure of project.content ){
+      figures_attributes.push({
+        type : "Figure::Photo",
+        _destroy : false,
+        attachment_id : figure.figure.id,
+        id : figure.figure.id,
+        position : figure.figure.position,
+      });
+    }
+      var data = {
+        project : {
+          id : project.id,
+          name : project.name,
+          description : project.description,
+          tag_list : "",
+          lisence_id: 0,
+          content_attributes : {
+            attachment_id : figures_attributes[0].attachment_id,
+            description : project.description,
+            type : "Content::PhotoList",
+            figures_attributes : figures_attributes,
+          } ,
+        }
+      };
+      console.log(data.toSource());
+
+    $.ajax({
+      dataType : "json",
+      headers : genHeader(),
+      type : "patch",
+      data : data,
+      success : function(res){
+        console.log("upload success: ",res);
+        //ProjectServerActionCreator.createProjectSuccess( res );
+      },
+      error : function(err){
+        console.log("Error from UpdateProject");
+        console.log(err);
+      },
+      url : "/api/v1/projects/"+ project.id + ".json"
+
+    });
   },                            
                              
   deleteProject : function( id ){
@@ -165,11 +208,11 @@ var WebAPIUtils = {
     console.log("deleteCalibrations");
   },
 
-  uploadFile : function( file ){
+  uploadFile : function( file, name, sym ){
     console.log("uploadFile");
 
     var fd = new FormData();
-    fd.append("attachment[file]",file, file.name);
+    fd.append("attachment[file]",file, name);
     
     $.ajax({
       dataType : "json",
@@ -179,12 +222,13 @@ var WebAPIUtils = {
       headers : genHeader(),
       type : "post",
       success : function(res){
-        //ProjectServerActionCreator.uploadFileSuccess( res );
         console.log("Uploaded file");
         console.log( res );
+        res.sym = sym;
+        ProjectServerActionCreator.uploadAttachmentSuccess( res );
       },
       error : function(err){
-        console.log("Error from Upload File");
+        console.log("Error from Upload File :sym", sym);
         console.log(err);
       },
       url : "/api/v1/attachments.json"

@@ -1,4 +1,4 @@
-var ActionTypes = require('../constants/ActionTypes');
+  var ActionTypes = require('../constants/ActionTypes');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 var ProjectServerActionCreator = {
@@ -23,6 +23,12 @@ var ProjectServerActionCreator = {
       });
   }, 
 
+  uploadAttachmentSuccess : function( result ){
+      AppDispatcher.dispatch ({
+        type : ActionTypes.UPLOAD_ATTACHMENT_SUCCESS,
+        result : result,
+      });
+  },
 
 };
 

@@ -80,7 +80,6 @@ function build(){
   .on('error', gutil.log.bind(gutil, 'Browserify Error'))
   .pipe(source("bundle.js"))
   .pipe(buffer())
-  .pipe(uglify())
   .pipe(gulp.dest(DIST_CLIENT));
 }
 

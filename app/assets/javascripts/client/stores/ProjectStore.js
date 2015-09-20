@@ -162,7 +162,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
 
   findFigureBySymbol : function( sym ){
-     for( fig of ProjectStore.getProject().content ){
+     var cts  = ProjectStore.getProject().content;
+     var fig = null;
+     for(var i = 0; i < cts.length; i++){
+        fig = cts[i];
         if( fig.figure.hasOwnProperty('sym') && fig.figure.sym == sym ) return fig;
      } 
   },

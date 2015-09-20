@@ -123,44 +123,23 @@ var WebAPIUtils = {
 
   updateProject : function( project ){
     console.log("updateProject");
+      var fd = new FormData();
+      fd.append("project[name]", project.name);
 
-    console.log(project);
-
-    var figures_attributes = [];
-   var figure = null;
-   var cts = project.content; 
-    for( var i = 0; i<cts.length; i++){
-     figure = cts[i];
-      figures_attributes.push({
-        type : "Figure::Photo",
-        _destroy : false,
-        attachment_id : figure.figure.id,
-        id : figure.figure.id,
-        position : figure.figure.position,
-      });
-    }
-      var data = {
-        project : {
-          id : project.id,
-          name : project.name,
-          description : project.description,
-          tag_list : "",
-          lisence_id: 0,
-          content_attributes : {
-            attachment_id : figures_attributes[0].attachment_id,
-            description : project.description,
-            type : "Content::PhotoList",
-            figures_attributes : figures_attributes,
-          } ,
-        }
-      };
-      console.log(data.toSource());
-
+      console.log(project.content);
+      for(var i=0; i < project.content.length; i++){
+        fd.append("project[content_attributes][figures_attributes][][type]","Figure::Photo");
+        fd.append("project[content_attributes][figures_attributes][][attachment_id]",project.content[i].figure.id);
+        fd.append("project[content_attributes][figures_attributes][][position]",i);
+        fd.append("project[content_attributes][figures_attributes][][_destroy]","false");
+      }
     $.ajax({
       dataType : "json",
       headers : genHeader(),
       type : "patch",
-      data : data,
+      data  : fd,
+      contentType : false,
+      processData : false,
       success : function(res){
         console.log("upload success: ",res);
         //ProjectServerActionCreator.createProjectSuccess( res );

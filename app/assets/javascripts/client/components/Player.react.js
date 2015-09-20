@@ -3,6 +3,7 @@ var jade = require('react-jade');
 
 var ProjectStore = require('../stores/ProjectStore');
 var MainView = require('../player/MainView');
+var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 var Router = require('react-router'); 
 var DefaultRoute = Router.DefaultRoute;
@@ -66,6 +67,7 @@ var Player = React.createClass({
   },
   
   componentWillMount : function() {
+    ProjectActionCreator.getProject({ id: this.context.router.getCurrentParams().projectId});
   },
 
   componentDidMount : function () {

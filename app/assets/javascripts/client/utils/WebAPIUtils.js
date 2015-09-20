@@ -127,8 +127,10 @@ var WebAPIUtils = {
     console.log(project);
 
     var figures_attributes = [];
-    
-    for( var figure of project.content ){
+   var figure = null;
+   var cts = project.content; 
+    for( var i = 0; i<cts.length; i++){
+     figure = cts[i];
       figures_attributes.push({
         type : "Figure::Photo",
         _destroy : false,

@@ -11,6 +11,10 @@ module Attachable
   def to_be_attached?
     attachment_id.present?
   end
+  
+  def attached?
+    attachment.present?
+  end
 
   def attach! option = {}
     return unless attachment_id

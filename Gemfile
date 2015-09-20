@@ -29,10 +29,12 @@ gem 'kaminari'
 gem 'acts-as-taggable-on'
 gem 'acts_as_votable'
 gem 'acts_as_list'
+gem 'aws-sdk'
 gem 'fog'
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rspec-rails'
   gem 'guard-rspec', require: false
   gem 'guard-livereload', '~> 2.4', require: false

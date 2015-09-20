@@ -123,7 +123,6 @@ var WebAPIUtils = {
 
   updateProject : function( project ){
     console.log("updateProject");
-    
       var fd = new FormData();
       fd.append("project[name]", project.name);
 
@@ -134,7 +133,6 @@ var WebAPIUtils = {
         fd.append("project[content_attributes][figures_attributes][][position]",i);
         fd.append("project[content_attributes][figures_attributes][][_destroy]","false");
       }
-
     $.ajax({
       dataType : "json",
       headers : genHeader(),

@@ -128,37 +128,60 @@ var WebAPIUtils = {
 
     var figures_attributes = [];
     
+    var i = 0;
     for( var figure of project.content ){
       figures_attributes.push({
         type : "Figure::Photo",
         _destroy : false,
         attachment_id : figure.figure.id,
-        id : figure.figure.id,
-        position : figure.figure.position,
+        position : i,
       });
+      break;
+      i++;
     }
+      var adata = {
+        project : {
+          id : project.id,
+          name : project.name,
+          description : project.description,
+          content_attributes : {
+            attachment_id : figures_attributes[0].attachment_id,
+            description : project.description,
+          } ,
+        }
+      };
       var data = {
         project : {
           id : project.id,
           name : project.name,
           description : project.description,
           tag_list : "",
-          lisence_id: 0,
+          lisence_id: 1,
           content_attributes : {
             attachment_id : figures_attributes[0].attachment_id,
             description : project.description,
             type : "Content::PhotoList",
-            figures_attributes : figures_attributes,
-          } ,
+            "figures_attributes" : [{
+              attachment_id : figures_attributes[0].attachment_id,
+              type : "Figure::Photo",
+              _destroy : false,
+              position : 1,
+            }], 
+          }
         }
       };
-      console.log(data.toSource());
+      console.log(data);
+      var fd = new FormData();
+
+      //fd.append("projectuu
 
     $.ajax({
       dataType : "json",
       headers : genHeader(),
       type : "patch",
       data : data,
+     contentType:"application/x-www-form-urlencoded",
+     processData : true,
       success : function(res){
         console.log("upload success: ",res);
         //ProjectServerActionCreator.createProjectSuccess( res );

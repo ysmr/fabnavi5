@@ -71,7 +71,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     console.log(fig);
     var dst = ProjectStore.findFigureBySymbol( fig.sym );
     dst.figure.id = fig.id;
-    dst.figure.file.file = fig.file;
+    dst.figure.file = fig.file;
     ProjectStore.saveProject();
     ProjectStore.emitChange();
   },

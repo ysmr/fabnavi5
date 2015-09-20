@@ -131,30 +131,34 @@ var WebAPIUtils = {
     for( var figure of project.content ){
       figures_attributes.push({
         type : "Figure::Photo",
-        _destroy : "false",
+        _destroy : false,
         attachment_id : figure.figure.id,
         id : figure.figure.id,
         position : figure.figure.position,
       });
     }
-    console.log(figures_attributes);
-
-    $.ajax({
-      dataType : "json",
-      data : {
+      var data = {
         project : {
+          id : project.id,
           name : project.name,
           description : project.description,
           tag_list : "",
           lisence_id: 0,
           content_attributes : {
+            attachment_id : figures_attributes[0].attachment_id,
             description : project.description,
             type : "Content::PhotoList",
+            figures_attributes : figures_attributes,
           } ,
         }
-      },
+      };
+      console.log(data.toSource());
+
+    $.ajax({
+      dataType : "json",
       headers : genHeader(),
       type : "patch",
+      data : data,
       success : function(res){
         console.log("upload success: ",res);
         //ProjectServerActionCreator.createProjectSuccess( res );

@@ -4,5 +4,7 @@ module.exports = keyMirror({
   PROJECT_LIST_CHANGE : null,
   PROJECT_SELECTOR_CHANGE :null,
   PROJECT_CHANGE : null,
+
+  UPDATE_CANVAS_REQUEST : null,
 });
 

@@ -11,7 +11,6 @@ var MainView = function(){
 
 function init (canvasElement){
   initCanvas(canvasElement);
-  console.log(CalibrateController);
   CalibrateController.init( canvasElement, getCurrentImage );
   ViewConfig.init();
 }

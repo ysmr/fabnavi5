@@ -205,5 +205,4 @@ return {
 
 
 global.CalibrateController = CalibrateController;
-console.log(CalibrateController);
 module.exports = CalibrateController;

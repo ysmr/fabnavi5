@@ -32,9 +32,13 @@ var Player = React.createClass({
   },
 
   _onChange : function () {
-    console.log("Emit player component");
     this.setState(this.getStateFromStores());
   },
+
+  _onCanvasUpdate : function () {
+    this.updateCanvas();
+  },
+
   getInitialState: function() {
     return this.getStateFromStores();
   },
@@ -45,13 +49,11 @@ var Player = React.createClass({
    },
 
   handleSubmit : function( event ){
-    console.log(event);
     if( _current_file == null ) return ;
     WebAPIUtils.uploadFile( _current_file );
   },
 
   handleFile : function( event ){
-    console.log(event);
     _current_file = event.target.files[0];
   },
 
@@ -61,7 +63,6 @@ var Player = React.createClass({
       var img = new Image();
       img.src = fig.file.file.url;
       img.onload = function(aImg){
-        console.log("Image loaded");
         MainView.draw(img);
       }
       img.onerror = function(err){
@@ -77,8 +78,9 @@ var Player = React.createClass({
 
   componentDidMount : function () {
     ProjectStore.addChangeListener(this._onChange);
+    ProjectStore.addCanvasRequestListener(this._onCanvasUpdate);
+
     MainView.init( React.findDOMNode(this.refs.mainCanvas));
-    console.log(this.state.project);
     MainView.showWaitMessage();
   },
 
@@ -93,6 +95,7 @@ var Player = React.createClass({
 
   componentWillUnmount : function() {
     ProjectStore.removeChangeListener(this._onChange);
+    ProjectStore.removeCanvasRequestListener(this._onCanvasUpdate);
   },
 
 });

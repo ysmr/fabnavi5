@@ -69,7 +69,6 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   mergeUploadedFigure : function( fig ){
-    console.log(fig);
     var dst = ProjectStore.findFigureBySymbol( fig.sym );
     dst.figure.id = fig.id;
     dst.figure.file = fig.file;
@@ -145,6 +144,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.emit(EventTypes.PROJECT_CHANGE);
   },
 
+  emitUpdateCanvas : function(){
+    this.emit(EventTypes.UPDATE_CANVAS_REQUEST);
+  },
+
   getProject : function( ){
     return _project;
   },
@@ -155,6 +158,14 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
   addChangeListener: function(callback) {
     this.on(EventTypes.PROJECT_CHANGE, callback);
+  },
+
+  addCanvasRequestListener: function(callback) {
+    this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
+  },
+
+  removeCanvasRequestListener: function(callback) {
+    this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
   },
 
   removeChangeListener: function(callback) {
@@ -182,6 +193,9 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
     case ActionTypes.PROJECT_RECEIVE: 
       ProjectStore.setProject( action.project );
+      break;
+    case ActionTypes.UPDATE_CANVAS :
+      ProjectStore.emitUpdateCanvas();
       break;
     case ActionTypes.PROJECT_PLAY: 
       location.hash = "#/project/play/" + action.id;

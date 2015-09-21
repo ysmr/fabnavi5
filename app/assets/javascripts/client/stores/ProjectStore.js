@@ -43,7 +43,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
   next : function(){
     _current_page++;
-    if( _project.content.length >= _current_page ) {
+    if( _current_page <= _project.content.length ) {
         _current_page = _project.content.length -1 ;
     }
     ProjectStore.emitChange();

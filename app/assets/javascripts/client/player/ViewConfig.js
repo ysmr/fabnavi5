@@ -61,7 +61,9 @@ function saveConfig(){
 
 function setConfig(conf){
   _conf = normalize(conf);
-  ProjectActionCreator.updateCanvas();
+  setTimeout(function(){
+    ProjectActionCreator.updateCanvas();
+  },0);
   
 }
 

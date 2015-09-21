@@ -18,6 +18,18 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     keyMap[13] = ProjectStore.shoot;
     keyMap[39] = ProjectStore.next;
     keyMap[37] = ProjectStore.prev;
+
+    var d = 5;
+    keyMap[65] = CalibrateController.changeRegionCB(-d,0);
+    keyMap[68] = CalibrateController.changeRegionCB(d,0);
+    keyMap[83] = CalibrateController.changeRegionCB(0,-d);
+    keyMap[87] = CalibrateController.changeRegionCB(0,d);
+
+    keyMap[72] = CalibrateController.moveRegionCB(-d,0);
+    keyMap[70] = CalibrateController.moveRegionCB(d,0);
+    keyMap[84] = CalibrateController.moveRegionCB(0,-d);
+    keyMap[71] = CalibrateController.moveRegionCB(0,d);
+
     this.emitChange();
   },
 

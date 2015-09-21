@@ -75,8 +75,6 @@ function moveRegionCB(_dx,_dy){
   }
 }
 
-
-
 function validateWH(){
   if(w < 2)w = 2;
   if(h < 2)h = 2;
@@ -179,7 +177,6 @@ function update (){
   else {
    initConf();
   }
-  //TODO Fire Redraw Action
 }
 
 function initConf(){
@@ -187,6 +184,9 @@ function initConf(){
     if(c = getCurrentImage()){
       w = c.naturalWidth;
       h = c.naturalHeight;
+      validateWH();
+      updateXYFromWH();
+      updateXYFromCenter();
       isInitalized = true;
      }
 }

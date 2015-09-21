@@ -1,4 +1,5 @@
 var ViewConfig = require('../player/ViewConfig');
+var getCurrentImage = null;
 
 var CalibrateController = (function () {
   var x  = 0,
@@ -96,8 +97,10 @@ function loadFromViewConfig(){
   validateWH();
 }
 
-function init ( canvas ){
+function init ( canvas, currentImageFn ){
   cvs = canvas;
+  getCurrentImage = currentImageFn;
+
   setInterval(function(){
       if(zi)zoomIn();
       if(zo)zoomOut();
@@ -107,6 +110,7 @@ function init ( canvas ){
   loadFromViewConfig();
   updateXYFromWH();
   update();
+
 }
 
 function toggleAspectShiftMode(){
@@ -180,7 +184,7 @@ function update (){
 
 function initConf(){
     var c = "";
-    if(c = MainView.getCurrentImage()){
+    if(c = getCurrentImage()){
       w = c.naturalWidth;
       h = c.naturalHeight;
       isInitalized = true;
@@ -201,4 +205,5 @@ return {
 
 
 global.CalibrateController = CalibrateController;
+console.log(CalibrateController);
 module.exports = CalibrateController;

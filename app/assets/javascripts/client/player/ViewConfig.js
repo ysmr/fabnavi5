@@ -1,3 +1,5 @@
+var ProjectActionCreator = require('../actions/ProjectActionCreator');
+
 var ViewConfig = function(){
   var playModeConfig = {},
       addModeConfig = {},
@@ -11,7 +13,7 @@ function init(){
 
 function setLocalData(key,jsonData) {
   var data = {};
-  if(Fabnavi.mode() == 0){
+  if(true){
     data["play"] = jsonData;
     var res = getLocalData(key);
     if(res && res.hasOwnProperty("add"))data["add"] = res.add;
@@ -30,11 +32,11 @@ function getLocalData(key) {
 }
 
 function getLocalConfig() {
-  var id = Detail.projectName();
+  var id = "ProjectId";
   var res = getLocalData(id);
   res = res || "";
 
-  if(Fabnavi.mode() == 0){
+    if(true){
     _conf = res.play || "";
   } else {
     _conf = res.add || "";
@@ -54,13 +56,13 @@ function getConfig(){
 }
 
 function saveConfig(){
-  setLocalConfig(Detail.projectName());
-  Publisher.unsubscribe("Config");
+  setLocalConfig("ProjectId");
 }
 
 function setConfig(conf){
   _conf = normalize(conf);
-  Publisher.subscribe("Config","Not Saved");
+  ProjectActionCreator.updateCanvas();
+  
 }
 
 function normalize(conf){

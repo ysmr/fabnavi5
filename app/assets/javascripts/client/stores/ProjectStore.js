@@ -55,18 +55,29 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   next : function(){
-    _current_page++;
-    if( _current_page <= _project.content.length ) {
-        _current_page = _project.content.length -1 ;
-    }
-    ProjectStore.emitChange();
+    ProjectStore.setPage(_current_page + 1);
   },
 
   prev : function(){
-    _current_page--;
-    if( _current_page < 0 ) {
-        _current_page = 0;
+    ProjectStore.setPage(_current_page - 1);
+  },
+
+  setPage : function( page ){
+
+    if( ! _project.hasOwnProperty("content") ) {
+      console.log("Project not set");
+      return ;
     }
+    if( page >= _project.content.length ) {
+      page = _project.content.length -1 ;
+    }
+
+    if( page < 0 ) {
+      page = 0;
+    }
+
+    _current_page = page;
+    console.log("page : ",page);
     ProjectStore.emitChange();
   },
 

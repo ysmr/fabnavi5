@@ -173,14 +173,29 @@ function updateXYFromCenter (){
 
 function update (){
   updateXYFromCenter();
-  if(isInitalized)ViewConfig.setConf({x:x,y:y,w:w,h:h});
-  else {
+  if(isInitalized ){
+    ViewConfig.setConf({x:x,y:y,w:w,h:h});
+    //XXX
+    ViewConfig.save();
+  } else {
    initConf();
   }
 }
 
 function initConf(){
     var c = "";
+    var cf = ViewConfig.conf();
+    if( cf.hasOwnProperty("w")){
+      w = cf.w;
+      h = cf.h;
+      x = cf.x;
+      y = cf.y;
+      validateWH();
+      updateXYFromWH();
+      updateXYFromCenter();
+      isInitalized = true;
+      return 
+    }
     if(c = getCurrentImage()){
       w = c.naturalWidth;
       h = c.naturalHeight;

@@ -61,6 +61,8 @@ var Player = React.createClass({
     if(this.state.project != null && this.state.project.content.length > 0){
       var fig = this.state.project.content[this.state.page].figure;
       var img = new Image();
+      MainView.clear();
+      MainView.showWaitMessage();
       img.src = fig.file.file.url;
       img.onload = function(aImg){
         MainView.draw(img);

@@ -4,6 +4,9 @@ var ProjectSelectorStore = require('../stores/ProjectSelectorStore');
 var ProjectElement = require('../components/ProjectElement.react');
 var jade = require('react-jade');
 var projectList= jade.compileFile(__dirname + '/../templates/ProjectList.jade');
+var ProjectActionCreator = require('../actions/ProjectActionCreator');
+
+
 var ProjectList = React.createClass({
 
   propTypes : {
@@ -40,6 +43,7 @@ var ProjectList = React.createClass({
   },
 
   componentWillMount : function() {
+    ProjectActionCreator.getAllProjects();
   },
 
   componentDidMount : function () {

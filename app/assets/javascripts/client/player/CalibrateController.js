@@ -1,4 +1,6 @@
-var CalibrateController = function () {
+var ViewConfig = require('../player/ViewConfig');
+
+var CalibrateController = (function () {
   var x  = 0,
       y = 0,
       w = 1000,
@@ -13,8 +15,13 @@ var CalibrateController = function () {
       as=1,
       cvs,
       aspShift = false,
-      isInitalized = false
+      isInitalized = false,
+      _isCalibrateLocked = false
   ;
+
+function isCalibrationLocked(){
+  return _isCalibrateLocked;
+}
 
 function dbg(){
   console.log("x: "+x);
@@ -89,8 +96,8 @@ function loadFromViewConfig(){
   validateWH();
 }
 
-function init (){
-  cvs = document.getElementById('cvs');
+function init ( canvas ){
+  cvs = canvas;
   setInterval(function(){
       if(zi)zoomIn();
       if(zo)zoomOut();
@@ -107,7 +114,7 @@ function toggleAspectShiftMode(){
 }
 
 function addMouseEvent (){
-  if(Fabnavi.isCalibrationLocked()){
+  if(isCalibrationLocked()){
     removeMouseEvent();
     return -1;
   }
@@ -168,7 +175,7 @@ function update (){
   else {
    initConf();
   }
-  Fabnavi.redraw();
+  //TODO Fire Redraw Action
 }
 
 function initConf(){
@@ -190,6 +197,8 @@ return {
   dbg:dbg,
   update:update,
 };
-} ();
+}) ();
 
-module.exprots = CalibrateController;
+
+global.CalibrateController = CalibrateController;
+module.exports = CalibrateController;

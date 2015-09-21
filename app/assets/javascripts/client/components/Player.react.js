@@ -11,6 +11,7 @@ var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
+var CalibrateController = require('../player/CalibrateController');
 var player = jade.compileFile(__dirname + '/../templates/Player.jade');
 var WebAPIUtils = require('../utils/WebAPIUtils');
 

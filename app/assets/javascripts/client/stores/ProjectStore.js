@@ -5,6 +5,7 @@ var ActionTypes = require('../constants/ActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 var Camera = require('../player/Camera');
 var ImageConverter = require('../player/ImageConverter');
+var CalibrateController = require('../player/CalibrateController');
 
 var _project = null;
 var _current_page = 0;

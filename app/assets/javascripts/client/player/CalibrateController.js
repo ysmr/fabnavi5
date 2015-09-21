@@ -1,4 +1,7 @@
-var CalibrateController = function () {
+var ViewConfig = require('../player/ViewConfig');
+var getCurrentImage = null;
+
+var CalibrateController = (function () {
   var x  = 0,
       y = 0,
       w = 1000,
@@ -13,8 +16,13 @@ var CalibrateController = function () {
       as=1,
       cvs,
       aspShift = false,
-      isInitalized = false
+      isInitalized = false,
+      _isCalibrateLocked = false
   ;
+
+function isCalibrationLocked(){
+  return _isCalibrateLocked;
+}
 
 function dbg(){
   console.log("x: "+x);
@@ -67,8 +75,6 @@ function moveRegionCB(_dx,_dy){
   }
 }
 
-
-
 function validateWH(){
   if(w < 2)w = 2;
   if(h < 2)h = 2;
@@ -89,8 +95,10 @@ function loadFromViewConfig(){
   validateWH();
 }
 
-function init (){
-  cvs = document.getElementById('cvs');
+function init ( canvas, currentImageFn ){
+  cvs = canvas;
+  getCurrentImage = currentImageFn;
+
   setInterval(function(){
       if(zi)zoomIn();
       if(zo)zoomOut();
@@ -100,6 +108,7 @@ function init (){
   loadFromViewConfig();
   updateXYFromWH();
   update();
+
 }
 
 function toggleAspectShiftMode(){
@@ -107,7 +116,7 @@ function toggleAspectShiftMode(){
 }
 
 function addMouseEvent (){
-  if(Fabnavi.isCalibrationLocked()){
+  if(isCalibrationLocked()){
     removeMouseEvent();
     return -1;
   }
@@ -164,18 +173,35 @@ function updateXYFromCenter (){
 
 function update (){
   updateXYFromCenter();
-  if(isInitalized)ViewConfig.setConf({x:x,y:y,w:w,h:h});
-  else {
+  if(isInitalized ){
+    ViewConfig.setConf({x:x,y:y,w:w,h:h});
+    //XXX
+    ViewConfig.save();
+  } else {
    initConf();
   }
-  Fabnavi.redraw();
 }
 
 function initConf(){
     var c = "";
-    if(c = MainView.getCurrentImage()){
+    var cf = ViewConfig.conf();
+    if( cf.hasOwnProperty("w")){
+      w = cf.w;
+      h = cf.h;
+      x = cf.x;
+      y = cf.y;
+      validateWH();
+      updateXYFromWH();
+      updateXYFromCenter();
+      isInitalized = true;
+      return 
+    }
+    if(c = getCurrentImage()){
       w = c.naturalWidth;
       h = c.naturalHeight;
+      validateWH();
+      updateXYFromWH();
+      updateXYFromCenter();
       isInitalized = true;
      }
 }
@@ -190,6 +216,8 @@ return {
   dbg:dbg,
   update:update,
 };
-} ();
+}) ();
 
-module.exprots = CalibrateController;
+
+global.CalibrateController = CalibrateController;
+module.exports = CalibrateController;

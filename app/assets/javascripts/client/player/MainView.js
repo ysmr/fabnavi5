@@ -1,5 +1,6 @@
 var ImageConverter = require('../player/ImageConverter');
 var ViewConfig = require('../player/ViewConfig');
+var CalibrateController = require('../player/CalibrateController');
 
 var MainView = function(){
   var cvs,
@@ -10,6 +11,8 @@ var MainView = function(){
 
 function init (canvasElement){
   initCanvas(canvasElement);
+  CalibrateController.init( canvasElement, getCurrentImage );
+  ViewConfig.init();
 }
 
 function getCtx(){
@@ -38,7 +41,6 @@ function drawCalibrateLine(){
 }
 
 function drawWaitingMessage(){
- console.log("Draw Waiting Message");
   ctx.fillStyle = "green";
   ctx.font = "100px ArialRoundedMTBoldBold, serif";
   ctx.rotate(Math.PI);
@@ -59,9 +61,7 @@ function drawShootingMessage(){
 }
 
 function draw(image){
- console.log("Draw Image");
   ImageConverter.drawImage(image,cvs,ViewConfig.conf());
-
   currentImage = image;
 }
 

@@ -5,6 +5,7 @@ var ActionTypes = require('../constants/ActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 var Camera = require('../player/Camera');
 var ImageConverter = require('../player/ImageConverter');
+var CalibrateController = require('../player/CalibrateController');
 
 var _project = null;
 var _current_page = 0;
@@ -17,6 +18,18 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     keyMap[13] = ProjectStore.shoot;
     keyMap[39] = ProjectStore.next;
     keyMap[37] = ProjectStore.prev;
+
+    var d = 5;
+    keyMap[65] = CalibrateController.changeRegionCB(-d,0);
+    keyMap[68] = CalibrateController.changeRegionCB(d,0);
+    keyMap[83] = CalibrateController.changeRegionCB(0,-d);
+    keyMap[87] = CalibrateController.changeRegionCB(0,d);
+
+    keyMap[72] = CalibrateController.moveRegionCB(-d,0);
+    keyMap[70] = CalibrateController.moveRegionCB(d,0);
+    keyMap[84] = CalibrateController.moveRegionCB(0,-d);
+    keyMap[71] = CalibrateController.moveRegionCB(0,d);
+
     this.emitChange();
   },
 
@@ -42,18 +55,29 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   next : function(){
-    _current_page++;
-    if( _project.content.length >= _current_page ) {
-        _current_page = _project.content.length -1 ;
-    }
-    ProjectStore.emitChange();
+    ProjectStore.setPage(_current_page + 1);
   },
 
   prev : function(){
-    _current_page--;
-    if( _current_page < 0 ) {
-        _current_page = 0;
+    ProjectStore.setPage(_current_page - 1);
+  },
+
+  setPage : function( page ){
+
+    if( ! _project.hasOwnProperty("content") ) {
+      console.log("Project not set");
+      return ;
     }
+    if( page >= _project.content.length ) {
+      page = _project.content.length -1 ;
+    }
+
+    if( page < 0 ) {
+      page = 0;
+    }
+
+    _current_page = page;
+    console.log("page : ",page);
     ProjectStore.emitChange();
   },
 
@@ -68,7 +92,6 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   mergeUploadedFigure : function( fig ){
-    console.log(fig);
     var dst = ProjectStore.findFigureBySymbol( fig.sym );
     dst.figure.id = fig.id;
     dst.figure.file = fig.file;
@@ -144,6 +167,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.emit(EventTypes.PROJECT_CHANGE);
   },
 
+  emitUpdateCanvas : function(){
+    this.emit(EventTypes.UPDATE_CANVAS_REQUEST);
+  },
+
   getProject : function( ){
     return _project;
   },
@@ -154,6 +181,14 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
   addChangeListener: function(callback) {
     this.on(EventTypes.PROJECT_CHANGE, callback);
+  },
+
+  addCanvasRequestListener: function(callback) {
+    this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
+  },
+
+  removeCanvasRequestListener: function(callback) {
+    this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
   },
 
   removeChangeListener: function(callback) {
@@ -181,6 +216,9 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
     case ActionTypes.PROJECT_RECEIVE: 
       ProjectStore.setProject( action.project );
+      break;
+    case ActionTypes.UPDATE_CANVAS :
+      ProjectStore.emitUpdateCanvas();
       break;
     case ActionTypes.PROJECT_PLAY: 
       location.hash = "#/project/play/" + action.id;

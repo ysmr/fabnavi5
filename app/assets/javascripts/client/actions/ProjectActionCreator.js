@@ -47,6 +47,11 @@ var ProjectActionCreator = {
     WebAPIUtils.uploadFile( payload.file, payload.name, payload.sym );
   },
 
+  updateCanvas : function( ){
+    AppDispatcher.dispatch({
+      type : ActionTypes.UPDATE_CANVAS
+    });
+  },
 
 };
 

@@ -5,7 +5,7 @@ class BaseUploader < CarrierWave::Uploader::Base
     if Rails.env.production?
       "/#{Rails.application.secrets.data_dir}/uploads"
     else
-      '/uploads'
+      'uploads'
     end
   end
 end

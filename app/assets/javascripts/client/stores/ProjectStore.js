@@ -2,6 +2,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events');
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
+var KeyActionTypes = require('../constants/KeyActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 var Camera = require('../player/Camera');
 var ImageConverter = require('../player/ImageConverter');
@@ -9,26 +10,12 @@ var CalibrateController = require('../player/CalibrateController');
 
 var _project = null;
 var _current_page = 0;
-var keyMap = [];
 
 
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     Camera.init();
-    keyMap[13] = ProjectStore.shoot;
-    keyMap[39] = ProjectStore.next;
-    keyMap[37] = ProjectStore.prev;
-
     var d = 5;
-    keyMap[65] = CalibrateController.changeRegionCB(-d,0);
-    keyMap[68] = CalibrateController.changeRegionCB(d,0);
-    keyMap[83] = CalibrateController.changeRegionCB(0,-d);
-    keyMap[87] = CalibrateController.changeRegionCB(0,d);
-
-    keyMap[72] = CalibrateController.moveRegionCB(-d,0);
-    keyMap[70] = CalibrateController.moveRegionCB(d,0);
-    keyMap[84] = CalibrateController.moveRegionCB(0,-d);
-    keyMap[71] = CalibrateController.moveRegionCB(0,d);
 
     this.emitChange();
   },
@@ -207,19 +194,48 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 });
 
 ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
+ var d = 10;
   switch(action.type){
-    case ActionTypes.KEY_DOWN:
-      if( keyMap.hasOwnProperty( action.keyCode ) ){
-        console.log(action);
-          keyMap[action.keyCode]();
-      }  
+    case KeyActionTypes.CALIBRATE_LONGER_HORIZONTAL:
+      CalibrateController.changeRegionCB(-d,0)();
       break;
+    case KeyActionTypes.CALIBRATE_SHORTER_HORIZONTAL:
+      CalibrateController.changeRegionCB(d,0)();
+      break;
+    case KeyActionTypes.CALIBRATE_LONGER_VERTICAL:
+      CalibrateController.changeRegionCB(0,d)();
+      break;
+    case KeyActionTypes.CALIBRATE_SHORTER_VERTICAL:
+      CalibrateController.changeRegionCB(0,-d)();
+      break;
+
+    case KeyActionTypes.CALIBRATE_MOVE_RIGHT:
+      CalibrateController.moveRegionCB(d,0)();
+      break;
+    case KeyActionTypes.CALIBRATE_MOVE_LEFT:
+      CalibrateController.moveRegionCB(-d,0)();
+      break;
+    case KeyActionTypes.CALIBRATE_MOVE_DOWN:
+      CalibrateController.moveRegionCB(0,d)();
+      break;
+    case KeyActionTypes.CALIBRATE_MOVE_UP:
+      CalibrateController.moveRegionCB(0,-d)();
+      break;
+
+    case KeyActionTypes.PROJECT_NEXT_PAGE:
+      ProjectStore.next();
+      break
+    case KeyActionTypes.PROJECT_PREV_PAGE:
+      ProjectStore.prev();
+      break
+
     case ActionTypes.PROJECT_RECEIVE: 
       ProjectStore.setProject( action.project );
       break;
     case ActionTypes.UPDATE_CANVAS :
       ProjectStore.emitUpdateCanvas();
       break;
+
     case ActionTypes.PROJECT_PLAY: 
       location.hash = "#/project/play/" + action.id;
       ProjectActionCreator.getProject({ id:action.id });

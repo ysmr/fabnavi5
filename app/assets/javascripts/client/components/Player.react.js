@@ -14,6 +14,7 @@ var RouteHandler = Router.RouteHandler;
 var CalibrateController = require('../player/CalibrateController');
 var player = jade.compileFile(__dirname + '/../templates/Player.jade');
 var WebAPIUtils = require('../utils/WebAPIUtils');
+var State = require('../utils/FabnaviStateMachine');
 
 var _current_file = null;
 
@@ -84,6 +85,7 @@ var Player = React.createClass({
 
     MainView.init( React.findDOMNode(this.refs.mainCanvas));
     MainView.showWaitMessage();
+    State.transition("player");
   },
 
   componentWillUpdate : function() {
@@ -96,6 +98,7 @@ var Player = React.createClass({
   },
 
   componentWillUnmount : function() {
+    State.transition("projectList");
     ProjectStore.removeChangeListener(this._onChange);
     ProjectStore.removeCanvasRequestListener(this._onCanvasUpdate);
   },

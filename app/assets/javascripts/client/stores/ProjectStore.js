@@ -11,17 +11,15 @@ var CalibrateController = require('../player/CalibrateController');
 var _project = null;
 var _current_page = 0;
 
-
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     Camera.init();
-    var d = 5;
-
     this.emitChange();
   },
 
   shoot : function(){
     console.log("shoot");
+    ProjectStore.emitClearCanvas();
     Camera.shoot().then(function(url){
       var fig = ProjectStore.newFigure();
       ProjectStore.setImageToFigureFromCamera(fig, url);
@@ -158,6 +156,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.emit(EventTypes.UPDATE_CANVAS_REQUEST);
   },
 
+  emitClearCanvas : function(){
+    this.emit(EventTypes.CLEAR_CANVAS_REQUEST);
+  },
+
   getProject : function( ){
     return _project;
   },
@@ -174,6 +176,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
   },
 
+  addCanvasClearListener: function(callback) {
+    this.addListener(EventTypes.CLEAR_CANVAS_REQUEST, callback);
+  },
+
   removeCanvasRequestListener: function(callback) {
     this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
   },
@@ -182,6 +188,9 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.removeListener(EventTypes.PROJECT_CHANGE, callback);
   },
 
+  removeCanvasClearListener: function(callback) {
+    this.removeListener(EventTypes.CLEAR_CANVAS_REQUEST, callback);
+  },
 
   findFigureBySymbol : function( sym ){
      var cts  = ProjectStore.getProject().content;
@@ -222,6 +231,9 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       CalibrateController.moveRegionCB(0,-d)();
       break;
 
+    case KeyActionTypes.PROJECT_SHOOT:
+      ProjectStore.shoot();
+      break
     case KeyActionTypes.PROJECT_NEXT_PAGE:
       ProjectStore.next();
       break

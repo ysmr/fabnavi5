@@ -4,6 +4,7 @@ var ViewConfig = function(){
   var playModeConfig = {},
       addModeConfig = {},
       _conf = {},
+      isCropped = true,
       isConfigChanged = false
   ;
 
@@ -13,7 +14,7 @@ function init(){
 
 function setLocalData(key,jsonData) {
   var data = {};
-  if(true){
+  if(!isCropped){
     data["play"] = jsonData;
     var res = getLocalData(key);
     if(res && res.hasOwnProperty("add"))data["add"] = res.add;
@@ -36,7 +37,7 @@ function getLocalConfig() {
   var res = getLocalData(id);
   res = res || "";
 
-    if(true){
+  if(!isCropped){
     _conf = res.play || "";
   } else {
     _conf = res.add || "";
@@ -76,11 +77,16 @@ function normalize(conf){
    return res;
 }
 
+function setCropped( b ) {
+  isCropped = b;
+}
+
 return {
   init : init,
   conf:getConfig,
   setConf:setConfig,
   save:saveConfig,
+  setCropped : setCropped,
 };
 
 }();

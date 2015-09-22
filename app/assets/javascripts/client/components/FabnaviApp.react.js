@@ -19,11 +19,14 @@ var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
+var NotFoundRoute = Router.NotFoundRoute;
 var routes = (
     React.createElement(Route, {handler: Frame, path: "/"}, 
       React.createElement(DefaultRoute, { handler: ProjectManager }),
+      React.createElement(NotFoundRoute, { handler: ProjectManager }),
       React.createElement(Route, {handler: ProjectManager, name: "manager"},
         React.createElement(DefaultRoute, { handler: ProjectList }),
+        React.createElement(NotFoundRoute, { handler: ProjectList }),
         React.createElement(Route, {handler: ProjectList, name: "index"}),
         React.createElement(Route, {handler: CreateProject, name: "create"}),
         React.createElement(Route, {handler: EditProject, name: "edit", path: "edit/:projectId"}),

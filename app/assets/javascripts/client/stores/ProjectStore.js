@@ -241,6 +241,10 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       ProjectStore.prev();
       break
 
+    case KeyActionTypes.EXIT_PROJECT:
+      location.hash = "#/manager";
+      break
+
     case ActionTypes.PROJECT_RECEIVE: 
       ProjectStore.setProject( action.project );
       break;

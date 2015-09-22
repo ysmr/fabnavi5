@@ -180,7 +180,6 @@ function update (){
   } else {
    initConf();
   }
-  dbg();
 }
 
 function initConf(){

@@ -11,12 +11,9 @@ var CalibrateController = require('../player/CalibrateController');
 var _project = null;
 var _current_page = 0;
 
-
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     Camera.init();
-    var d = 5;
-
     this.emitChange();
   },
 
@@ -222,6 +219,9 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       CalibrateController.moveRegionCB(0,-d)();
       break;
 
+    case KeyActionTypes.PROJECT_SHOOT:
+      ProjectStore.shoot();
+      break
     case KeyActionTypes.PROJECT_NEXT_PAGE:
       ProjectStore.next();
       break

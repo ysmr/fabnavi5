@@ -6,7 +6,12 @@ var KeyAction = require('../constants/KeyActionTypes');
 
 function consume( payload ){
       if( this.keyMap.hasOwnProperty( payload.keyCode ) ){
-        payload.type = this.keyMap[payload.keyCode];
+        var op = this.keyMap[payload.keyCode];
+        if( typeof(op) == "function" ){
+          payload.type = op();
+        } else {
+          payload.type = op;
+        }
       }
       return payload;
 }
@@ -30,12 +35,15 @@ var playerKeyHandler = new machina.Fsm({
         this.keyMap[13] = KeyAction.PROJECT_SHOOT;
         this.keyMap[39] = KeyAction.PROJECT_NEXT_PAGE;
         this.keyMap[37] = KeyAction.PROJECT_PREV_PAGE;
+        this.keyMap[27] = KeyAction.EXIT_PROJECT;
+        this.keyMap[67] = function(){this.transition("calibrateCenter");}.bind(this);
       },
 
       _onExit : function(){
         console.log("exit play mode");
       },
-      "consume" : function(e){
+
+      consume : function(e){
         var p = consume.call(this,e);
         this.emit("actionFired",p);
       }
@@ -50,6 +58,11 @@ var playerKeyHandler = new machina.Fsm({
       _onExit : function(){
         console.log("exit record mode");
       },
+
+      consume : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      }
     },
 
     "edit" : {
@@ -61,6 +74,10 @@ var playerKeyHandler = new machina.Fsm({
         console.log("exit edit mode");
       },
 
+      consume : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      },
     },
 
     "calibrateCenter" : {
@@ -70,13 +87,19 @@ var playerKeyHandler = new machina.Fsm({
         this.keyMap[39] = KeyAction.CALIBRATE_MOVE_RIGHT;
         this.keyMap[37] = KeyAction.CALIBRATE_MOVE_LEFT;
         this.keyMap[40] = KeyAction.CALIBRATE_MOVE_DOWN;
+        this.keyMap[27] = KeyAction.EXIT_PROJECT;
         this.keyMap[38] = KeyAction.CALIBRATE_MOVE_UP;
+        this.keyMap[67] = function(){this.transition("calibrateScale");}.bind(this);
       },
 
       _onExit : function(){
         console.log("exit calibrate center mode");
       },
 
+      consume : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      },
     },
 
     "calibrateScale" : {
@@ -87,6 +110,13 @@ var playerKeyHandler = new machina.Fsm({
         this.keyMap[37] = KeyAction.CALIBRATE_SHORTER_HORIZONTAL;
         this.keyMap[40] = KeyAction.CALIBRATE_LONGER_VERTICAL;
         this.keyMap[38] = KeyAction.CALIBRATE_SHORTER_VERTICAL;
+        this.keyMap[27] = KeyAction.EXIT_PROJECT;
+        this.keyMap[67] = function(){this.transition("play");}.bind(this);
+      },
+
+      consume : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
       },
 
       _onExit : function(){

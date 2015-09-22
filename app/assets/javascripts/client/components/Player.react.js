@@ -71,6 +71,9 @@ var Player = React.createClass({
 
       if( _last_page == this.state.page && _currentImage != null ){
         MainView.draw(_currentImage);
+        if( State.compositeState().contains("calibrate") ){
+          MainView.showCalibrateLine();
+        }
         return 0;
       } 
       var fig = this.state.project.content[this.state.page].figure;
@@ -99,6 +102,9 @@ var Player = React.createClass({
         }
       }
     }   
+    if( State.compositeState().contains("calibrate") ){
+      MainView.showCalibrateLine();
+    }
   },
 
   clearCanvas : function( ){

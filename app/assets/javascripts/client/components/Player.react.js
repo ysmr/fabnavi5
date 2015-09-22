@@ -3,6 +3,7 @@ var jade = require('react-jade');
 
 var ProjectStore = require('../stores/ProjectStore');
 var MainView = require('../player/MainView');
+var ViewConfig = require('../player/ViewConfig');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 var Router = require('react-router'); 
@@ -65,17 +66,27 @@ var Player = React.createClass({
   updateCanvas : function(){
     if(this.state.project != null && this.state.project.content.length > 0){
       var fig = this.state.project.content[this.state.page].figure;
-      var img = new Image();
-      MainView.clear();
-      MainView.showWaitMessage();
-      img.src = fig.file.file.url;
-      img.onload = function(aImg){
+
+      if(fig.hasOwnProperty("clientContent") && fig.clientContent.hasOwnProperty("dfdImage")){
+        fig.clientContent.dfdImage.then(function(img){
+          ViewConfig.setCropped(false);
+          MainView.clear();
+          MainView.draw(img);
+        }); 
+      } else {
+        var img = new Image();
+        ViewConfig.setCropped(true);
         MainView.clear();
-        MainView.draw(img);
-      }
-      img.onerror = function(err){
-        console.log("Image load error : ", err, img);
-        throw new Error(err);
+        MainView.showWaitMessage();
+        img.src = fig.file.file.url;
+        img.onload = function(aImg){
+          MainView.clear();
+          MainView.draw(img);
+        }
+        img.onerror = function(err){
+          console.log("Image load error : ", err, img);
+          throw new Error(err);
+        }
       }
     }   
   },

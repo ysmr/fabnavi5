@@ -1,6 +1,6 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher.js');
 var ActionTypes = require('../constants/ActionTypes');
-var FSM = require('../utils/FSM');
+var FSM = require('../utils/FabnaviStateMachine');
 
 module.exports = KeyActionCreator = {
   handleKeyDown : function ( event ) {
@@ -21,7 +21,6 @@ module.exports = KeyActionCreator = {
       type    : "NOT_REGISTER",
     };
     var p = FSM.consume( payload );
-    console.log(p);
     AppDispatcher.dispatch(p);
   },
 }

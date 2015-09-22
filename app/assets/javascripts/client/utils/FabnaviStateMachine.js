@@ -51,10 +51,10 @@ var FSM = new machina.Fsm({
       _onEnter : function (){
         console.log("enter calibrate center mode");
         this.keyMap = [];
-        this.keyMap[39] = KeyAction.CALIBRATE_LONGER_HORIZONTAL;
-        this.keyMap[37] = KeyAction.CALIBRATE_SHORTER_HORIZONTAL;
-        this.keyMap[40] = KeyAction.CALIBRATE_LONGER_VERTICAL;
-        this.keyMap[38] = KeyAction.CALIBRATE_SHORTER_VERTICAL;
+        this.keyMap[39] = KeyAction.CALIBRATE_MOVE_RIGHT;
+        this.keyMap[37] = KeyAction.CALIBRATE_MOVE_LEFT;
+        this.keyMap[40] = KeyAction.CALIBRATE_MOVE_DOWN;
+        this.keyMap[38] = KeyAction.CALIBRATE_MOVE_UP;
       },
 
       _onExit : function(){
@@ -67,10 +67,10 @@ var FSM = new machina.Fsm({
       _onEnter : function (){
         console.log("enter calibrate scale mode");
         this.keyMap = [];
-        this.keyMap[39] = KeyAction.CALIBRATE_MOVE_RIGHT;
-        this.keyMap[37] = KeyAction.CALIBRATE_MOVE_LEFT;
-        this.keyMap[40] = KeyAction.CALIBRATE_MOVE_DOWN;
-        this.keyMap[38] = KeyAction.CALIBRATE_MOVE_UP;
+        this.keyMap[39] = KeyAction.CALIBRATE_LONGER_HORIZONTAL;
+        this.keyMap[37] = KeyAction.CALIBRATE_SHORTER_HORIZONTAL;
+        this.keyMap[40] = KeyAction.CALIBRATE_LONGER_VERTICAL;
+        this.keyMap[38] = KeyAction.CALIBRATE_SHORTER_VERTICAL;
       },
 
       _onExit : function(){
@@ -80,11 +80,9 @@ var FSM = new machina.Fsm({
   },
 
     consume : function( payload ){
-      console.log( payload.keyCode);
       if( this.keyMap.hasOwnProperty( payload.keyCode ) ){
         payload.type = this.keyMap[payload.keyCode];
       }
-      console.log(payload);
       return payload;
     },
 

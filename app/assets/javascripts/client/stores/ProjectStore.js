@@ -15,10 +15,6 @@ var keyMap = [];
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     Camera.init();
-    keyMap[13] = ProjectStore.shoot;
-    keyMap[39] = ProjectStore.next;
-    keyMap[37] = ProjectStore.prev;
-
     var d = 5;
     keyMap[65] = CalibrateController.changeRegionCB(-d,0);
     keyMap[68] = CalibrateController.changeRegionCB(d,0);

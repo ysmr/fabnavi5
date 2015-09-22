@@ -1,5 +1,7 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher.js');
 var ActionTypes = require('../constants/ActionTypes');
+var FSM = require('../utils/FabnaviStateMachine');
+
 module.exports = KeyActionCreator = {
   handleKeyDown : function ( event ) {
     //if input element changed, 'handleKeyDown' does't handle keyEvent
@@ -10,16 +12,16 @@ module.exports = KeyActionCreator = {
     event.stopped = true;
 
     var payload = {
-      type    : ActionTypes.KEY_DOWN,
       keyCode : event.keyCode,
       charCode: event.charCode,
       ctrl    : event.ctrlKey,
       alt     : event.altKey,
       meta    : event.metaKey,
-      shift   : event.shiftKey
+      shift   : event.shiftKey,
+      type    : "NOT_REGISTER",
     };
-
-    AppDispatcher.dispatch( payload ); 
+    var p = FSM.consume( payload );
+    AppDispatcher.dispatch(p);
   },
 }
 

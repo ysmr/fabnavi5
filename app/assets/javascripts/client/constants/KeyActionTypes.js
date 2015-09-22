@@ -13,5 +13,7 @@ module.exports = keyMirror({
   CALIBRATE_LONGER_HORIZONTAL: null,
   CALIBRATE_SHORTER_VERTICAL: null,
   CALIBRATE_LONGER_VERTICAL: null,
+
+  EXIT_PROJECT : null,
 });
 

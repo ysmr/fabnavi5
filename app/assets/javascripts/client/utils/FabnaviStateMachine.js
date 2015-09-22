@@ -35,6 +35,7 @@ var playerKeyHandler = new machina.Fsm({
         this.keyMap[13] = KeyAction.PROJECT_SHOOT;
         this.keyMap[39] = KeyAction.PROJECT_NEXT_PAGE;
         this.keyMap[37] = KeyAction.PROJECT_PREV_PAGE;
+        this.keyMap[27] = KeyAction.EXIT_PROJECT;
         this.keyMap[67] = function(){this.transition("calibrateCenter");}.bind(this);
       },
 
@@ -86,6 +87,7 @@ var playerKeyHandler = new machina.Fsm({
         this.keyMap[39] = KeyAction.CALIBRATE_MOVE_RIGHT;
         this.keyMap[37] = KeyAction.CALIBRATE_MOVE_LEFT;
         this.keyMap[40] = KeyAction.CALIBRATE_MOVE_DOWN;
+        this.keyMap[27] = KeyAction.EXIT_PROJECT;
         this.keyMap[38] = KeyAction.CALIBRATE_MOVE_UP;
         this.keyMap[67] = function(){this.transition("calibrateScale");}.bind(this);
       },
@@ -108,6 +110,7 @@ var playerKeyHandler = new machina.Fsm({
         this.keyMap[37] = KeyAction.CALIBRATE_SHORTER_HORIZONTAL;
         this.keyMap[40] = KeyAction.CALIBRATE_LONGER_VERTICAL;
         this.keyMap[38] = KeyAction.CALIBRATE_SHORTER_VERTICAL;
+        this.keyMap[27] = KeyAction.EXIT_PROJECT;
         this.keyMap[67] = function(){this.transition("play");}.bind(this);
       },
 

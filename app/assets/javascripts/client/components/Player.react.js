@@ -98,6 +98,7 @@ var Player = React.createClass({
   },
 
   componentWillUnmount : function() {
+    State.transition("unIntialized");
     ProjectStore.removeChangeListener(this._onChange);
     ProjectStore.removeCanvasRequestListener(this._onCanvasUpdate);
   },

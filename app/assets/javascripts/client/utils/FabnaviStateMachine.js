@@ -8,8 +8,13 @@ var FSM = new machina.Fsm({
  initialize : function(){
     console.log("FSM initialize");
  },
- initialState : "play",
+ initialState : "unInitialized",
   states : {
+    "unInitialized" : {
+      _onEnter : function(){
+        this.keyMap = [];
+      },
+    },
 
     "play" : {
       _onEnter : function (){

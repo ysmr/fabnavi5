@@ -110,6 +110,13 @@ var FSM = new machina.Fsm({
       _onEnter : function(){
       },
       _child : playerKeyHandler,
+      _onExit : function(){
+      },
+    },
+    projectList : {
+      _onEnter : function(){
+        
+      },
     },
   },
   consume : function( payload ){

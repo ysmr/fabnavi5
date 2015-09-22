@@ -85,7 +85,7 @@ var Player = React.createClass({
 
     MainView.init( React.findDOMNode(this.refs.mainCanvas));
     MainView.showWaitMessage();
-    State.transition("play");
+    State.transition("player");
   },
 
   componentWillUpdate : function() {
@@ -98,7 +98,7 @@ var Player = React.createClass({
   },
 
   componentWillUnmount : function() {
-    State.transition("unIntialized");
+    State.transition("projectList");
     ProjectStore.removeChangeListener(this._onChange);
     ProjectStore.removeCanvasRequestListener(this._onCanvasUpdate);
   },

@@ -20,9 +20,11 @@ module.exports = KeyActionCreator = {
       shift   : event.shiftKey,
       type    : "NOT_REGISTER",
     };
-    var p = FSM.consume( payload );
-    AppDispatcher.dispatch(p);
+    FSM.consume( payload );
   },
 }
+FSM.on("actionFired",function( payload ){
+  AppDispatcher.dispatch( payload );
+});
 
 window.onkeydown = KeyActionCreator.handleKeyDown;

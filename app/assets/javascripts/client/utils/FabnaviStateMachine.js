@@ -4,11 +4,18 @@
 var machina = require('machina');
 var KeyAction = require('../constants/KeyActionTypes');
 
-var FSM = new machina.Fsm({
+function consume( payload ){
+      if( this.keyMap.hasOwnProperty( payload.keyCode ) ){
+        payload.type = this.keyMap[payload.keyCode];
+      }
+      return payload;
+}
+var playerKeyHandler = new machina.Fsm({
  initialize : function(){
     console.log("FSM initialize");
  },
- initialState : "unInitialized",
+ namespace : "playerKeyHandler",
+ initialState : "play",
   states : {
     "unInitialized" : {
       _onEnter : function(){
@@ -28,6 +35,10 @@ var FSM = new machina.Fsm({
       _onExit : function(){
         console.log("exit play mode");
       },
+      "consume" : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      }
     },
 
     "record" : {
@@ -84,14 +95,33 @@ var FSM = new machina.Fsm({
     },
   },
 
-    consume : function( payload ){
-      if( this.keyMap.hasOwnProperty( payload.keyCode ) ){
-        payload.type = this.keyMap[payload.keyCode];
-      }
-      return payload;
-    },
 
 });
 
+playerKeyHandler.on("consume", function(payload){
+  console.log("consume firered-----------");
+});
+
+var FSM = new machina.Fsm({
+  namespace: "fabnavi",
+  initialState : "player",
+  states : {
+    player : {
+      _onEnter : function(){
+      },
+      _child : playerKeyHandler,
+      _onExit : function(){
+      },
+    },
+    projectList : {
+      _onEnter : function(){
+        
+      },
+    },
+  },
+  consume : function( payload ){
+    this.handle("consume",payload);
+  },
+});
 global.FSM = FSM;
 module.exports = FSM;

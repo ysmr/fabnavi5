@@ -7,7 +7,6 @@ var ImageConverter = function(){
     cvs.width =  img.naturalWidth;
     cvs.height = img.naturalHeight;
     ImageConverter.drawImage(img,cvs,ViewConfig.conf());
-    document.body.appendChild(cvs);
     cvs.toBlob(function(blob){
      d.resolve(blob);
     });

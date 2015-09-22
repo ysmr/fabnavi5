@@ -4,6 +4,12 @@
 var machina = require('machina');
 var KeyAction = require('../constants/KeyActionTypes');
 
+function consume( payload ){
+      if( this.keyMap.hasOwnProperty( payload.keyCode ) ){
+        payload.type = this.keyMap[payload.keyCode];
+      }
+      return payload;
+}
 var playerKeyHandler = new machina.Fsm({
  initialize : function(){
     console.log("FSM initialize");
@@ -29,6 +35,10 @@ var playerKeyHandler = new machina.Fsm({
       _onExit : function(){
         console.log("exit play mode");
       },
+      "consume" : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      }
     },
 
     "record" : {
@@ -85,13 +95,6 @@ var playerKeyHandler = new machina.Fsm({
     },
   },
 
-    consume : function( payload ){
-     console.log("consuming");
-      if( this.keyMap.hasOwnProperty( payload.keyCode ) ){
-        payload.type = this.keyMap[payload.keyCode];
-      }
-      return payload;
-    },
 
 });
 
@@ -105,12 +108,7 @@ var FSM = new machina.Fsm({
   states : {
     player : {
       _onEnter : function(){
-        console.log("init root Fabnavi statemachine");
       },
-      consume : function( payload ){
-        this.emit("consume",payload);
-      },
-      
       _child : playerKeyHandler,
     },
   },

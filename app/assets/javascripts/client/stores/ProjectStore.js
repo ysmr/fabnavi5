@@ -19,6 +19,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
   shoot : function(){
     console.log("shoot");
+    ProjectStore.emitClearCanvas();
     Camera.shoot().then(function(url){
       var fig = ProjectStore.newFigure();
       ProjectStore.setImageToFigureFromCamera(fig, url);
@@ -155,6 +156,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.emit(EventTypes.UPDATE_CANVAS_REQUEST);
   },
 
+  emitClearCanvas : function(){
+    this.emit(EventTypes.CLEAR_CANVAS_REQUEST);
+  },
+
   getProject : function( ){
     return _project;
   },
@@ -171,6 +176,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
   },
 
+  addCanvasClearListener: function(callback) {
+    this.addListener(EventTypes.CLEAR_CANVAS_REQUEST, callback);
+  },
+
   removeCanvasRequestListener: function(callback) {
     this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
   },
@@ -179,6 +188,9 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.removeListener(EventTypes.PROJECT_CHANGE, callback);
   },
 
+  removeCanvasClearListener: function(callback) {
+    this.removeListener(EventTypes.CLEAR_CANVAS_REQUEST, callback);
+  },
 
   findFigureBySymbol : function( sym ){
      var cts  = ProjectStore.getProject().content;

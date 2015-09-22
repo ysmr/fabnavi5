@@ -6,5 +6,6 @@ module.exports = keyMirror({
   PROJECT_CHANGE : null,
 
   UPDATE_CANVAS_REQUEST : null,
+  CLEAR_CANVAS_REQUEST : null,
 });
 

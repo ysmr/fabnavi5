@@ -40,6 +40,10 @@ var Player = React.createClass({
     this.updateCanvas();
   },
 
+  _onCanvasClear : function( ){
+    this.clearCanvas();
+  },
+
   getInitialState: function() {
     return this.getStateFromStores();
   },
@@ -66,6 +70,7 @@ var Player = React.createClass({
       MainView.showWaitMessage();
       img.src = fig.file.file.url;
       img.onload = function(aImg){
+        MainView.clear();
         MainView.draw(img);
       }
       img.onerror = function(err){
@@ -74,14 +79,19 @@ var Player = React.createClass({
       }
     }   
   },
+
+  clearCanvas : function( ){
+    MainView.clear();
+  },
   
   componentWillMount : function() {
     ProjectActionCreator.getProject({ id: this.context.router.getCurrentParams().projectId});
-  },
+    },
 
   componentDidMount : function () {
     ProjectStore.addChangeListener(this._onChange);
     ProjectStore.addCanvasRequestListener(this._onCanvasUpdate);
+    ProjectStore.addCanvasClearListener(this._onCanvasClear);
 
     MainView.init( React.findDOMNode(this.refs.mainCanvas));
     MainView.showWaitMessage();
@@ -101,6 +111,7 @@ var Player = React.createClass({
     State.transition("projectList");
     ProjectStore.removeChangeListener(this._onChange);
     ProjectStore.removeCanvasRequestListener(this._onCanvasUpdate);
+    ProjectStore.removeCanvasClearListener(this._onCanvasClear);
   },
 
 });

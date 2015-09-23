@@ -1,4 +1,12 @@
 var ViewConfig = require('../player/ViewConfig');
+var QUALITY = 0.7;
+function getQ (){
+  return QUALITY;
+};
+
+function setQ( q ){
+  QUALITY = q;
+}
 var ImageConverter = function(){
 
   function toBlob(img){
@@ -9,7 +17,7 @@ var ImageConverter = function(){
     ImageConverter.drawImage(img,cvs,ViewConfig.conf());
     cvs.toBlob(function(blob){
      d.resolve(blob);
-    });
+    }, "image/jpeg", QUALITY);
     return d.promise();
   }
 
@@ -78,4 +86,6 @@ var ImageConverter = function(){
   };
   }();
 
+global.getQ = getQ;
+global.setQ = setQ;
 module.exports = ImageConverter;

@@ -9,11 +9,13 @@ var Link = Router.Link;
 
 
 var navigation = jade.compileFile(__dirname + '/../templates/Navigation.jade');
+var _release_time = "loading...";
 var Navigation = React.createClass({
 
   getStateFromStores : function getStateFromStores() {
     return {
-     account : AccountStore.getAccountInfo()
+     account : AccountStore.getAccountInfo(),
+     time : _release_time,
     };
   },
 
@@ -37,6 +39,13 @@ var Navigation = React.createClass({
 
   componentDidMount : function () {
     AccountStore.addChangeListener(this._onChange);
+    $.get("https://github.com/fabnavi/fabnavi5/commits/release")
+      .then(function(res){
+       var parser = new DOMParser();
+       var logDoc =  parser.parseFromString(res,"text/html");
+       _release_time = "Released at " + logDoc.getElementsByTagName("time")[0].dateTime;
+       this._onChange();
+     }.bind(this));
   },
 
   componentWillUpdate : function() {

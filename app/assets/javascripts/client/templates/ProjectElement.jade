@@ -9,7 +9,7 @@ div(
   .box
     img.user-icon(src=this.getUserIconSrc())
     .username
-      | username
+      = this.props.project.user.email.replace(/@.*$/,"")
     .date
       | date
   ul.actions.hide

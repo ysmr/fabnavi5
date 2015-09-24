@@ -21,6 +21,8 @@ var _current_file = null;
 var _currentImage = null;
 var _page_changed = true;
 var _last_page = 0;
+var _lastState = "";
+var _currentState = "";
 
 var Player = React.createClass({
   render:  player,
@@ -69,9 +71,17 @@ var Player = React.createClass({
   updateCanvas : function(){
     if(this.state.project != null && this.state.project.content.length > 0){
 
+      _currentState = State.compositeState();
+      console.log("state : ", _currentState);
+      if( _currentState != _lastState ){
+        MainView.clear();
+      }
+      _lastState = _currentState;
+
+
       if( _last_page == this.state.page && _currentImage != null ){
         MainView.draw(_currentImage);
-        if( State.compositeState().contains("calibrate") ){
+        if( _currentState.contains("calibrate") ){
           MainView.showCalibrateLine();
         }
         return 0;
@@ -95,6 +105,9 @@ var Player = React.createClass({
           MainView.clear();
           MainView.draw(img);
           _currentImage = img;
+         if( _currentState.contains("calibrate") ){
+           MainView.showCalibrateLine();
+         }
         }
         img.onerror = function(err){
           console.log("Image load error : ", err, img);
@@ -102,7 +115,7 @@ var Player = React.createClass({
         }
       }
     }   
-    if( State.compositeState().contains("calibrate") ){
+    if( _currentState.contains("calibrate") ){
       MainView.showCalibrateLine();
     }
   },

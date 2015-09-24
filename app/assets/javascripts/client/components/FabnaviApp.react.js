@@ -20,21 +20,22 @@ var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 var NotFoundRoute = Router.NotFoundRoute;
-var routes = (
-    React.createElement(Route, {handler: Frame, path: "/"}, 
-      React.createElement(DefaultRoute, { handler: ProjectManager }),
-      React.createElement(NotFoundRoute, { handler: ProjectManager }),
-      React.createElement(Route, {handler: ProjectManager, name: "manager"},
-        React.createElement(DefaultRoute, { handler: ProjectList }),
-        React.createElement(NotFoundRoute, { handler: ProjectList }),
-        React.createElement(Route, {handler: ProjectList, name: "index"}),
-        React.createElement(Route, {handler: CreateProject, name: "create"}),
-        React.createElement(Route, {handler: EditProject, name: "edit", path: "edit/:projectId"}),
-        React.createElement(Route, {handler: ProjectDetail, name: "project", path:"project/:projectId"})
-      ),
-      React.createElement(Route, {handler: Player, name: "player", path:"project/play/:projectId"})
-     )
+var Redirect = Router.Redirect;
 
+var routes = (
+  React.createElement(Route, {handler: Frame, path: "/"}, 
+    React.createElement(Route, {handler: ProjectManager, name: "manager"},
+      React.createElement(Route, {handler: ProjectList, name: "index"}),
+      React.createElement(Route, {handler: CreateProject, name: "create"}),
+      React.createElement(Route, {handler: EditProject, name: "edit", path: "edit/:projectId"}),
+      React.createElement(Route, {handler: ProjectDetail, name: "project", path:"project/:projectId"}),
+      React.createElement(DefaultRoute,   { handler: ProjectList }),
+      React.createElement(NotFoundRoute,  { handler: ProjectList })
+    ),
+    React.createElement(Route, {handler: Player, name: "player", path:"project/play/:projectId"}),
+    React.createElement(Redirect, {from: "/", to:"/manager"}),
+    React.createElement(NotFoundRoute, { handler: ProjectManager })
+  )
 );
 
 global.onload = function ( ) {

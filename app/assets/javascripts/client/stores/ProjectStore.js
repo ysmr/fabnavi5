@@ -11,6 +11,15 @@ var CalibrateController = require('../player/CalibrateController');
 var _project = null;
 var _current_page = 0;
 
+var STEP = 1;
+
+function setStep( s ){
+  STEP = s;
+}
+function getStep( ){
+  console.log(STEP);
+}
+
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     Camera.init();
@@ -203,32 +212,31 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 });
 
 ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
- var d = 10;
   switch(action.type){
     case KeyActionTypes.CALIBRATE_LONGER_HORIZONTAL:
-      CalibrateController.changeRegionCB(-d,0)();
+      CalibrateController.changeRegionCB(-STEP,0)();
       break;
     case KeyActionTypes.CALIBRATE_SHORTER_HORIZONTAL:
-      CalibrateController.changeRegionCB(d,0)();
+      CalibrateController.changeRegionCB(STEP,0)();
       break;
     case KeyActionTypes.CALIBRATE_LONGER_VERTICAL:
-      CalibrateController.changeRegionCB(0,d)();
+      CalibrateController.changeRegionCB(0,STEP)();
       break;
     case KeyActionTypes.CALIBRATE_SHORTER_VERTICAL:
-      CalibrateController.changeRegionCB(0,-d)();
+      CalibrateController.changeRegionCB(0,-STEP)();
       break;
 
     case KeyActionTypes.CALIBRATE_MOVE_RIGHT:
-      CalibrateController.moveRegionCB(d,0)();
+      CalibrateController.moveRegionCB(STEP,0)();
       break;
     case KeyActionTypes.CALIBRATE_MOVE_LEFT:
-      CalibrateController.moveRegionCB(-d,0)();
+      CalibrateController.moveRegionCB(-STEP,0)();
       break;
     case KeyActionTypes.CALIBRATE_MOVE_DOWN:
-      CalibrateController.moveRegionCB(0,d)();
+      CalibrateController.moveRegionCB(0,STEP)();
       break;
     case KeyActionTypes.CALIBRATE_MOVE_UP:
-      CalibrateController.moveRegionCB(0,-d)();
+      CalibrateController.moveRegionCB(0,-STEP)();
       break;
 
     case KeyActionTypes.PROJECT_SHOOT:
@@ -267,4 +275,6 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
 });
 
 global.ProjectStore = ProjectStore;
+global.setStep = setStep;
+global.getStep = getStep;
 module.exports = ProjectStore;

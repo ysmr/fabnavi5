@@ -3,6 +3,7 @@
 
 var machina = require('machina');
 var KeyAction = require('../constants/KeyActionTypes');
+var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 function consume( payload ){
       if( this.keyMap.hasOwnProperty( payload.keyCode ) ){
@@ -37,6 +38,7 @@ var playerKeyHandler = new machina.Fsm({
         this.keyMap[37] = KeyAction.PROJECT_PREV_PAGE;
         this.keyMap[27] = KeyAction.EXIT_PROJECT;
         this.keyMap[67] = function(){this.transition("calibrateCenter");}.bind(this);
+        ProjectActionCreator.updateCanvas();
       },
 
       _onExit : function(){
@@ -53,6 +55,7 @@ var playerKeyHandler = new machina.Fsm({
 
       _onEnter : function (){
         console.log("enter record mode");
+        ProjectActionCreator.updateCanvas();
       },
 
       _onExit : function(){
@@ -68,6 +71,7 @@ var playerKeyHandler = new machina.Fsm({
     "edit" : {
       _onEnter : function (){
         console.log("enter edit mode");
+        ProjectActionCreator.updateCanvas();
       },
 
       _onExit : function(){
@@ -90,6 +94,7 @@ var playerKeyHandler = new machina.Fsm({
         this.keyMap[27] = KeyAction.EXIT_PROJECT;
         this.keyMap[38] = KeyAction.CALIBRATE_MOVE_UP;
         this.keyMap[67] = function(){this.transition("calibrateScale");}.bind(this);
+        ProjectActionCreator.updateCanvas();
       },
 
       _onExit : function(){
@@ -112,6 +117,7 @@ var playerKeyHandler = new machina.Fsm({
         this.keyMap[38] = KeyAction.CALIBRATE_SHORTER_VERTICAL;
         this.keyMap[27] = KeyAction.EXIT_PROJECT;
         this.keyMap[67] = function(){this.transition("play");}.bind(this);
+        ProjectActionCreator.updateCanvas();
       },
 
       consume : function(e){

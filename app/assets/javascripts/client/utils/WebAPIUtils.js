@@ -125,6 +125,7 @@ var WebAPIUtils = {
     console.log("updateProject");
       var fd = new FormData();
       fd.append("project[name]", project.name);
+      //fd.append("project[content_attributes][attachment_id]", project.content[project.content.length - 1].figure.id);
 
       console.log(project.content);
       for(var i=0; i < project.content.length; i++){

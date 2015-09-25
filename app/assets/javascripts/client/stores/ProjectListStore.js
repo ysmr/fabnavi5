@@ -25,6 +25,16 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
+  removeProject : function( project ) {
+    for( var i = 0; i < _projects.length; i++ ){
+      if( _projects[i].id == project.id ){
+        _projects.splice(i,1);
+        this.emitChange();
+        return;
+      }
+    }
+  },
+
   addChangeListener: function(callback) {
     this.on(EventTypes.PROJECT_LIST_CHANGE, callback);
   },
@@ -38,6 +48,9 @@ ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
   switch(action.type){
    case ActionTypes.PROJECTS_RECEIVE: 
       ProjectListStore.setProjects(action.projects);
+      break;
+   case ActionTypes.DELETE_PROJECT_SUCCESS: 
+      ProjectListStore.removeProject(action.project);
       break;
     default : 
       break;

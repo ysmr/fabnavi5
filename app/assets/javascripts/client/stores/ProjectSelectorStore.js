@@ -44,6 +44,11 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
        ProjectActionCreator.playProject( project );
         },0);
        break;  
+      case 4:
+        setTimeout(function(){
+       ProjectActionCreator.deleteProject( project );
+        },0);
+       break;  
     };
   }, 
   open : function () {

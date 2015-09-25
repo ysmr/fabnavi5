@@ -37,6 +37,20 @@ var ProjectServerActionCreator = {
         result : result,
       });
   },
+
+  deleteProjectSucess : function( project ){
+      AppDispatcher.dispatch ({
+        type : ActionTypes.DELETE_PROJECT_SUCCESS,
+        project : project,
+      });
+  },
+
+  deleteProjectFailed: function( project ){
+      AppDispatcher.dispatch ({
+        type : ActionTypes.DELETE_PROJECT_FAILED,
+        project : project,
+      });
+  },
 };
 
 module.exports = ProjectServerActionCreator;

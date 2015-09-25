@@ -13,7 +13,8 @@ var ProjectActionCreator = {
 
   createProject : function( payload ){
     AppDispatcher.dispatch({
-      type : ActionTypes.PROJECTS_CREATE
+      type : ActionTypes.PROJECT_CREATE,
+      payload : payload
     });
     WebAPIUtils.createProject( payload.name, payload.contentAttributesType );
   },

@@ -183,7 +183,6 @@ var WebAPIUtils = {
         console.log(err);
       },
       url : "/api/v1/projects/"+ project.id + ".json"
-
     });
   },                            
                              

@@ -43,22 +43,27 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         setTimeout(function(){
        ProjectActionCreator.playProject( project );
         },0);
+       _selector.openMenu = false;
+       _selector.menuIndex = 0;
        break;  
       case 4:
         setTimeout(function(){
        ProjectActionCreator.deleteProject( project );
         },0);
+       _selector.openMenu = false;
+       _selector.menuIndex = 0;
        break;  
     };
   }, 
   open : function () {
     _selector.openMenu = true;
-    this.emitChange();
+    _selector.menuIndex = 0;
+    ProjectSelectorStore.emitChange();
   },
 
   close : function () {
     _selector.openMenu = false;
-    this.emitChange();
+    ProjectSelectorStore.emitChange();
   },
 
   up : function () {

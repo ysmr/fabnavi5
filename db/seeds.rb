@@ -71,5 +71,7 @@ tokens.each_with_index do |tok, i|
         attachable_type: fig.class.base_class.name
       )
     end
+
+    p.update figure_id: p.content.figures.first.id
   end
 end

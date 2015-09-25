@@ -2,10 +2,9 @@ class Project < ActiveRecord::Base
   acts_as_taggable
   acts_as_votable
 
-  mount_uploader :image, ImageUploader
-
   belongs_to :user
   belongs_to :lisence
+  belongs_to :figure
   has_one :content, dependent: :destroy
 
   validates :name, presence: true, length: {maximum: 64}, uniqueness: {scope: :user_id}
@@ -36,7 +35,7 @@ class Project < ActiveRecord::Base
     end
 
     def acceptable_attributes_for_update
-      %i(tag_list name description attachment_id lisence_id) + [content_attributes: Content.acceptable_attributes_for_update]
+      %i(tag_list name description figure_id lisence_id) + [content_attributes: Content.acceptable_attributes_for_update]
     end
   end
 end

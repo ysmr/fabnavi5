@@ -65,8 +65,8 @@ class V1::Projects < V1::Base
         requires :project, type: Hash do
           optional :name, type: String
           optional :description, type: String
+          optional :figure_id, type: Integer
           optional :tag_list, type: String
-          optional :image, type: Rack::Multipart::UploadedFile
           optional :lisence_id, type: Integer
           optional :content_attributes, type: Hash do
             optional :description, type: String
@@ -87,7 +87,7 @@ class V1::Projects < V1::Base
         if params[:project][:content_attributes]
           params[:project][:content_attributes][:id] = @project.content.id
         end
-        if @project.update (project_params_for_update.merge({image: params[:project][:image]}))
+        if @project.update project_params_for_update
           status 200
         else
           status 400

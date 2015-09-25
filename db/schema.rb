@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150919223812) do
+ActiveRecord::Schema.define(version: 20150925041437) do
 
   create_table "attachments", force: :cascade do |t|
     t.string   "type",            limit: 255
@@ -73,9 +73,10 @@ ActiveRecord::Schema.define(version: 20150919223812) do
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
     t.integer  "lisence_id",  limit: 4
-    t.string   "image",       limit: 255
+    t.integer  "figure_id",   limit: 4
   end
 
+  add_index "projects", ["figure_id"], name: "index_projects_on_figure_id", using: :btree
   add_index "projects", ["lisence_id"], name: "index_projects_on_lisence_id", using: :btree
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
@@ -148,6 +149,7 @@ ActiveRecord::Schema.define(version: 20150919223812) do
   add_foreign_key "calibrations", "users"
   add_foreign_key "contents", "projects"
   add_foreign_key "figures", "contents"
+  add_foreign_key "projects", "figures"
   add_foreign_key "projects", "lisences"
   add_foreign_key "projects", "users"
 end

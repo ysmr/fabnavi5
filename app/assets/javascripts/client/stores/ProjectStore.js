@@ -260,6 +260,7 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       ProjectStore.emitUpdateCanvas();
       break;
 
+    case ActionTypes.PROJECT_CREATE_SUCCESS: 
     case ActionTypes.PROJECT_PLAY: 
       location.hash = "#/project/play/" + action.id;
       ProjectActionCreator.getProject({ id:action.id });

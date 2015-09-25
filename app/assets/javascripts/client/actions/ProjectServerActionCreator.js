@@ -20,6 +20,7 @@ var ProjectServerActionCreator = {
       AppDispatcher.dispatch ({
         type : ActionTypes.PROJECT_CREATE_SUCCESS,
         result : result,
+        id : result.id,
       });
   }, 
 

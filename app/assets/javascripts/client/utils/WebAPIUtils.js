@@ -94,15 +94,15 @@ var WebAPIUtils = {
     });
   },
 
-  createProject : function( name, contentAttributesType ){
+  createProject : function( name, contentAttributesType, description){
     console.log("createProject");
-    
     $.ajax({
       dataType : "json",
       data : {
         project : {
           name : name,
           content_attributes : {
+            description : description,
            type : "Content::PhotoList"
           } 
         }
@@ -111,6 +111,12 @@ var WebAPIUtils = {
       type : "post",
       success : function(res){
         ProjectServerActionCreator.createProjectSuccess( res );
+        WebAPIUtils.updateProject({
+          id: res.id,
+          name: res.name,
+          content : [],
+          description : description,
+        });
       },
       error : function(err){
         console.log("Error from Create Project");
@@ -121,11 +127,36 @@ var WebAPIUtils = {
     });
   },
 
+  setThumbnailLast : function( project ){
+    var fd = new FormData();
+    fd.append("project[name]", project.name);
+    fd.append("project[figure_id]", project.content[project.content.length - 1].figure.id);
+    $.ajax({
+      dataType : "json",
+      headers : genHeader(),
+      type : "patch",
+      data  : fd,
+      contentType : false,
+      processData : false,
+      success : function(res){
+        console.log("set thumbnail success: ",res);
+        //ProjectServerActionCreator.createProjectSuccess( res );
+      },
+      error : function(err){
+        console.log("Error from UpdateThumbnail");
+        console.log(err);
+      },
+      url : "/api/v1/projects/"+ project.id + ".json"
+
+    });
+  },
+
   updateProject : function( project ){
     console.log("updateProject");
       var fd = new FormData();
       fd.append("project[name]", project.name);
-      //fd.append("project[content_attributes][attachment_id]", project.content[project.content.length - 1].figure.id);
+      fd.append("project[description]", project.description);
+      fd.append("project[tag_list]", project.tag_list);
 
       console.log(project.content);
       for(var i=0; i < project.content.length; i++){
@@ -143,6 +174,7 @@ var WebAPIUtils = {
       processData : false,
       success : function(res){
         console.log("upload success: ",res);
+        WebAPIUtils.setThumbnailLast(project);
         //ProjectServerActionCreator.createProjectSuccess( res );
       },
       error : function(err){

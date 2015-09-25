@@ -147,6 +147,63 @@ playerStateMachine.on("consume", function(payload){
   console.log("consume firered-----------");
 });
 
+var ProjectSelectorStateMachine = new machina.Fsm({
+  initialize : function() {
+  },
+
+  initialState : "projects",
+
+  states : {
+    
+   projects : {
+
+     _onEnter : function( ){
+        this.keyMap = [];
+       this.keyMap[38] = KeyAction.SELECT_PROJECT_UP;
+       this.keyMap[40] = KeyAction.SELECT_PROJECT_DOWN;
+       this.keyMap[39] = KeyAction.SELECT_PROJECT_RIGHT;
+       this.keyMap[37] = KeyAction.SELECT_PROJECT_LEFT;
+     },
+
+     _onExit : function( ){
+      this.keyMap = [];
+     },
+
+      consume : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      },
+   },
+
+    projectMenu : {
+     _onEnter : function( ){
+     },
+
+     _onExit : function( ){
+      this.keyMap = [];
+     },
+      consume : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      },
+    },
+
+    navigation : {
+     _onEnter : function( ){
+     },
+     _onExit : function( ){
+      this.keyMap = [];
+     },
+
+      consume : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      },
+    },
+  },
+});
+
+
 var managerStateMachine= new machina.Fsm({
   initialState : "index",
   states : {
@@ -157,21 +214,18 @@ var managerStateMachine= new machina.Fsm({
       transitionl2 : function(){
         transitionl2.call(this);
       },
-
     },
 
     "create" : {
       transitionl2 : function(){
         transitionl2.call(this);
       },
-
     },
 
     "config" : {
       transitionl2 : function(){
         transitionl2.call(this);
       },
-
     },
 
     "edit" : {

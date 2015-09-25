@@ -21,15 +21,11 @@ var ProjectElement = React.createClass({
 
   getThumbnailSrc: function () {
     
+    var thumb = this.props.project.figure;
     var src = null;
-    /*
-    var thumbnailId = this.props.project.thumbnail_picture_id;
-    
-    if ( this.props.project.photo.hasOwnProperty( thumbnailId ) ){
-      src = this.props.project.photo[thumbnailId].thumbnail.url;
+    if( thumb.hasOwnProperty("attachment") ){
+      src = this.props.project.figure.attachment.file.thumb;
     }
-    */
-
     if ( src == null || src == "" ) {
       src = "/images/noimage.gif";
     }

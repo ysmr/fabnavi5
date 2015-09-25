@@ -16,7 +16,7 @@ function consume( payload ){
       }
       return payload;
 }
-var playerKeyHandler = new machina.Fsm({
+var playerStateMachine = new machina.Fsm({
  initialize : function(){
     console.log("FSM initialize");
  },
@@ -134,8 +134,30 @@ var playerKeyHandler = new machina.Fsm({
 
 });
 
-playerKeyHandler.on("consume", function(payload){
+playerStateMachine.on("consume", function(payload){
   console.log("consume firered-----------");
+});
+
+var managerStateMachine= new machina.Fsm({
+  initialState : "index",
+  states : {
+    "index" : {
+
+    },
+
+    "create" : {
+
+    },
+
+    "config" : {
+
+    },
+
+    "edit" : {
+
+    },
+  },
+
 });
 
 var FSM = new machina.Fsm({
@@ -145,14 +167,15 @@ var FSM = new machina.Fsm({
     player : {
       _onEnter : function(){
       },
-      _child : playerKeyHandler,
+      _child : playerStateMachine,
       _onExit : function(){
       },
     },
-    projectList : {
+    projectManager: {
       _onEnter : function(){
-        
+         
       },
+      _child : managerStateMachine,
     },
   },
   consume : function( payload ){

@@ -6,6 +6,7 @@ var jade = require('react-jade');
 var projectList= jade.compileFile(__dirname + '/../templates/ProjectList.jade');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
+var State = require('../utils/FabnaviStateMachine');
 
 var ProjectList = React.createClass({
 
@@ -49,6 +50,7 @@ var ProjectList = React.createClass({
   componentDidMount : function () {
     ProjectListStore.addChangeListener(this._onChange);
     ProjectSelectorStore.addChangeListener(this._onChange);
+    State.transition("projectManager");
   },
 
   componentWillUpdate : function() {

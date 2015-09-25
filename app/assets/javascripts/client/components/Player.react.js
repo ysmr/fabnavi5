@@ -150,7 +150,6 @@ var Player = React.createClass({
   },
 
   componentWillUnmount : function() {
-    State.transition("projectList");
     ProjectStore.removeChangeListener(this._onChange);
     ProjectStore.removeCanvasRequestListener(this._onCanvasUpdate);
     ProjectStore.removeCanvasClearListener(this._onCanvasClear);

@@ -18,6 +18,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
       row   : 0,
       col   : 0,
       openMenu : false,
+      menuIndex : 0,
     };
   },
 
@@ -58,6 +59,22 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
    this.setSelectorByIndex( _selector.index +1 );
   },  
 
+  nextAction : function(){
+    _selector.menuIndex++;
+    if(_selector.menuIndex > 4){
+      _selector.menuIndex = 4;
+    }
+    this.emitChange();
+  },
+
+  prevAction : function(){
+    _selector.menuIndex--;
+    if(_selector.menuIndex < 0){
+      _selector.menuIndex = 0;
+    }
+    this.emitChange();
+  },
+
   setSelectorIndex : function ( index  ){
     _selector.index = index;
     _selector.col   = index % 4;
@@ -71,6 +88,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   emitChange : function(){
     this.emit(EventTypes.PROJECT_SELECTOR_CHANGE);
+    console.log("------------",_selector);
   },
 
   addChangeListener: function(callback) {
@@ -103,6 +121,12 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
       ProjectSelectorStore.close();
       break;
     case KeyActionTypes.SELECT_ACTION:
+      break;
+    case KeyActionTypes.SELECT_ACTION_UP:
+      ProjectSelectorStore.prevAction();
+      break;
+    case KeyActionTypes.SELECT_ACTION_DOWN:
+      ProjectSelectorStore.nextAction();
       break;
     case ActionTypes.MOVE_TOP:
       location.hash = "#/manager"

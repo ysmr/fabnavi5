@@ -25,7 +25,12 @@ function getStep( ){
 
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
  init : function () {
-   Camera.init();
+  _project = null;
+  _current_page = 0;
+  _uploadQueue = [];
+  _shooting = false;
+  Camera.init();
+   
    this.emitChange();
  },
 
@@ -308,6 +313,7 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
     case ActionTypes.PROJECT_CREATE_SUCCESS: 
     case ActionTypes.PROJECT_PLAY: 
       location.hash = "#/project/play/" + action.id;
+      ProjectStore.init();
       ProjectActionCreator.getProject({ id:action.id });
       break;
     case ActionTypes.UPLOAD_ATTACHMENT_SUCCESS :

@@ -21,7 +21,7 @@ var projectManager= jade.compileFile(__dirname + '/../templates/ProjectManager.j
 var ProjectManager = React.createClass({
   render: projectManager,
   componentDidMount : function () {
-    State.transition("projectManager");
+
   },
 
   componentWillUpdate : function() {

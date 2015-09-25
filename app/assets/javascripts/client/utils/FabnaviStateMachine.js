@@ -16,6 +16,15 @@ function consume( payload ){
       }
       return payload;
 }
+
+function transitionl2( ){
+  var dst = location.hash.split("/")[2];
+  if( dst == undefined ){
+    dst = "index";
+  }
+  this.transition(dst);
+}
+
 var playerStateMachine = new machina.Fsm({
  initialize : function(){
     console.log("FSM initialize");
@@ -142,18 +151,33 @@ var managerStateMachine= new machina.Fsm({
   initialState : "index",
   states : {
     "index" : {
+      _onEnter : function(){
+        console.log("entering index");
+      },
+      transitionl2 : function(){
+        transitionl2.call(this);
+      },
 
     },
 
     "create" : {
+      transitionl2 : function(){
+        transitionl2.call(this);
+      },
 
     },
 
     "config" : {
+      transitionl2 : function(){
+        transitionl2.call(this);
+      },
 
     },
 
     "edit" : {
+      transitionl2 : function(){
+        transitionl2.call(this);
+      },
 
     },
   },
@@ -170,16 +194,23 @@ var FSM = new machina.Fsm({
       _child : playerStateMachine,
       _onExit : function(){
       },
+      nestedTransition : function( loc ){
+      },
     },
-    projectManager: {
+    manager: {
       _onEnter : function(){
-         
       },
       _child : managerStateMachine,
     },
   },
   consume : function( payload ){
     this.handle("consume",payload);
+  },
+
+  reload : function( loc ){
+    console.log("Nested Transition: ",location.hash.split("/"));
+    this.transition(location.hash.split("/")[1]);
+    this.handle("transitionl2");
   },
 });
 global.FSM = FSM;

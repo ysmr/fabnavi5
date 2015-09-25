@@ -50,7 +50,7 @@ var ProjectList = React.createClass({
   componentDidMount : function () {
     ProjectListStore.addChangeListener(this._onChange);
     ProjectSelectorStore.addChangeListener(this._onChange);
-    State.transition("projectManager");
+    State.reload();
   },
 
   componentWillUpdate : function() {

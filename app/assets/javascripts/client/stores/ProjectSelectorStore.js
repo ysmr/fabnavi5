@@ -8,6 +8,7 @@ var _selector  = {
 };
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
+var KeyActionTypes = require('../constants/KeyActionTypes');
 
 
 var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
@@ -31,19 +32,19 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   up : function () {
-   ProjectSelectorState.setSelectorByIndex( _selector.index - 4 );
+   this.setSelectorByIndex( _selector.index - 4 );
   },  
 
   down : function () {
-   ProjectSelectorState.setSelectorByIndex( _selector.index +4 );
+   this.setSelectorByIndex( _selector.index +4 );
   },  
 
   left : function () {
-   ProjectSelectorState.setSelectorByIndex( _selector.index -1 );
+   this.setSelectorByIndex( _selector.index -1 );
   },  
 
   right : function () {
-   ProjectSelectorState.setSelectorByIndex( _selector.index +1 );
+   this.setSelectorByIndex( _selector.index +1 );
   },  
 
   setSelectorIndex : function ( index  ){
@@ -72,10 +73,17 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
 ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
   switch( action.type ){
-    case ActionTypes.KEY_DOWN:
-      if( keyMap.hasOwnProperty( action.keyCode ) ){
-        keyMap[action.keyCode]();
-      }  
+    case KeyActionTypes.SELECT_PROJECT_UP:
+      ProjectSelectorStore.up();
+      break;
+    case KeyActionTypes.SELECT_PROJECT_DOWN:
+      ProjectSelectorStore.down();
+      break;
+    case KeyActionTypes.SELECT_PROJECT_LEFT:
+      ProjectSelectorStore.left();
+      break;
+    case KeyActionTypes.SELECT_PROJECT_RIGHT:
+      ProjectSelectorStore.right();
       break;
     case ActionTypes.MOVE_TOP:
       location.hash = "#/manager"

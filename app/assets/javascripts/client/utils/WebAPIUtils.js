@@ -187,8 +187,25 @@ var WebAPIUtils = {
     });
   },                            
                              
-  deleteProject : function( id ){
+  deleteProject : function( project ){
     console.log("deleteProject");
+    $.ajax({
+      dataType : "json",
+      headers : genHeader(),
+      type : "delete",
+      contentType : false,
+      processData : false,
+      success : function(res){
+        console.log("delete success: ",res);
+        ProjectServerActionCreator.deleteProjectSucess( project );
+      },
+      error : function(err){
+        console.log("Error from DeleteProject");
+        console.log(err);
+      },
+      url : "/api/v1/projects/"+ project.id + ".json"
+
+    });
   },
 
   likeProject : function( id ){

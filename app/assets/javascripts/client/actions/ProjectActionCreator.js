@@ -38,6 +38,14 @@ var ProjectActionCreator = {
     WebAPIUtils.updateProject( payload.project );
   },
 
+  deleteProject : function( payload ){
+    AppDispatcher.dispatch({
+      type : ActionTypes.PROJECT_DELETE,
+      project   : payload
+    });
+    WebAPIUtils.deleteProject( payload );
+  },
+
   uploadAttachment : function( payload ){
     AppDispatcher.dispatch({
       type : ActionTypes.UPLOAD_ATTACHMENT,

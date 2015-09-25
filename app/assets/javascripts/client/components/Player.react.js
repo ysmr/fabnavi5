@@ -91,14 +91,14 @@ var Player = React.createClass({
       _last_page = this.state.page;
       if(fig.hasOwnProperty("clientContent") && fig.clientContent.hasOwnProperty("dfdImage")){
         fig.clientContent.dfdImage.then(function(img){
-          ViewConfig.setCropped(false);
+          ViewConfig.setCropped(true);
             MainView.clear();
           MainView.draw(img);
           _currentImage = img;
         }); 
       } else {
         var img = new Image();
-        ViewConfig.setCropped(true);
+        ViewConfig.setCropped(false);
           MainView.clear();
           MainView.showWaitMessage();
         img.src = fig.file.file.url;

@@ -39,7 +39,7 @@ function getLocalConfig() {
 
   if(!isCropped){
     _conf = res.play || "";
-  } else {
+    } else {
     _conf = res.add || "";
   }
 }
@@ -53,6 +53,7 @@ function setLocalConfig(id) {
 }
 
 function getConfig(){
+  getLocalConfig();
   return normalize(_conf);
 }
 

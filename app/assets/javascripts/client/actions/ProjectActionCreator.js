@@ -16,7 +16,7 @@ var ProjectActionCreator = {
       type : ActionTypes.PROJECT_CREATE,
       payload : payload
     });
-    WebAPIUtils.createProject( payload.name, payload.contentAttributesType );
+    WebAPIUtils.createProject( payload.name, payload.contentAttributesType, payload.description );
   },
 
   getProject : function( payload ){

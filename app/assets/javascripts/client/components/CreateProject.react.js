@@ -40,6 +40,7 @@ var CreateProject = React.createClass({
   handleSubmit : function( e ) {
     ProjectActionCreator.createProject({
       name : this.state.name, 
+      description : this.state.description,
       contentAttributesType : "Content::PhotoList"
     });  
   },

@@ -14,6 +14,20 @@ module.exports = keyMirror({
   CALIBRATE_SHORTER_VERTICAL: null,
   CALIBRATE_LONGER_VERTICAL: null,
 
+  SELECT_PROJECT_RIGHT : null,
+  SELECT_PROJECT_LEFT : null,
+  SELECT_PROJECT_DOWN : null,
+  SELECT_PROJECT_UP : null,
+  SELECT_PROJECT : null,
+
+  SELECT_ACTION_DOWN : null,
+  SELECT_ACTION_UP : null,
+  SELECT_ACTION : null,
+
+  SELECT_NAVIGATION_RIGHT : null,
+  SELECT_NAVIGATION_LEFT : null,
+  SELECT_NAVIGATION : null,
+
   EXIT_PROJECT : null,
 });
 

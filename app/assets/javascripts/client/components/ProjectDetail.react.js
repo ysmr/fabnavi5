@@ -38,6 +38,7 @@ var ProjectDetail= React.createClass({
   },
 
   componentDidMount : function () {
+    State.reload();
   },
 
   componentWillUpdate : function() {

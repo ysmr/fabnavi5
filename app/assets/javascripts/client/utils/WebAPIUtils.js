@@ -241,9 +241,10 @@ var WebAPIUtils = {
         res.sym = sym;
         ProjectServerActionCreator.uploadAttachmentSuccess( res );
       },
-      error : function(err){
+      error : function(xhr,status,err){
         console.log("Error from Upload File :sym", sym);
         console.log(err);
+        ProjectServerActionCreator.uploadAttachmentFailed( {xhr:xhr, status:status,err:err, sym:sym} );
       },
       url : "/api/v1/attachments.json"
 

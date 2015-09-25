@@ -38,6 +38,7 @@ var EditProject = React.createClass({
   },
 
   componentDidMount : function () {
+    State.reload();
   },
 
   componentWillUpdate : function() {

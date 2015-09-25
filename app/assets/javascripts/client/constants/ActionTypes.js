@@ -27,6 +27,7 @@ module.exports = keyMirror({
 
   UPLOAD_ATTACHMENT : null,
   UPLOAD_ATTACHMENT_SUCCESS : null,
+  UPLOAD_ATTACHMENT_FAILED: null,
 
   UPDATE_CANVAS: null,
 });

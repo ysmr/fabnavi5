@@ -16,7 +16,16 @@ function consume( payload ){
       }
       return payload;
 }
-var playerKeyHandler = new machina.Fsm({
+
+function transitionl2( ){
+  var dst = location.hash.split("/")[2];
+  if( dst == undefined ){
+    dst = "index";
+  }
+  this.transition(dst);
+}
+
+var playerStateMachine = new machina.Fsm({
  initialize : function(){
     console.log("FSM initialize");
  },
@@ -134,8 +143,102 @@ var playerKeyHandler = new machina.Fsm({
 
 });
 
-playerKeyHandler.on("consume", function(payload){
+playerStateMachine.on("consume", function(payload){
   console.log("consume firered-----------");
+});
+
+var ProjectSelectorStateMachine = new machina.Fsm({
+  initialize : function() {
+  },
+
+  initialState : "projects",
+
+  states : {
+    
+   projects : {
+
+     _onEnter : function( ){
+        this.keyMap = [];
+       this.keyMap[38] = KeyAction.SELECT_PROJECT_UP;
+       this.keyMap[40] = KeyAction.SELECT_PROJECT_DOWN;
+       this.keyMap[39] = KeyAction.SELECT_PROJECT_RIGHT;
+       this.keyMap[37] = KeyAction.SELECT_PROJECT_LEFT;
+     },
+
+     _onExit : function( ){
+      this.keyMap = [];
+     },
+
+      consume : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      },
+   },
+
+    projectMenu : {
+     _onEnter : function( ){
+      this.keyMap = [];
+     },
+
+     _onExit : function( ){
+      this.keyMap = [];
+     },
+      consume : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      },
+    },
+
+    navigation : {
+     _onEnter : function( ){
+       this.keyMap = [];
+     },
+     _onExit : function( ){
+      this.keyMap = [];
+     },
+
+      consume : function(e){
+        var p = consume.call(this,e);
+        this.emit("actionFired",p);
+      },
+    },
+  },
+});
+
+
+var managerStateMachine= new machina.Fsm({
+  initialState : "index",
+  states : {
+    "index" : {
+      _onEnter : function(){
+        console.log("entering index");
+      },
+      transitionl2 : function(){
+        transitionl2.call(this);
+      },
+      _child : ProjectSelectorStateMachine,
+    },
+
+    "create" : {
+      transitionl2 : function(){
+        transitionl2.call(this);
+      },
+    },
+
+    "config" : {
+      transitionl2 : function(){
+        transitionl2.call(this);
+      },
+    },
+
+    "edit" : {
+      transitionl2 : function(){
+        transitionl2.call(this);
+      },
+
+    },
+  },
+
 });
 
 var FSM = new machina.Fsm({
@@ -145,18 +248,26 @@ var FSM = new machina.Fsm({
     player : {
       _onEnter : function(){
       },
-      _child : playerKeyHandler,
+      _child : playerStateMachine,
       _onExit : function(){
       },
-    },
-    projectList : {
-      _onEnter : function(){
-        
+      nestedTransition : function( loc ){
       },
+    },
+    manager: {
+      _onEnter : function(){
+      },
+      _child : managerStateMachine,
     },
   },
   consume : function( payload ){
     this.handle("consume",payload);
+  },
+
+  reload : function( loc ){
+    console.log("Nested Transition: ",location.hash.split("/"));
+    this.transition(location.hash.split("/")[1]);
+    this.handle("transitionl2");
   },
 });
 global.FSM = FSM;

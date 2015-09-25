@@ -10,6 +10,7 @@ var RouteHandler = Router.RouteHandler;
 
 var createProject = jade.compileFile(__dirname + '/../templates/CreateProject.jade');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
+var State = require('../utils/FabnaviStateMachine');
 var CreateProject = React.createClass({
 
 
@@ -51,6 +52,7 @@ var CreateProject = React.createClass({
   },
 
   componentDidMount : function () {
+    State.reload();
   },
 
   componentWillUpdate : function() {

@@ -52,12 +52,6 @@ tokens.each_with_index do |tok, i|
       },
       tag_list: "tag1 tag2 tag3 tag4 tag5"
     )
-    u.attachments.create!(
-      type: Attachment::Image.name,
-      file: File.open(File.join(Rails.root, "app/assets/images/dog.jpg")),
-      attachable_id: p.id,
-      attachable_type: p.class.name
-    )
 
     # Content
     p.content.update!(
@@ -77,5 +71,7 @@ tokens.each_with_index do |tok, i|
         attachable_type: fig.class.base_class.name
       )
     end
+
+    p.update figure_id: p.content.figures.first.id
   end
 end

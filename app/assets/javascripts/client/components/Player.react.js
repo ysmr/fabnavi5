@@ -33,8 +33,10 @@ var Player = React.createClass({
 
   getStateFromStores : function getStateFromStores() {
     return {
-     project : ProjectStore.getProject(),
-     page : ProjectStore.getCurrentPage(),
+      project : ProjectStore.getProject(),
+      page : ProjectStore.getCurrentPage(),
+      uploadQueue : ProjectStore.getUploadQueue(),
+      shooting : ProjectStore.isShooting(),
     };
   },
 

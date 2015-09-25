@@ -88,6 +88,11 @@ canvas {
     border-left: $black 3px solid;
     padding-left: 10px;
   }
+}
 
-
+.upload-queue {
+  border : solid 2px red;
+  position : fixed;
+  top:0;
+  left:0;
 }

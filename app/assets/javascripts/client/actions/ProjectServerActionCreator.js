@@ -31,6 +31,12 @@ var ProjectServerActionCreator = {
       });
   },
 
+  uploadAttachmentFailed: function( result ){
+      AppDispatcher.dispatch ({
+        type : ActionTypes.UPLOAD_ATTACHMENT_FAILED,
+        result : result,
+      });
+  },
 };
 
 module.exports = ProjectServerActionCreator;

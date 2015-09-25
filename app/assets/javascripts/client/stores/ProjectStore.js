@@ -10,6 +10,7 @@ var CalibrateController = require('../player/CalibrateController');
 
 var _project = null;
 var _current_page = 0;
+var _uploadQueue = [];
 
 var STEP = 1;
 
@@ -39,13 +40,29 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
           if( url.length > 1000 ){ 
             url = url.slice(30,40) + ".jpg";
           }
-          ProjectActionCreator.uploadAttachment({
+          
+          var payload = {
             file : blob,
             name : url.replace(/\?.*/,"").replace(/^.*\//,""),
             sym : fig.figure.sym
-          });
+          };
+          ProjectActionCreator.uploadAttachment(payload);
+          ProjectStore.pushUploadQueue(payload);
         });
     });
+  },
+
+  pushUploadQueue : function( payload ){
+    _uploadQueue.push({name:payload.name, sym:payload.sym}); 
+    ProjectStore.emitChange();
+  },
+
+  completeUpload : function( sym ){
+    for(var i = 0; i<_uploadQueue.length; i++){
+      if(_uploadQueue[i].sym == sym){
+        _uploadQueue.splice(i,1);
+      }
+    }
   },
 
   next : function(){
@@ -90,6 +107,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     dst.figure.id = fig.id;
     dst.figure.file = fig.file;
     ProjectStore.saveProject();
+    ProjectStore.completeUpload( fig.sym );
     ProjectStore.emitChange();
   },
 
@@ -175,6 +193,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
   getCurrentPage: function(){
     return _current_page;
+  },
+
+  getUploadQueue : function(){
+    return _uploadQueue;
   },
 
   addChangeListener: function(callback) {

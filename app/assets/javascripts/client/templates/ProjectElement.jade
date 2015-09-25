@@ -12,4 +12,20 @@ div(
       = this.props.project.user.email.replace(/@.*$/,"")
     .date
       = this.props.isOpenMenu.toString()
-  ul.actions.hide
+  - if( this.props.isOpenMenu )
+    ul.actions
+      li.action-box.action 
+        img(src="/images/p_play.png")
+        | Play
+      li.action-box.action 
+        img(src="/images/p_record.png")
+        | Record
+      li.action-box.action 
+        img(src="/images/p_detail.png")
+        | Detail
+      li.action-box.action
+        img(src="/images/p_edit.png")
+        | Edit
+      li.action-box.action
+        img(src="/images/p_delete.png")
+        | Delete

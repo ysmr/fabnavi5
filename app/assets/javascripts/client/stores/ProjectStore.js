@@ -10,7 +10,9 @@ var CalibrateController = require('../player/CalibrateController');
 
 var _project = null;
 var _current_page = 0;
-var _uploadQueue = [];
+var _uploadQueue = [
+];
+var _shooting = false;
 
 var STEP = 1;
 
@@ -22,215 +24,226 @@ function getStep( ){
 }
 
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
-  init : function () {
-    Camera.init();
-    this.emitChange();
-  },
+ init : function () {
+   Camera.init();
+   this.emitChange();
+ },
 
-  shoot : function(){
-    console.log("shoot");
-    ProjectStore.emitClearCanvas();
-    Camera.shoot().then(function(url){
-      var fig = ProjectStore.newFigure();
-      ProjectStore.setImageToFigureFromCamera(fig, url);
-      ProjectStore.pushFigure( fig );
-      fig.figure.clientContent.dfdImage
-        .then(ImageConverter.toBlob)
-        .then(function(blob){
-          if( url.length > 1000 ){ 
-            url = url.slice(30,40) + ".jpg";
-          }
-          
-          var payload = {
-            file : blob,
-            name : url.replace(/\?.*/,"").replace(/^.*\//,""),
-            sym : fig.figure.sym
-          };
-          ProjectActionCreator.uploadAttachment(payload);
-          ProjectStore.pushUploadQueue(payload);
-        });
-    });
-  },
+ shoot : function(){
+   console.log("shoot");
+   if(_shooting){
+    console.log("shooting now.");
+    return;
+   }
+   ProjectStore.emitClearCanvas();
+   Camera.shoot().then(function(url){
+     var fig = ProjectStore.newFigure();
+     ProjectStore.setImageToFigureFromCamera(fig, url);
+     ProjectStore.pushFigure( fig );
+     fig.figure.clientContent.dfdImage
+       .then(ImageConverter.toBlob)
+       .then(function(blob){
+         if( url.length > 1000 ){ 
+           url = url.slice(30,40) + ".jpg";
+         }
+         
+         var payload = {
+           file : blob,
+           name : url.replace(/\?.*/,"").replace(/^.*\//,""),
+           sym : fig.figure.sym,
+         };
+         ProjectActionCreator.uploadAttachment(payload);
+         payload.status = "Uploading";
+         ProjectStore.pushUploadQueue(payload);
+       });
+   });
+ },
 
-  pushUploadQueue : function( payload ){
-    _uploadQueue.push({name:payload.name, sym:payload.sym}); 
-    ProjectStore.emitChange();
-  },
+ pushUploadQueue : function( payload ){
+   _uploadQueue.push({name:payload.name, sym:payload.sym, status: payload.status}); 
+   ProjectStore.emitChange();
+ },
 
-  completeUpload : function( sym ){
-    for(var i = 0; i<_uploadQueue.length; i++){
-      if(_uploadQueue[i].sym == sym){
-        _uploadQueue.splice(i,1);
-      }
-    }
-  },
+ completeUpload : function( sym ){
+   for(var i = 0; i<_uploadQueue.length; i++){
+     if(_uploadQueue[i].sym == sym){
+       _uploadQueue.splice(i,1);
+     }
+   }
+ },
 
-  next : function(){
-    ProjectStore.setPage(_current_page + 1);
-  },
+ next : function(){
+   ProjectStore.setPage(_current_page + 1);
+ },
 
-  prev : function(){
-    ProjectStore.setPage(_current_page - 1);
-  },
+ prev : function(){
+   ProjectStore.setPage(_current_page - 1);
+ },
 
-  setPage : function( page ){
+ setPage : function( page ){
 
-    if( ! _project.hasOwnProperty("content") ) {
-      console.log("Project not set");
-      return ;
-    }
-    if( page >= _project.content.length ) {
-      page = _project.content.length -1 ;
-    }
+   if( ! _project.hasOwnProperty("content") ) {
+     console.log("Project not set");
+     return ;
+   }
+   if( page >= _project.content.length ) {
+     page = _project.content.length -1 ;
+   }
 
-    if( page < 0 ) {
-      page = 0;
-    }
+   if( page < 0 ) {
+     page = 0;
+   }
 
-    _current_page = page;
-    console.log("page : ",page);
-    ProjectStore.emitChange();
-  },
+   _current_page = page;
+   console.log("page : ",page);
+   ProjectStore.emitChange();
+ },
 
-  setProject : function( project ){
-    _project = project;
-    this.emitChange();
-  },
+ setProject : function( project ){
+   _project = project;
+   this.emitChange();
+ },
 
-  pushFigure : function( fig ){
-    _project.content.push(fig);
-    ProjectStore.emitChange();
-  },
+ pushFigure : function( fig ){
+   _project.content.push(fig);
+   ProjectStore.emitChange();
+ },
 
-  mergeUploadedFigure : function( fig ){
-    var dst = ProjectStore.findFigureBySymbol( fig.sym );
-    dst.figure.id = fig.id;
-    dst.figure.file = fig.file;
-    ProjectStore.saveProject();
-    ProjectStore.completeUpload( fig.sym );
-    ProjectStore.emitChange();
-  },
+ mergeUploadedFigure : function( fig ){
+   var dst = ProjectStore.findFigureBySymbol( fig.sym );
+   dst.figure.id = fig.id;
+   dst.figure.file = fig.file;
+   ProjectStore.saveProject();
+   ProjectStore.completeUpload( fig.sym );
+   ProjectStore.emitChange();
+ },
 
-  saveProject : function(){
-    setTimeout(function(){
-      ProjectActionCreator.updateProject({
-        project :  ProjectStore.getProject() 
-      });
-    },0);
-  },
+ saveProject : function(){
+   setTimeout(function(){
+     ProjectActionCreator.updateProject({
+       project :  ProjectStore.getProject() 
+     });
+   },0);
+ },
 
-  newFigure : function( ){
-    return {
-      figure : {
-        sym           : gensym(),
-        clientContent : {
-          dfdImage      : null,
-          dfdThumbnail  : null,
-        },
-        serverContent : {
-          dfdImage      : null,
-          dfdThumbnail  : null,
-        },
-        file : {
-          id : null,
-          file : {
-            url : null,
-            thumb : {
-              url : null
-            },
-          },
-        },
-        position : 7,
-      }
-    };
-  },
+ newFigure : function( ){
+   return {
+     figure : {
+       sym           : gensym(),
+       clientContent : {
+         dfdImage      : null,
+         dfdThumbnail  : null,
+       },
+       serverContent : {
+         dfdImage      : null,
+         dfdThumbnail  : null,
+       },
+       file : {
+         id : null,
+         file : {
+           url : null,
+           thumb : {
+             url : null
+           },
+         },
+       },
+       position : 7,
+     }
+   };
+ },
 
-  setImageToFigureFromCamera : function( fig, url ){
-   var src = null;
-    if( url ){
-      src = url;
-      fig.figure.file.file.url = url;
-    } else if( fig.figure.file.file.url ) {
-      src = fig.figure.file.file.url;
-    } else {
-      throw new Error("Figure url is not sed");
-    }
+ setImageToFigureFromCamera : function( fig, url ){
+  var src = null;
+   if( url ){
+     src = url;
+     fig.figure.file.file.url = url;
+   } else if( fig.figure.file.file.url ) {
+     src = fig.figure.file.file.url;
+   } else {
+     throw new Error("Figure url is not sed");
+   }
 
-    var img = new Image();
-    var d = $.Deferred();
-    img.src = src;
-    img.crossOrigin='anonymous';
-    img.onload = function(){
-      d.resolve(img);
-    }
-    fig.figure.clientContent.dfdImage = d.promise();
-  },
+   var img = new Image();
+   var d = $.Deferred();
+   img.src = src;
+   img.crossOrigin='anonymous';
+   img.onload = function(){
+     d.resolve(img);
+   }
+   fig.figure.clientContent.dfdImage = d.promise();
+ },
 
-  setImageToFigureFromServer : function( fig, url ){
+ setImageToFigureFromServer : function( fig, url ){
 
-  },
+ },
 
-  setThumbnailToFigureFromServer : function( fig, url ){
+ setThumbnailToFigureFromServer : function( fig, url ){
 
-  },
+ },
 
 
-  emitChange : function(){
-    this.emit(EventTypes.PROJECT_CHANGE);
-  },
+ emitChange : function(){
+   _shooting = false;
+   this.emit(EventTypes.PROJECT_CHANGE);
+ },
 
-  emitUpdateCanvas : function(){
-    this.emit(EventTypes.UPDATE_CANVAS_REQUEST);
-  },
+ emitUpdateCanvas : function(){
+   this.emit(EventTypes.UPDATE_CANVAS_REQUEST);
+ },
 
-  emitClearCanvas : function(){
-    this.emit(EventTypes.CLEAR_CANVAS_REQUEST);
-  },
+ emitClearCanvas : function(){
+   _shooting = true;
+   this.emit(EventTypes.CLEAR_CANVAS_REQUEST);
+ },
 
-  getProject : function( ){
-    return _project;
-  },
+ getProject : function( ){
+   return _project;
+ },
 
-  getCurrentPage: function(){
-    return _current_page;
-  },
+ getCurrentPage: function(){
+   return _current_page;
+ },
 
-  getUploadQueue : function(){
-    return _uploadQueue;
-  },
+ getUploadQueue : function(){
+   return _uploadQueue;
+ },
 
-  addChangeListener: function(callback) {
-    this.on(EventTypes.PROJECT_CHANGE, callback);
-  },
+ isShooting : function(){
+  return _shooting;
+ },
 
-  addCanvasRequestListener: function(callback) {
-    this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
-  },
+ addChangeListener: function(callback) {
+   this.on(EventTypes.PROJECT_CHANGE, callback);
+ },
 
-  addCanvasClearListener: function(callback) {
-    this.addListener(EventTypes.CLEAR_CANVAS_REQUEST, callback);
-  },
+ addCanvasRequestListener: function(callback) {
+   this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
+ },
 
-  removeCanvasRequestListener: function(callback) {
-    this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
-  },
+ addCanvasClearListener: function(callback) {
+   this.addListener(EventTypes.CLEAR_CANVAS_REQUEST, callback);
+ },
 
-  removeChangeListener: function(callback) {
-    this.removeListener(EventTypes.PROJECT_CHANGE, callback);
-  },
+ removeCanvasRequestListener: function(callback) {
+   this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
+ },
 
-  removeCanvasClearListener: function(callback) {
-    this.removeListener(EventTypes.CLEAR_CANVAS_REQUEST, callback);
-  },
+ removeChangeListener: function(callback) {
+   this.removeListener(EventTypes.PROJECT_CHANGE, callback);
+ },
 
-  findFigureBySymbol : function( sym ){
-     var cts  = ProjectStore.getProject().content;
-     var fig = null;
-     for(var i = 0; i < cts.length; i++){
-        fig = cts[i];
-        if( fig.figure.hasOwnProperty('sym') && fig.figure.sym == sym ) return fig;
-     } 
-  },
+ removeCanvasClearListener: function(callback) {
+   this.removeListener(EventTypes.CLEAR_CANVAS_REQUEST, callback);
+ },
+
+ findFigureBySymbol : function( sym ){
+    var cts  = ProjectStore.getProject().content;
+    var fig = null;
+    for(var i = 0; i < cts.length; i++){
+       fig = cts[i];
+       if( fig.figure.hasOwnProperty('sym') && fig.figure.sym == sym ) return fig;
+    } 
+ },
 });
 
 ProjectStore.dispatchToken = AppDispatcher.register(function( action ){

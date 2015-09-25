@@ -42,7 +42,6 @@ var Player = React.createClass({
 
   _onChange : function () {
     this.setState(this.getStateFromStores());
-    console.log(this.state.uploadQueue);
   },
 
   _onCanvasUpdate : function () {

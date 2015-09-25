@@ -12,13 +12,27 @@ var jade = require('react-jade');
 var Router = require('react-router'); 
 var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
+var State = require('../utils/FabnaviStateMachine');
 
 
 
 var projectManager= jade.compileFile(__dirname + '/../templates/ProjectManager.jade');
 
 var ProjectManager = React.createClass({
-  render: projectManager
+  render: projectManager,
+  componentDidMount : function () {
+
+  },
+
+  componentWillUpdate : function() {
+  },
+
+  componentDidUpdate : function() {
+  },
+
+  componentWillUnmount : function() {
+  },
+
 });
 
 module.exports = ProjectManager;

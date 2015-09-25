@@ -101,7 +101,6 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   emitChange : function(){
     this.emit(EventTypes.PROJECT_SELECTOR_CHANGE);
-    console.log("------------",_selector);
   },
 
   addChangeListener: function(callback) {

@@ -80,7 +80,6 @@ var Player = React.createClass({
       }
       _lastState = _currentState;
 
-
       if( _last_page == this.state.page && _currentImage != null ){
         MainView.draw(_currentImage);
         if( _currentState.contains("calibrate") ){

@@ -23,6 +23,7 @@ module.exports = keyMirror({
   SELECT_ACTION_DOWN : null,
   SELECT_ACTION_UP : null,
   SELECT_ACTION : null,
+  DESELECT_ACTION : null,
 
   SELECT_NAVIGATION_RIGHT : null,
   SELECT_NAVIGATION_LEFT : null,

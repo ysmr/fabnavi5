@@ -146,15 +146,11 @@ ul.actions {
   height:0px;
 
   .selected-action {
-    a {
     color: $selected-color ;
-    }
   }
 
   .action {
-    a {
       color:$white;
-    }
   }
   .action-box {
     background-color: $tp-black;
@@ -165,7 +161,7 @@ ul.actions {
       width:$action-height * 0.8;
       margin:  $action-height * 0.1;
     }
-    a {
+    span {
       position:absolute;
       margin-top:$action-height * 0.2;
     }

@@ -64,10 +64,20 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
    ProjectStore.emitChange();
  },
 
- completeUpload : function( sym ){
+ uploadFinish : function( sym ){
    for(var i = 0; i<_uploadQueue.length; i++){
      if(_uploadQueue[i].sym == sym){
        _uploadQueue.splice(i,1);
+       ProjectStore.emitChange();
+     }
+   }
+ },
+
+ uploadFailed : function( sym ){
+   for(var i = 0; i<_uploadQueue.length; i++){
+     if(_uploadQueue[i].sym == sym){
+       _uploadQueue[i].status = "Error";
+       ProjectStore.emitChange();
      }
    }
  },
@@ -114,7 +124,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
    dst.figure.id = fig.id;
    dst.figure.file = fig.file;
    ProjectStore.saveProject();
-   ProjectStore.completeUpload( fig.sym );
+   ProjectStore.uploadFinish( fig.sym );
    ProjectStore.emitChange();
  },
 
@@ -303,6 +313,9 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
     case ActionTypes.UPLOAD_ATTACHMENT_SUCCESS :
       ProjectStore.mergeUploadedFigure( action.result );
       ProjectStore.findFigureBySymbol(action.result.sym);
+      break;
+    case ActionTypes.UPLOAD_ATTACHMENT_FAILED:
+      ProjectStore.uploadFailed( action.result.sym );
       break;
     default : 
       break;

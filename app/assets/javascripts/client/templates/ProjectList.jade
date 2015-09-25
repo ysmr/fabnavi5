@@ -1,4 +1,7 @@
 -  var projects = [];
 .projects
   - for (var i in this.state.projects )
-    ProjectElement(project=this.state.projects[i] isSelected=this.state.selected.index == i)
+   ProjectElement(
+    project=this.state.projects[i] 
+    isSelected=this.state.selected.index == i 
+    isOpenMenu=this.state.selected.index == i && this.state.selected.openMenu)

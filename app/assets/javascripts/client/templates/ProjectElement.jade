@@ -11,5 +11,5 @@ div(
     .username
       = this.props.project.user.email.replace(/@.*$/,"")
     .date
-      | date
+      = this.props.isOpenMenu.toString()
   ul.actions.hide

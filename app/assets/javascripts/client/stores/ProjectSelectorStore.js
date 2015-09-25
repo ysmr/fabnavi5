@@ -17,6 +17,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
       index : 0,
       row   : 0,
       col   : 0,
+      openMenu : false,
     };
   },
 
@@ -29,6 +30,16 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     index = 0;
    };
    ProjectSelectorStore.setSelectorIndex( index );
+  },
+
+  open : function () {
+    _selector.openMenu = true;
+    this.emitChange();
+  },
+
+  close : function () {
+    _selector.openMenu = false;
+    this.emitChange();
   },
 
   up : function () {
@@ -84,6 +95,14 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
     case KeyActionTypes.SELECT_PROJECT_RIGHT:
       ProjectSelectorStore.right();
+      break;
+    case KeyActionTypes.SELECT_PROJECT:
+      ProjectSelectorStore.open();
+      break;
+    case KeyActionTypes.DESELECT_ACTION:
+      ProjectSelectorStore.close();
+      break;
+    case KeyActionTypes.SELECT_ACTION:
       break;
     case ActionTypes.MOVE_TOP:
       location.hash = "#/manager"

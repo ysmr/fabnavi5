@@ -9,6 +9,7 @@ var _selector  = {
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
 var KeyActionTypes = require('../constants/KeyActionTypes');
+var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 
 var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
@@ -33,6 +34,18 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
    ProjectSelectorStore.setSelectorIndex( index );
   },
 
+  explode : function(){
+    if(!_selector.openMenu)throw new Error("Ilegal Action");
+    var projects = ProjectListStore.getProjectsAll();
+    var project = projects[_selector.index];
+    switch(_selector.menuIndex){
+      case 0:
+        setTimeout(function(){
+       ProjectActionCreator.playProject( project );
+        },0);
+       break;  
+    };
+  }, 
   open : function () {
     _selector.openMenu = true;
     this.emitChange();
@@ -121,6 +134,7 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
       ProjectSelectorStore.close();
       break;
     case KeyActionTypes.SELECT_ACTION:
+      ProjectSelectorStore.explode();
       break;
     case KeyActionTypes.SELECT_ACTION_UP:
       ProjectSelectorStore.prevAction();

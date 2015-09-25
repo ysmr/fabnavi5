@@ -1,5 +1,5 @@
 json.extract! project, :id, :name, :description
-json.image project.image.thumb.url
+json.image project.attachment.file.thumb.url
 if project.lisenced?
   json.lisence do
     json.partial! 'v1/projects/lisence', lisence: project.lisence

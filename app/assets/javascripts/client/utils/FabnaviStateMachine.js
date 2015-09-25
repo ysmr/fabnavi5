@@ -177,6 +177,7 @@ var ProjectSelectorStateMachine = new machina.Fsm({
 
     projectMenu : {
      _onEnter : function( ){
+      this.keyMap = [];
      },
 
      _onExit : function( ){
@@ -190,6 +191,7 @@ var ProjectSelectorStateMachine = new machina.Fsm({
 
     navigation : {
      _onEnter : function( ){
+       this.keyMap = [];
      },
      _onExit : function( ){
       this.keyMap = [];
@@ -214,6 +216,7 @@ var managerStateMachine= new machina.Fsm({
       transitionl2 : function(){
         transitionl2.call(this);
       },
+      _child : ProjectSelectorStateMachine,
     },
 
     "create" : {

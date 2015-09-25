@@ -9,6 +9,7 @@ var _selector  = {
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
 var KeyActionTypes = require('../constants/KeyActionTypes');
+var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 
 var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
@@ -17,6 +18,8 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
       index : 0,
       row   : 0,
       col   : 0,
+      openMenu : false,
+      menuIndex : 0,
     };
   },
 
@@ -29,6 +32,28 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     index = 0;
    };
    ProjectSelectorStore.setSelectorIndex( index );
+  },
+
+  explode : function(){
+    if(!_selector.openMenu)throw new Error("Ilegal Action");
+    var projects = ProjectListStore.getProjectsAll();
+    var project = projects[_selector.index];
+    switch(_selector.menuIndex){
+      case 0:
+        setTimeout(function(){
+       ProjectActionCreator.playProject( project );
+        },0);
+       break;  
+    };
+  }, 
+  open : function () {
+    _selector.openMenu = true;
+    this.emitChange();
+  },
+
+  close : function () {
+    _selector.openMenu = false;
+    this.emitChange();
   },
 
   up : function () {
@@ -47,6 +72,22 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
    this.setSelectorByIndex( _selector.index +1 );
   },  
 
+  nextAction : function(){
+    _selector.menuIndex++;
+    if(_selector.menuIndex > 4){
+      _selector.menuIndex = 4;
+    }
+    this.emitChange();
+  },
+
+  prevAction : function(){
+    _selector.menuIndex--;
+    if(_selector.menuIndex < 0){
+      _selector.menuIndex = 0;
+    }
+    this.emitChange();
+  },
+
   setSelectorIndex : function ( index  ){
     _selector.index = index;
     _selector.col   = index % 4;
@@ -60,6 +101,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   emitChange : function(){
     this.emit(EventTypes.PROJECT_SELECTOR_CHANGE);
+    console.log("------------",_selector);
   },
 
   addChangeListener: function(callback) {
@@ -84,6 +126,21 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
     case KeyActionTypes.SELECT_PROJECT_RIGHT:
       ProjectSelectorStore.right();
+      break;
+    case KeyActionTypes.SELECT_PROJECT:
+      ProjectSelectorStore.open();
+      break;
+    case KeyActionTypes.DESELECT_ACTION:
+      ProjectSelectorStore.close();
+      break;
+    case KeyActionTypes.SELECT_ACTION:
+      ProjectSelectorStore.explode();
+      break;
+    case KeyActionTypes.SELECT_ACTION_UP:
+      ProjectSelectorStore.prevAction();
+      break;
+    case KeyActionTypes.SELECT_ACTION_DOWN:
+      ProjectSelectorStore.nextAction();
       break;
     case ActionTypes.MOVE_TOP:
       location.hash = "#/manager"

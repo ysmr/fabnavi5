@@ -163,6 +163,7 @@ var ProjectSelectorStateMachine = new machina.Fsm({
        this.keyMap[40] = KeyAction.SELECT_PROJECT_DOWN;
        this.keyMap[39] = KeyAction.SELECT_PROJECT_RIGHT;
        this.keyMap[37] = KeyAction.SELECT_PROJECT_LEFT;
+       this.keyMap[13] = function(){this.transition("actionMenu");return KeyAction.SELECT_PROJECT;}.bind(this);
      },
 
      _onExit : function( ){
@@ -175,9 +176,13 @@ var ProjectSelectorStateMachine = new machina.Fsm({
       },
    },
 
-    projectMenu : {
+    actionMenu: {
      _onEnter : function( ){
       this.keyMap = [];
+       this.keyMap[38] = KeyAction.SELECT_ACTION_UP;
+       this.keyMap[40] = KeyAction.SELECT_ACTION_DOWN;
+       this.keyMap[13] = KeyAction.SELECT_ACTION;
+       this.keyMap[27] = function(){this.transition("projects");return KeyAction.DESELECT_ACTION;}.bind(this);
      },
 
      _onExit : function( ){

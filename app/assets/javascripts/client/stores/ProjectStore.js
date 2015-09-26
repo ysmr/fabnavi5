@@ -25,6 +25,7 @@ function getStep( ){
 
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
  init : function () {
+  _project = null;
   _current_page = 0;
   _uploadQueue = [];
   _shooting = false;

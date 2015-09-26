@@ -39,17 +39,11 @@ var Player = React.createClass({
     _lastState = "";
     _currentState = "";
     MainView.reset();
-    this.replaceState({
-      project : null,
-      page : 0,
-      uploadQueue : [],
-      shooting : false,
-    });
   },
 
   getStateFromStores : function getStateFromStores() {
    var project = ProjectStore.getProject();
-   if( project == null || this.context.router.getCurrentParams().projectId != project.id ){
+   if(  project == null || this.context.router.getCurrentParams().projectId != project.id ){
     return {
      project : null,
      page : 0,
@@ -106,7 +100,6 @@ var Player = React.createClass({
     return 0;
    }
    _currentState = State.compositeState();
-   console.log("state : ", _currentState);
    if( _currentState != _lastState ){
     MainView.clear();
    }
@@ -179,6 +172,8 @@ var Player = React.createClass({
   },
 
   componentWillUnmount : function() {
+    ProjectStore.init();
+    ProjectStore.emitChange();
     this.reset();
     ProjectStore.removeChangeListener(this._onChange);
     ProjectStore.removeCanvasRequestListener(this._onCanvasUpdate);

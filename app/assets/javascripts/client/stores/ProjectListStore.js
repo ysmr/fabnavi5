@@ -49,7 +49,7 @@ ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
    case ActionTypes.PROJECTS_RECEIVE: 
       ProjectListStore.setProjects(action.projects);
       break;
-   case ActionTypes.DELETE_PROJECT_SUCCESS: 
+   case ActionTypes.PROJECT_DELETE_SUCCESS: 
       ProjectListStore.removeProject(action.project);
       break;
     default : 

@@ -46,6 +46,8 @@ var playerStateMachine = new machina.Fsm({
         this.keyMap[39] = KeyAction.PROJECT_NEXT_PAGE;
         this.keyMap[37] = KeyAction.PROJECT_PREV_PAGE;
         this.keyMap[27] = KeyAction.EXIT_PROJECT;
+        this.keyMap[8] = KeyAction.TOGGLE_DELETE_FLAG;
+        this.keyMap[83] = KeyAction.PROJECT_SAVE;
         this.keyMap[67] = function(){this.transition("calibrateCenter");}.bind(this);
         ProjectActionCreator.updateCanvas();
       },

@@ -108,6 +108,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
    _current_page = page;
    console.log("page : ",page);
+   if(_project.content[page].figure.hasOwnProperty("_destroy") &&
+      _project.content[page].figure._destroy){
+    console.log("******DELETE FLAG*********");
+   }
    ProjectStore.emitChange();
  },
 
@@ -136,6 +140,15 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
        project :  ProjectStore.getProject() 
      });
    },0);
+ },
+
+ toggleDestroy : function(){
+   if( _project.content[_current_page].figure.hasOwnProperty("_destroy") ){
+    _project.content[_current_page].figure._destroy = !_project.content[_current_page].figure._destroy;
+   } else {
+    _project.content[_current_page].figure["_destroy"] = true;
+   }
+   this.emitChange();
  },
 
  newFigure : function( ){
@@ -302,6 +315,16 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       CalibrateController.moveRegionCB(0,-STEP)();
       break;
 
+    case KeyActionTypes.PROJECT_SAVE: 
+      setTimeout(function(){
+        ProjectActionCreator.updateProject({
+          project:ProjectStore.getProject()
+        });
+      },0);
+      break;
+    case KeyActionTypes.TOGGLE_DELETE_FLAG : 
+      ProjectStore.toggleDestroy();
+      break;
     case KeyActionTypes.PROJECT_SHOOT:
       ProjectStore.shoot();
       break

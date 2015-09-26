@@ -95,7 +95,6 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
  setPage : function( page ){
 
    if( ! _project.hasOwnProperty("content") ) {
-     console.log("Project not set");
      return ;
    }
    if( page >= _project.content.length ) {
@@ -200,6 +199,9 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
  },
 
  emitUpdateCanvas : function(){
+    if( _project == null ){
+      return;
+    }
    this.emit(EventTypes.UPDATE_CANVAS_REQUEST);
  },
 

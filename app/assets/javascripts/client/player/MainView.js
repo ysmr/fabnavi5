@@ -8,12 +8,15 @@ var MainView = function(){
       currentImage = null
   ;
 
-function init (canvasElement){
-  console.log("Initizlize MainVIEW=*******");
+function reset(){
+  if(ctx != null)clear();
   _currentImage = null;
   ctx = null;
   cvs = null;
-  console.log(canvasElement);
+}
+
+function init (canvasElement){
+  reset();
   initCanvas(canvasElement);
   CalibrateController.init( canvasElement, getCurrentImage );
   ViewConfig.init();
@@ -100,6 +103,7 @@ function drawMessage(mes,x,y){
 }
 
 
+
 return {
   init:init,
   draw:draw,
@@ -108,6 +112,7 @@ return {
   clear:clear,
   redraw:redraw,
   showShootingMessage:drawShootingMessage,
+  reset : reset,
   getCtx:getCtx,
   getCvs:getCvs,
 

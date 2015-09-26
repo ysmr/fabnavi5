@@ -5,11 +5,13 @@ var CalibrateController = require('../player/CalibrateController');
 var MainView = function(){
   var cvs,
       ctx,
-      counter,
       currentImage = null
   ;
 
 function init (canvasElement){
+  _currentImage = null;
+  ctx = null;
+  cvs = null;
   initCanvas(canvasElement);
   CalibrateController.init( canvasElement, getCurrentImage );
   ViewConfig.init();

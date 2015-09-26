@@ -181,7 +181,7 @@ var ProjectSelectorStateMachine = new machina.Fsm({
       this.keyMap = [];
        this.keyMap[38] = KeyAction.SELECT_ACTION_UP;
        this.keyMap[40] = KeyAction.SELECT_ACTION_DOWN;
-       this.keyMap[13] = KeyAction.SELECT_ACTION;
+       this.keyMap[13] = function(){this.transition("projects");return KeyAction.SELECT_ACTION;}.bind(this);
        this.keyMap[27] = function(){this.transition("projects");return KeyAction.DESELECT_ACTION;}.bind(this);
      },
 

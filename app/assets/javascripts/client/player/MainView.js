@@ -9,12 +9,15 @@ var MainView = function(){
   ;
 
 function init (canvasElement){
+  console.log("Initizlize MainVIEW=*******");
   _currentImage = null;
   ctx = null;
   cvs = null;
+  console.log(canvasElement);
   initCanvas(canvasElement);
   CalibrateController.init( canvasElement, getCurrentImage );
   ViewConfig.init();
+  clear();
 }
 
 function getCtx(){

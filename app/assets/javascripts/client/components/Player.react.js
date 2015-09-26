@@ -126,16 +126,21 @@ var Player = React.createClass({
   },
   
   componentWillMount : function() {
-    ProjectActionCreator.getProject({ id: this.context.router.getCurrentParams().projectId});
+    _current_file = null;
+    _currentImage = null;
+    _page_changed = true;
+    _last_page = 0;
+    _lastState = "";
+    _currentState = "";
+    ProjectActionCreator.getProject({ id:this.context.router.getCurrentParams().projectId });
     },
 
   componentDidMount : function () {
+    MainView.init( React.findDOMNode(this.refs.mainCanvas));
     ProjectStore.addChangeListener(this._onChange);
     ProjectStore.addCanvasRequestListener(this._onCanvasUpdate);
     ProjectStore.addCanvasClearListener(this._onCanvasClear);
 
-    MainView.init( React.findDOMNode(this.refs.mainCanvas));
-    MainView.showWaitMessage();
     State.transition("player");
   },
 
@@ -149,6 +154,8 @@ var Player = React.createClass({
   },
 
   componentWillUnmount : function() {
+   console.log("unmount Player******");
+    MainView.clear();
     ProjectStore.removeChangeListener(this._onChange);
     ProjectStore.removeCanvasRequestListener(this._onCanvasUpdate);
     ProjectStore.removeCanvasClearListener(this._onCanvasClear);

@@ -108,6 +108,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
 
    _current_page = page;
    console.log("page : ",page);
+   if(_project.content[page].figure.hasOwnProperty("_destroy") &&
+      _project.content[page].figure._destroy){
+    console.log("******DELETE FLAG*********");
+   }
    ProjectStore.emitChange();
  },
 
@@ -311,6 +315,16 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       CalibrateController.moveRegionCB(0,-STEP)();
       break;
 
+    case KeyActionTypes.PROJECT_SAVE: 
+      setTimeout(function(){
+        ProjectActionCreator.updateProject({
+          project:ProjectStore.getProject()
+        });
+      },0);
+      break;
+    case KeyActionTypes.TOGGLE_DELETE_FLAG : 
+      ProjectStore.toggleDestroy();
+      break;
     case KeyActionTypes.PROJECT_SHOOT:
       ProjectStore.shoot();
       break

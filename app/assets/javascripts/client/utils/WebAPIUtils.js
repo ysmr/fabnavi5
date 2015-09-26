@@ -131,7 +131,7 @@ var WebAPIUtils = {
     if(project.content.length == 0) return;
     var fd = new FormData();
     fd.append("project[name]", project.name);
-    fd.append("project[figure_id]", project.content[project.content.length - 1].figure.id);
+    fd.append("project[figure_id]", project.content[project.content.length - 1].figure.figure_id);
     $.ajax({
       dataType : "json",
       headers : genHeader(),
@@ -141,7 +141,6 @@ var WebAPIUtils = {
       processData : false,
       success : function(res){
         console.log("set thumbnail success: ",res);
-        //ProjectServerActionCreator.createProjectSuccess( res );
       },
       error : function(err){
         console.log("Error from UpdateThumbnail");
@@ -175,8 +174,7 @@ var WebAPIUtils = {
       processData : false,
       success : function(res){
         console.log("upload success: ",res);
-        WebAPIUtils.setThumbnailLast(project);
-        //ProjectServerActionCreator.createProjectSuccess( res );
+        ProjectServerActionCreator.updateProjectSucess({ project: res });
       },
       error : function(err){
         console.log("Error from UpdateProject");

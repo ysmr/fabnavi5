@@ -23,6 +23,10 @@ var ProjectActionCreator = {
     WebAPIUtils.getProject( payload.id );
   },
 
+  setThumbnailLast : function( payload ){
+    WebAPIUtils.setThumbnailLast(payload.project);
+  },
+
   playProject : function( payload ){
     AppDispatcher.dispatch({
       type : ActionTypes.PROJECT_PLAY,

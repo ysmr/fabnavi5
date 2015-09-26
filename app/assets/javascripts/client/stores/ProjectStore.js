@@ -142,6 +142,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
    return {
      figure : {
        sym           : gensym(),
+       figure_id     : null,
        clientContent : {
          dfdImage      : null,
          dfdThumbnail  : null,
@@ -164,6 +165,18 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
    };
  },
 
+ mergeFigureId : function( project ){
+    var res = project.project;
+    for(var i=0; i<res.content.length; i++){
+      for(var j=0; j<_project.content.length; j++){
+        if(_project.content[j].figure.figure_id == null &&  _project.content[j].figure.id == res.content[i].figure.id ){
+          _project.content[j].figure.figure_id = res.content[i].figure.figure_id;
+        }
+      }   
+    }
+    ProjectActionCreator.setThumbnailLast({ project:_project });
+ },
+
  setImageToFigureFromCamera : function( fig, url ){
   var src = null;
    if( url ){
@@ -172,7 +185,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
    } else if( fig.figure.file.file.url ) {
      src = fig.figure.file.file.url;
    } else {
-     throw new Error("Figure url is not sed");
+     throw new Error("Figure url is not set");
    }
 
    var img = new Image();
@@ -318,6 +331,11 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
     case ActionTypes.UPLOAD_ATTACHMENT_SUCCESS :
       ProjectStore.mergeUploadedFigure( action.result );
       ProjectStore.findFigureBySymbol(action.result.sym);
+      break;
+    case ActionTypes.PROJECT_UPDATE_SUCCESS:
+      ProjectStore.mergeFigureId( action.project);
+      break;
+    case ActionTypes.PROJECT_UPDATE_FAILED:
       break;
     case ActionTypes.UPLOAD_ATTACHMENT_FAILED:
       ProjectStore.uploadFailed( action.result.sym );

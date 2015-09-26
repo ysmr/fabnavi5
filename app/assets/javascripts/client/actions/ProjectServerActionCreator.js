@@ -38,16 +38,30 @@ var ProjectServerActionCreator = {
       });
   },
 
+  updateProjectSucess : function( project ){
+      AppDispatcher.dispatch ({
+        type : ActionTypes.PROJECT_UPDATE_SUCCESS,
+        project : project,
+      });
+  },
+
+  updateProjectFailed: function( project ){
+      AppDispatcher.dispatch ({
+        type : ActionTypes.PROJECT_UPDATE_FAILED,
+        project : project,
+      });
+  },
+
   deleteProjectSucess : function( project ){
       AppDispatcher.dispatch ({
-        type : ActionTypes.DELETE_PROJECT_SUCCESS,
+        type : ActionTypes.PROJECT_DELETE_SUCCESS,
         project : project,
       });
   },
 
   deleteProjectFailed: function( project ){
       AppDispatcher.dispatch ({
-        type : ActionTypes.DELETE_PROJECT_FAILED,
+        type : ActionTypes.PROJECT_DELETE_FAILED,
         project : project,
       });
   },

@@ -30,5 +30,8 @@ module.exports = keyMirror({
   SELECT_NAVIGATION : null,
 
   EXIT_PROJECT : null,
+
+  TOGGLE_DELETE_FLAG : null,
+  PROJECT_SAVE : null,
 });
 

@@ -138,6 +138,15 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
    },0);
  },
 
+ toggleDestroy : function(){
+   if( _project.content[_current_page].figure.hasOwnProperty("_destroy") ){
+    _project.content[_current_page].figure._destroy = !_project.content[_current_page].figure._destroy;
+   } else {
+    _project.content[_current_page].figure["_destroy"] = true;
+   }
+   this.emitChange();
+ },
+
  newFigure : function( ){
    return {
      figure : {

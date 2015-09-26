@@ -30,8 +30,6 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   _uploadQueue = [];
   _shooting = false;
   Camera.init();
-   
-   this.emitChange();
  },
 
  shoot : function(){
@@ -98,7 +96,6 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
  setPage : function( page ){
 
    if( ! _project.hasOwnProperty("content") ) {
-     console.log("Project not set");
      return ;
    }
    if( page >= _project.content.length ) {
@@ -203,6 +200,9 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
  },
 
  emitUpdateCanvas : function(){
+    if( _project == null ){
+      return;
+    }
    this.emit(EventTypes.UPDATE_CANVAS_REQUEST);
  },
 
@@ -314,7 +314,6 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
     case ActionTypes.PROJECT_PLAY: 
       location.hash = "#/project/play/" + action.id;
       ProjectStore.init();
-      ProjectActionCreator.getProject({ id:action.id });
       break;
     case ActionTypes.UPLOAD_ATTACHMENT_SUCCESS :
       ProjectStore.mergeUploadedFigure( action.result );

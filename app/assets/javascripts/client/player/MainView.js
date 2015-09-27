@@ -40,6 +40,8 @@ function initCanvas(canvasElement){
 }
 
 function drawCalibrateLine(){
+  
+  ctx.strokeStyle = ViewConfig.isCropped() ? "#00ff00" : "#0000ff";
   ctx.beginPath();
   ctx.moveTo(0,cvs.height/2);
   ctx.lineTo(cvs.width,cvs.height/2);

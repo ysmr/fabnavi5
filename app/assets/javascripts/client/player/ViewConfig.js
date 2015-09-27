@@ -78,6 +78,9 @@ function normalize(conf){
    return res;
 }
 
+function getCropped( ) {
+ return isCropped;
+}
 function setCropped( b ) {
   isCropped = b;
 }
@@ -86,6 +89,7 @@ return {
   init : init,
   conf:getConfig,
   setConf:setConfig,
+  isCropped : getCropped,
   save:saveConfig,
   setCropped : setCropped,
 };

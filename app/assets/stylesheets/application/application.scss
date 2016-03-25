@@ -29,7 +29,7 @@ header {
 
   background-color:#231815;
   width:100%;
-} 
+}
 .header {
   @include outer-container;
   width:100%;
@@ -112,7 +112,7 @@ header {
 
 .belt {
   @include outer-container(100%);
-  background-color: $brown;
+  background-color: #123456;
   padding-bottom: 20px;
 }
 .search-bar {

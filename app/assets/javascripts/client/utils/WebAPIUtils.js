@@ -7,11 +7,11 @@ var _uid = null;
 var DEVELOPMENT = true;
 
 function setHeader(client,uid,accessToken){
-    localStorage.setItem("header",{
+    localStorage.setItem("header",JSON.stringify({
       "Client"        : _client,
       "Uid"           : _uid,
       "AccessToken"  : _accessToken
-    }.toSource());
+    }));
 }
 
 function clearHeader(){

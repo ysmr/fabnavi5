@@ -37,6 +37,10 @@
   },
   "scripts": {
     "start": "gulp start",
-    "build": "gulp build"
+    "build": "gulp build",
+    "lint": "eslint app/assets/javascripts/client/*"
+  },
+  "devDependencies": {
+    "eslint": "^2.5.1"
   }
 }

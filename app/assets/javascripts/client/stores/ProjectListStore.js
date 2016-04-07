@@ -9,7 +9,7 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     _projects = [];
     ProjectActionCreator.getAllProjects();
-    this.emitChange();
+    this.emitChange(); 
   },
 
   getProjectsAll : function (){
@@ -46,13 +46,13 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
 
 ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
   switch(action.type){
-   case ActionTypes.PROJECTS_RECEIVE: 
+   case ActionTypes.PROJECTS_RECEIVE:
       ProjectListStore.setProjects(action.projects);
       break;
-   case ActionTypes.PROJECT_DELETE_SUCCESS: 
+   case ActionTypes.PROJECT_DELETE_SUCCESS:
       ProjectListStore.removeProject(action.project);
       break;
-    default : 
+    default :
       break;
   };
 

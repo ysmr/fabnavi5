@@ -1,3 +1,4 @@
+//Menuのデータとかはここにあるっぽい location.hash
 var EventEmitter = require('events');
 var machina = require('machina');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
@@ -45,16 +46,16 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         },0);
        _selector.openMenu = false;
        _selector.menuIndex = 0;
-       break;  
+       break;
       case 4:
         setTimeout(function(){
        ProjectActionCreator.deleteProject( project );
         },0);
        _selector.openMenu = false;
        _selector.menuIndex = 0;
-       break;  
+       break;
     };
-  }, 
+  },
   open : function () {
     _selector.openMenu = true;
     _selector.menuIndex = 0;
@@ -68,19 +69,19 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   up : function () {
    this.setSelectorByIndex( _selector.index - 4 );
-  },  
+  },
 
   down : function () {
    this.setSelectorByIndex( _selector.index +4 );
-  },  
+  },
 
   left : function () {
    this.setSelectorByIndex( _selector.index -1 );
-  },  
+  },
 
   right : function () {
    this.setSelectorByIndex( _selector.index +1 );
-  },  
+  },
 
   nextAction : function(){
     _selector.menuIndex++;

@@ -94,17 +94,22 @@ var WebAPIUtils = {
     });
   },
 
-  createProject : function( name, contentAttributesType, description){
+  createProject : function( name, date,contentAttributesType, description){
     console.log("createProject");
+    //ok
+    console.log(date);
     $.ajax({
       dataType : "json",
       data : {
         project : {
           name : name,
+
           content_attributes : {
             description : description,
-           type : "Content::PhotoList"
-          } 
+            //
+            date : date,
+            type : "Content::PhotoList"
+          }
         }
       },
       headers : genHeader(),
@@ -116,6 +121,8 @@ var WebAPIUtils = {
           name: res.name,
           content : [],
           description : description,
+          //
+          date : date,
         });
       },
       error : function(err){
@@ -131,6 +138,8 @@ var WebAPIUtils = {
     if(project.content.length == 0) return;
     var fd = new FormData();
     fd.append("project[name]", project.name);
+    //
+    fd.append("project[date]",project.date);
     fd.append("project[figure_id]", project.content[project.content.length - 1].figure.figure_id);
     $.ajax({
       dataType : "json",
@@ -151,20 +160,23 @@ var WebAPIUtils = {
     });
   },
 
+
   updateProject : function( project ){
     console.log("updateProject");
       var fd = new FormData();
       fd.append("project[name]", project.name);
       fd.append("project[description]", project.description);
+      //
+      fd.append("project[date]",project.date);
       fd.append("project[tag_list]", project.tag_list);
 
       console.log(project.content);
       for(var i=0; i < project.content.length; i++){
-        if( project.content[i].figure.hasOwnProperty("_destroy") && 
+        if( project.content[i].figure.hasOwnProperty("_destroy") &&
             project.content[i].figure._destroy == true &&
             project.content[i].figure.figure_id != null ){
               console.log("Delete photo",project.content[i]);
-              if( !confirm("delete photo , index:  "+ i)) { 
+              if( !confirm("delete photo , index:  "+ i)) {
                 alert("Rollback");
                 project.content[i].figure._destroy = false;
                 return -1;
@@ -191,7 +203,7 @@ var WebAPIUtils = {
       processData : false,
       success : function(res){
         console.log("upload success: ",res);
-        ProjectServerActionCreator.updateProjectSucess({ project: res });
+        ProjectServerActionCreator.updateProjectSucess({ project: res });　
       },
       error : function(err){
         console.log("Error from UpdateProject");
@@ -199,8 +211,8 @@ var WebAPIUtils = {
       },
       url : "/api/v1/projects/"+ project.id + ".json"
     });
-  },                            
-                             
+  },
+
   deleteProject : function( project ){
     console.log("deleteProject");
     $.ajax({
@@ -259,11 +271,11 @@ var WebAPIUtils = {
 
     var fd = new FormData();
     fd.append("attachment[file]",file, name);
-    
+
     $.ajax({
       dataType : "json",
       data : fd,
-      processData: false, 
+      processData: false,
       contentType: false,
       headers : genHeader(),
       type : "post",
@@ -281,7 +293,7 @@ var WebAPIUtils = {
       url : "/api/v1/attachments.json"
 
     });
-  }, 
+  },
 
   signIn : function(){
     WebAPIUtils.initPersona();
@@ -328,8 +340,8 @@ var WebAPIUtils = {
               }
           });
         }
-    });  
-  } 
+    });
+  }
 };
 
 

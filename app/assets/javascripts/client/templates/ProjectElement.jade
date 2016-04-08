@@ -13,8 +13,8 @@ div(
     .username
       = this.props.project.user.email.replace(/@.*$/,"")
     .date
-      = this.props.isOpenMenu.toString()
-      //= this.props.project.date
+      //= this.props.isOpenMenu.toString()
+      = this.props.project.created_at.replace(/T.*$/,"").replace(/-/g," / ")
     
     p.description
       = this.props.project.description   

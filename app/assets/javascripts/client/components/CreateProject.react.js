@@ -1,5 +1,5 @@
 //Createのページview　
-var React = require('react');
+var React = require('react');　
 var ProjectListStore = require('../stores/ProjectListStore');
 var jade = require('react-jade');
 

@@ -1,4 +1,4 @@
-var ProjectServerActionCreator = require('../actions/ProjectServerActionCreator');
+var ProjectServerActionCreator = require('../actions/ProjectServerActionCreator');　
 var ServerActionCreator = require('../actions/ServerActionCreator');
 var $ = require('jquery');
 var _accessToken = null;
@@ -94,20 +94,19 @@ var WebAPIUtils = {
     });
   },
 
-  createProject : function( name, date,contentAttributesType, description){
+  createProject : function( name, contentAttributesType, description, created_at){
     console.log("createProject");
-    //ok
+    //
     console.log(date);
     $.ajax({
       dataType : "json",
       data : {
         project : {
           name : name,
-
+          //
+          created_at : created_at,
           content_attributes : {
             description : description,
-            //
-            date : date,
             type : "Content::PhotoList"
           }
         }
@@ -115,14 +114,14 @@ var WebAPIUtils = {
       headers : genHeader(),
       type : "post",
       success : function(res){
+        console.log(created_at);
         ProjectServerActionCreator.createProjectSuccess( res );
         WebAPIUtils.updateProject({
           id: res.id,
           name: res.name,
           content : [],
           description : description,
-          //
-          date : date,
+          created_at :  created_at,
         });
       },
       error : function(err){
@@ -167,7 +166,7 @@ var WebAPIUtils = {
       fd.append("project[name]", project.name);
       fd.append("project[description]", project.description);
       //
-      fd.append("project[date]",project.date);
+      fd.append("project[created_at]",project.created_at);
       fd.append("project[tag_list]", project.tag_list);
 
       console.log(project.content);
@@ -204,6 +203,7 @@ var WebAPIUtils = {
       success : function(res){
         console.log("upload success: ",res);
         ProjectServerActionCreator.updateProjectSucess({ project: res });　
+
       },
       error : function(err){
         console.log("Error from UpdateProject");

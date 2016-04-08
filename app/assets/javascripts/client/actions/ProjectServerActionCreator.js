@@ -4,7 +4,7 @@ var ActionTypes = require('../constants/ActionTypes');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
 var ProjectServerActionCreator = {
-  receiveProjects : function( projects ){
+  receiveProjects : function( projects ){　
       AppDispatcher.dispatch ({
         type : ActionTypes.PROJECTS_RECEIVE,
         projects : projects

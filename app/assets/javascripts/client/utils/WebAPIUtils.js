@@ -23,7 +23,7 @@ function loadHeader(){
   if( header == null || !DEVELOPMENT){
     return null;
   } else {
-    header = eval(header);
+    header = JSON.parse(header);
     _client = header.Client;
     _uid = header.Uid;
     _accessToken = header.AccessToken;
@@ -92,6 +92,10 @@ var WebAPIUtils = {
       url : "/api/v1/projects.json"
 
     });
+  },
+
+  isSigningIn : function(){
+    return !!loadHeader();
   },
 
   createProject : function( name, contentAttributesType, description){
@@ -284,13 +288,20 @@ var WebAPIUtils = {
   }, 
 
   signIn : function(){
-    WebAPIUtils.initPersona();
-    navigator.id.request();
+    window.location.href = "http://192.168.33.10:3000/auth/github?auth_origin_url=http://192.168.33.10:3000";
+
   },
 
   signOut : function () {
-    WebAPIUtils.initPersona();
-    navigator.id.logout();
+    clearHeader();
+    window.location.reload();
+  },
+
+  signedIn : function(token,uid,client){
+    _accessToken = token;
+    _uid = uid;
+    _client = client;
+    setHeader();
   },
 
   initPersona : function () {

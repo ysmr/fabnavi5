@@ -6,7 +6,7 @@ var _client = null;
 var _uid = null;
 var DEVELOPMENT = true;
 
-function setHeader(client,uid,accessToken){
+function setHeader(){
     localStorage.setItem("header",JSON.stringify({
       "Client"        : _client,
       "Uid"           : _uid,

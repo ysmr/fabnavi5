@@ -6,12 +6,13 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var NavigationViewActionCreator = {
 
   search : function ( act, text ) {
-    if ( ActionTypes.hasOwnProperty(act) ){
+    //if ( ActionTypes.hasOwnProperty(act) ){
+    console.log(text);
       AppDispatcher.dispatch ({
-        type  : ActionTypes[act],
+        type  : ActionTypes.PROJECT_SEARCH,
         text  : text,
       });
-    }
+    //}
   },
 
   menuSelect: function ( act ) {

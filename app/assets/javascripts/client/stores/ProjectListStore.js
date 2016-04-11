@@ -22,9 +22,13 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
     this.emit(EventTypes.PROJECT_LIST_CHANGE);
   },
 
+  initProjects : function(projects){
+    init_projects = projects;
+    console.log("init : " +init_projects.length);
+  },
+
   setProjects : function( projects ){
     _projects = projects;
-    init_projects = projects;
     this.emitChange();
   },
 
@@ -37,22 +41,27 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
       }
     }
   },
+
   searchProject : function( search_text ){
-  _project = null;
-  this.emitChange();
-  //console.log("search_text : " + search_text);
-  for(var i = 0; i < _projects.length; i++){
-    //console.log("name : " + init_projects[i].name);
-    if(_projects[i].name == search_text ){
-      search_projects[0] = init_projects[i];
-      console.log("con :" + search_projects[0].name);
+    _project = null;
+    console.log("search_text : " + search_text);
+
+    if(search_text === ""){
+      _project = init_projects;
+      console.log("empty"+ _project.length);
+    }else{
+      for(var i = 0; i < init_projects.length; i++){
+        if(init_projects[i].name == search_text ){
+          search_projects[0] = init_projects[i];
+          console.log("con :" + search_projects[0].name);
+          _project = search_projects;
+        }
+      }
     }
-  }
-  _project = search_projects;
-  console.log(_project[0].name)
-  this.emitChange();
-  return;
-},
+    console.log(_project[0].name)
+    this.setProjects(_project);
+    return;
+  },
 
   addChangeListener: function(callback) {
     this.on(EventTypes.PROJECT_LIST_CHANGE, callback);
@@ -65,8 +74,9 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
 
 ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
   switch(action.type){
-   case ActionTypes.PROJECTS_RECEIVE:
+   case ActionTypes.PROJECTS_RECEIVE:　
       ProjectListStore.setProjects(action.projects);
+      ProjectListStore.initProjects(action.projects);
       break;
    case ActionTypes.PROJECT_DELETE_SUCCESS:
       ProjectListStore.removeProject(action.project);

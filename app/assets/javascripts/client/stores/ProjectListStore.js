@@ -53,6 +53,8 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
         if(re.test(init_projects[i].name) ==true){
           search_projects.push(init_projects[i]);
           _project = search_projects;
+        }else{
+          _project = [];
         }
       }
     }

@@ -1,8 +1,6 @@
-//何が押されたかとか。こちらは常に動いているのでviewから呼び出されるものではない？
 var AppDispatcher = require('../dispatcher/AppDispatcher.js');
-//キー操作とかの変数名が入っている
 var ActionTypes = require('../constants/ActionTypes');
-var FSM = require('../utils/FabnaviStateMachine');　
+var FSM = require('../utils/FabnaviStateMachine');
 
 module.exports = KeyActionCreator = {
   handleKeyDown : function ( event ) {

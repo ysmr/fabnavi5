@@ -1,10 +1,9 @@
-//
 var React = require('react');
 var MenuIcon = require('./MenuIcon.react.js');
 var AccountStore = require('../stores/AccountStore');
 var jade = require('react-jade');
 
-var Router = require('react-router');
+var Router = require('react-router'); 
 var Link = Router.Link;
 
 
@@ -29,7 +28,7 @@ var Navigation = React.createClass({
 
   getDefaultProps: function() {
      return {
-        headerSrc : "images/fav_logo_3.png", 
+        headerSrc : "images/h_logo.png",
      };
    },
 
@@ -38,7 +37,6 @@ var Navigation = React.createClass({
   componentWillMount : function() {
   },
 
-//release timeを書いているだけ
   componentDidMount : function () {
     AccountStore.addChangeListener(this._onChange);
     $.get("https://github.com/fabnavi/fabnavi5/commits/release")

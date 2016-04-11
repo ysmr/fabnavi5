@@ -60,10 +60,6 @@ var ProjectList = React.createClass({
 
 
   componentDidUpdate : function() {
-    console.log("update : update");
-    ProjectListStore.addChangeListener(this._onChange);
-    ProjectSelectorStore.addChangeListener(this._onChange);
-    State.reload();
   },
 
    componentWillReceiveProps : function(){

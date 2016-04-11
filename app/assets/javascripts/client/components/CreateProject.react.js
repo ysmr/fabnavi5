@@ -23,7 +23,6 @@ var CreateProject = React.createClass({
     return {
       name : "",
       description : "",
-      date:""
     };
   },
 
@@ -46,7 +45,6 @@ var CreateProject = React.createClass({
     ProjectActionCreator.createProject({
       name : this.state.name,
       description : this.state.description,
-      date : date_obj.toString(),
       contentAttributesType : "Content::PhotoList"
     });
   },

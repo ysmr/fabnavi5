@@ -1,23 +1,10 @@
 var NavigationViewActionCreator = require('../actions/NavigationViewActionCreator');
-var ProjectServerActionCreator = require('../actions/ProjectServerActionCreator');　
-var ServerActionCreator = require('../actions/ServerActionCreator');
 var React = require('react');
 var jade = require('react-jade');
 var searchBar = jade.compileFile(__dirname + '/../templates/SearchBar.jade');
 var SearchBar = React.createClass({
 
   propTypes : {
-  },
-
-  getStateFromStores : function () {
-    return {
-     projects : ProjectListStore.getProjectsAll(),
-     selected : ProjectSelectorStore.getSelector(),
-    };
-  },
-
-  _onChange : function () {
-    this.setState(this.getStateFromStores());
   },
 
   getInitialState: function() {

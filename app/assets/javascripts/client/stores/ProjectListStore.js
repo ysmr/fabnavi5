@@ -3,6 +3,7 @@ var EventEmitter = require('events');
 var _projects = [];
 var init_projects = [];
 var search_projects = [];
+var empty_projects = [];
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
@@ -43,22 +44,18 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   searchProject : function( search_text ){
-    _project = null;
-    console.log("search_text : " + search_text);
-
+    search_projects = [];
+    var re = new RegExp(search_text,'i');
     if(search_text === ""){
       _project = init_projects;
-      console.log("empty"+ _project.length);
     }else{
       for(var i = 0; i < init_projects.length; i++){
-        if(init_projects[i].name == search_text ){
-          search_projects[0] = init_projects[i];
-          console.log("con :" + search_projects[0].name);
+        if(re.test(init_projects[i].name) ==true){
+          search_projects.push(init_projects[i]);
           _project = search_projects;
         }
       }
     }
-    console.log(_project[0].name)
     this.setProjects(_project);
     return;
   },

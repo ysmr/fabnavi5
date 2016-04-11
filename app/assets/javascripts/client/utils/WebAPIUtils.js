@@ -94,17 +94,13 @@ var WebAPIUtils = {
     });
   },
 
-  createProject : function( name, contentAttributesType, description, created_at){
+  createProject : function( name, contentAttributesType, description){
     console.log("createProject");
-    //
-    console.log(date);
     $.ajax({
       dataType : "json",
       data : {
         project : {
           name : name,
-          //
-          created_at : created_at,
           content_attributes : {
             description : description,
             type : "Content::PhotoList"
@@ -114,14 +110,12 @@ var WebAPIUtils = {
       headers : genHeader(),
       type : "post",
       success : function(res){
-        console.log(created_at);
         ProjectServerActionCreator.createProjectSuccess( res );
         WebAPIUtils.updateProject({
           id: res.id,
           name: res.name,
           content : [],
           description : description,
-          created_at :  created_at,
         });
       },
       error : function(err){
@@ -165,8 +159,6 @@ var WebAPIUtils = {
       var fd = new FormData();
       fd.append("project[name]", project.name);
       fd.append("project[description]", project.description);
-      //
-      fd.append("project[created_at]",project.created_at);
       fd.append("project[tag_list]", project.tag_list);
 
       console.log(project.content);

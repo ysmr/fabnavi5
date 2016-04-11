@@ -1,10 +1,9 @@
-//Createのページview　
-var React = require('react');　
+var React = require('react');
 var ProjectListStore = require('../stores/ProjectListStore');
 var jade = require('react-jade');
 
-var Router = require('react-router');
-var DefaultRoute = Router.DefaultRoute;　
+var Router = require('react-router'); 
+var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
@@ -12,8 +11,6 @@ var RouteHandler = Router.RouteHandler;
 var createProject = jade.compileFile(__dirname + '/../templates/CreateProject.jade');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 var State = require('../utils/FabnaviStateMachine');
-
-var date_obj = new Date();
 var CreateProject = React.createClass({
 
 
@@ -22,8 +19,7 @@ var CreateProject = React.createClass({
   getInitialState: function() {
     return {
       name : "",
-      description : "",
-      date:""
+      description : ""
     };
   },
 
@@ -44,11 +40,10 @@ var CreateProject = React.createClass({
 
   handleSubmit : function( e ) {
     ProjectActionCreator.createProject({
-      name : this.state.name,
+      name : this.state.name, 
       description : this.state.description,
-      date : date_obj.toString(),
       contentAttributesType : "Content::PhotoList"
-    });
+    });  
   },
 
   render : createProject,

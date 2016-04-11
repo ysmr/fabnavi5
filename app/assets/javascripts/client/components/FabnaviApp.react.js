@@ -1,8 +1,4 @@
 var React = require('react');
-var jade = require('react-jade');
-var Router = require('react-router');
-
-//他のreactファイル
 var Navigation = require('./Navigation.react');
 var SearchBar = require('./SearchBar.react');
 var ProjectList = require('./ProjectList.react');
@@ -16,8 +12,9 @@ var ProjectDetail = require('./ProjectDetail.react.js');
 var ProjectList = require('./ProjectList.react.js');
 var ProjectStore = require('../stores/ProjectStore');
 
+var jade = require('react-jade');
 
-//ract-router
+var Router = require('react-router'); 
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
@@ -26,9 +23,7 @@ var NotFoundRoute = Router.NotFoundRoute;
 var Redirect = Router.Redirect;
 
 var routes = (
- //フレーム
-  React.createElement(Route, {handler: Frame, path: "/"},
-    //以下は、メニューバーがついたページの描画
+  React.createElement(Route, {handler: Frame, path: "/"}, 
     React.createElement(Route, {handler: ProjectManager, name: "manager"},
       React.createElement(Route, {handler: ProjectList, name: "index"}),
       React.createElement(Route, {handler: CreateProject, name: "create"}),
@@ -37,14 +32,12 @@ var routes = (
       React.createElement(DefaultRoute,   { handler: ProjectList }),
       React.createElement(NotFoundRoute,  { handler: ProjectList })
     ),
-  　//以下は、プレイヤーのページの描画
     React.createElement(Route, {handler: Player, name: "player", path:"project/play/:projectId"}),
     React.createElement(Redirect, {from: "/", to:"/manager"}),
     React.createElement(NotFoundRoute, { handler: ProjectManager })
   )
 );
 
-//とりあえずよくわからないが、viewを一括でjadeの bodyにレンダリングしているっぽい
 global.onload = function ( ) {
   console.log("Fabnavi boot");
   ProjectStore.init();

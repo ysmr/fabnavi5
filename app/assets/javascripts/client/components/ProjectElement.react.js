@@ -1,4 +1,3 @@
-//こちらが、プロジェクトの部分かな
 var React = require('react');
 var jade = require('react-jade');
 var projectElement = jade.compileFile(__dirname + '/../templates/ProjectElement.jade');
@@ -16,12 +15,12 @@ var ProjectElement = React.createClass({
 
   getDefaultProps: function() {
      return {
-
+        
      };
    },
 
   getThumbnailSrc: function () {
-
+    
     var src = null;
 
     if( this.props.project.hasOwnProperty("figure") ){
@@ -32,7 +31,7 @@ var ProjectElement = React.createClass({
     }
 
     if ( src == null || src == "" ) {
-      src = "/images/kaffcop_icon/fab_samp.jpg";
+      src = "/images/noimage.gif";
     }
     return src;
   },
@@ -46,7 +45,7 @@ var ProjectElement = React.createClass({
     }
     */
     if( src == null ){
-      src = "/images/kaffcop_icon/user_icon.png";
+      src = "/images/user_icon.png";
     }
     return src;
   },
@@ -78,3 +77,4 @@ var ProjectElement = React.createClass({
 });
 
 module.exports = ProjectElement;
+

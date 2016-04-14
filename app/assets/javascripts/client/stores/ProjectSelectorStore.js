@@ -69,18 +69,35 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   up : function () {
    this.setSelectorByIndex( _selector.index - 4 );
+   this.scroll_up();
   },
 
   down : function () {
    this.setSelectorByIndex( _selector.index +4 );
+   this.scroll_down();
   },
 
   left : function () {
    this.setSelectorByIndex( _selector.index -1 );
+   if(_selector.index%3==0){
+     this.scroll_up();
+   }
   },
 
   right : function () {
    this.setSelectorByIndex( _selector.index +1 );
+   if(_selector.index%4==0){
+     this.scroll_down();
+   }
+  },
+
+  scroll_up : function () {
+    window.scrollBy(0,-380);
+  },
+
+  scroll_down : function (){
+    console.log("scroll_down");
+    window.scrollBy(0,380);
   },
 
   nextAction : function(){
@@ -127,9 +144,11 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
   switch( action.type ){
     case KeyActionTypes.SELECT_PROJECT_UP:
       ProjectSelectorStore.up();
+      //ProjectSelectorStore.scroll_up();
       break;
     case KeyActionTypes.SELECT_PROJECT_DOWN:
       ProjectSelectorStore.down();
+      //ProjectSelectorStore.scroll_down();
       break;
     case KeyActionTypes.SELECT_PROJECT_LEFT:
       ProjectSelectorStore.left();

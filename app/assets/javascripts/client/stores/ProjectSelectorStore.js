@@ -1,4 +1,5 @@
 //Menuのデータとかはここにあるっぽい location.hash
+var $ = require('jquery-sweet-scroll');
 var EventEmitter = require('events');
 var machina = require('machina');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
@@ -12,6 +13,7 @@ var ActionTypes = require('../constants/ActionTypes');
 var KeyActionTypes = require('../constants/KeyActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
+var ease_cout = 0;
 
 var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
@@ -79,7 +81,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   left : function () {
    this.setSelectorByIndex( _selector.index -1 );
-   if(_selector.index%3==0){
+   if((_selector.index+1)%4==0){
      this.scroll_up();
    }
   },
@@ -90,14 +92,32 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
      this.scroll_down();
    }
   },
-
+//when press key up button , scroll up 380 height
   scroll_up : function () {
-    window.scrollBy(0,-380);
+    var x =0;
+    var ani = setInterval(function(){
+      if(x>=30){
+        clearInterval(ani);
+      }
+      window.scrollBy(0,-x);
+      x= x +1;
+    },8);
+    //window.scrollBy(0,-380);
   },
-
+//when press key down button, scroll down 380 height
   scroll_down : function (){
-    console.log("scroll_down");
-    window.scrollBy(0,380);
+    var x =0;
+    var ani = setInterval(function(){
+      if(x>=30){
+        clearInterval(ani);
+      }
+      window.scrollBy(0,x);
+      x= x +1;
+    },8);
+  },
+//scroll animation
+  scroll_animation : function (){
+
   },
 
   nextAction : function(){

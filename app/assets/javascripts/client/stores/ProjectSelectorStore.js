@@ -96,24 +96,24 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
   scroll_up : function () {
     var x =0;
     var ani = setInterval(function(){
-      if(x>=30){
+      if(x>=28){
         clearInterval(ani);
       }
       window.scrollBy(0,-x);
       x= x +1;
-    },8);
+    },5);
     //window.scrollBy(0,-380);
   },
 //when press key down button, scroll down 380 height
   scroll_down : function (){
     var x =0;
     var ani = setInterval(function(){
-      if(x>=30){
+      if(x>=28){
         clearInterval(ani);
       }
       window.scrollBy(0,x);
       x= x +1;
-    },8);
+    },5);
   },
 //scroll animation
   scroll_animation : function (){

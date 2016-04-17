@@ -49,8 +49,8 @@ function watch(){
   function bundle(){
     return b.bundle()
     .on('error', function(e){
-      //gutil.log('Browserify Error',_.omit(e,"stream"));
-      gutil.log('Browserify Error',e);
+      gutil.log('Browserify Error',e.message);
+      gutil.log('Stack Trace:',e.stack);
 
       if(NOTIFICATION){ 
         try{

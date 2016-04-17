@@ -75,11 +75,18 @@ function watch(){
 
 function build(){
   var b = browserify(options);
-  return b.bundle()
+  b.bundle()
   .on('log', gutil.log)
-  .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+  .on('error',function(e){
+    gutil.log('Browserify Error',e.message);
+    gutil.log('Stack Trace:',e.stack);
+    setTimeout(function(){
+      process.exit(1);
+    },1000);
+  })
   .pipe(source("bundle.js"))
   .pipe(buffer())
   .pipe(gulp.dest(DIST_CLIENT));
+
 }
 

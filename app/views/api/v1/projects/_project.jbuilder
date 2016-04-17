@@ -16,3 +16,9 @@ end
 json.content do
   json.partial! 'v1/projects/content', content: project.content
 end
+
+json.sensor_infos do
+  json.array! project.sensor_infos do |si|
+    json.partial! 'v1/projects/sensor_info', sensor_info: si
+  end
+end

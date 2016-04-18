@@ -58,4 +58,7 @@ global.onload = function ( ) {
   if(WebAPIUtils.isSigningIn()){
     ServerActionCreator.signIn();
   }
+  // if(WebAPIUtils.isSigningOut()){
+  //   ServerActionCreator.signOut();
+  // }
 }

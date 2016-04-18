@@ -12,7 +12,13 @@
   "rules": {
     "keyword-spacing": [
       2,
-       {"before": false, "after": false, "overrides": {}}
+      {
+        "before": false, 
+        "after": false, 
+        "overrides": {
+          "else": {"after": true, "before": true},
+        }
+      }
     ],
     "comma-spacing": [
       2,
@@ -42,6 +48,10 @@
     "brace-style": 2,
     "no-regex-spaces": 2,
     "space-infix-ops": 2,
-    "space-unary-ops": 2
+    "space-unary-ops": 2,
+    "indent": [
+        2,
+        2
+    ]
   }
 }

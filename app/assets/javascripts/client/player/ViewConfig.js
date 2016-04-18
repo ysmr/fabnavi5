@@ -1,12 +1,11 @@
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 var ViewConfig = function(){
-  var
-    playModeConfig = {},
-    addModeConfig = {},
-    _conf = {},
-    isCropped = true,
-    isConfigChanged = false;
+  var playModeConfig = {},
+      addModeConfig = {},
+      _conf = {},
+      isCropped = true,
+      isConfigChanged = false;
 
   function init(){
     getLocalConfig();

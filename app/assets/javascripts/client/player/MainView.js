@@ -3,10 +3,9 @@ var ViewConfig = require('../player/ViewConfig');
 var CalibrateController = require('../player/CalibrateController');
 
 var MainView = function(){
-  var
-    cvs,
-    ctx,
-    currentImage = null;
+  var cvs,
+      ctx,
+      currentImage = null;
 
   function reset(){
     if(ctx != null)clear();

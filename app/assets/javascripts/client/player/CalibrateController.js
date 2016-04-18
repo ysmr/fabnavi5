@@ -2,23 +2,22 @@ var ViewConfig = require('../player/ViewConfig');
 var getCurrentImage = null;
 
 var CalibrateController = (function () {
-  var
-    x = 0,
-    y = 0,
-    w = 1000,
-    h = 1000,
-    cx = 0,
-    cy = 0,
-    lx,
-    ly,
-    drag = false,
-    zi = false,
-    zo = false,
-    as = 1,
-    cvs,
-    aspShift = false,
-    isInitalized = false,
-    _isCalibrateLocked = false;
+  var x = 0,
+      y = 0,
+      w = 1000,
+      h = 1000,
+      cx = 0,
+      cy = 0,
+      lx,
+      ly,
+      drag = false,
+      zi = false,
+      zo = false,
+      as = 1,
+      cvs,
+      aspShift = false,
+      isInitalized = false,
+      _isCalibrateLocked = false;
 
   function isCalibrationLocked(){
     return _isCalibrateLocked;

@@ -23,7 +23,7 @@ function loadHeader(){
   if( header == null || !DEVELOPMENT){
     return null;
   } else {
-    header = eval(header);
+    header = JSON.parse(header);
     _client = header.Client;
     _uid = header.Uid;
     _accessToken = header.AccessToken;
@@ -104,7 +104,7 @@ var WebAPIUtils = {
           content_attributes : {
             description : description,
            type : "Content::PhotoList"
-          } 
+          }
         }
       },
       headers : genHeader(),
@@ -160,11 +160,11 @@ var WebAPIUtils = {
 
       console.log(project.content);
       for(var i=0; i < project.content.length; i++){
-        if( project.content[i].figure.hasOwnProperty("_destroy") && 
+        if( project.content[i].figure.hasOwnProperty("_destroy") &&
             project.content[i].figure._destroy == true &&
             project.content[i].figure.figure_id != null ){
               console.log("Delete photo",project.content[i]);
-              if( !confirm("delete photo , index:  "+ i)) { 
+              if( !confirm("delete photo , index:  "+ i)) {
                 alert("Rollback");
                 project.content[i].figure._destroy = false;
                 return -1;
@@ -199,8 +199,8 @@ var WebAPIUtils = {
       },
       url : "/api/v1/projects/"+ project.id + ".json"
     });
-  },                            
-                             
+  },
+
   deleteProject : function( project ){
     console.log("deleteProject");
     $.ajax({
@@ -259,11 +259,11 @@ var WebAPIUtils = {
 
     var fd = new FormData();
     fd.append("attachment[file]",file, name);
-    
+
     $.ajax({
       dataType : "json",
       data : fd,
-      processData: false, 
+      processData: false,
       contentType: false,
       headers : genHeader(),
       type : "post",
@@ -281,16 +281,26 @@ var WebAPIUtils = {
       url : "/api/v1/attachments.json"
 
     });
-  }, 
+  },
+
+  isSigningIn : function(){
+    return !!loadHeader();
+  },
 
   signIn : function(){
-    WebAPIUtils.initPersona();
-    navigator.id.request();
+    window.location.href = "http://192.168.33.10:3000/auth/github?auth_origin_url=http://192.168.33.10:3000";
+  },
+  
+  signedIn : function(token,uid,client){
+    _accessToken = token;
+    _uid = uid;
+    _client = client;
+    setHeader();
   },
 
   signOut : function () {
-    WebAPIUtils.initPersona();
-    navigator.id.logout();
+    clearHeader();
+    window.location.reload();
   },
 
   initPersona : function () {
@@ -328,8 +338,8 @@ var WebAPIUtils = {
               }
           });
         }
-    });  
-  } 
+    });
+  }
 };
 
 

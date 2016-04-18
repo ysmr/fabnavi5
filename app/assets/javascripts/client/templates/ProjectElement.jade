@@ -10,6 +10,7 @@ div(
     img.user-icon(src=this.getUserIconSrc())
     .username
       = this.props.project.user.email.replace(/@.*$/,"")
+      // = this.props.project.user.email.replace(/[a-zA-Z0-9]*/,"")
     .date
       = this.props.isOpenMenu.toString()
   - if( this.props.isOpenMenu )

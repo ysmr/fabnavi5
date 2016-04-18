@@ -12,7 +12,7 @@ var ProjectDetail = require('./ProjectDetail.react.js');
 var ProjectList = require('./ProjectList.react.js');
 var ProjectStore = require('../stores/ProjectStore');
 var WebAPIUtils = require('../utils/WebAPIUtils');
-// var ServerActionCreator = require('../actions/ServerActionCreator');
+var ServerActionCreator = require('../actions/ServerActionCreator');
 
 var jade = require('react-jade');
 
@@ -58,7 +58,7 @@ global.onload = function ( ) {
   if(WebAPIUtils.isSigningIn()){
     ServerActionCreator.signIn();
   }
-  // if(WebAPIUtils.isSigningOut()){
-  //   ServerActionCreator.signOut();
-  // }
+  if(WebAPIUtils.SignOut()){
+    ServerActionCreator.signOut();
+  }
 }

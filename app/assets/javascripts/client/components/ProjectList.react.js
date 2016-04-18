@@ -1,3 +1,5 @@
+//プロジェクトたちをリストにしている所？
+//最初のページとも言える
 var React = require('react');
 var ProjectListStore = require('../stores/ProjectListStore');
 var ProjectSelectorStore = require('../stores/ProjectSelectorStore');
@@ -16,8 +18,8 @@ var ProjectList = React.createClass({
 
   getStateFromStores : function () {
     return {
-     projects : ProjectListStore.getProjectsAll(),
-     selected : ProjectSelectorStore.getSelector(),
+      projects : ProjectListStore.getProjectsAll(),
+      selected : ProjectSelectorStore.getSelector(),
     };
   },
 
@@ -31,12 +33,12 @@ var ProjectList = React.createClass({
 
   getDefaultProps: function() {
      return {
-        
+
      };
    },
 
-  render : projectList,  
-  
+  render : projectList,
+
   handleChange: function ( event ){
   },
 
@@ -56,7 +58,11 @@ var ProjectList = React.createClass({
   componentWillUpdate : function() {
   },
 
+
   componentDidUpdate : function() {
+  },
+
+  componentWillReceiveProps : function(){
   },
 
   componentWillUnmount : function() {

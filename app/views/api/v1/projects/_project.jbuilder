@@ -1,4 +1,4 @@
-json.extract! project, :id, :name, :description
+json.extract! project, :id, :name, :description, :updated_at, :created_at
 if project.figure
   json.figure do
     json.partial! 'v1/projects/figure', figure: project.figure

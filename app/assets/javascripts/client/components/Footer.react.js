@@ -1,6 +1,10 @@
 var React = require('react');
 var jade = require('react-jade');
 var footer = jade.compileFile(__dirname + '/../templates/Footer.jade');
+
+var Router = require('react-router');
+var Link = Router.Link;
+
 var Footer = React.createClass({
 
   propTypes : {
@@ -13,7 +17,7 @@ var Footer = React.createClass({
 
   getDefaultProps: function() {
      return {
-        
+       footerText : "fabnavi", 
      };
    },
 

@@ -44,7 +44,7 @@ var routes = (
   )
 );
 
-//とりあえずよくわからないが、viewを一括でjadeの bodyにレンダリングしているっぽい
+//ProjectStoreのinitと, 上で定義されたroutesを基に, Reactをdocument.body以下に展開する
 global.onload = function ( ) {
   console.log("Fabnavi boot");
   ProjectStore.init();

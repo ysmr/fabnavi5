@@ -62,8 +62,8 @@ var ProjectList = React.createClass({
   componentDidUpdate : function() {
   },
 
-   componentWillReceiveProps : function(){
-   },
+  componentWillReceiveProps : function(){
+  },
 
   componentWillUnmount : function() {
     ProjectListStore.removeChangeListener(this._onChange);

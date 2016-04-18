@@ -1,4 +1,5 @@
 //Menuのデータとかはここにあるっぽい location.hash
+var $ = require('jquery-sweet-scroll');
 var EventEmitter = require('events');
 var machina = require('machina');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
@@ -12,6 +13,7 @@ var ActionTypes = require('../constants/ActionTypes');
 var KeyActionTypes = require('../constants/KeyActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
+var ease_cout = 0;
 
 var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
@@ -69,18 +71,53 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   up : function () {
    this.setSelectorByIndex( _selector.index - 4 );
+   this.scroll_up();
   },
 
   down : function () {
    this.setSelectorByIndex( _selector.index +4 );
+   this.scroll_down();
   },
 
   left : function () {
    this.setSelectorByIndex( _selector.index -1 );
+   if((_selector.index+1)%4==0){
+     this.scroll_up();
+   }
   },
 
   right : function () {
    this.setSelectorByIndex( _selector.index +1 );
+   if(_selector.index%4==0){
+     this.scroll_down();
+   }
+  },
+//when press key up button , scroll up 380 height
+  scroll_up : function () {
+    var x =0;
+    var ani = setInterval(function(){
+      if(x>=28){
+        clearInterval(ani);
+      }
+      window.scrollBy(0,-x);
+      x= x +1;
+    },5);
+    //window.scrollBy(0,-380);
+  },
+//when press key down button, scroll down 380 height
+  scroll_down : function (){
+    var x =0;
+    var ani = setInterval(function(){
+      if(x>=28){
+        clearInterval(ani);
+      }
+      window.scrollBy(0,x);
+      x= x +1;
+    },5);
+  },
+//scroll animation
+  scroll_animation : function (){
+
   },
 
   nextAction : function(){
@@ -127,9 +164,11 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
   switch( action.type ){
     case KeyActionTypes.SELECT_PROJECT_UP:
       ProjectSelectorStore.up();
+      //ProjectSelectorStore.scroll_up();
       break;
     case KeyActionTypes.SELECT_PROJECT_DOWN:
       ProjectSelectorStore.down();
+      //ProjectSelectorStore.scroll_down();
       break;
     case KeyActionTypes.SELECT_PROJECT_LEFT:
       ProjectSelectorStore.left();

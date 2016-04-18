@@ -10,6 +10,27 @@
   },
   "parser": null,
   "rules": {
+    "keyword-spacing": [
+      2,
+       {"before": false, "after": false, "overrides": {}}
+    ],
+    "comma-spacing": [
+      2,
+      { "before": false, "after": true } 
+    ],
+    "no-irregular-whitespace": 2,
+    "block-spacing": [
+      2,
+      "always"
+    ],
+    "no-spaced-func": 2,
+    "array-bracket-spacing": [
+      2,
+      "never"
+    ],
+    "no-multi-spaces": 2,
+    "no-multiple-empty-lines": 2,
+    "no-trailing-spaces": 2,
     "accessor-pairs": [
       1,
       {
@@ -17,14 +38,10 @@
         "setWithoutGet": true
       }
     ],
-    "array-bracket-spacing": [
-      2,
-      "never"
-    ],
-    "block-spacing": [
-      2,
-      "always"
-    ],
-    "brace-style": 2
+    "no-mixed-spaces-and-tabs": 2,
+    "brace-style": 2,
+    "no-regex-spaces": 2,
+    "space-infix-ops": 2,
+    "space-unary-ops": 2
   }
 }

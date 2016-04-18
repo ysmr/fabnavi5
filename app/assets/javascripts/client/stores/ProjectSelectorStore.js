@@ -71,29 +71,29 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   up : function () {
    this.setSelectorByIndex( _selector.index - 4 );
-   this.scroll_up();
+   this.scrollUp();
   },
 
   down : function () {
    this.setSelectorByIndex( _selector.index +4 );
-   this.scroll_down();
+   this.scrollDown();
   },
 
   left : function () {
    this.setSelectorByIndex( _selector.index -1 );
    if((_selector.index+1)%4==0){
-     this.scroll_up();
+     this.scrollUp();
    }
   },
 
   right : function () {
    this.setSelectorByIndex( _selector.index +1 );
    if(_selector.index%4==0){
-     this.scroll_down();
+     this.scrollDown();
    }
   },
 //when press key up button , scroll up 380 height
-  scroll_up : function () {
+  scrollUp : function () {
     var x =0;
     var ani = setInterval(function(){
       if(x>=28){
@@ -105,7 +105,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     //window.scrollBy(0,-380);
   },
 //when press key down button, scroll down 380 height
-  scroll_down : function (){
+  scrollDown : function (){
     var x =0;
     var ani = setInterval(function(){
       if(x>=28){
@@ -114,10 +114,6 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
       window.scrollBy(0,x);
       x= x +1;
     },5);
-  },
-//scroll animation
-  scroll_animation : function (){
-
   },
 
   nextAction : function(){
@@ -164,11 +160,11 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
   switch( action.type ){
     case KeyActionTypes.SELECT_PROJECT_UP:
       ProjectSelectorStore.up();
-      //ProjectSelectorStore.scroll_up();
+      //ProjectSelectorStore.scrollUp();
       break;
     case KeyActionTypes.SELECT_PROJECT_DOWN:
       ProjectSelectorStore.down();
-      //ProjectSelectorStore.scroll_down();
+      //ProjectSelectorStore.scrollDown();
       break;
     case KeyActionTypes.SELECT_PROJECT_LEFT:
       ProjectSelectorStore.left();

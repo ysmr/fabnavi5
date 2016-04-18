@@ -1,3 +1,4 @@
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events');
 var EventTypes = require('../constants/EventTypes');
@@ -46,10 +47,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
      fig.figure.clientContent.dfdImage
        .then(ImageConverter.toBlob)
        .then(function(blob){
-         if( url.length > 1000 ){ 
+         if( url.length > 1000 ){
            url = url.slice(30,40) + ".jpg";
          }
-         
+
          var payload = {
            file : blob,
            name : url.replace(/\?.*/,"").replace(/^.*\//,""),
@@ -63,7 +64,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
  },
 
  pushUploadQueue : function( payload ){
-   _uploadQueue.push({name:payload.name, sym:payload.sym, status: payload.status}); 
+   _uploadQueue.push({name:payload.name, sym:payload.sym, status: payload.status});
    ProjectStore.emitChange();
  },
 
@@ -137,7 +138,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
  saveProject : function(){
    setTimeout(function(){
      ProjectActionCreator.updateProject({
-       project :  ProjectStore.getProject() 
+       project :  ProjectStore.getProject()
      });
    },0);
  },
@@ -185,7 +186,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
         if(_project.content[j].figure.figure_id == null &&  _project.content[j].figure.id == res.content[i].figure.id ){
           _project.content[j].figure.figure_id = res.content[i].figure.figure_id;
         }
-      }   
+      }
     }
     ProjectActionCreator.setThumbnailLast({ project:_project });
  },
@@ -283,7 +284,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     for(var i = 0; i < cts.length; i++){
        fig = cts[i];
        if( fig.figure.hasOwnProperty('sym') && fig.figure.sym == sym ) return fig;
-    } 
+    }
  },
 });
 
@@ -315,14 +316,14 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       CalibrateController.moveRegionCB(0,-STEP)();
       break;
 
-    case KeyActionTypes.PROJECT_SAVE: 
+    case KeyActionTypes.PROJECT_SAVE:
       setTimeout(function(){
         ProjectActionCreator.updateProject({
           project:ProjectStore.getProject()
         });
       },0);
       break;
-    case KeyActionTypes.TOGGLE_DELETE_FLAG : 
+    case KeyActionTypes.TOGGLE_DELETE_FLAG :
       ProjectStore.toggleDestroy();
       break;
     case KeyActionTypes.PROJECT_SHOOT:
@@ -339,15 +340,15 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       location.hash = "#/manager";
       break
 
-    case ActionTypes.PROJECT_RECEIVE: 
+    case ActionTypes.PROJECT_RECEIVE:
       ProjectStore.setProject( action.project );
       break;
     case ActionTypes.UPDATE_CANVAS :
       ProjectStore.emitUpdateCanvas();
       break;
 
-    case ActionTypes.PROJECT_CREATE_SUCCESS: 
-    case ActionTypes.PROJECT_PLAY: 
+    case ActionTypes.PROJECT_CREATE_SUCCESS:
+    case ActionTypes.PROJECT_PLAY:
       location.hash = "#/project/play/" + action.id;
       ProjectStore.init();
       break;
@@ -363,7 +364,7 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
     case ActionTypes.UPLOAD_ATTACHMENT_FAILED:
       ProjectStore.uploadFailed( action.result.sym );
       break;
-    default : 
+    default :
       break;
   };
 

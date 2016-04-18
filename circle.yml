@@ -4,6 +4,10 @@ machine:
   ruby:
     version: 2.2.3
 
+dependencies:
+  post:
+    - npm run build 
+
 deployment:
   production:
     branch: release

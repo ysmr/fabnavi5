@@ -14,13 +14,13 @@ var SearchBar = React.createClass({
 
   getDefaultProps: function() {
      return {
-        
+
      };
    },
 
   render : searchBar,
   handleChange: function ( event ){
-    NavigationViewActionCreator.search( event.target.value );
+    NavigationViewActionCreator.search( "",event.target.value );
   },
 
   onclick : function() {

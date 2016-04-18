@@ -23,7 +23,7 @@ function setLocalData(key,jsonData) {
     var res = getLocalData(key);
     if(res && res.hasOwnProperty("play"))data["play"] = res.play;
   }
-  var d = data.toSource();
+  var d = JSON.stringify(data);
   localStorage.setItem(key,d);
 }
 

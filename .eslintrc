@@ -17,7 +17,7 @@
         "after": false, 
         "overrides": {
           "else": {"after": true, "before": true},
-          "return": {"after": true, "before": false},
+          "return": {"after": true, "before": true},
           "catch": {"after": false, "before": true},
         }
       }

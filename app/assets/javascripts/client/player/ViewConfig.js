@@ -15,11 +15,11 @@ var ViewConfig = function(){
     var data = {};
     if(!isCropped){
       data["play"] = jsonData;
-      var res = getLocalData(key);
+      let res = getLocalData(key);
       if(res && res.hasOwnProperty("add"))data["add"] = res.add;
     } else {
       data["add"] = jsonData;
-      var res = getLocalData(key);
+      let res = getLocalData(key);
       if(res && res.hasOwnProperty("play"))data["play"] = res.play;
     }
     var d = JSON.stringify(data);

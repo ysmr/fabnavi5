@@ -131,8 +131,6 @@ var WebAPIUtils = {
     if(project.content.length == 0) return;
     var fd = new FormData();
     fd.append("project[name]", project.name);
-    //
-    fd.append("project[date]",project.date);
     fd.append("project[figure_id]", project.content[project.content.length - 1].figure.figure_id);
     $.ajax({
       dataType : "json",

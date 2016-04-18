@@ -17,7 +17,7 @@ var Footer = React.createClass({
 
   getDefaultProps: function() {
      return {
-       footerr : "fabnavi",
+       footerText : "fabnavi", 
 
      };
    },

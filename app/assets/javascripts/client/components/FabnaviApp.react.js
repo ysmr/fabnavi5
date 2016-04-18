@@ -44,7 +44,7 @@ var routes = (
   )
 );
 
-//とりあえずよくわからないが、viewを一括でjadeの bodyにレンダリングしているっぽい
+//ProjectStoreのinitと上で用意れた, ページのroutingをつくってる
 global.onload = function ( ) {
   console.log("Fabnavi boot");
   ProjectStore.init();

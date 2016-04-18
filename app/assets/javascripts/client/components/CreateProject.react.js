@@ -13,7 +13,6 @@ var createProject = jade.compileFile(__dirname + '/../templates/CreateProject.ja
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 var State = require('../utils/FabnaviStateMachine');
 
-var date_obj = new Date();
 var CreateProject = React.createClass({
 
 

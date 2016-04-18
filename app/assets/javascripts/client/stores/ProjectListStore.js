@@ -1,9 +1,8 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events');
 var _projects = [];
-var init_projects = [];
-var search_projects = [];
-var empty_projects = [];
+var initProjects = [];
+var searchProjects = [];
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
@@ -24,8 +23,8 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   initProjects : function(projects){
-    init_projects = projects;
-    console.log("init : " +init_projects.length);
+    initProjects = projects;
+    console.log("init : " +initProjects.length);
   },
 
   setProjects : function( projects ){
@@ -44,15 +43,15 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   searchProject : function( search_text ){
-    search_projects = [];
+    searchProjects = [];
     var re = new RegExp(search_text,'i');
     if(search_text === ""){
-      _project = init_projects;
+      _project = initProjects;
     }else{
-      for(var i = 0; i < init_projects.length; i++){
-        if(re.test(init_projects[i].name) ==true){
-          search_projects.push(init_projects[i]);
-          _project = search_projects;
+      for(var i = 0; i < initProjects.length; i++){
+        if(re.test(initProjects[i].name) ==true){
+          searchProjects.push(initProjects[i]);
+          _project = searchProjects;
         }
       }
     }
@@ -80,7 +79,8 @@ ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
    case ActionTypes.PROJECT_SEARCH:
       ProjectListStore.searchProject(action.text);
-    default :
+      break;
+   default :
       break;
   };
 

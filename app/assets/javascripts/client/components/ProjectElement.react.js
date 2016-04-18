@@ -15,10 +15,9 @@ var ProjectElement = React.createClass({
   },
 
   getDefaultProps: function() {
-     return {
-
-     };
-   },
+    return {
+    };
+  },
 
   getThumbnailSrc: function () {
 
@@ -31,7 +30,7 @@ var ProjectElement = React.createClass({
       }
     }
 
-    if ( src == null || src == "" ) {
+    if( src == null || src == "" ) {
       src = "/images/kaffcop_icon/fab_samp.jpg";
     }
     return src;

@@ -6,7 +6,7 @@ var MainView = require('../player/MainView');
 var ViewConfig = require('../player/ViewConfig');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
-var Router = require('react-router'); 
+var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
@@ -28,7 +28,7 @@ var Player = React.createClass({
   render:  player,
 
   contextTypes: {
-      router: React.PropTypes.func
+    router: React.PropTypes.func
   },
 
   reset : function(){
@@ -42,22 +42,22 @@ var Player = React.createClass({
   },
 
   getStateFromStores : function getStateFromStores() {
-   var project = ProjectStore.getProject();
-   if(  project == null || this.context.router.getCurrentParams().projectId != project.id ){
-    return {
-     project : null,
-     page : 0,
-     uploadQueue : [],
-     shooting : false,
-    };
-   }
+    var project = ProjectStore.getProject();
+    if( project == null || this.context.router.getCurrentParams().projectId != project.id ){
+      return {
+        project : null,
+        page : 0,
+        uploadQueue : [],
+        shooting : false,
+      };
+    }
 
-   return {
-    project : project,
-    page : ProjectStore.getCurrentPage(),
-    uploadQueue : ProjectStore.getUploadQueue(),
-    shooting : ProjectStore.isShooting(),
-   };
+    return {
+      project : project,
+      page : ProjectStore.getCurrentPage(),
+      uploadQueue : ProjectStore.getUploadQueue(),
+      shooting : ProjectStore.isShooting(),
+    };
   },
 
   _onChange : function () {
@@ -77,12 +77,12 @@ var Player = React.createClass({
   },
 
   getDefaultProps: function() {
-     return {
-     };
-   },
+    return {
+    };
+  },
 
   handleSubmit : function( event ){
-    if( _current_file == null ) return ;
+    if( _current_file == null )return ;
     WebAPIUtils.uploadFile( _current_file );
   },
 
@@ -92,66 +92,67 @@ var Player = React.createClass({
 
   updateCanvas : function(){
 
-   if(this.state.project == null){
-    return 0;
-   }
+    if(this.state.project == null){
+      return 0;
+    }
 
-   if( this.state.project.content.length == 0){
-    return 0;
-   }
-   _currentState = State.compositeState();
-   if( _currentState != _lastState ){
-    MainView.clear();
-   }
-   _lastState = _currentState;
+    if( this.state.project.content.length == 0){
+      return 0;
+    }
+    _currentState = State.compositeState();
+    if( _currentState != _lastState ){
+      MainView.clear();
+    }
+    _lastState = _currentState;
 
-   if( _last_page == this.state.page && _currentImage != null ){
-    MainView.draw(_currentImage);
+    if( _last_page == this.state.page && _currentImage != null ){
+      MainView.draw(_currentImage);
+      if( _currentState.contains("calibrate") ){
+        MainView.showCalibrateLine();
+      }
+      return 0;
+    }
+
+    var fig = this.state.project.content[this.state.page].figure;
+    _last_page = this.state.page;
+    if(fig.hasOwnProperty("clientContent") && fig.clientContent.hasOwnProperty("dfdImage")){
+      fig.clientContent.dfdImage.then(function(img){
+        ViewConfig.setCropped(true);
+        MainView.clear();
+        MainView.draw(img);
+        _currentImage = img;
+      });
+    } else {
+      var img = new Image();
+      ViewConfig.setCropped(false);
+      MainView.clear();
+      MainView.showWaitMessage();
+      img.src = fig.file.file.url;
+      img.onload = function(aImg){
+        MainView.clear();
+        MainView.draw(img);
+        _currentImage = img;
+        if( _currentState.contains("calibrate") ){
+          MainView.showCalibrateLine();
+        }
+      }
+      img.onerror = function(err){
+        console.log("Image load error : ", err, img);
+        throw new Error(err);
+      }
+    }
     if( _currentState.contains("calibrate") ){
-     MainView.showCalibrateLine();
-    }
-    return 0;
-   } 
-   var fig = this.state.project.content[this.state.page].figure;
-   _last_page = this.state.page;
-   if(fig.hasOwnProperty("clientContent") && fig.clientContent.hasOwnProperty("dfdImage")){
-    fig.clientContent.dfdImage.then(function(img){
-     ViewConfig.setCropped(true);
-     MainView.clear();
-     MainView.draw(img);
-     _currentImage = img;
-    }); 
-   } else {
-    var img = new Image();
-    ViewConfig.setCropped(false);
-    MainView.clear();
-    MainView.showWaitMessage();
-    img.src = fig.file.file.url;
-    img.onload = function(aImg){
-     MainView.clear();
-     MainView.draw(img);
-     _currentImage = img;
-     if( _currentState.contains("calibrate") ){
       MainView.showCalibrateLine();
-     }
     }
-    img.onerror = function(err){
-     console.log("Image load error : ", err, img);
-     throw new Error(err);
-    }
-   }
-   if( _currentState.contains("calibrate") ){
-    MainView.showCalibrateLine();
-   }
   },
 
   clearCanvas : function( ){
     MainView.clear();
   },
-  
+
   componentWillMount : function() {
     ProjectActionCreator.getProject({ id:this.context.router.getCurrentParams().projectId });
-    },
+  },
 
   componentDidMount : function () {
     MainView.init( React.findDOMNode(this.refs.mainCanvas));
@@ -168,7 +169,7 @@ var Player = React.createClass({
   },
 
   componentDidUpdate : function() {
-   this.updateCanvas();
+    this.updateCanvas();
   },
 
   componentWillUnmount : function() {

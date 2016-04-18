@@ -11,15 +11,15 @@ var Footer = React.createClass({
   },
 
   getInitialState: function() {
-     return {
-     };
+    return {
+    };
   },
 
   getDefaultProps: function() {
-     return {
-       footerText : "fabnavi", 
-     };
-   },
+    return {
+      footerText : "fabnavi",
+    };
+  },
 
   render : footer,
 

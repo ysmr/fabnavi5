@@ -6,10 +6,10 @@ var ActionTypes = require('../constants/ActionTypes');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var WebAPIUtils = require('../utils/WebAPIUtils');
 
-var ProjectActionCreator = {　
+var ProjectActionCreator = {
 
   getAllProjects : function( ){
-    AppDispatcher.dispatch ({
+    AppDispatcher.dispatch({
       type : ActionTypes.PROJECTS_FETCH,
     });
     WebAPIUtils.getAllProjects();

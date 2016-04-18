@@ -1,5 +1,4 @@
 //Menuのデータとかはここにあるっぽい location.hash
-var $ = require('jquery-sweet-scroll');
 var EventEmitter = require('events');
 var machina = require('machina');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
@@ -13,7 +12,6 @@ var ActionTypes = require('../constants/ActionTypes');
 var KeyActionTypes = require('../constants/KeyActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
-var ease_cout = 0;
 
 var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
@@ -160,11 +158,9 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
   switch( action.type ){
     case KeyActionTypes.SELECT_PROJECT_UP:
       ProjectSelectorStore.up();
-      //ProjectSelectorStore.scrollUp();
       break;
     case KeyActionTypes.SELECT_PROJECT_DOWN:
       ProjectSelectorStore.down();
-      //ProjectSelectorStore.scrollDown();
       break;
     case KeyActionTypes.SELECT_PROJECT_LEFT:
       ProjectSelectorStore.left();

@@ -18,7 +18,6 @@ var Footer = React.createClass({
   getDefaultProps: function() {
      return {
        footerText : "fabnavi", 
-
      };
    },
 

@@ -50,8 +50,13 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
     }else{
       for(var i = 0; i < initProjects.length; i++){
         if(re.test(initProjects[i].name) ==true){
+<<<<<<< HEAD
           searchProjects.push(initProjects[i]);
           _project = searchProjects;
+=======
+          search_projects.push(initProjects[i]);
+          _project = search_projects;
+>>>>>>> kaffcop-fix-projects-search
         }
       }
     }
@@ -80,7 +85,11 @@ ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
    case ActionTypes.PROJECT_SEARCH:
       ProjectListStore.searchProject(action.text);
       break;
+<<<<<<< HEAD
    default :
+=======
+    default :
+>>>>>>> kaffcop-fix-projects-search
       break;
   };
 

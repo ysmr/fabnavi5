@@ -1,8 +1,8 @@
 var STUB = false;
 var Camera = function() {
-  var
-    connected = false,
-    heartbeat = null;
+
+  var connected = false,
+      heartbeat = null;
 
   function init () {
     if(document.sonycameracontroller == undefined){

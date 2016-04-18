@@ -22,19 +22,18 @@ var ImageConverter = function(){
   }
 
   function projectImgToCanvas(img, cvs, conf){
-    var
-      ctx = cvs.getContext('2d'),
+    var ctx = cvs.getContext('2d'),
         /* set cropping area on image  */
-      sx = Number(conf.x) || 0,
-      sy = Number(conf.y) || 0,
-      sw = Number(conf.w) || img.width,
-      sh = Number(conf.h) || img.height,
+        sx = Number(conf.x) || 0,
+        sy = Number(conf.y) || 0,
+        sw = Number(conf.w) || img.width,
+        sh = Number(conf.h) || img.height,
 
-      /* set project area */
-      dx = 0,
-      dy = 0,
-      dw = cvs.width,
-      dh = cvs.height;
+        /* set project area */
+        dx = 0,
+        dy = 0,
+        dw = cvs.width,
+        dh = cvs.height;
 
     ctx.fillStyle = "black";
 

@@ -82,7 +82,7 @@ var Player = React.createClass({
   },
 
   handleSubmit : function( event ){
-    if( _current_file == null )return ;
+    if( _current_file == null ) return ;
     WebAPIUtils.uploadFile( _current_file );
   },
 

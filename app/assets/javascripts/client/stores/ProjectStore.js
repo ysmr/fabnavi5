@@ -281,7 +281,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     var fig = null;
     for(var i = 0; i < cts.length; i++){
       fig = cts[i];
-      if( fig.figure.hasOwnProperty('sym') && fig.figure.sym == sym )return fig;
+      if( fig.figure.hasOwnProperty('sym') && fig.figure.sym == sym ) return fig;
     }
   },
 });

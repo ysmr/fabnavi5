@@ -7,9 +7,9 @@ var FSM = require('../utils/FabnaviStateMachine');
 module.exports = KeyActionCreator = {
   handleKeyDown : function ( event ) {
     //if input element changed, 'handleKeyDown' does't handle keyEvent
-    if( event.target.nodeName == "INPUT" || event.target.nodeName == "TEXTAREA")return ;
+    if( event.target.nodeName == "INPUT" || event.target.nodeName == "TEXTAREA") return ;
     //if metakey pressed, Fabnavi won't handle this keyEvent
-    if(event.metaKey)return 0;
+    if(event.metaKey) return 0;
     event.preventDefault();
     event.stopped = true;
 

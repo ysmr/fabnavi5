@@ -79,38 +79,38 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   left : function () {
    this.setSelectorByIndex( _selector.index -1 );
-   if((_selector.index+1)%4==0){
+   if((_selector.index + 1) % 4 == 0){
      this.scrollUp();
    }
   },
 
   right : function () {
    this.setSelectorByIndex( _selector.index +1 );
-   if(_selector.index%4==0){
+   if(_selector.index % 4 == 0){
      this.scrollDown();
    }
   },
 //when press key up button , scroll up 380 height
   scrollUp : function () {
-    var x =0;
-    var ani = setInterval(function(){
-      if(x>=28){
+    var x = 0;
+    var animationTimer = setInterval(function(){
+      if(x >= 28){
         clearInterval(ani);
       }
       window.scrollBy(0,-x);
-      x= x +1;
+      x = x + 1 ;
     },5);
     //window.scrollBy(0,-380);
   },
 //when press key down button, scroll down 380 height
   scrollDown : function (){
-    var x =0;
+    var x = 0;
     var ani = setInterval(function(){
-      if(x>=28){
+      if(x >= 28){
         clearInterval(ani);
       }
       window.scrollBy(0,x);
-      x= x +1;
+      x = x + 1 ;
     },5);
   },
 

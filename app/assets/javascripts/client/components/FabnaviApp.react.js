@@ -34,10 +34,10 @@ var routes = (
       React.createElement(Route, {handler: CreateProject, name: "create"}),
       React.createElement(Route, {handler: EditProject, name: "edit", path: "edit/:projectId"}),
       React.createElement(Route, {handler: ProjectDetail, name: "project", path:"project/:projectId"}),
-      React.createElement(DefaultRoute,   { handler: ProjectList }),
-      React.createElement(NotFoundRoute,  { handler: ProjectList })
+      React.createElement(DefaultRoute, { handler: ProjectList }),
+      React.createElement(NotFoundRoute, { handler: ProjectList })
     ),
-  　//以下は、プレイヤーのページの描画
+    //以下は、プレイヤーのページの描画
     React.createElement(Route, {handler: Player, name: "player", path:"project/play/:projectId"}),
     React.createElement(Redirect, {from: "/", to:"/manager"}),
     React.createElement(NotFoundRoute, { handler: ProjectManager })

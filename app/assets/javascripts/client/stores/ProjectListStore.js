@@ -24,7 +24,7 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
 
   initProjects : function(projects){
     initProjects = projects;
-    console.log("init : " +initProjects.length);
+    console.log("init : " + initProjects.length);
   },
 
   setProjects : function( projects ){
@@ -35,21 +35,21 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
   removeProject : function( project ) {
     for( var i = 0; i < _projects.length; i++ ){
       if( _projects[i].id == project.id ){
-        _projects.splice(i,1);
+        _projects.splice(i, 1);
         this.emitChange();
-        return;
+        return ;
       }
     }
   },
 
   searchProject : function( search_text ){
     searchProjects = [];
-    var re = new RegExp(search_text,'i');
+    var re = new RegExp(search_text, 'i');
     if(search_text === ""){
       _project = initProjects;
-    }else{
+    } else {
       for(var i = 0; i < initProjects.length; i++){
-        if(re.test(initProjects[i].name) ==true){
+        if(re.test(initProjects[i].name) == true){
           searchProjects.push(initProjects[i]);
           _project = searchProjects;
         }
@@ -70,17 +70,17 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
 
 ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
   switch(action.type){
-   case ActionTypes.PROJECTS_RECEIVE:　
+    case ActionTypes.PROJECTS_RECEIVE:
       ProjectListStore.setProjects(action.projects);
       ProjectListStore.initProjects(action.projects);
       break;
-   case ActionTypes.PROJECT_DELETE_SUCCESS:
+    case ActionTypes.PROJECT_DELETE_SUCCESS:
       ProjectListStore.removeProject(action.project);
       break;
-   case ActionTypes.PROJECT_SEARCH:
+    case ActionTypes.PROJECT_SEARCH:
       ProjectListStore.searchProject(action.text);
       break;
-   default :
+    default :
       break;
   };
 

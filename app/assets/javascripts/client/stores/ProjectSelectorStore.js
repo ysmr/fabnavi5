@@ -4,8 +4,7 @@ var machina = require('machina');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var ProjectListStore = require('../stores/ProjectListStore');
 
-
-var _selector  = {
+var _selector = {
 };
 var EventTypes = require('../constants/EventTypes');
 var ActionTypes = require('../constants/ActionTypes');
@@ -25,14 +24,14 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   setSelectorByIndex : function setSelectorByIndex( index ){
-   //validates selector
-   var projects = ProjectListStore.getProjectsAll();
-   if( index >= projects.length ) {
-    index = projects.length -1;
-   } else if( index < 0 ) {
-    index = 0;
-   };
-   ProjectSelectorStore.setSelectorIndex( index );
+    //validates selector
+    var projects = ProjectListStore.getProjectsAll();
+    if( index >= projects.length ) {
+      index = projects.length - 1;
+    } else if( index < 0 ) {
+      index = 0;
+    };
+    ProjectSelectorStore.setSelectorIndex( index );
   },
 
   explode : function(){
@@ -42,18 +41,18 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     switch(_selector.menuIndex){
       case 0:
         setTimeout(function(){
-       ProjectActionCreator.playProject( project );
-        },0);
-       _selector.openMenu = false;
-       _selector.menuIndex = 0;
-       break;
+          ProjectActionCreator.playProject( project );
+        }, 0);
+        _selector.openMenu = false;
+        _selector.menuIndex = 0;
+        break;
       case 4:
         setTimeout(function(){
-       ProjectActionCreator.deleteProject( project );
-        },0);
-       _selector.openMenu = false;
-       _selector.menuIndex = 0;
-       break;
+          ProjectActionCreator.deleteProject( project );
+        }, 0);
+        _selector.openMenu = false;
+        _selector.menuIndex = 0;
+        break;
     };
   },
   open : function () {
@@ -68,19 +67,19 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   up : function () {
-   this.setSelectorByIndex( _selector.index - 4 );
+    this.setSelectorByIndex( _selector.index - 4 );
   },
 
   down : function () {
-   this.setSelectorByIndex( _selector.index +4 );
+    this.setSelectorByIndex( _selector.index + 4 );
   },
 
   left : function () {
-   this.setSelectorByIndex( _selector.index -1 );
+    this.setSelectorByIndex( _selector.index - 1 );
   },
 
   right : function () {
-   this.setSelectorByIndex( _selector.index +1 );
+    this.setSelectorByIndex( _selector.index + 1);
   },
 
   nextAction : function(){
@@ -99,10 +98,10 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
-  setSelectorIndex : function ( index  ){
+  setSelectorIndex : function( index ){
     _selector.index = index;
-    _selector.col   = index % 4;
-    _selector.row   = Math.floor(index / 4);
+    _selector.col = index % 4;
+    _selector.row = Math.floor(index / 4);
     this.emitChange();
   },
 

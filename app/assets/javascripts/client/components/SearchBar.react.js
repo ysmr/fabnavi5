@@ -8,19 +8,19 @@ var SearchBar = React.createClass({
   },
 
   getInitialState: function() {
-     return {
-     };
+    return {
+    };
   },
 
   getDefaultProps: function() {
-     return {
+    return {
 
-     };
-   },
+    };
+  },
 
   render : searchBar,
   handleChange: function ( event ){
-    NavigationViewActionCreator.search( "",event.target.value );
+    NavigationViewActionCreator.search( "", event.target.value );
   },
 
   onclick : function() {

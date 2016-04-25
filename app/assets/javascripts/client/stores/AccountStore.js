@@ -9,7 +9,7 @@ var WebAPIUtils = require('../utils/WebAPIUtils');
 var AccountStore = Object.assign({}, EventEmitter.prototype, {
   init : function () {
     _accountInfo.email = (window.hasOwnProperty('CURRENT_USER') && window.CURRENT_USER) || "";
-  }, 
+  },
 
   emitChange : function(){
     this.emit(EventTypes.ACCOUNT_CHANGE);
@@ -25,8 +25,8 @@ var AccountStore = Object.assign({}, EventEmitter.prototype, {
 
   getUserEmail : function () {
     return _accountInfo.email
-  },  
-  
+  },
+
   isSigningIn : function () {
     return _accountInfo.email != "";
   },
@@ -46,32 +46,31 @@ var AccountStore = Object.assign({}, EventEmitter.prototype, {
 });
 
 AccountStore.dispatchToken = AppDispatcher.register(function( action ){
-    switch( action.type ){
+  switch( action.type ){
+    case ActionTypes.SIGN_IN :
+      WebAPIUtils.signIn();
+      break;
 
-      case ActionTypes.SIGN_IN : 
-        WebAPIUtils.signIn();         
-        break; 
+    case ActionTypes.SIGN_IN_SUCCESS :
+      AccountStore.setEmail(action.email);
+      AccountStore.emitChange();
+      break;
 
-      case ActionTypes.SIGN_IN_SUCCESS : 
-        AccountStore.setEmail(action.email);
-        AccountStore.emitChange();
-        break; 
+    case ActionTypes.SIGN_OUT_SUCCESS :
+      AccountStore.clearEmail();
+      AccountStore.emitChange();
+      break;
 
-      case ActionTypes.SIGN_OUT_SUCCESS : 
-        AccountStore.clearEmail();
-        AccountStore.emitChange();
-        break; 
+    case ActionTypes.SIGN_OUT :
+      WebAPIUtils.signOut();
+      break;
 
-      case ActionTypes.SIGN_OUT :
-        WebAPIUtils.signOut();
-        break;
+    case ActionTypes.CONFIG :
+      break;
 
-      case ActionTypes.CONFIG :
-        break;
-
-      default :
-        break;
-    };
+    default :
+      break;
+  };
 
 });
 

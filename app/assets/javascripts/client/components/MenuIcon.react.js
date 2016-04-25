@@ -8,11 +8,9 @@ var Router = require('react-router');
 var Link = Router.Link;
 var Route = Router.Route;
 
-
-
 var menuIcon = jade.compileFile(__dirname + '/../templates/MenuIcon.jade');
 
-var MenuIcon  =  React.createClass({
+var MenuIcon = React.createClass({
 //Navigation.jadeにあるactとsrc
   propTypes : {
     act   : React.PropTypes.string.isRequired,
@@ -20,15 +18,14 @@ var MenuIcon  =  React.createClass({
   },
 
   getInitialState: function() {
-     return {
-     };
+    return {
+    };
   },
 
   getDefaultProps: function() {
-     return {
-
-     };
-   },
+    return {
+    };
+  },
 
   render : menuIcon,
 

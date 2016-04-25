@@ -24,7 +24,7 @@ function loadHeader(){
     return null;
   }
 
-  header = JSON.stringify(header);
+  header = JSON.parse(header);
   _client = header.Client;
   _uid = header.Uid;
   _accessToken = header.AccessToken;
@@ -51,6 +51,7 @@ var WebAPIUtils = {
 
   getProject : function( id ){
     console.log("getProject : ", id);
+
     $.ajax({
       dataType : "json",
       type : "GET",

@@ -9,7 +9,7 @@ var ImageConverter = require('../player/ImageConverter');
 var CalibrateController = require('../player/CalibrateController');
 
 var _project = null;
-var _current_page = 0;
+var _currentPage = 0;
 var _uploadQueue = [
 ];
 var _shooting = false;
@@ -24,9 +24,9 @@ function getStep( ){
 }
 
 var ProjectStore = Object.assign({}, EventEmitter.prototype, {
-  init : function () {
+  init : function(){
     _project = null;
-    _current_page = 0;
+    _currentPage = 0;
     _uploadQueue = [];
     _shooting = false;
     Camera.init();
@@ -47,12 +47,12 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
         .then(ImageConverter.toBlob)
         .then(function(blob){
           if( url.length > 1000 ){
-            url = url.slice(30, 40) + ".jpg";
+            let _url = url.slice(30, 40) + ".jpg";
           }
 
           var payload = {
             file : blob,
-            name : url.replace(/\?.*/, "").replace(/^.*\//, ""),
+            name : _url.replace(/\?.*/, "").replace(/^.*\//, ""),
             sym : fig.figure.sym,
           };
           ProjectActionCreator.uploadAttachment(payload);
@@ -63,7 +63,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   pushUploadQueue : function( payload ){
-    _uploadQueue.push({name:payload.name, sym:payload.sym, status: payload.status});
+    _uploadQueue.push({ name:payload.name, sym:payload.sym, status: payload.status });
     ProjectStore.emitChange();
   },
 
@@ -86,29 +86,30 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   next : function(){
-    ProjectStore.setPage(_current_page + 1);
+    ProjectStore.setPage(_currentPage + 1);
   },
 
   prev : function(){
-    ProjectStore.setPage(_current_page - 1);
+    ProjectStore.setPage(_currentPage - 1);
   },
 
-  setPage : function( page ){
-    if( !_project.hasOwnProperty("content") ) {
-      return ;
+  setPage : function(page){
+    var _page = page;
+    if( !_project.hasOwnProperty("content") ){
+      return;
     }
-    if( page >= _project.content.length ) {
-      page = _project.content.length - 1;
-    }
-
-    if( page < 0 ) {
-      page = 0;
+    if( page >= _project.content.length ){
+      _page = _project.content.length - 1;
     }
 
-    _current_page = page;
-    console.log("page : ", page);
-    if(_project.content[page].figure.hasOwnProperty("_destroy") &&
-      _project.content[page].figure._destroy){
+    if( _page < 0 ){
+      _page = 0;
+    }
+
+    _current_page = _page;
+    console.log("_page : ", _page);
+    if(_project.content[_page].figure.hasOwnProperty("_destroy") &&
+      _project.content[_page].figure._destroy){
       console.log("******DELETE FLAG*********");
     }
     ProjectStore.emitChange();
@@ -142,10 +143,10 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   toggleDestroy : function(){
-    if( _project.content[_current_page].figure.hasOwnProperty("_destroy") ){
-      _project.content[_current_page].figure._destroy = !_project.content[_current_page].figure._destroy;
+    if( _project.content[_currentPage].figure.hasOwnProperty("_destroy") ){
+      _project.content[_currentPage].figure._destroy = !_project.content[_currentPage].figure._destroy;
     } else {
-      _project.content[_current_page].figure["_destroy"] = true;
+      _project.content[_currentPage].figure["_destroy"] = true;
     }
     this.emitChange();
   },
@@ -194,7 +195,7 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     if( url ){
       src = url;
       fig.figure.file.file.url = url;
-    } else if( fig.figure.file.file.url ) {
+    } else if( fig.figure.file.file.url ){
       src = fig.figure.file.file.url;
     } else {
       throw new Error("Figure url is not set");
@@ -236,12 +237,12 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.emit(EventTypes.CLEAR_CANVAS_REQUEST);
   },
 
-  getProject : function( ){
+  getProject : function(){
     return _project;
   },
 
   getCurrentPage: function(){
-    return _current_page;
+    return _currentPage;
   },
 
   getUploadQueue : function(){
@@ -252,27 +253,27 @@ var ProjectStore = Object.assign({}, EventEmitter.prototype, {
     return _shooting;
   },
 
-  addChangeListener: function(callback) {
+  addChangeListener: function(callback){
     this.on(EventTypes.PROJECT_CHANGE, callback);
   },
 
-  addCanvasRequestListener: function(callback) {
+  addCanvasRequestListener: function(callback){
     this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
   },
 
-  addCanvasClearListener: function(callback) {
+  addCanvasClearListener: function(callback){
     this.addListener(EventTypes.CLEAR_CANVAS_REQUEST, callback);
   },
 
-  removeCanvasRequestListener: function(callback) {
+  removeCanvasRequestListener: function(callback){
     this.on(EventTypes.UPDATE_CANVAS_REQUEST, callback);
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener: function(callback){
     this.removeListener(EventTypes.PROJECT_CHANGE, callback);
   },
 
-  removeCanvasClearListener: function(callback) {
+  removeCanvasClearListener: function(callback){
     this.removeListener(EventTypes.CLEAR_CANVAS_REQUEST, callback);
   },
 

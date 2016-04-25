@@ -25,13 +25,14 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   setSelectorByIndex : function setSelectorByIndex(index){
     //validates selector
+    let _index = index;
     var projects = ProjectListStore.getProjectsAll();
     if( index >= projects.length ){
-      index = projects.length - 1;
+      _index = projects.length - 1;
     } else if( index < 0 ){
-      index = 0;
+      _index = 0;
     };
-    ProjectSelectorStore.setSelectorIndex( index );
+    ProjectSelectorStore.setSelectorIndex(_index);
   },
 
   explode : function(){
@@ -52,6 +53,9 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         }, 0);
         _selector.openMenu = false;
         _selector.menuIndex = 0;
+        break;
+      default:
+        console.log("do nothing");
         break;
     };
   },
@@ -83,21 +87,21 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     }
   },
 
-  right : function () {
+  right : function(){
     this.setSelectorByIndex( _selector.index + 1 );
     if(_selector.index % 4 == 0){
       this.scrollDown();
     }
   },
 //when press key up button , scroll up 380 height
-  scrollUp : function () {
+  scrollUp : function(){
     var x = 0;
     var animationTimer = setInterval(function(){
       if(x >= 28){
         clearInterval(animationTimer);
       }
       window.scrollBy(0, -x);
-      x = x + 1 ;
+      x += 1;
     }, 5);
     //window.scrollBy(0,-380);
   },
@@ -109,7 +113,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         clearInterval(ani);
       }
       window.scrollBy(0, x);
-      x = x + 1;
+      x += 1;
     }, 5);
   },
 

@@ -159,14 +159,14 @@ playerStateMachine.on("consume", function(payload){
 });
 
 var ProjectSelectorStateMachine = new machina.Fsm({
-  initialize : function() {
+  initialize : function(){
   },
 
   initialState : "projects",
 
   states : {
     projects : {
-      _onEnter : function( ){
+      _onEnter : function(){
         this.keyMap = [];
         this.keyMap[38] = KeyAction.SELECT_PROJECT_UP;
         this.keyMap[40] = KeyAction.SELECT_PROJECT_DOWN;
@@ -174,7 +174,8 @@ var ProjectSelectorStateMachine = new machina.Fsm({
         this.keyMap[37] = KeyAction.SELECT_PROJECT_LEFT;
 
         this.keyMap[13] = function(){
-          this.transition("actionMenu");return KeyAction.SELECT_PROJECT;
+          this.transition("actionMenu");
+          return KeyAction.SELECT_PROJECT;
         }.bind(this);
       },
 
@@ -195,11 +196,13 @@ var ProjectSelectorStateMachine = new machina.Fsm({
         this.keyMap[40] = KeyAction.SELECT_ACTION_DOWN;
 
         this.keyMap[13] = function(){
-          this.transition("projects");return KeyAction.SELECT_ACTION;
+          this.transition("projects");
+          return KeyAction.SELECT_ACTION;
         }.bind(this);
 
         this.keyMap[27] = function(){
-          this.transition("projects");return KeyAction.DESELECT_ACTION;
+          this.transition("projects");
+          return KeyAction.DESELECT_ACTION;
         }.bind(this);
       },
 

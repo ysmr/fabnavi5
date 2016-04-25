@@ -24,7 +24,7 @@ function loadHeader(){
     return null;
   }
 
-  header = eval(header);
+  header = JSON.stringify(header);
   _client = header.Client;
   _uid = header.Uid;
   _accessToken = header.AccessToken;
@@ -66,17 +66,17 @@ var WebAPIUtils = {
     });
   },
 
-  getAllProjects : function( page, per_page, offset ){
+  getAllProjects : function( page, perPage, offset ){
     console.log("getProjects");
-    page = page || 0;
-    per_page = per_page || 20;
-    offset = offset || 0;
+    _page = page || 0;
+    _perPage = perPage || 20;
+    _offset = offset || 0;
     $.ajax({
       dataType : "json",
       data : {
-        page : page,
-        per_page : per_page,
-        offset : offset
+        page : _page,
+        perPage : _perPage,
+        offset : _offset
       },
       type : "GET",
       success : function(res){
@@ -125,7 +125,7 @@ var WebAPIUtils = {
   },
 
   setThumbnailLast : function( project ){
-    if(project.content.length == 0) return ;
+    if(project.content.length == 0) return;
     var fd = new FormData();
     fd.append("project[name]", project.name);
     fd.append("project[figure_id]", project.content[project.content.length - 1].figure.figure_id);
@@ -162,7 +162,7 @@ var WebAPIUtils = {
         project.content[i].figure.figure_id != null ){
 
         console.log("Delete photo", project.content[i]);
-        if( !confirm("delete photo , index:  " + i)) {
+        if( !confirm("delete photo , index:  " + i)){
           alert("Rollback");
           project.content[i].figure._destroy = false;
           return -1;
@@ -237,7 +237,7 @@ var WebAPIUtils = {
     console.log("unlikeFigure");
   },
 
-  getCalibrations : function( page, per_page, offset ){
+  getCalibrations : function( page, perPage, offset ){
     console.log("getCalibrations");
   },
 
@@ -286,18 +286,18 @@ var WebAPIUtils = {
     navigator.id.request();
   },
 
-  signOut : function () {
+  signOut : function (){
     WebAPIUtils.initPersona();
     navigator.id.logout();
   },
 
-  initPersona : function () {
+  initPersona : function (){
     navigator.id.watch({
       onlogin: function(assertion){
         $.ajax({
           type:"POST",
           url:"/api/v1/auth/sign_in",
-          data:{assertion:assertion},
+          data:{ assertion:assertion },
           dataType:"json",
           success: function(res, status, xhr){
             _accessToken = xhr.getResponseHeader("Access-Token");

@@ -13,7 +13,7 @@ var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 
 var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
-  init : function () {
+  init : function(){
     _selector = {
       index : 0,
       row   : 0,
@@ -23,12 +23,12 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     };
   },
 
-  setSelectorByIndex : function setSelectorByIndex( index ){
+  setSelectorByIndex : function setSelectorByIndex(index){
     //validates selector
     var projects = ProjectListStore.getProjectsAll();
-    if( index >= projects.length ) {
+    if( index >= projects.length ){
       index = projects.length - 1;
-    } else if( index < 0 ) {
+    } else if( index < 0 ){
       index = 0;
     };
     ProjectSelectorStore.setSelectorIndex( index );
@@ -55,28 +55,28 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         break;
     };
   },
-  open : function () {
+  open : function (){
     _selector.openMenu = true;
     _selector.menuIndex = 0;
     ProjectSelectorStore.emitChange();
   },
 
-  close : function () {
+  close : function(){
     _selector.openMenu = false;
     ProjectSelectorStore.emitChange();
   },
 
-  up : function () {
+  up : function(){
     this.setSelectorByIndex( _selector.index - 4 );
     this.scrollUp();
   },
 
-  down : function () {
+  down : function(){
     this.setSelectorByIndex( _selector.index + 4 );
     this.scrollDown();
   },
 
-  left : function () {
+  left : function(){
     this.setSelectorByIndex( _selector.index - 1 );
     if((_selector.index + 1) % 4 == 0){
       this.scrollUp();
@@ -136,7 +136,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
-  getSelector : function (){
+  getSelector : function(){
     return _selector;
   },
 
@@ -144,11 +144,11 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     this.emit(EventTypes.PROJECT_SELECTOR_CHANGE);
   },
 
-  addChangeListener: function(callback) {
+  addChangeListener: function(callback){
     this.on(EventTypes.PROJECT_SELECTOR_CHANGE, callback);
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener: function(callback){
     this.removeListener(EventTypes.PROJECT_SELECTOR_CHANGE, callback);
   },
 });

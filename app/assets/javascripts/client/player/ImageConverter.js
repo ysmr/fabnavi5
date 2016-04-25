@@ -59,14 +59,14 @@ var ImageConverter = function(){
 
     if(sx + sw > img.width){
       let StoDw = dw / sw;
-      sw -= (sx + sw - img.width);
+      sw -= sx + sw - img.width;
       dw = sw * StoDw;
       ctx.fillRect(dx + dw, 0, cvs.width - dx - dw, cvs.height);
     }
 
     if(sy + sh > img.height){
       let StoDh = dh / sh;
-      sh -= (sy + sh - img.height);
+      sh -= sy + sh - img.height;
       dh = sh * StoDh;
       ctx.fillRect(0, dy + dh, cvs.width, 100);
     }

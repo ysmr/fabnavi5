@@ -5,14 +5,14 @@ var ActionTypes = require('../constants/ActionTypes');
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var NavigationViewActionCreator = {
 
-  search : function ( act, text ) {
+  search : function ( act, text ){
     AppDispatcher.dispatch({
       type  : ActionTypes.PROJECT_SEARCH,
       text  : text,
     });
   },
 
-  menuSelect: function ( act ) {
+  menuSelect: function ( act ){
     if( ActionTypes.hasOwnProperty(act) ){
       AppDispatcher.dispatch({
         type : ActionTypes[act]

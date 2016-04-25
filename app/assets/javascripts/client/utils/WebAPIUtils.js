@@ -22,31 +22,29 @@ function loadHeader(){
   var header = localStorage.getItem("header");
   if( header == null || !DEVELOPMENT){
     return null;
-  } else {
-    header = eval(header);
-    _client = header.Client;
-    _uid = header.Uid;
-    _accessToken = header.AccessToken;
-    setTimeout(function(){
-      ServerActionCreator.signIn(_uid);
-    }, 0);
-    return header;
   }
+
+  header = eval(header);
+  _client = header.Client;
+  _uid = header.Uid;
+  _accessToken = header.AccessToken;
+  setTimeout(function(){
+    ServerActionCreator.signIn(_uid);
+  }, 0);
+  return header;
 }
 
 function genHeader(){
   loadHeader();
   if( _client == null || _uid == null || _accessToken == null){
-    return {
-    };
-
-  } else {
-    return {
-      "Client"        : _client,
-      "Uid"           : _uid,
-      "Access-Token"  : _accessToken
-    };
+    return {};
   }
+
+  return {
+    "Client"        : _client,
+    "Uid"           : _uid,
+    "Access-Token"  : _accessToken
+  };
 }
 
 var WebAPIUtils = {

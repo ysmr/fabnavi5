@@ -15,46 +15,44 @@ var ProjectDetail = React.createClass({
     router: React.PropTypes.func
   },
 
-  getStateFromStores : function getStateFromStores() {
+  getStateFromStores : function getStateFromStores(){
     return {
     };
   },
 
-  _onChange : function () {
+  _onChange : function (){
     this.setState(this.getStateFromStores());
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return this.getStateFromStores();
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function(){
     return {
     };
   },
 
   render : projectDetail,
 
-  componentWillMount : function() {
+  componentWillMount : function(){
   },
 
-  componentDidMount : function () {
+  componentDidMount : function (){
     State.reload();
   },
 
-  componentWillUpdate : function() {
+  componentWillUpdate : function(){
     return {
     };
   },
 
-  componentDidUpdate : function() {
+  componentDidUpdate : function(){
     return {
     };
   },
 
-  componentWillUnmount : function() {
+  componentWillUnmount : function(){
   },
-
-
 });
 
 module.exports = ProjectDetail;

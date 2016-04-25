@@ -17,10 +17,10 @@ var player = jade.compileFile(__dirname + '/../templates/Player.jade');
 var WebAPIUtils = require('../utils/WebAPIUtils');
 var State = require('../utils/FabnaviStateMachine');
 
-var _current_file = null;
+var currentFile = null;
 var _currentImage = null;
-var _page_changed = true;
-var _last_page = 0;
+var pageChanged = true;
+var lastPage = 0;
 var _lastState = "";
 var _currentState = "";
 
@@ -32,16 +32,16 @@ var Player = React.createClass({
   },
 
   reset : function(){
-    _current_file = null;
+    currentFile = null;
     _currentImage = null;
-    _page_changed = true;
-    _last_page = 0;
+    pageChanged = true;
+    lastPage = 0;
     _lastState = "";
     _currentState = "";
     MainView.reset();
   },
 
-  getStateFromStores : function getStateFromStores() {
+  getStateFromStores : function getStateFromStores(){
     var project = ProjectStore.getProject();
     if( project == null || this.context.router.getCurrentParams().projectId != project.id ){
       return {
@@ -60,34 +60,34 @@ var Player = React.createClass({
     };
   },
 
-  _onChange : function () {
+  _onChange : function (){
     this.setState(this.getStateFromStores());
   },
 
-  _onCanvasUpdate : function () {
+  _onCanvasUpdate : function(){
     this.updateCanvas();
   },
 
-  _onCanvasClear : function( ){
+  _onCanvasClear : function(){
     this.clearCanvas();
   },
 
-  getInitialState: function() {
+  getInitialState: function(){
     return this.getStateFromStores();
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function(){
     return {
     };
   },
 
   handleSubmit : function( event ){
-    if( _current_file == null ) return ;
-    WebAPIUtils.uploadFile( _current_file );
+    if( currentFile == null ) return;
+    WebAPIUtils.uploadFile( currentFile );
   },
 
   handleFile : function( event ){
-    _current_file = event.target.files[0];
+    currentFile = event.target.files[0];
   },
 
   updateCanvas : function(){
@@ -105,7 +105,7 @@ var Player = React.createClass({
     }
     _lastState = _currentState;
 
-    if( _last_page == this.state.page && _currentImage != null ){
+    if( lastPage == this.state.page && _currentImage != null ){
       MainView.draw(_currentImage);
       if( _currentState.contains("calibrate") ){
         MainView.showCalibrateLine();
@@ -114,7 +114,7 @@ var Player = React.createClass({
     }
 
     var fig = this.state.project.content[this.state.page].figure;
-    _last_page = this.state.page;
+    lastPage = this.state.page;
     if(fig.hasOwnProperty("clientContent") && fig.clientContent.hasOwnProperty("dfdImage")){
       fig.clientContent.dfdImage.then(function(img){
         ViewConfig.setCropped(true);
@@ -150,11 +150,11 @@ var Player = React.createClass({
     MainView.clear();
   },
 
-  componentWillMount : function() {
+  componentWillMount : function(){
     ProjectActionCreator.getProject({ id:this.context.router.getCurrentParams().projectId });
   },
 
-  componentDidMount : function () {
+  componentDidMount : function (){
     MainView.init( React.findDOMNode(this.refs.mainCanvas));
     ProjectStore.addChangeListener(this._onChange);
     ProjectStore.addCanvasRequestListener(this._onCanvasUpdate);
@@ -163,16 +163,16 @@ var Player = React.createClass({
     State.transition("player");
   },
 
-  componentWillUpdate : function() {
+  componentWillUpdate : function(){
     return {
     };
   },
 
-  componentDidUpdate : function() {
+  componentDidUpdate : function(){
     this.updateCanvas();
   },
 
-  componentWillUnmount : function() {
+  componentWillUnmount : function(){
     ProjectStore.init();
     ProjectStore.emitChange();
     this.reset();

@@ -1,16 +1,16 @@
 var STUB = false;
-var Camera = function() {
+var Camera = function(){
 
   var connected = false,
       heartbeat = null;
 
-  function init () {
+  function init(){
     if(document.sonycameracontroller == undefined){
       console.error("Addon is not  installed");
       console.log("install http://crest-multimedia-web.s3.amazonaws.com/tsuka/fabnavi-preview/public/sonycameraremotecontroller.xpi");
       return false;
     }
-    document.sonycameracontroller.setup({ipaddress: "10.0.0.1", port: 10000, version: "1.0"}, true, true);
+    document.sonycameracontroller.setup({ ipaddress: "10.0.0.1", port: 10000, version: "1.0" }, true, true);
     return true;
   }
 
@@ -24,9 +24,9 @@ var Camera = function() {
     return d.promise();
   }
 
-  function shoot () {
+  function shoot (){
     var d = $.Deferred();
-    if(STUB) {
+    if(STUB){
       console.log("Stub");
       var cvs = document.createElement('canvas');
       var ctx = cvs.getContext('2d');
@@ -44,8 +44,7 @@ var Camera = function() {
       var t = window.setTimeout(function(){
         d.reject("Camera Not Respond");
       }, 3000);
-      var listener =
-      function (url, res) {
+      var listener = function(url, res){
         window.clearTimeout(t);
         setTimeout(function(){
           d.resolve(url);
@@ -72,7 +71,8 @@ var Camera = function() {
       };
       r.open("GET", "http://10.0.0.1:10000", true);
       r.send();
-    } catch(e) {
+    } catch(e){
+      console.error(e);
     }
     return d.promise();
   }

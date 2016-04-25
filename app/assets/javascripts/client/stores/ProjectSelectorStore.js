@@ -95,7 +95,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     var x = 0;
     var animationTimer = setInterval(function(){
       if(x >= 28){
-        clearInterval(ani);
+        clearInterval(animationTimer);
       }
       window.scrollBy(0,-x);
       x = x + 1 ;
@@ -110,7 +110,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         clearInterval(ani);
       }
       window.scrollBy(0,x);
-      x = x + 1 ;
+      x = x + 1;
     },5);
   },
 

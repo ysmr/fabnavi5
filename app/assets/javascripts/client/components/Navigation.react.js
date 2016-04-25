@@ -1,4 +1,3 @@
-//
 var React = require('react');
 var MenuIcon = require('./MenuIcon.react.js');
 var AccountStore = require('../stores/AccountStore');
@@ -7,16 +6,14 @@ var jade = require('react-jade');
 var Router = require('react-router');
 var Link = Router.Link;
 
-
-
 var navigation = jade.compileFile(__dirname + '/../templates/Navigation.jade');
 var _release_time = "loading...";
 var Navigation = React.createClass({
 
   getStateFromStores : function getStateFromStores() {
     return {
-     account : AccountStore.getAccountInfo(),
-     time : _release_time,
+      account : AccountStore.getAccountInfo(),
+      time : _release_time,
     };
   },
 
@@ -28,26 +25,26 @@ var Navigation = React.createClass({
   },
 
   getDefaultProps: function() {
-     return {
-        headerSrc : "images/fav_logo_3.png", 
-     };
-   },
+    return {
+      headerSrc : "images/fav_logo_3.png",
+    };
+  },
 
   render : navigation,
 
   componentWillMount : function() {
   },
 
-//release timeを書いているだけ
+  //release timeを書いているだけ
   componentDidMount : function () {
     AccountStore.addChangeListener(this._onChange);
     $.get("https://github.com/fabnavi/fabnavi5/commits/release")
       .then(function(res){
-       var parser = new DOMParser();
-       var logDoc =  parser.parseFromString(res,"text/html");
-       _release_time = "Released at " + logDoc.getElementsByTagName("time")[0].dateTime;
-       this._onChange();
-     }.bind(this));
+        var parser = new DOMParser();
+        var logDoc = parser.parseFromString(res, "text/html");
+        _release_time = "Released at " + logDoc.getElementsByTagName("time")[0].dateTime;
+        this._onChange();
+      }.bind(this));
   },
 
   componentWillUpdate : function() {

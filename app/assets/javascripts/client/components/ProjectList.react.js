@@ -5,7 +5,7 @@ var ProjectListStore = require('../stores/ProjectListStore');
 var ProjectSelectorStore = require('../stores/ProjectSelectorStore');
 var ProjectElement = require('../components/ProjectElement.react');
 var jade = require('react-jade');
-var projectList= jade.compileFile(__dirname + '/../templates/ProjectList.jade');
+var projectList = jade.compileFile(__dirname + '/../templates/ProjectList.jade');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 var State = require('../utils/FabnaviStateMachine');
@@ -28,14 +28,13 @@ var ProjectList = React.createClass({
   },
 
   getInitialState: function() {
-     return this.getStateFromStores();
+    return this.getStateFromStores();
   },
 
   getDefaultProps: function() {
-     return {
-
-     };
-   },
+    return {
+    };
+  },
 
   render : projectList,
 

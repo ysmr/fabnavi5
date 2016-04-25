@@ -1,10 +1,10 @@
-//Createのページview　
-var React = require('react');　
+//Createのページview
+var React = require('react');
 var ProjectListStore = require('../stores/ProjectListStore');
 var jade = require('react-jade');
 
 var Router = require('react-router');
-var DefaultRoute = Router.DefaultRoute;　
+var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
@@ -14,7 +14,6 @@ var ProjectActionCreator = require('../actions/ProjectActionCreator');
 var State = require('../utils/FabnaviStateMachine');
 
 var CreateProject = React.createClass({
-
 
   _onChange : function () {
   },
@@ -26,9 +25,9 @@ var CreateProject = React.createClass({
   },
 
   getDefaultProps: function() {
-     return {
-     };
-   },
+    return {
+    };
+  },
 
   handleChange : function( e ) {
   },

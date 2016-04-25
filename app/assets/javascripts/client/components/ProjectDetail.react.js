@@ -2,17 +2,17 @@ var React = require('react');
 var ProjectListStore = require('../stores/ProjectListStore');
 var jade = require('react-jade');
 
-var Router = require('react-router'); 
+var Router = require('react-router');
 var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
 var projectDetail = jade.compileFile(__dirname + '/../templates/ProjectDetail.jade');
-var ProjectDetail= React.createClass({
+var ProjectDetail = React.createClass({
 
   contextTypes: {
-      router: React.PropTypes.func
+    router: React.PropTypes.func
   },
 
   getStateFromStores : function getStateFromStores() {
@@ -28,9 +28,9 @@ var ProjectDetail= React.createClass({
   },
 
   getDefaultProps: function() {
-     return {
-     };
-   },
+    return {
+    };
+  },
 
   render : projectDetail,
 

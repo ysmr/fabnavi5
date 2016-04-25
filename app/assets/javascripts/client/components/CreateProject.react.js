@@ -15,31 +15,31 @@ var State = require('../utils/FabnaviStateMachine');
 
 var CreateProject = React.createClass({
 
-  _onChange : function () {
+  _onChange : function(){
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return {
       name : "",
       description : "",
     };
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function(){
     return {
     };
   },
 
-  handleChange : function( e ) {
+  handleChange : function( e ){
   },
 
-  handleNameChange : function( e ) {
-    this.setState({name : e.target.value});
+  handleNameChange : function( e ){
+    this.setState({ name : e.target.value });
   },
-  handleDescriptionChange : function( e ) {
-    this.setState({description : e.target.value});
+  handleDescriptionChange : function( e ){
+    this.setState({ description : e.target.value });
   },
 
-  handleSubmit : function( e ) {
+  handleSubmit : function( e ){
     ProjectActionCreator.createProject({
       name : this.state.name,
       description : this.state.description,
@@ -49,26 +49,25 @@ var CreateProject = React.createClass({
 
   render : createProject,
 
-  componentWillMount : function() {
+  componentWillMount : function(){
   },
 
-  componentDidMount : function () {
+  componentDidMount : function (){
     State.reload();
   },
 
-  componentWillUpdate : function() {
+  componentWillUpdate : function(){
     return {
     };
   },
 
-  componentDidUpdate : function() {
+  componentDidUpdate : function(){
     return {
     };
   },
 
-  componentWillUnmount : function() {
+  componentWillUnmount : function(){
   },
-
 
 });
 

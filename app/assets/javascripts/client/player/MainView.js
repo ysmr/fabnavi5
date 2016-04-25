@@ -90,9 +90,9 @@ var MainView = function(){
     return cvs.toDataURL();
   }
 
-  function drawMessage(mes, x, y){
-    x = x || 0;
-    y = y || 20;
+  function drawMessage(mes, X, Y){
+    x = X || 0;
+    y = Y || 20;
     ctx.fillStyle = "green";
     ctx.font = "100px ArialRoundedMTBoldBold, serif";
     ctx.rotate(Math.PI);

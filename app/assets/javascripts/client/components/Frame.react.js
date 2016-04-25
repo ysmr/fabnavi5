@@ -1,6 +1,5 @@
 var React = require('react');
 var jade = require('react-jade');
-
 var Router = require('react-router');
 var Route = Router.Route;
 var Link = Router.Link;
@@ -10,7 +9,6 @@ var Frame = React.createClass({
   contextTypes: {
     router: React.PropTypes.func
   },
-
   render : frame
 });
 

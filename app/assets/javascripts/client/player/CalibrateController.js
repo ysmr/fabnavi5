@@ -1,7 +1,7 @@
 var ViewConfig = require('../player/ViewConfig');
 var getCurrentImage = null;
 
-var CalibrateController = (function () {
+var CalibrateController = (function init(){
   var x = 0,
       y = 0,
       w = 1000,
@@ -34,7 +34,7 @@ var CalibrateController = (function () {
     console.log("ly: " + ly);
   }
 
-  function zoomIn(_shift) {
+  function zoomIn(_shift){
     var shift = _shift | 10;
     w -= shift;
     h -= shift * as;
@@ -42,7 +42,7 @@ var CalibrateController = (function () {
     update();
   }
 
-  function zoomOut(_shift) {
+  function zoomOut(_shift){
     var shift = _shift | 10;
     w += shift;
     h += shift * as;
@@ -112,21 +112,21 @@ var CalibrateController = (function () {
     aspShift = !aspShift;
   }
 
-  function addMouseEvent (){
+  function addMouseEvent(){
     if(isCalibrationLocked()){
       removeMouseEvent();
       return -1;
     }
 
-    cvs.onmousedown = function (e) {
+    cvs.onmousedown = function(e){
       drag = true;
       lx = e.clientX;
       ly = e.clientY;
     };
-    cvs.onmouseup = function (e){
+    cvs.onmouseup = function(e){
       drag = false;
     };
-    cvs.onmousemove = function (e){
+    cvs.onmousemove = function(e){
       if(drag){
         var eX = e.clientX;
         if(aspShift){
@@ -160,10 +160,10 @@ var CalibrateController = (function () {
     y = cy - Math.floor(h / 2);
   }
 
-  function update (){
+  function update(){
     updateXYFromCenter();
     if(isInitalized ){
-      ViewConfig.setConf({x:x, y:y, w:w, h:h});
+      ViewConfig.setConf({ x:x, y:y, w:w, h:h });
       //XXX
       ViewConfig.save();
     } else {
@@ -183,9 +183,11 @@ var CalibrateController = (function () {
       updateXYFromWH();
       updateXYFromCenter();
       isInitalized = true;
-      return ;
+      return;
     }
-    if(c = getCurrentImage()){
+
+    if(getCurrentImage()){
+      let c = getCurrentImage();
       w = c.naturalWidth;
       h = c.naturalHeight;
       validateWH();

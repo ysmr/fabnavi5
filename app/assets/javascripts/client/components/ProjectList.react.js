@@ -16,55 +16,55 @@ var ProjectList = React.createClass({
 
   },
 
-  getStateFromStores : function () {
+  getStateFromStores : function (){
     return {
       projects : ProjectListStore.getProjectsAll(),
       selected : ProjectSelectorStore.getSelector(),
     };
   },
 
-  _onChange : function () {
+  _onChange : function (){
     this.setState(this.getStateFromStores());
   },
 
-  getInitialState: function() {
+  getInitialState: function(){
     return this.getStateFromStores();
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function(){
     return {
     };
   },
 
   render : projectList,
 
-  handleChange: function ( event ){
+  handleChange: function( event ){
   },
 
-  onclick : function() {
+  onclick : function(){
   },
 
-  componentWillMount : function() {
+  componentWillMount : function(){
     ProjectActionCreator.getAllProjects();
   },
 
-  componentDidMount : function () {
+  componentDidMount : function(){
     ProjectListStore.addChangeListener(this._onChange);
     ProjectSelectorStore.addChangeListener(this._onChange);
     State.reload();
   },
 
-  componentWillUpdate : function() {
+  componentWillUpdate : function(){
   },
 
 
-  componentDidUpdate : function() {
+  componentDidUpdate : function(){
   },
 
   componentWillReceiveProps : function(){
   },
 
-  componentWillUnmount : function() {
+  componentWillUnmount : function(){
     ProjectListStore.removeChangeListener(this._onChange);
     ProjectSelectorStore.removeChangeListener(this._onChange);
   },

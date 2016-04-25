@@ -10,12 +10,12 @@ var Footer = React.createClass({
   propTypes : {
   },
 
-  getInitialState: function() {
+  getInitialState: function(){
     return {
     };
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function(){
     return {
       footerText : "fabnavi",
     };
@@ -23,25 +23,25 @@ var Footer = React.createClass({
 
   render : footer,
 
-  handleChange: function ( event ){
+  handleChange: function( event ){
   },
 
-  onclick : function() {
+  onclick : function(){
   },
 
-  componentWillMount : function() {
+  componentWillMount : function(){
   },
 
-  componentDidMount : function () {
+  componentDidMount : function(){
   },
 
-  componentWillUpdate : function() {
+  componentWillUpdate : function(){
   },
 
-  componentDidUpdate : function() {
+  componentDidUpdate : function(){
   },
 
-  componentWillUnmount : function() {
+  componentWillUnmount : function(){
   },
 
 });

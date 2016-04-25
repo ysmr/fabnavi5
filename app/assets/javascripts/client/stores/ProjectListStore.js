@@ -8,13 +8,13 @@ var ActionTypes = require('../constants/ActionTypes');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
-  init : function () {
+  init : function(){
     _projects = [];
     ProjectActionCreator.getAllProjects();
     this.emitChange();
   },
 
-  getProjectsAll : function (){
+  getProjectsAll : function(){
     return _projects;
   },
 
@@ -32,20 +32,20 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
-  removeProject : function( project ) {
+  removeProject : function( project ){
     for( var i = 0; i < _projects.length; i++ ){
       if( _projects[i].id == project.id ){
         _projects.splice(i, 1);
         this.emitChange();
-        return ;
+        return;
       }
     }
   },
 
-  searchProject : function( search_text ){
+  searchProject : function( searchText ){
     searchProjects = [];
-    var re = new RegExp(search_text, 'i');
-    if(search_text === ""){
+    var re = new RegExp(searchText, 'i');
+    if(searchText === ""){
       _project = initProjects;
     } else {
       for(var i = 0; i < initProjects.length; i++){
@@ -59,11 +59,11 @@ var ProjectListStore = Object.assign({}, EventEmitter.prototype, {
     return;
   },
 
-  addChangeListener: function(callback) {
+  addChangeListener: function(callback){
     this.on(EventTypes.PROJECT_LIST_CHANGE, callback);
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener: function(callback){
     this.removeListener(EventTypes.PROJECT_LIST_CHANGE, callback);
   },
 });

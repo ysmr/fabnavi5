@@ -13,7 +13,7 @@ var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 
 var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
-  init : function () {
+  init : function(){
     _selector = {
       index : 0,
       row   : 0,
@@ -23,15 +23,16 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     };
   },
 
-  setSelectorByIndex : function setSelectorByIndex( index ){
+  setSelectorByIndex : function setSelectorByIndex(index){
     //validates selector
+    let _index = index;
     var projects = ProjectListStore.getProjectsAll();
-    if( index >= projects.length ) {
-      index = projects.length - 1;
-    } else if( index < 0 ) {
-      index = 0;
+    if( index >= projects.length ){
+      _index = projects.length - 1;
+    } else if( index < 0 ){
+      _index = 0;
     };
-    ProjectSelectorStore.setSelectorIndex( index );
+    ProjectSelectorStore.setSelectorIndex(_index);
   },
 
   explode : function(){
@@ -53,51 +54,54 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         _selector.openMenu = false;
         _selector.menuIndex = 0;
         break;
+      default:
+        console.log("do nothing");
+        break;
     };
   },
-  open : function () {
+  open : function (){
     _selector.openMenu = true;
     _selector.menuIndex = 0;
     ProjectSelectorStore.emitChange();
   },
 
-  close : function () {
+  close : function(){
     _selector.openMenu = false;
     ProjectSelectorStore.emitChange();
   },
 
-  up : function () {
+  up : function(){
     this.setSelectorByIndex( _selector.index - 4 );
     this.scrollUp();
   },
 
-  down : function () {
+  down : function(){
     this.setSelectorByIndex( _selector.index + 4 );
     this.scrollDown();
   },
 
-  left : function () {
+  left : function(){
     this.setSelectorByIndex( _selector.index - 1 );
     if((_selector.index + 1) % 4 == 0){
       this.scrollUp();
     }
   },
 
-  right : function () {
+  right : function(){
     this.setSelectorByIndex( _selector.index + 1 );
     if(_selector.index % 4 == 0){
       this.scrollDown();
     }
   },
 //when press key up button , scroll up 380 height
-  scrollUp : function () {
+  scrollUp : function(){
     var x = 0;
     var animationTimer = setInterval(function(){
       if(x >= 28){
         clearInterval(animationTimer);
       }
       window.scrollBy(0, -x);
-      x = x + 1 ;
+      x += 1;
     }, 5);
     //window.scrollBy(0,-380);
   },
@@ -109,7 +113,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         clearInterval(ani);
       }
       window.scrollBy(0, x);
-      x = x + 1;
+      x += 1;
     }, 5);
   },
 
@@ -136,7 +140,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
-  getSelector : function (){
+  getSelector : function(){
     return _selector;
   },
 
@@ -144,11 +148,11 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     this.emit(EventTypes.PROJECT_SELECTOR_CHANGE);
   },
 
-  addChangeListener: function(callback) {
+  addChangeListener: function(callback){
     this.on(EventTypes.PROJECT_SELECTOR_CHANGE, callback);
   },
 
-  removeChangeListener: function(callback) {
+  removeChangeListener: function(callback){
     this.removeListener(EventTypes.PROJECT_SELECTOR_CHANGE, callback);
   },
 });

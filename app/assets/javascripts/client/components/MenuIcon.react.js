@@ -17,46 +17,45 @@ var MenuIcon = React.createClass({
     src   : React.PropTypes.string.isRequired,
   },
 
-  getInitialState: function() {
+  getInitialState: function(){
     return {
     };
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function(){
     return {
     };
   },
 
   render : menuIcon,
 
-  onclick : function() {
+  onclick : function(){
     NavigationViewActionCreator.menuSelect(this.props.act);
   },
 
-  componentWillMount : function() {
+  componentWillMount : function(){
     return {
     };
   },
 
-  componentDidMount : function () {
+  componentDidMount : function (){
 
   },
 
-  componentWillUpdate : function() {
+  componentWillUpdate : function(){
     return {
     };
   },
 
-  componentDidUpdate : function() {
+  componentDidUpdate : function(){
     return {
     };
   },
 
-  componentWillUnmount : function() {
+  componentWillUnmount : function(){
     return {
     };
   },
-
 
 });
 

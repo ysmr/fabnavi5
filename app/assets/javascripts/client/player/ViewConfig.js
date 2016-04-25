@@ -11,27 +11,27 @@ var ViewConfig = function(){
     getLocalConfig();
   }
 
-  function setLocalData(key, jsonData) {
+  function setLocalData(key, jsonData){
     var data = {};
     if(!isCropped){
       data["play"] = jsonData;
-      var res = getLocalData(key);
+      let res = getLocalData(key);
       if(res && res.hasOwnProperty("add"))data["add"] = res.add;
     } else {
       data["add"] = jsonData;
-      var res = getLocalData(key);
+      let res = getLocalData(key);
       if(res && res.hasOwnProperty("play"))data["play"] = res.play;
     }
     var d = JSON.stringify(data);
     localStorage.setItem(key, d);
   }
 
-  function getLocalData(key) {
+  function getLocalData(key){
     var data = localStorage.getItem(key);
-    return eval(data);
+    return JSON.parse(data);
   }
 
-  function getLocalConfig() {
+  function getLocalConfig(){
     var id = "ProjectId";
     var res = getLocalData(id);
     res = res || "";
@@ -43,7 +43,7 @@ var ViewConfig = function(){
     }
   }
 
-  function setLocalConfig(id) {
+  function setLocalConfig(id){
     if(_conf == ""){
       alert("there is no config");
       return false;
@@ -76,11 +76,11 @@ var ViewConfig = function(){
     return res;
   }
 
-  function getCropped( ) {
+  function getCropped(){
     return isCropped;
   }
 
-  function setCropped( b ) {
+  function setCropped(b){
     isCropped = b;
   }
 

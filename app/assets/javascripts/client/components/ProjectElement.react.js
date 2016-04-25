@@ -9,17 +9,16 @@ var ProjectElement = React.createClass({
   propTypes : {
   },
 
-
-  getInitialState: function() {
+  getInitialState: function(){
     return null;
   },
 
-  getDefaultProps: function() {
+  getDefaultProps: function(){
     return {
     };
   },
 
-  getThumbnailSrc: function () {
+  getThumbnailSrc: function (){
 
     var src = null;
 
@@ -30,20 +29,14 @@ var ProjectElement = React.createClass({
       }
     }
 
-    if( src == null || src == "" ) {
+    if( src == null || src == "" ){
       src = "/images/kaffcop_icon/fab_samp.jpg";
     }
     return src;
   },
 
-  getUserIconSrc: function () {
+  getUserIconSrc: function (){
     var src = null;
-    /*
-    var maybeAvater = this.props.project.user.avatar;
-    if( maybeAvater != null && ( maybeAvater.url != null || maybeAvater.url != "" )) {
-      src = maybeAvater.url;
-    }
-    */
     if( src == null ){
       src = "/images/kaffcop_icon/user_icon.png";
     }
@@ -55,25 +48,24 @@ var ProjectElement = React.createClass({
   handleChange: function ( event ){
   },
 
-  handleClick : function( event ) {
+  handleClick : function( event ){
     ProjectActionCreator.playProject( this.props.project );
   },
 
-  componentWillMount : function() {
+  componentWillMount : function(){
   },
 
-  componentDidMount : function () {
+  componentDidMount : function (){
   },
 
-  componentWillUpdate : function() {
+  componentWillUpdate : function(){
   },
 
-  componentDidUpdate : function() {
+  componentDidUpdate : function(){
   },
 
-  componentWillUnmount : function() {
+  componentWillUnmount : function(){
   },
-
 });
 
 module.exports = ProjectElement;

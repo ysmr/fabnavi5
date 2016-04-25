@@ -38,7 +38,7 @@ var ImageConverter = function(){
     ctx.fillStyle = "black";
 
     if(sy < 0){
-      var StoDh = dh / sh;
+      let StoDh = dh / sh;
       dy = sy * StoDh;
       dh += dy;
       sh += sy;
@@ -48,7 +48,7 @@ var ImageConverter = function(){
     }
 
     if(sx < 0){
-      var StoDw = dw / sw;
+      let StoDw = dw / sw;
       dx = sx * StoDw;
       dw += dx;
       sw += sx;
@@ -58,15 +58,15 @@ var ImageConverter = function(){
     }
 
     if(sx + sw > img.width){
-      var StoDw = dw / sw;
-      sw -= (sx + sw - img.width);
+      let StoDw = dw / sw;
+      sw -= sx + sw - img.width;
       dw = sw * StoDw;
       ctx.fillRect(dx + dw, 0, cvs.width - dx - dw, cvs.height);
     }
 
     if(sy + sh > img.height){
-      var StoDh = dh / sh;
-      sh -= (sy + sh - img.height);
+      let StoDh = dh / sh;
+      sh -= sy + sh - img.height;
       dh = sh * StoDh;
       ctx.fillRect(0, dy + dh, cvs.width, 100);
     }

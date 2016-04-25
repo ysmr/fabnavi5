@@ -112,8 +112,21 @@ header {
 
 .belt {
   @include outer-container(100%);
+<<<<<<< HEAD
   background-color: $brown;
   padding-bottom: 20px;
+=======
+  background-color: white;
+  padding-bottom: 30px;
+  padding-top: 5px;
+  text-align:center;
+  hr{
+   border: 0;
+   border-bottom: 1px dashed #ccc;
+   background: #fff;
+  }
+
+>>>>>>> upstream/master
 }
 .search-bar {
   width: $ct-width;

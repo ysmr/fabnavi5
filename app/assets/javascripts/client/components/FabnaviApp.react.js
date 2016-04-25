@@ -9,7 +9,6 @@ var Footer = require('./Footer.react.js');
 var CreateProject = require('./CreateProject.react.js');
 var EditProject = require('./EditProject.react.js');
 var ProjectDetail = require('./ProjectDetail.react.js');
-var ProjectList = require('./ProjectList.react.js');
 var ProjectStore = require('../stores/ProjectStore');
 
 var jade = require('react-jade');
@@ -22,6 +21,7 @@ var RouteHandler = Router.RouteHandler;
 var NotFoundRoute = Router.NotFoundRoute;
 var Redirect = Router.Redirect;
 
+<<<<<<< HEAD
 var routes = (
   React.createElement(Route, {handler: Frame, path: "/"}, 
     React.createElement(Route, {handler: ProjectManager, name: "manager"},
@@ -39,6 +39,27 @@ var routes = (
 );
 
 global.onload = function ( ) {
+=======
+ //フレーム
+var routes = React.createElement(Route, { handler: Frame, path: "/" },
+    //以下は、メニューバーがついたページの描画
+  React.createElement(Route, { handler: ProjectManager, name: "manager" },
+    React.createElement(Route, { handler: ProjectList, name: "index" }),
+    React.createElement(Route, { handler: CreateProject, name: "create" }),
+    React.createElement(Route, { handler: EditProject, name: "edit", path: "edit/:projectId" }),
+    React.createElement(Route, { handler: ProjectDetail, name: "project", path:"project/:projectId" }),
+    React.createElement(DefaultRoute, { handler: ProjectList }),
+    React.createElement(NotFoundRoute, { handler: ProjectList })
+  ),
+  //以下は、プレイヤーのページの描画
+  React.createElement(Route, { handler: Player, name: "player", path:"project/play/:projectId" }),
+  React.createElement(Redirect, { from: "/", to:"/manager" }),
+  React.createElement(NotFoundRoute, { handler: ProjectManager })
+);
+
+//ProjectStoreのinitと, 上で定義されたroutesを基に, Reactをdocument.body以下に展開する
+global.onload = function ( ){
+>>>>>>> upstream/master
   console.log("Fabnavi boot");
   ProjectStore.init();
   Router.run(routes, function(Handler){

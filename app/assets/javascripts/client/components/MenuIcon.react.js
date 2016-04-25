@@ -5,22 +5,26 @@ var Router = require('react-router');
 var Link = Router.Link;
 var Route = Router.Route;
 
-
-
 var menuIcon = jade.compileFile(__dirname + '/../templates/MenuIcon.jade');
 
+<<<<<<< HEAD
 var MenuIcon  =  React.createClass({
 
+=======
+var MenuIcon = React.createClass({
+//Navigation.jadeにあるactとsrc
+>>>>>>> upstream/master
   propTypes : {
     act   : React.PropTypes.string.isRequired,
     src   : React.PropTypes.string.isRequired,
   },
 
-  getInitialState: function() {
-     return {
-     };
+  getInitialState: function(){
+    return {
+    };
   },
 
+<<<<<<< HEAD
   getDefaultProps: function() {
      return {
         
@@ -31,32 +35,42 @@ var MenuIcon  =  React.createClass({
 
   onclick : function() {
     NavigationViewActionCreator.menuSelect(this.props.act); 
-  },
-
-  componentWillMount : function() {
+=======
+  getDefaultProps: function(){
     return {
     };
   },
 
-  componentDidMount : function () {
+  render : menuIcon,
 
+  onclick : function(){
+    NavigationViewActionCreator.menuSelect(this.props.act);
+>>>>>>> upstream/master
   },
 
-  componentWillUpdate : function() {
+  componentWillMount : function(){
     return {
     };
   },
 
-  componentDidUpdate : function() {
+  componentDidMount : function (){
+
+  },
+
+  componentWillUpdate : function(){
     return {
     };
   },
 
-  componentWillUnmount : function() {
+  componentDidUpdate : function(){
     return {
     };
   },
 
+  componentWillUnmount : function(){
+    return {
+    };
+  },
 
 });
 

@@ -6,63 +6,72 @@ var jade = require('react-jade');
 var Router = require('react-router'); 
 var Link = Router.Link;
 
-
-
 var navigation = jade.compileFile(__dirname + '/../templates/Navigation.jade');
-var _release_time = "loading...";
+var releaseTime = "loading...";
 var Navigation = React.createClass({
 
-  getStateFromStores : function getStateFromStores() {
+  getStateFromStores : function getStateFromStores(){
     return {
-     account : AccountStore.getAccountInfo(),
-     time : _release_time,
+      account : AccountStore.getAccountInfo(),
+      time : releaseTime,
     };
   },
 
-  _onChange : function () {
+  _onChange : function (){
     this.setState(this.getStateFromStores());
   },
-  getInitialState: function() {
+  getInitialState: function(){
     return this.getStateFromStores();
   },
 
+<<<<<<< HEAD
   getDefaultProps: function() {
      return {
         headerSrc : "images/h_logo.png",
      };
    },
+=======
+  getDefaultProps: function(){
+    return {
+      headerSrc : "images/fav_logo_3.png",
+    };
+  },
+>>>>>>> upstream/master
 
   render : navigation,
 
-  componentWillMount : function() {
+  componentWillMount : function(){
   },
 
+<<<<<<< HEAD
   componentDidMount : function () {
+=======
+  //release timeを書いているだけ
+  componentDidMount : function (){
+>>>>>>> upstream/master
     AccountStore.addChangeListener(this._onChange);
     $.get("https://github.com/fabnavi/fabnavi5/commits/release")
       .then(function(res){
-       var parser = new DOMParser();
-       var logDoc =  parser.parseFromString(res,"text/html");
-       _release_time = "Released at " + logDoc.getElementsByTagName("time")[0].dateTime;
-       this._onChange();
-     }.bind(this));
+        var parser = new DOMParser();
+        var logDoc = parser.parseFromString(res, "text/html");
+        releaseTime = "Released at " + logDoc.getElementsByTagName("time")[0].dateTime;
+        this._onChange();
+      }.bind(this));
   },
 
-  componentWillUpdate : function() {
+  componentWillUpdate : function(){
     return {
     };
   },
 
-  componentDidUpdate : function() {
+  componentDidUpdate : function(){
     return {
     };
   },
 
-  componentWillUnmount : function() {
+  componentWillUnmount : function(){
     AccountStore.removeChangeListener(this._onChange);
   },
-
-
 });
 
 module.exports = Navigation;

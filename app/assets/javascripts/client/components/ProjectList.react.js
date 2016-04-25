@@ -3,7 +3,7 @@ var ProjectListStore = require('../stores/ProjectListStore');
 var ProjectSelectorStore = require('../stores/ProjectSelectorStore');
 var ProjectElement = require('../components/ProjectElement.react');
 var jade = require('react-jade');
-var projectList= jade.compileFile(__dirname + '/../templates/ProjectList.jade');
+var projectList = jade.compileFile(__dirname + '/../templates/ProjectList.jade');
 var ProjectActionCreator = require('../actions/ProjectActionCreator');
 
 var State = require('../utils/FabnaviStateMachine');
@@ -14,21 +14,22 @@ var ProjectList = React.createClass({
 
   },
 
-  getStateFromStores : function () {
+  getStateFromStores : function (){
     return {
-     projects : ProjectListStore.getProjectsAll(),
-     selected : ProjectSelectorStore.getSelector(),
+      projects : ProjectListStore.getProjectsAll(),
+      selected : ProjectSelectorStore.getSelector(),
     };
   },
 
-  _onChange : function () {
+  _onChange : function (){
     this.setState(this.getStateFromStores());
   },
 
-  getInitialState: function() {
-     return this.getStateFromStores();
+  getInitialState: function(){
+    return this.getStateFromStores();
   },
 
+<<<<<<< HEAD
   getDefaultProps: function() {
      return {
         
@@ -38,28 +39,42 @@ var ProjectList = React.createClass({
   render : projectList,  
   
   handleChange: function ( event ){
+=======
+  getDefaultProps: function(){
+    return {
+    };
   },
 
-  onclick : function() {
+  render : projectList,
+
+  handleChange: function( event ){
+>>>>>>> upstream/master
   },
 
-  componentWillMount : function() {
+  onclick : function(){
+  },
+
+  componentWillMount : function(){
     ProjectActionCreator.getAllProjects();
   },
 
-  componentDidMount : function () {
+  componentDidMount : function(){
     ProjectListStore.addChangeListener(this._onChange);
     ProjectSelectorStore.addChangeListener(this._onChange);
     State.reload();
   },
 
-  componentWillUpdate : function() {
+  componentWillUpdate : function(){
   },
 
-  componentDidUpdate : function() {
+
+  componentDidUpdate : function(){
   },
 
-  componentWillUnmount : function() {
+  componentWillReceiveProps : function(){
+  },
+
+  componentWillUnmount : function(){
     ProjectListStore.removeChangeListener(this._onChange);
     ProjectSelectorStore.removeChangeListener(this._onChange);
   },

@@ -5,7 +5,7 @@ var WebAPIUtils = require('../utils/WebAPIUtils');
 var ProjectActionCreator = {
 
   getAllProjects : function( ){
-    AppDispatcher.dispatch ({
+    AppDispatcher.dispatch({
       type : ActionTypes.PROJECTS_FETCH,
     });
     WebAPIUtils.getAllProjects();
@@ -16,7 +16,11 @@ var ProjectActionCreator = {
       type : ActionTypes.PROJECT_CREATE,
       payload : payload
     });
+<<<<<<< HEAD
     WebAPIUtils.createProject( payload.name, payload.contentAttributesType, payload.description );
+=======
+    WebAPIUtils.createProject(payload.name, payload.contentAttributesType, payload.description);
+>>>>>>> upstream/master
   },
 
   getProject : function( payload ){

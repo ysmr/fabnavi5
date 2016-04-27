@@ -1,5 +1,5 @@
 const ViewConfig = require('../player/ViewConfig');
-const $ = require('jQuery');
+const $ = require('jquery');
 let QUALITY = 0.7;
 function getQ (){
   return QUALITY;

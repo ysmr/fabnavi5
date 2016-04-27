@@ -1,10 +1,11 @@
-var ProjectServerActionCreator = require('../actions/ProjectServerActionCreator');
-var ServerActionCreator = require('../actions/ServerActionCreator');
-var $ = require('jquery');
-var _accessToken = null;
-var _client = null;
-var _uid = null;
-var DEVELOPMENT = true;
+'use strict';
+const ProjectServerActionCreator = require('../actions/ProjectServerActionCreator');
+const ServerActionCreator = require('../actions/ServerActionCreator');
+const $ = require('jquery');
+let _accessToken = null,
+    _client = null,
+    _uid = null;
+const DEVELOPMENT = true;
 
 function setHeader(){
     localStorage.setItem("header",JSON.stringify({
@@ -84,9 +85,9 @@ var WebAPIUtils = {
 
   getAllProjects : function( page, perPage, offset ){
     console.log("getProjects");
-    _page = page || 0;
-    _perPage = perPage || 20;
-    _offset = offset || 0;
+    let _page = page || 0,
+        _perPage = perPage || 20,
+        _offset = offset || 0;
     $.ajax({
       dataType : "json",
       data : {

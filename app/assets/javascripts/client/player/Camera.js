@@ -1,5 +1,5 @@
 const STUB = false;
-const $ = require('jQuery');
+const $ = require('jquery');
 const Camera = function(){
 
   let

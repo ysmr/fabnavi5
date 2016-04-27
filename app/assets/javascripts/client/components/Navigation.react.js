@@ -35,16 +35,8 @@ var Navigation = React.createClass({
   componentWillMount : function(){
   },
 
-  //release timeを書いているだけ
   componentDidMount : function (){
     AccountStore.addChangeListener(this._onChange);
-    $.get("https://github.com/fabnavi/fabnavi5/commits/release")
-      .then(function(res){
-        var parser = new DOMParser();
-        var logDoc = parser.parseFromString(res, "text/html");
-        releaseTime = "Released at " + logDoc.getElementsByTagName("time")[0].dateTime;
-        this._onChange();
-      }.bind(this));
   },
 
   componentWillUpdate : function(){

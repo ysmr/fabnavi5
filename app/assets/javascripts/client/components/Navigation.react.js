@@ -1,19 +1,19 @@
-var React = require('react');
-var MenuIcon = require('./MenuIcon.react.js');
-var AccountStore = require('../stores/AccountStore');
-var jade = require('react-jade');
+const
+    React = require('react'),
+    MenuIcon = require('./MenuIcon.react.js'),
+    AccountStore = require('../stores/AccountStore'),
+    jade = require('react-jade'),
 
-var Router = require('react-router');
-var Link = Router.Link;
+    Router = require('react-router'),
+    Link = Router.Link,
 
-var navigation = jade.compileFile(__dirname + '/../templates/Navigation.jade');
-var releaseTime = "loading...";
-var Navigation = React.createClass({
+    navigation = jade.compileFile(__dirname + '/../templates/Navigation.jade');
+
+const Navigation = React.createClass({
 
   getStateFromStores : function getStateFromStores(){
     return {
-      account : AccountStore.getAccountInfo(),
-      time : releaseTime,
+      account : AccountStore.getAccountInfo()
     };
   },
 

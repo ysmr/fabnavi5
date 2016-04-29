@@ -4,6 +4,7 @@ const
     jade = require('react-jade'),
     projectElement = jade.compileFile(__dirname + '/../templates/ProjectElement.jade'),
     ProjectActionCreator = require('../actions/ProjectActionCreator');
+    AccountStore = require('../stores/AccountStore');
 
 const ProjectElement = React.createClass({
 
@@ -38,8 +39,10 @@ const ProjectElement = React.createClass({
 
   getUserIconSrc: function (){
     let src = null;
+    const username = AccountStore.getUserEmail;
     if( src == null ){
-      src = "/images/kaffcop_icon/user_icon.png";
+      src = "https://github.com/" + username + ">.png";
+
     }
     return src;
   },

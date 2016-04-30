@@ -32,7 +32,7 @@ gulp.task('build', build);
 gulp.task('start', watch);
 
 function watch(){
-  var b = watchify(browserify(options));
+  var b = watchify(browserify(options).transform("babelify", {presets: ["es2015"]}));
   bundle();
   b.on('log', function(res){
     gutil.log(res);
@@ -74,7 +74,7 @@ function watch(){
 }
 
 function build(){
-  var b = browserify(options);
+  var b = browserify(options).transform("babelify", {presets: ["es2015"]});
   b.bundle()
   .on('log', gutil.log)
   .on('error',function(e){
@@ -86,6 +86,7 @@ function build(){
   })
   .pipe(source("bundle.js"))
   .pipe(buffer())
+//  .pipe(uglify())
   .pipe(gulp.dest(DIST_CLIENT));
 
 }

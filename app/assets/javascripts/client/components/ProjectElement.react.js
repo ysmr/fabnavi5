@@ -3,7 +3,7 @@ const
     React = require('react'),
     jade = require('react-jade'),
     projectElement = jade.compileFile(__dirname + '/../templates/ProjectElement.jade'),
-    ProjectActionCreator = require('../actions/ProjectActionCreator');
+    ProjectActionCreator = require('../actions/ProjectActionCreator'),
     AccountStore = require('../stores/AccountStore');
 
 const ProjectElement = React.createClass({
@@ -42,7 +42,6 @@ const ProjectElement = React.createClass({
     const username = AccountStore.getUserEmail;
     if( src == null ){
       src = "https://github.com/" + username + ".png";
-
     }
     return src;
   },

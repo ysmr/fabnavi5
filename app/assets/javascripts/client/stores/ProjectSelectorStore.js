@@ -34,7 +34,7 @@ var ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     };
     ProjectSelectorStore.setSelectorIndex(_index);
   },
-
+//project element explode ProjectElement.jade
   explode : function(){
     if(!_selector.openMenu)throw new Error("Ilegal Action");
     var projects = ProjectListStore.getProjectsAll();

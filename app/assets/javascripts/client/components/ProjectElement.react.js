@@ -41,7 +41,7 @@ const ProjectElement = React.createClass({
     let src = null;
     const username = AccountStore.getUserEmail;
     if( src == null ){
-      src = "https://github.com/" + username + ">.png";
+      src = "https://github.com/" + username + ".png";
 
     }
     return src;

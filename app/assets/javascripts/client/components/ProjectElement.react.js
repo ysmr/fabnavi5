@@ -44,7 +44,7 @@ const ProjectElement = React.createClass({
         src = "https://github.com/" + userName + ".png";
       }
     } catch(e){
-      throw new Error("Error from getUserIconSrc");
+      throw new Error("project owner's email is Invalid");
     }
     return src;
   },

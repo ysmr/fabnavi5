@@ -80,19 +80,14 @@ body {
   }
 }
 .selected-project {
-  //background-color: $selected-color;
   width:252px;
   height:382px;
-  //border: solid 3px;
   border-color: $hover-color;
-  //box-shadow: 2px 3px 5px 2px #c8c8c8;
   box-shadow: 0 0 0 3px #FF8F8F
 }
 .project {
   background-color: white;
-  //border:solid 1px;
   box-shadow: 0 0 0 1px #c8c8c8
-  //border-color: $border-normal
 }
 .project-box {
 
@@ -117,10 +112,6 @@ body {
   }
 }
 .project-box:hover {
-  //background-color: ;
-  //border: solid 3px;
-  //border-color: $hover-color;
-  //box-shadow: 2px 3px 5px 2px #c8c8c8;
   box-shadow: 0 0 0 3px #FF8F8F
 }
 .project-name {
@@ -209,7 +200,6 @@ ul.actions {
 
     background-color: $tp-black;
     list-style: none;
-    //height: $action-height;
     height:33.948px;
     margin-bottom:0px;
     img {

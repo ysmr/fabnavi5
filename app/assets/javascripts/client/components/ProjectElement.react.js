@@ -38,15 +38,10 @@ const ProjectElement = React.createClass({
 
   getUserIconSrc: function (){
     let src = null;
-    const userName = this.props.project.user.email.replace(/@.*$/,"")
-    try {
-      if( src == null ){
-        src = "https://github.com/" + userName + ".png";
-      }
-    } catch(e){
-      throw new Error("project owner's email is Invalid");
+    if( src == null ){
+      src = this.props.project.user.image;
     }
-    return src;
+  return src;
   },
 
   render : projectElement,

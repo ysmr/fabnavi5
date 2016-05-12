@@ -33,6 +33,8 @@ tokens.each_with_index do |tok, i|
   u = User.create!(
     provider: "persona",
     uid: "user#{i}@example.com",
+    nickname: "ysmr",
+ 	image: "https://avatars.githubusercontent.com/u/11815130?v=3",
     email: "user#{i}@example.com",
     password: "password",
     tokens: tok,

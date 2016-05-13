@@ -55,9 +55,11 @@ const MainView = function(){
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "100px NotoSansCJKjp-Medium, sans-serif";
     ctx.rotate(Math.PI);
-    ctx.translate(-1500, -800);
-    ctx.fillText("Now Loading...", 0,400);
-    ctx.translate(1500, 800);
+    //ctx.translate(-1500, -800);
+    ctx.translate(-(cvs.width/2+300), -cvs.height/2);
+    ctx.fillText("Now Loading...", 0,0);
+    ctx.translate(cvs.width/2+300, cvs.height/2);
+    //ctx.translate(1500, 800);
     ctx.rotate(-Math.PI);
   }
 

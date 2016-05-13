@@ -15,9 +15,7 @@ const MainView = function(){
   }
 
   function init (canvasElement){
-    //ctx,ctvの初期化
     reset();
-    //ctxにcanvasを入れる
     initCanvas(canvasElement);
 
     CalibrateController.init( canvasElement, getCurrentImage );

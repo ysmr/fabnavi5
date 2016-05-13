@@ -7,7 +7,8 @@ const
 let
     _projects = [],
     initProjects = [],
-    searchProjects = [];
+    searchProjects = [],
+    searchMyProjects = [];
 
 const ProjectListStore = Object.assign({}, EventEmitter.prototype, {
   init : function(){
@@ -65,6 +66,26 @@ const ProjectListStore = Object.assign({}, EventEmitter.prototype, {
     return;
   },
 
+  searchMyProjects : function( uid ){
+    let _project = null;
+    const re = new RegExp(uid, 'i');
+    searchMyProjects = [];
+
+    if(uid === ""){
+      _project = initProjects;
+    } else {
+      let i;
+      for(i = 0; i < initProjects.length; i++){
+        if(re.test(initProjects[i].user.uid) == true){
+          searchMyProjects.push(initProjects[i]);
+          _project = searchMyProjects;
+        }
+      }
+    }
+    this.setProjects(_project);
+    return;
+  },
+
   addChangeListener: function(callback){
     this.on(EventTypes.PROJECT_LIST_CHANGE, callback);
   },
@@ -85,6 +106,10 @@ ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
     case ActionTypes.PROJECT_SEARCH:
       ProjectListStore.searchProject(action.text);
+      break;
+    case ActionTypes.MOVE_MY_PROJECTS:
+      const current_uid = 11815130;
+      ProjectListStore.searchMyProjects(current_uid);
       break;
     default :
       break;

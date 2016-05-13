@@ -15,8 +15,11 @@ const MainView = function(){
   }
 
   function init (canvasElement){
+    //ctx,ctvの初期化
     reset();
+    //ctxにcanvasを入れる
     initCanvas(canvasElement);
+
     CalibrateController.init( canvasElement, getCurrentImage );
     ViewConfig.init();
     clear();
@@ -49,18 +52,20 @@ const MainView = function(){
   }
 
   function drawWaitingMessage(){
-    ctx.fillStyle = "green";
-    ctx.font = "100px ArialRoundedMTBoldBold, serif";
+    clear();
+    if(currentImage)draw(currentImage);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "100px NotoSansCJKjp-Medium, sans-serif";
     ctx.rotate(Math.PI);
     ctx.translate(-1500, -800);
-    ctx.fillText("Now loading...", 400, 400);
+    ctx.fillText("Now Loading...", 0,400);
     ctx.translate(1500, 800);
     ctx.rotate(-Math.PI);
   }
 
   function drawShootingMessage(){
-    ctx.fillStyle = "green";
-    ctx.font = "100px ArialRoundedMTBoldBold, serif";
+    ctx.fillStyle = "#343434";
+    ctx.font =  "100px NotoSansCJKjp-Medium, sans-serif";
     ctx.rotate(Math.PI);
     ctx.translate(-1500, -800);
     ctx.fillText("Taking picture...", 400, 400);

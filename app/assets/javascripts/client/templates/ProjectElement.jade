@@ -13,15 +13,9 @@ div(
     .username
       = this.props.project.user.nickname
     .date
-      //= this.props.isOpenMenu.toString()
-      = this.props.project.created_at.replace(/T.*$/,"").replace(/-/g," / ")
-
-    if this.props.project.description.length>=100
-      .description 
-        = this.props.project.description.substr(0,100) + " . . ." 
-    else
-      .description 
-        = this.props.project.description
+      = this.getUploadDate()
+    .description
+      = this.getDescription()
 
 
   - if( this.props.isOpenMenu )

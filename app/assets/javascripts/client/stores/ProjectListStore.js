@@ -7,8 +7,7 @@ const
 let
     _projects = [],
     initProjects = [],
-    searchProjects = [],
-    searchMyProjects = [];
+    searchProjects = [];
 
 const ProjectListStore = Object.assign({}, EventEmitter.prototype, {
   init : function(){
@@ -68,17 +67,17 @@ const ProjectListStore = Object.assign({}, EventEmitter.prototype, {
 
   searchMyProjects : function( uid ){
     let _project = null;
-    const re = new RegExp(uid, 'i');
-    searchMyProjects = [];
+    const serch_uid = new RegExp(uid, 'i');
+    searchProjects = [];
 
     if(uid === ""){
       _project = initProjects;
     } else {
       let i;
       for(i = 0; i < initProjects.length; i++){
-        if(re.test(initProjects[i].user.uid) == true){
-          searchMyProjects.push(initProjects[i]);
-          _project = searchMyProjects;
+        if(serch_uid.test(initProjects[i].user.uid) == true){
+          searchProjects.push(initProjects[i]);
+          _project = searchProjects;
         }
       }
     }

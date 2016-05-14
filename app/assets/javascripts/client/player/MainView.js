@@ -53,9 +53,9 @@ const MainView = function(){
     ctx.fillStyle = "#FFFFFF";
     ctx.font = "100px NotoSansCJKjp-Medium, sans-serif";
     ctx.rotate(Math.PI);
-    ctx.translate(-1500, -800);
+    ctx.translate(-(cvs.width/2+300), -(cvs.height/2));
     ctx.fillText("Now Loading...", 0,0);
-    ctx.translate(1500, 800);
+    ctx.translate(cvs.width/2+300, cvs.height/2);
     ctx.rotate(-Math.PI);
   }
 
@@ -63,9 +63,9 @@ const MainView = function(){
     ctx.fillStyle = "#343434";
     ctx.font =  "100px NotoSansCJKjp-Medium, sans-serif";
     ctx.rotate(Math.PI);
-    ctx.translate(-1500, -800);
-    ctx.fillText("Taking picture...", 400, 400);
-    ctx.translate(1500, 800);
+    ctx.translate(-(cvs.width/2+300), -(cvs.height/2));
+    ctx.fillText("Taking picture...", 0, 0);
+    ctx.translate(cvs.width/2+300, cvs.height/2);
     ctx.rotate(-Math.PI);
   }
 

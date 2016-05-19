@@ -34,6 +34,13 @@ const ProjectListStore = Object.assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
+  listMyProjects : function(uid){
+    _projects = [];
+    ProjectActionCreator.getMyProjects(uid);
+    this.setProjects(_project);
+    return;
+  },
+
   removeProject : function( project ){
     let i;
     for( i = 0; i < _projects.length; i++ ){
@@ -107,8 +114,8 @@ ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
       ProjectListStore.searchProject(action.text);
       break;
     case ActionTypes.MOVE_MY_PROJECTS:
-      const current_uid = 11815130;
-      ProjectListStore.searchMyProjects(current_uid);
+      const uid = 11815130;
+      ProjectListStore.searchMyProjects(uid);
       break;
     default :
       break;

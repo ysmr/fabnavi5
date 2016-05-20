@@ -344,11 +344,11 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       ProjectStore.prev();
       break
 
-    case KeyActionTypes.PROJECT_EXPAND:
-      CalibrateController.changeRegion(0.99, 0.99)();
+    case KeyActionTypes.PROJECT_ZOOMOUT:
+      CalibrateController.zoomIO(1.01, 1.01)();
       break
-    case KeyActionTypes.PROJECT_SHRINK:
-      CalibrateController.changeRegion(1.01, 1.01)();
+    case KeyActionTypes.PROJECT_ZOOMIN:
+      CalibrateController.zoomIO(0.99, 0.99)();
       break
 
 

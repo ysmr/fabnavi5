@@ -51,8 +51,8 @@ const playerStateMachine = new machina.Fsm({
         this.keyMap[83] = KeyAction.PROJECT_SAVE;
 
         //Playの時に画像を上下キーで拡大縮小
-        this.keyMap[38] = KeyAction.PROJECT_ZOOMIN;
-        this.keyMap[40] = KeyAction.PROJECT_ZOOMOUT;
+        this.keyMap[38] = KeyAction.CALIBRATE_ZOOMIN;
+        this.keyMap[40] = KeyAction.CALIBRATE_ZOOMOUT;
 
         this.keyMap[67] = function(){
           this.transition("calibrateCenter");

@@ -67,7 +67,7 @@ const CalibrateController = (function (){
     }
   }
 
-  function zoomIO(_w, _h){
+  function zoomIOCB(_w, _h){
     return function(){
       w = w*_w;
       h = h*_h;
@@ -213,7 +213,7 @@ const CalibrateController = (function (){
     removeMouseEvent:removeMouseEvent,
     toggleAspBtn:toggleAspectShiftMode,
     changeRegionCB:changeRegionCB,
-    zoomIO:zoomIO,
+    zoomIOCB:zoomIOCB,
     moveRegionCB:moveRegionCB,
     dbg:dbg,
     update:update,

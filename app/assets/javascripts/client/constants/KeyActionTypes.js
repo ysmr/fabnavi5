@@ -4,8 +4,8 @@ module.exports = keyMirror({
   PROJECT_PREV_PAGE : null,
   PROJECT_SHOOT : null,
 
-  PROJECT_ZOOMIN :null,
-  PROJECT_ZOOMOUT : null,
+  CALIBRATE_ZOOMIN :null,
+  CALIBRATE_ZOOMOUT : null,
 
   CALIBRATE_MOVE_RIGHT : null,
   CALIBRATE_MOVE_LEFT: null,

@@ -204,13 +204,14 @@ ul.actions {
     //height:33.948px;
     height:$thumb-height/3;
     margin-bottom:0px;
+    padding-top: 8px;
     img {
       width:$action-height * 0.8;
       margin:  $action-height * 0.1;
     }
     span {
       position:absolute;
-      margin-top:$action-height * 0.2;
+      margin-top:2px;
     }
   }
   .delete {
@@ -225,5 +226,5 @@ ul.actions {
 
 .logo{
   padding-top: 90px;
-  padding-left:0px;
+  padding-left:38px;
 }

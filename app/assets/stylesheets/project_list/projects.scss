@@ -74,7 +74,7 @@ body {
 .projects {
  @include outer-container;
   margin:20px auto;
-  width: $ct-width;
+  width:$solid-width;
   color: #323232;
   h1{
     font-size: 18px;
@@ -225,5 +225,5 @@ ul.actions {
 
 .logo{
   padding-top: 90px;
-  padding-left:40px;
+  padding-left:0px;
 }

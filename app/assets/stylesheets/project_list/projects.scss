@@ -61,6 +61,7 @@ body {
 .thumbnail img {
   transform: rotateZ(180deg);
   width: 100%;
+  height:100%;
   border-radius: 0px 0px 5px 5px;
 }
 #status-icon {
@@ -118,7 +119,7 @@ body {
   font-size:17pt;
   margin-left:$thumb-pad;
   margin-bottom:5px;
-  margin-top: 35px;
+  margin-top: 20px;
   height:54px;
 }
 .date {
@@ -200,7 +201,8 @@ ul.actions {
 
     background-color: $tp-black;
     list-style: none;
-    height:33.948px;
+    //height:33.948px;
+    height:$thumb-height/3;
     margin-bottom:0px;
     img {
       width:$action-height * 0.8;

@@ -53,7 +53,6 @@ const ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         setTimeout(function(){
           ProjectActionCreator.detailProject( project );
         },0);
-        console.log("hey");
         _selector.openMenu = false;
         _selector.menuIndex = 0;
         break;

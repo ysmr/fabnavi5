@@ -1,6 +1,7 @@
 const
     React = require('react'),
     ProjectListStore = require('../stores/ProjectListStore'),
+    ProjectStore = require('../stores/ProjectStore'),
     jade = require('react-jade'),
 
     Router = require('react-router'),
@@ -32,12 +33,14 @@ const ProjectDetail = React.createClass({
 
   getDefaultProps: function(){
     return {
+      hoge : "hoge",
     };
   },
 
   render : projectDetail,
 
   componentWillMount : function(){
+    console.log("load detail page");
   },
 
   componentDidMount : function (){

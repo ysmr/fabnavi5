@@ -16,7 +16,9 @@ const ProjectActionCreator = {
     WebAPIUtils.getAllProjects();
   },
 
-  getOwnProjects : function(uid){
+  getOwnProjects : function(){
+    WebAPIUtils.getCurrentUserID();
+    const uid = localStorage.getItem("currentuser");
     AppDispatcher.dispatch({
       type : ActionTypes.PROJECTS_FETCH,
     });

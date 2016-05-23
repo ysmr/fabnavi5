@@ -18,7 +18,7 @@ const ProjectListStore = Object.assign({}, EventEmitter.prototype, {
 
   loadProjects : function(){
     if(location.hash=="#/manager/myprojects"){
-      ProjectActionCreator.getOwnProjects(1);
+      ProjectActionCreator.getOwnProjects();
     }else{
       ProjectActionCreator.getAllProjects();
     }

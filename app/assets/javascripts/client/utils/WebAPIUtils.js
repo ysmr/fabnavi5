@@ -56,6 +56,25 @@ function genHeader(){
 
 const WebAPIUtils = {
 
+  getCurrentUserID : function(){
+    console.log("getCurrentUserID");
+    let current_id;
+
+    $.ajax({
+      dataType : "json",
+      type : "GET",
+      success : function(res){
+        current_id = res.id;
+        localStorage.setItem("currentuser", current_id);
+      },
+      error : function(err){
+        console.log("Error from getCurrentUserID");
+        console.log(err);
+      },
+      url : "/api/v1/current_user.json"
+    });
+  },
+
   getProject : function( id ){
     console.log("getProject : ", id);
 

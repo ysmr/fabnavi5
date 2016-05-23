@@ -189,9 +189,11 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
     case ActionTypes.MOVE_TOP:
       location.hash = "#/manager"
+      window.location.reload();
       break;
     case ActionTypes.MOVE_MY_PROJECTS:
       location.hash = "#/manager/myprojects"
+      window.location.reload();
       break;
     case ActionTypes.MOVE_CONFIG:
       location.hash = "#/manager"

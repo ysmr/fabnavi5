@@ -16,11 +16,11 @@ const ProjectActionCreator = {
     WebAPIUtils.getAllProjects();
   },
 
-  getMyProjects : function(uid){
+  getOwnProjects : function(uid){
     AppDispatcher.dispatch({
       type : ActionTypes.PROJECTS_FETCH,
     });
-    WebAPIUtils.getMyProjects(uid);
+    WebAPIUtils.getOwnProjects(uid);
   },
 
   createProject : function( payload ){

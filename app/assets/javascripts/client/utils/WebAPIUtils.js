@@ -74,20 +74,19 @@ const WebAPIUtils = {
     });
   },
 
-  getMyProjects : function( uid ){
-    console.log("getMyProjects : ", uid);
+  getOwnProjects : function( uid ){
+    console.log("getOwnProjects : ", uid);
 
     $.ajax({
       dataType : "json",
       type : "GET",
       success : function(res){
-        ProjectServerActionCreator.receiveProject( res );
+        ProjectServerActionCreator.receiveProjects( res );
       },
       error : function(err){
-        console.log("Error from getMyProjects");
+        console.log("Error from getOwnProjects");
         console.log(err);
       },
-      headers : genHeader(),
       url : "/api/v1/users/" + uid + "/projects.json"
     });
   },

@@ -12,8 +12,16 @@ let
 const ProjectListStore = Object.assign({}, EventEmitter.prototype, {
   init : function(){
     _projects = [];
-    ProjectActionCreator.getAllProjects();
+    this.loadProjects();
     this.emitChange();
+  },
+
+  loadProjects : function(){
+    if(location.hash=="#/manager/myprojects"){
+      ProjectActionCreator.getOwnProjects(1);
+    }else{
+      ProjectActionCreator.getAllProjects();
+    }
   },
 
   getProjectsAll : function(){
@@ -32,13 +40,6 @@ const ProjectListStore = Object.assign({}, EventEmitter.prototype, {
   setProjects : function( projects ){
     _projects = projects;
     this.emitChange();
-  },
-
-  listMyProjects : function(uid){
-    _projects = [];
-    ProjectActionCreator.getMyProjects(uid);
-    this.setProjects(_project);
-    return;
   },
 
   removeProject : function( project ){
@@ -112,10 +113,6 @@ ProjectListStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
     case ActionTypes.PROJECT_SEARCH:
       ProjectListStore.searchProject(action.text);
-      break;
-    case ActionTypes.MOVE_MY_PROJECTS:
-      const uid = 11815130;
-      ProjectListStore.searchMyProjects(uid);
       break;
     default :
       break;

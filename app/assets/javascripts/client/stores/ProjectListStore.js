@@ -73,26 +73,6 @@ const ProjectListStore = Object.assign({}, EventEmitter.prototype, {
     return;
   },
 
-  searchMyProjects : function( uid ){
-    let _project = null;
-    const serch_uid = new RegExp(uid, 'i');
-    searchProjects = [];
-
-    if(uid === ""){
-      _project = initProjects;
-    } else {
-      let i;
-      for(i = 0; i < initProjects.length; i++){
-        if(serch_uid.test(initProjects[i].user.uid) == true){
-          searchProjects.push(initProjects[i]);
-          _project = searchProjects;
-        }
-      }
-    }
-    this.setProjects(_project);
-    return;
-  },
-
   addChangeListener: function(callback){
     this.on(EventTypes.PROJECT_LIST_CHANGE, callback);
   },

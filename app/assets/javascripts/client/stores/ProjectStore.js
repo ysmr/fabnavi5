@@ -372,6 +372,10 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
     case ActionTypes.UPLOAD_ATTACHMENT_FAILED:
       ProjectStore.uploadFailed( action.result.sym );
       break;
+    case ActionTypes.PROJECT_DETAIL:
+      location.hash = "#/detail/" + action.id;
+      ProjectStore.init();
+      break;
     default :
       break;
   };

@@ -108,6 +108,7 @@ const WebAPIUtils = {
         console.log("Error from getOwnProjects");
         console.log(err);
       },
+      headers : genHeader(),
       url : "/api/v1/users/" + uid + "/projects.json"
     });
   },

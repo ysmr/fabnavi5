@@ -188,15 +188,22 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
       ProjectSelectorStore.nextAction();
       break;
     case ActionTypes.MOVE_TOP:
-      location.hash = "#/manager"
-      window.location.reload();
+      location.hash = "#/manager/transit"
+      setTimeout(function(){
+        location.hash = "#/manager"
+      },0);
       break;
     case ActionTypes.MOVE_MY_PROJECTS:
-      location.hash = "#/manager/myprojects"
-      window.location.reload();
+      location.hash = "#/manager/transit"
+      setTimeout(function(){
+        location.hash = "#/manager/myprojects"
+      },0);
       break;
     case ActionTypes.MOVE_CONFIG:
-      location.hash = "#/manager"
+      location.hash = "#/manager/transit"
+      setTimeout(function(){
+        location.hash = "#/manager/"
+      },0);
       break;
     case ActionTypes.MOVE_NEW_PROJECT:
       location.hash = "#/manager/create"

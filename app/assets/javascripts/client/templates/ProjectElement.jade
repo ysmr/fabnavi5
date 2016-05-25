@@ -1,4 +1,4 @@
-//画像に表示されるメニュー
+//画像に表示されるメニュー 
 div(
   className="project-box " + (this.props.isSelected  ? "selected-project" : "project")
   onClick=this.handleClick
@@ -29,9 +29,9 @@ div(
       li(className="action-box "+(this.props.menuIndex == 1 ? "selected-action" : "action"))
         img(src="/images/p_detail.png")
         | Detail
-      //li(className="action-box "+(this.props.menuIndex == 3 ? "selected-action" : "action"))
-      //  img(src="/images/p_edit.png")
-      //  | Edit
       li(className="action-box "+(this.props.menuIndex == 2 ? "selected-action" : "action"))
+        img(src="/images/p_edit.png")
+        | Edit
+      li(className="action-box "+(this.props.menuIndex == 3 ? "selected-action" : "action"))
         img(src="/images/p_delete.png")
         | Delete

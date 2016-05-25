@@ -48,7 +48,14 @@ const ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         _selector.openMenu = false;
         _selector.menuIndex = 0;
         break;
-      case 4:
+      case 2:
+        setTimeout(function(){
+          ProjectActionCreator.editProject( project );
+        }, 0);
+        _selector.openMenu = false;
+        _selector.menuIndex = 0;
+      break;
+      case 3:
         setTimeout(function(){
           ProjectActionCreator.deleteProject( project );
         }, 0);
@@ -120,8 +127,8 @@ const ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
 
   nextAction : function(){
     _selector.menuIndex++;
-    if(_selector.menuIndex > 2){
-      _selector.menuIndex = 2;
+    if(_selector.menuIndex > 3){
+      _selector.menuIndex = 3;
     }
     this.emitChange();
   },

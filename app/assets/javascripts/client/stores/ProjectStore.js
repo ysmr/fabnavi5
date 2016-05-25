@@ -381,6 +381,8 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
     case ActionTypes.UPLOAD_ATTACHMENT_FAILED:
       ProjectStore.uploadFailed( action.result.sym );
       break;
+    case ActionTypes.PROJECT_EDIT:
+      location.hash = "#/manager/edit/" + action.id;
     default :
       break;
   };

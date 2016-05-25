@@ -38,6 +38,7 @@ const ProjectDetail = React.createClass({
   render : projectDetail,
 
   componentWillMount : function(){
+
   },
 
   componentDidMount : function (){

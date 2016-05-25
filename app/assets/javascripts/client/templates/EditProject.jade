@@ -1,2 +1,6 @@
 h1 EditProject
-= this.context.router.getCurrentParams().projectId
+//= this.context.router.getCurrentParams().projectId　
+
+- var contents = this.getImage();
+- for(var a in contents.content_array)
+  img(src = contents.figure[a])

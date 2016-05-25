@@ -39,6 +39,13 @@ const ProjectActionCreator = {
     });
   },
 
+  editProject : function( payload ){
+    AppDispatcher.dispatch({
+      type : ActionTypes.PROJECT_EDIT,
+      id   : payload.id
+    });
+  },
+
   updateProject : function( payload ){
     AppDispatcher.dispatch({
       type : ActionTypes.PROJECT_UPDATE,

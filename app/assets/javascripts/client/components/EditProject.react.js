@@ -1,6 +1,8 @@
 const
     React = require('react'),
     ProjectListStore = require('../stores/ProjectListStore'),
+    ProjectStore = require('../stores/ProjectStore'),
+    ProjectActionCreator = require('../actions/ProjectActionCreator'),
     jade = require('react-jade'),
     Router = require('react-router'),
     DefaultRoute = Router.DefaultRoute,
@@ -19,6 +21,7 @@ const EditProject = React.createClass({
 
   getStateFromStores : function getStateFromStores(){
     return {
+      projects : ProjectListStore.getProjectsAll(),
     };
   },
 
@@ -34,9 +37,29 @@ const EditProject = React.createClass({
     };
   },
 
+
+  getImage: function(){
+  let project ={};
+  project.figure=[];
+  project.content_array=[];
+
+  for(var i in this.state.projects){
+    if(this.state.projects[i].id == this.context.router.getCurrentParams().projectId){
+      project.content_array = this.state.projects[i].content;
+      //console.log(content_array);
+    }
+  }
+  for(var i in project.content_array){
+    project.figure.push(project.content_array[i].figure.file.file.thumb.url);
+  }
+  return project;
+},
+
+
   render : editProject,
 
   componentWillMount : function(){
+    ProjectActionCreator.getAllProjects();　
   },
 
   componentDidMount : function (){

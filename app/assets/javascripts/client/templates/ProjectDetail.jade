@@ -1,5 +1,20 @@
-h1 ProjectDetail
-= this.context.router.getCurrentParams().projectId
+div.detail-page
+  h1 ProjectDetail
+  - var project = this.getProjectDetail();
+  div.project-detail-box
+    .thumbnail
+      img(src=project.thumb) 
+    h1.project-name
+      = project.name
+    hr
+    .box
+      img.user-icon(src=project.usericon)
+      .username
+        //= this.props.project.user.nickname
+        = project.username
+      .date
+        = project.date
+  h1 Description
+  p
+  = project.description 
  
-p
-= this.props.hoge 

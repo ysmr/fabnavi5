@@ -383,7 +383,7 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
     case ActionTypes.PROJECT_DETAIL:
       console.log("PROJECT_DETAIL");
-      location.hash = "#/detail/" + action.id;
+      location.hash = "#/manager/detail/" + action.id;
       break;
     default :
       break;

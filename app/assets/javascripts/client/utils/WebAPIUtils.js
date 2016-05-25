@@ -18,6 +18,7 @@ function setHeader(){
 
 function clearHeader(){
   localStorage.removeItem("header");
+  localStorage.removeItem("currentuser");
 }
 
 function loadHeader(){
@@ -71,6 +72,7 @@ const WebAPIUtils = {
         console.log("Error from getCurrentUserID");
         console.log(err);
       },
+      headers : genHeader(),
       url : "/api/v1/current_user.json"
     });
   },

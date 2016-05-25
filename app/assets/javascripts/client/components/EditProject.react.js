@@ -15,6 +15,11 @@ const
 
 const EditProject = React.createClass({
 
+  propTypes : {
+    act   : React.PropTypes.string.isRequired,
+    src   : React.PropTypes.string.isRequired,
+  },
+
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -37,20 +42,27 @@ const EditProject = React.createClass({
     };
   },
 
+  onclick : function(){
+    console.log("click picture : "+ this.props.arc);
+    return;
+  },
+
 
   getImage: function(){
   let project ={};
   project.figure=[];
   project.content_array=[];
+  project.figure_id =[];
 
   for(var i in this.state.projects){
     if(this.state.projects[i].id == this.context.router.getCurrentParams().projectId){
       project.content_array = this.state.projects[i].content;
-      //console.log(content_array);
+      console.log(project.content_array );
     }
   }
   for(var i in project.content_array){
     project.figure.push(project.content_array[i].figure.file.file.thumb.url);
+    project.figure_id.push(project.content_array[i].figure.figure_id);
   }
   return project;
 },

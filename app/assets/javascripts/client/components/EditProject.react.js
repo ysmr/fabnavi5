@@ -10,6 +10,8 @@ const
     Route = Router.Route,
     RouteHandler = Router.RouteHandler,
 
+    EditContent = require('./EditContent.react.js'),
+
     State = require('../utils/FabnaviStateMachine'),
     editProject = jade.compileFile(__dirname + '/../templates/EditProject.jade');
 

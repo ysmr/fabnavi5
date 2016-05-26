@@ -2,10 +2,17 @@ h1 EditProject
 //= this.context.router.getCurrentParams().projectId　
 
 - var contents = this.getImage();
+
 div.edit-pic
   - for(var i in contents.content_array)
     p 
     = contents.figure_id[i]
     a( arc = contents.figure_id[i])
       img.edit-thum(src = contents.figure[i] onClick=this.onclick)  
+
+      
+//div.edit-pic
+//  - for(var i in contents.content_array)
+//    EditContent(act = contents.figure_id[i] src=contents.figure[i])
+    
       

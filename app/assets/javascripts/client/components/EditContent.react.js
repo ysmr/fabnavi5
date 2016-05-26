@@ -28,11 +28,10 @@ const EditContent = React.createClass({
   },
 
   onclick : function(){
-    console.log("click picture : "+ this.props.act);
     this.setState({flag:!this.state.flag});
     this.getSrc();
-    console.log(this.state.flag);
-    console.log(this.state.src);
+    console.log("click picture : "+ this.props.act);
+    console.log(this.state.flag)
     return;
   },
 

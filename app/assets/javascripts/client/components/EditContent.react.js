@@ -8,7 +8,7 @@ const
 
     editContent = jade.compileFile(__dirname + '/../templates/EditContent.jade');
 
-const MenuIcon = React.createClass({
+const EditContent = React.createClass({
 //Navigation.jadeにあるactとsrc
   propTypes : {
     act   : React.PropTypes.string.isRequired,
@@ -25,10 +25,11 @@ const MenuIcon = React.createClass({
     };
   },
 
-  render : menuIcon,
+  render : editContent,
 
   onclick : function(){
-    //NavigationViewActionCreator.menuSelect(this.props.act);
+    console.log("click picture : "+ this.props.act);
+    return;
   },
 
   componentWillMount : function(){
@@ -57,4 +58,4 @@ const MenuIcon = React.createClass({
 
 });
 
-module.exports = MenuIcon;
+module.exports = EditContent;

@@ -1,5 +1,6 @@
 const
     React = require('react'),
+    EditContent = require('./EditContent.react.js'),
     ProjectListStore = require('../stores/ProjectListStore'),
     ProjectStore = require('../stores/ProjectStore'),
     ProjectActionCreator = require('../actions/ProjectActionCreator'),
@@ -10,7 +11,6 @@ const
     Route = Router.Route,
     RouteHandler = Router.RouteHandler,
 
-    EditContent = require('./EditContent.react.js'),
 
     State = require('../utils/FabnaviStateMachine'),
     editProject = jade.compileFile(__dirname + '/../templates/EditProject.jade');
@@ -44,10 +44,6 @@ const EditProject = React.createClass({
     };
   },
 
-  onclick : function(){
-    console.log("click picture : "+ this.props.arc);
-    return;
-  },
 
 
   getImage: function(){
@@ -60,6 +56,7 @@ const EditProject = React.createClass({
     if(this.state.projects[i].id == this.context.router.getCurrentParams().projectId){
       project.content_array = this.state.projects[i].content;
       console.log(project.content_array );
+      console.log(project.content_array[1].figure.figure_id);
     }
   }
   for(var i in project.content_array){

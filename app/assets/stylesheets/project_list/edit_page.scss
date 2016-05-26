@@ -22,20 +22,23 @@
     margin-right:14px;
     margin-bottom:10px;
     border-radius: 3px;
+    width:200px;
+    height:126px;
   }
-  a:hover{
-    img{
-      border-color: $hover-color;
-      box-shadow: 0 0 0 3px #FF8F8F
-    }
+  img:hover{
+    border-color: $hover-color;
+    box-shadow: 0 0 0 3px #FF8F8F
+  }
+  img:checked{
+    border-color: $hover-color;
+    box-shadow: 0 0 0 8px #FF8F8F
   }
 }
 
   .edit-thumb{
-    img{
-    margin: 10px;
-  }
-
+    img:active{
+      -webkit-filter: grayscale(100%);
+    }
 }
 
 input {

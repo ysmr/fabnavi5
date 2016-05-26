@@ -44,8 +44,6 @@ const EditProject = React.createClass({
     };
   },
 
-
-
   getImage: function(){
   let project ={};
   project.figure=[];
@@ -63,8 +61,8 @@ const EditProject = React.createClass({
     project.figure.push(project.content_array[i].figure.file.file.thumb.url);
     project.figure_id.push(project.content_array[i].figure.figure_id);
   }
-  return project;
-},
+    return project;
+  },
 
 
   render : editProject,

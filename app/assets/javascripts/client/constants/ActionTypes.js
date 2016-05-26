@@ -39,4 +39,6 @@ module.exports = keyMirror({
   UPDATE_CANVAS: null,
 
   PROJECT_SEARCH: null,
+
+  EDIT_CONTENT: null,
 });

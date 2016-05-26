@@ -78,6 +78,12 @@ const ProjectActionCreator = {
     });
   },
 
+  editContent : function(){
+    AppDispatcher.dispatch({
+      type : ActionTypes.EDIT_CONTENT　
+    });
+  },
+
 };
 
 module.exports = ProjectActionCreator;

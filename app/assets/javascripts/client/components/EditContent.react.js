@@ -12,6 +12,8 @@ const EditContent = React.createClass({
   propTypes : {
     id   : React.PropTypes.string.isRequired,
     src   : React.PropTypes.string.isRequired,
+    current_page   : React.PropTypes.number.isRequired,
+    current_array : React.PropTypes.array.isRequired,
     id_array : React.PropTypes.array.isRequired,
   },
 
@@ -29,7 +31,8 @@ const EditContent = React.createClass({
   },
 
   onclick : function(){
-    this.registId(this.props.id)
+    this.registId(this.props.id);
+    this.registPage(this.props.current_page);
     this.setState({flag:!this.state.flag});
     this.getSrc();
     //console.log("click picture : "+ this.props.id);
@@ -59,6 +62,12 @@ const EditContent = React.createClass({
       this.props.id_array.push(id);
     }
     console.log(this.props.id_array);
+    return;
+  },
+
+  registPage: function(current_page){
+    this.props.current_array.push(current_page);
+    console.log(this.props.current_array);
     return;
   },
 

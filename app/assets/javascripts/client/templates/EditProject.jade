@@ -1,10 +1,11 @@
 div.editproject
   h1 EditProject
-  button(type = "button" name ="delete")
+  button.btn(type ="submit" onClick = this.onclick) D E L E T E
+  
   hr
   - var contents = this.getImage();
   div.edit-pic
     - for(var i in contents.content_array)
-      EditContent(id=contents.figure_id[i] src=contents.figure[i] id_array = this.props.id_array) 
+      EditContent(id=contents.figure_id[i] src=contents.figure[i] current_page = contents.content_array[i] current_array = this.props.current_array id_array = this.props.id_array ) 
     
       

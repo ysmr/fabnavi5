@@ -42,6 +42,7 @@ const EditProject = React.createClass({
   getDefaultProps: function(){
     return {
       id_array : [],
+      current_array : [],
     };
   },
 
@@ -64,6 +65,14 @@ const EditProject = React.createClass({
   }
     return project;
   },
+
+  onclick: function(){
+    console.log("button onclick: " + this.props.id_array);
+    console.log(this.props.id_array);
+    ProjectActionCreator.editContent(this.props.id_array);
+  },
+
+
 
 
   render : editProject,

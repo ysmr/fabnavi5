@@ -158,6 +158,16 @@ const ProjectStore = Object.assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
+  toggleDestroyContent:function(){
+    /*
+    for(let i =0; i<_project.length;i++){
+      for(let j =0; j<)
+      if(_project.content[i].figure.figure_id)
+    }
+    */
+    return;
+  },
+
   newFigure : function( ){
     return {
       figure : {
@@ -383,6 +393,17 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
     case ActionTypes.PROJECT_EDIT:
       location.hash = "#/manager/edit/" + action.id;
+
+    case ActionTypes.EDIT_CONTENT:
+      _project = action.project;
+      //_figureid = action.figure_id;
+      ProjectStore.toggleDestroyContent();
+      setTimeout(function(){
+        ProjectActionCreator.updateProject({
+          project:ProjectStore.getProject()
+        });
+      }, 0);
+      break;
     default :
       break;
   };

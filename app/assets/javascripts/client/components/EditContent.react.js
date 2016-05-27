@@ -10,10 +10,8 @@ const
 const EditContent = React.createClass({
 //Navigation.jadeにあるactとsrc
   propTypes : {
-    id   : React.PropTypes.string.isRequired,
+    id   : React.PropTypes.number.isRequired,
     src   : React.PropTypes.string.isRequired,
-    current_page   : React.PropTypes.number.isRequired,
-    current_array : React.PropTypes.array.isRequired,
     id_array : React.PropTypes.array.isRequired,
   },
 
@@ -44,7 +42,7 @@ const EditContent = React.createClass({
     if(this.state.flag){
       this.setState({src:this.props.src});
     }else{
-      this.setState({src:"/images/kaffcop_icon/delete_content.png"}); 
+      this.setState({src:"/images/kaffcop_icon/delete_content.png"});
     }
     return;
   },

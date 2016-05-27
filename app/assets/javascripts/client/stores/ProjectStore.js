@@ -160,16 +160,19 @@ const ProjectStore = Object.assign({}, EventEmitter.prototype, {
   },
 
   toggleDestroyContent:function(){
-    /*
-    for(let i =0; i<_project.length;i++){
-      for(let j =0; j<_delContent.length;j++)
-      if(_project.content[i].figure.figure_id == _delContent[j]){
-        _project.content[i].figure["_destroy"] = true;
+    console.log("toggletoggle");
+    console.log(_project.content.length);
+    console.log(_delContent.length);
+    for(let i =0; i<_project.content.length;i++){
+      for(let j =0; j<_delContent.length;j++){
+        if(_project.content[i].figure.figure_id == _delContent[j]){
+          console.log(_project.content[i].figure.file.file.thumb.url);
+          _project.content[i].figure["_destroy"] = true;
+          console.log(_project.content[i].figure["_destroy"]);
+        }
       }
     }
     this.emitChange();
-    */
-    return;
   },
 
   newFigure : function( ){
@@ -397,16 +400,15 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       break;
     case ActionTypes.PROJECT_EDIT:
       location.hash = "#/manager/edit/" + action.id;
-
+      break;
     case ActionTypes.EDIT_CONTENT:
       _project = action.project;
-      _delContent = action.delete_content;
+      _delContent = action.content_array;
       console.log("action edit content:")
       console.log(_project);
       console.log(_delContent);
-      //_figureid = action.figure_id;
-      /*
       ProjectStore.toggleDestroyContent();
+      /*
       setTimeout(function(){
         ProjectActionCreator.updateProject({
           project:ProjectStore.getProject()

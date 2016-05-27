@@ -18,8 +18,6 @@ const
 const EditProject = React.createClass({
 
   propTypes : {
-    act   : React.PropTypes.string.isRequired,
-    src   : React.PropTypes.string.isRequired,
   },
 
   contextTypes: {

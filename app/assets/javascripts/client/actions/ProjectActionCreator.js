@@ -82,7 +82,7 @@ const ProjectActionCreator = {
     AppDispatcher.dispatch({
       type : ActionTypes.EDIT_CONTENT,
       project : project,
-      delete_content : content_array
+      content_array : content_array
     });
   },
 

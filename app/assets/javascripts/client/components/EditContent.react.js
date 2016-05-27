@@ -30,7 +30,6 @@ const EditContent = React.createClass({
 
   onclick : function(){
     this.registId(this.props.id);
-    this.registPage(this.props.current_page);
     this.setState({flag:!this.state.flag});
     this.getSrc();
     //console.log("click picture : "+ this.props.id);
@@ -62,13 +61,6 @@ const EditContent = React.createClass({
     console.log(this.props.id_array);
     return;
   },
-
-  registPage: function(current_page){
-    //this.props.current_array.push(current_page);
-    //console.log(this.props.current_array);
-    return;
-  },
-
 
   render : editContent,
 

@@ -20,6 +20,7 @@ const EditProject = React.createClass({
   propTypes : {
   },
 
+
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -76,6 +77,7 @@ const EditProject = React.createClass({
   render : editProject,
 
   componentWillMount : function(){
+    this.props.id_array = [];
     ProjectActionCreator.getAllProjects();　
   },
 

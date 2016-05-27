@@ -408,13 +408,11 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       console.log(_project);
       console.log(_delContent);
       ProjectStore.toggleDestroyContent();
-      /*
       setTimeout(function(){
         ProjectActionCreator.updateProject({
           project:ProjectStore.getProject()
         });
       }, 0);
-      */
       break;
     default :
       break;

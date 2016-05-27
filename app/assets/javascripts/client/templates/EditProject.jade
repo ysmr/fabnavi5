@@ -1,9 +1,10 @@
 div.editproject
   h1 EditProject
+  button(type = "button" name ="delete")
   hr
   - var contents = this.getImage();
   div.edit-pic
     - for(var i in contents.content_array)
-      EditContent(act=contents.figure_id[i] src=contents.figure[i]) 
+      EditContent(id=contents.figure_id[i] src=contents.figure[i] id_array = this.props.id_array) 
     
       

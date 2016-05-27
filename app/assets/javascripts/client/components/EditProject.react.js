@@ -41,6 +41,7 @@ const EditProject = React.createClass({
 
   getDefaultProps: function(){
     return {
+      id_array : [],
     };
   },
 

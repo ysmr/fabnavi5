@@ -10,14 +10,15 @@ const
 const EditContent = React.createClass({
 //Navigation.jadeにあるactとsrc
   propTypes : {
-    act   : React.PropTypes.string.isRequired,
+    id   : React.PropTypes.string.isRequired,
     src   : React.PropTypes.string.isRequired,
+    id_array : React.PropTypes.array.isRequired,
   },
 
   getInitialState: function(){
     return {
       src : this.props.src,
-      act : this.props.act,
+      id : this.props.act,
       flag : false,
     };
   },
@@ -28,10 +29,11 @@ const EditContent = React.createClass({
   },
 
   onclick : function(){
+    this.registId(this.props.id)
     this.setState({flag:!this.state.flag});
     this.getSrc();
-    console.log("click picture : "+ this.props.act);
-    console.log(this.state.flag)
+    //console.log("click picture : "+ this.props.id);
+    console.log(this.state.flag);
     return;
   },
 
@@ -43,6 +45,23 @@ const EditContent = React.createClass({
     }
     return;
   },
+
+  registId: function(id){
+    let flag = true;
+    console.log("click picture : " + id);
+    for(var i=0;i<this.props.id_array.length;i++){
+      if(this.props.id_array[i]==id){
+        this.props.id_array.splice(i,1);
+        flag = !flag;
+      }
+    }
+    if(flag){
+      this.props.id_array.push(id);
+    }
+    console.log(this.props.id_array);
+    return;
+  },
+
 
   render : editContent,
 

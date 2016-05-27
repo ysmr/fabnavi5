@@ -44,7 +44,7 @@ const EditContent = React.createClass({
     if(this.state.flag){
       this.setState({src:this.props.src});
     }else{
-      this.setState({src:"/images/kaffcop_icon/delete_content.png"});
+      this.setState({src:"/images/kaffcop_icon/delete_content.png"}); 
     }
     return;
   },
@@ -66,8 +66,8 @@ const EditContent = React.createClass({
   },
 
   registPage: function(current_page){
-    this.props.current_array.push(current_page);
-    console.log(this.props.current_array);
+    //this.props.current_array.push(current_page);
+    //console.log(this.props.current_array);
     return;
   },
 

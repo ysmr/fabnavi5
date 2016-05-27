@@ -42,23 +42,23 @@ const EditProject = React.createClass({
   getDefaultProps: function(){
     return {
       id_array : [],
-      current_array : [],
     };
   },
 
   getImage: function(){
   let project ={};
-  project.figure=[];
   project.content_array=[];
+  project.figure=[];
   project.figure_id =[];
+  project.project_id = null;
 
   for(var i in this.state.projects){
     if(this.state.projects[i].id == this.context.router.getCurrentParams().projectId){
+      project.project_id = this.state.projects[i];
       project.content_array = this.state.projects[i].content;
-      console.log(project.content_array );
-      console.log(project.content_array[1].figure.figure_id);
     }
   }
+
   for(var i in project.content_array){
     project.figure.push(project.content_array[i].figure.file.file.thumb.url);
     project.figure_id.push(project.content_array[i].figure.figure_id);
@@ -67,9 +67,9 @@ const EditProject = React.createClass({
   },
 
   onclick: function(){
+    var a = this.getImage();
     console.log("button onclick: " + this.props.id_array);
-    console.log(this.props.id_array);
-    ProjectActionCreator.editContent(this.props.id_array);
+    ProjectActionCreator.editContent(a.project_id,this.props.id_array);
   },
 
 

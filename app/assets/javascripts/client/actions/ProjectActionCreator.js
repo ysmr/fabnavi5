@@ -78,9 +78,11 @@ const ProjectActionCreator = {
     });
   },
 
-  editContent : function(){
+  editContent : function( project,content_array ){
     AppDispatcher.dispatch({
-      type : ActionTypes.EDIT_CONTENT　
+      type : ActionTypes.EDIT_CONTENT,
+      project : project,
+      delete_content : content_array
     });
   },
 

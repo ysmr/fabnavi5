@@ -14,6 +14,7 @@ let
     STEP = 10,
     _shooting = false,
     _project = null,
+    _delContent = [],
     _currentPage = 0,
     _uploadQueue = [
     ];
@@ -161,9 +162,12 @@ const ProjectStore = Object.assign({}, EventEmitter.prototype, {
   toggleDestroyContent:function(){
     /*
     for(let i =0; i<_project.length;i++){
-      for(let j =0; j<)
-      if(_project.content[i].figure.figure_id)
+      for(let j =0; j<_delContent.length;j++)
+      if(_project.content[i].figure.figure_id == _delContent[j]){
+        _project.content[i].figure["_destroy"] = true;
+      }
     }
+    this.emitChange();
     */
     return;
   },
@@ -396,13 +400,19 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
 
     case ActionTypes.EDIT_CONTENT:
       _project = action.project;
+      _delContent = action.delete_content;
+      console.log("action edit content:")
+      console.log(_project);
+      console.log(_delContent);
       //_figureid = action.figure_id;
+      /*
       ProjectStore.toggleDestroyContent();
       setTimeout(function(){
         ProjectActionCreator.updateProject({
           project:ProjectStore.getProject()
         });
       }, 0);
+      */
       break;
     default :
       break;

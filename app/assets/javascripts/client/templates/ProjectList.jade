@@ -2,7 +2,8 @@
 .projects
   - for (var i in this.state.projects )
    ProjectElement(
-    project=this.state.projects[i] 
-    isSelected=this.state.selected.index == i 
+    project=this.state.projects[i]
+    isSelected=this.state.selected.index == i
     isOpenMenu=this.state.selected.index == i && this.state.selected.openMenu
-    menuIndex=this.state.selected.menuIndex)
+    menuIndex=this.state.selected.menuIndex
+    menuType=this.state.type)

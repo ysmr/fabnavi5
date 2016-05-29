@@ -150,11 +150,20 @@ const ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     this.emitChange();
   },
 
-  changeMenuType : function(_menuType){
-    _selector.index = 0;
+  changeProjectsType : function(projectsType){
+    _selector.menuType = projectsType;
+    if(projectsType == "allProjects"){
+      setTimeout(function(){
+        ProjectActionCreator.getAllProjects();
+      }, 0);
+    }else{
+      setTimeout(function(){
+        ProjectActionCreator.getOwnProjects();
+      }, 0);
+    }
+    _selector.openMenu = false;
     _selector.menuIndex = 0;
-    _selector.menuType = _menuType;
-    this.emitChange();
+    _selector.index = 0;
   },
 
   getSelector : function(){
@@ -204,18 +213,12 @@ ProjectSelectorStore.dispatchToken = AppDispatcher.register(function( action ){
       ProjectSelectorStore.nextAction();
       break;
     case ActionTypes.MOVE_TOP:
-      location.hash = "#/manager/transit"
-      setTimeout(function(){
-        location.hash = "#/manager"
-      },0);
-      ProjectSelectorStore.changeMenuType("allProjects");
+      location.hash = "#/manager"
+      ProjectSelectorStore.changeProjectsType("allProjects");
       break;
     case ActionTypes.MOVE_MY_PROJECTS:
-      location.hash = "#/manager/transit"
-      setTimeout(function(){
-        location.hash = "#/manager/myprojects"
-      },0);
-      ProjectSelectorStore.changeMenuType("myprojects");
+      location.hash = "#/manager/myprojects"
+      ProjectSelectorStore.changeProjectsType("myprojects");
       break;
     case ActionTypes.MOVE_CONFIG:
       location.hash = "#/manager/transit"

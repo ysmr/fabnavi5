@@ -16,6 +16,15 @@ const ProjectActionCreator = {
     WebAPIUtils.getAllProjects();
   },
 
+  getOwnProjects : function(){
+    WebAPIUtils.getCurrentUserID();
+    const uid = localStorage.getItem("currentuser");
+    AppDispatcher.dispatch({
+      type : ActionTypes.PROJECTS_FETCH,
+    });
+    WebAPIUtils.getOwnProjects(uid);
+  },
+
   createProject : function( payload ){
     AppDispatcher.dispatch({
       type : ActionTypes.PROJECT_CREATE,
@@ -34,7 +43,7 @@ const ProjectActionCreator = {
 
   playProject : function( payload ){
     AppDispatcher.dispatch({
-      type : ActionTypes.PROJECT_PLAY,
+      type : ActionTypes.PROJECT_PLAY,　
       id   : payload.id
     });
   },
@@ -83,6 +92,13 @@ const ProjectActionCreator = {
       type : ActionTypes.EDIT_CONTENT,
       project : project,
       content_array : content_array
+    });
+  },
+
+  detailProject : function( payload ){
+    AppDispatcher.dispatch({
+      type : ActionTypes.PROJECT_DETAIL,　
+      id   : payload.id
     });
   },
 

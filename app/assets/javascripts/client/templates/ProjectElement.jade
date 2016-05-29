@@ -15,13 +15,13 @@ div(
     .date
       = this.getUploadDate()
     .description
-      = this.getDescription()
+      = this.getDescription()　
 
 
   - if( this.props.isOpenMenu )
     ul.actions
       if this.props.menuType == "allProjects"
-        li(className="action-box "+(this.props.menuIndex == 0 ? "selected-action" : "action"))
+        li(className="action-box "+(this.props.menuIndex == 0 ? "selected-action" : "action"),style="border-radius: 5px 5px 0px 0px;")
           img(src="/images/p_play.png")
           | Play
         li(className="action-box "+(this.props.menuIndex == 1 ? "selected-action" : "action"))

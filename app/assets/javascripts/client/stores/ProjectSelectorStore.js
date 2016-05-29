@@ -20,6 +20,7 @@ const ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
       index : 0,
       row   : 0,
       col   : 0,
+      menuType : "allProjects",
       openMenu : false,
       menuIndex : 0,
     };
@@ -69,6 +70,8 @@ const ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
     };
   },
   open : function (){
+    const _menuType = ProjectListStore.getProjectsType();
+    _selector.menuType = _menuType;
     _selector.openMenu = true;
     _selector.menuIndex = 0;
     ProjectSelectorStore.emitChange();

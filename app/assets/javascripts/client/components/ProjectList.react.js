@@ -21,7 +21,7 @@ const ProjectList = React.createClass({
     return {
       projects : ProjectListStore.getProjectsAll(),
       selected : ProjectSelectorStore.getSelector(),
-      type : ProjectListStore.getProjectsType(),
+      projectsType : ProjectListStore.getProjectsType(),
     };
   },
 

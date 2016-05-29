@@ -5,7 +5,7 @@ const
     projectElement = jade.compileFile(__dirname + '/../templates/ProjectElement.jade'),
     ProjectActionCreator = require('../actions/ProjectActionCreator');
 
-const ProjectElement = React.createClass({
+const ProjectElement = React.createClass({　
 
   propTypes : {
   },
@@ -31,7 +31,7 @@ const ProjectElement = React.createClass({
     }
 
     if( src == null || src == "" ){
-      src = "/images/kaffcop_icon/fab_samp.jpg";
+      src = "/images/kaffcop_icon/no_thumbnail.png";
     }
     return src;
   },

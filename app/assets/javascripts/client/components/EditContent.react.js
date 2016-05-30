@@ -8,7 +8,6 @@ const
     editContent = jade.compileFile(__dirname + '/../templates/EditContent.jade');
 
 const EditContent = React.createClass({
-//Navigation.jadeにあるactとsrc
   propTypes : {
     id   : React.PropTypes.number.isRequired,
     src   : React.PropTypes.string.isRequired,

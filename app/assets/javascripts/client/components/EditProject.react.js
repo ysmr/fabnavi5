@@ -71,6 +71,10 @@ const EditProject = React.createClass({
     ProjectActionCreator.editContent(a.project_id,this.props.id_array);
   },
 
+  delete_num: function(){
+    let num = "DELETE"+String(this.props.id_array.length);
+    return num;
+  },
 
 
 

@@ -162,6 +162,7 @@ const ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
       }, 0);
     }
     _selector.openMenu = false;
+    FSM.states.manager._child.instance.states.index._child.instance.transition("projects");
     _selector.menuIndex = 0;
     _selector.index = 0;
   },

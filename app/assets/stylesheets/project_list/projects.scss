@@ -202,7 +202,7 @@ ul.actions {
     list-style: none;
     height:$thumb-height/4;
     margin-bottom:0px;
-    padding-top: 5px;
+    //padding-top: 8px;
     img {
       width:$action-height * 0.8;
       margin:  $action-height * 0.1;
@@ -224,5 +224,5 @@ ul.actions {
 
 .logo{
   padding-top: 90px;
-  padding-left:5px;
+  padding-left:38px;
 }

@@ -59,8 +59,8 @@ body {
 }
 
 .thumbnail img {
-  width: 100%;
-  height:100%;
+  width: $thumb-width;
+  height:$thumb-height;
   border-radius: 7px 7px 0px 0px;
 }
 #status-icon {

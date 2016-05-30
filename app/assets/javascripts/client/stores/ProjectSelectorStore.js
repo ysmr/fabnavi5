@@ -58,7 +58,7 @@ const ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         _selector.openMenu = false;
         _selector.menuIndex = 0;
         break;
-      case 2:
+      case 3:
         setTimeout(function(){
           ProjectActionCreator.deleteProject( project );
         }, 0);
@@ -159,7 +159,7 @@ const ProjectSelectorStore = Object.assign({}, EventEmitter.prototype, {
         ProjectActionCreator.getAllProjects();
       }, 0);
     }else{
-      menuIndexSize = 2;
+      menuIndexSize = 3;
       setTimeout(function(){
         ProjectActionCreator.getOwnProjects();
       }, 0);

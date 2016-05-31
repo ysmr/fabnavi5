@@ -40,8 +40,9 @@ const MainView = function(){
   }
 
   function drawCalibrateLine(){
-    ctx.strokeStyle = ViewConfig.isCropped() ? "#00ff00" : "#0000ff";
+    ctx.strokeStyle = "#539ECD";
     ctx.beginPath();
+    ctx.lineWidth = 3.0;
     ctx.moveTo(0, cvs.height / 2);
     ctx.lineTo(cvs.width, cvs.height / 2);
     ctx.moveTo(cvs.width / 2, 0);
@@ -64,33 +65,33 @@ const MainView = function(){
     ctx.textBaseline = 'top';
     ctx.lineWidth = 5.0;
     ctx.strokeStyle = "#343434";
-    ctx.strokeText("C Key : Calibration Mode", cvs.width/8,cvs.height/8);
+    ctx.strokeText(" c : Calibration Mode", cvs.width/8,cvs.height/8);
     ctx.fillStyle = "#FFFFFF";
-    ctx.fillText("C Key : Calibration Mode", cvs.width/8,cvs.height/8);
+    ctx.fillText(" c : Calibration Mode", cvs.width/8,cvs.height/8);
     ctx.strokeStyle = "#343434";
-    ctx.strokeText("↑ Key : Expand", cvs.width/8,cvs.height/8+50);
+    ctx.strokeText(" ↑  : Zoom In", cvs.width/8,cvs.height/8+70);
     ctx.fillStyle = "#FFFFFF";
-    ctx.fillText("↑ Key : Expand", cvs.width/8,cvs.height/8+50);
+    ctx.fillText(" ↑  : Zoom In", cvs.width/8,cvs.height/8+70);
     ctx.strokeStyle = "#343434";
-    ctx.strokeText("↓ Key : Shrink", cvs.width/8,cvs.height/8+100);
+    ctx.strokeText(" ↓  : Zoom Out", cvs.width/8,cvs.height/8+140);
     ctx.fillStyle = "#FFFFFF";
-    ctx.fillText("↓ Key : Shrink", cvs.width/8,cvs.height/8+100);
+    ctx.fillText(" ↓  : Zoom Out", cvs.width/8,cvs.height/8+140);
     ctx.strokeStyle = "#343434";
-    ctx.strokeText("← Key : To Privious Page", cvs.width/8,cvs.height/8+150);
+    ctx.strokeText("← : To Privious Page", cvs.width/8,cvs.height/8+210);
     ctx.fillStyle = "#FFFFFF";
-    ctx.fillText("← Key : To Privious Page", cvs.width/8,cvs.height/8+150);
+    ctx.fillText("← : To Privious Page", cvs.width/8,cvs.height/8+210);
     ctx.strokeStyle = "#343434";
-    ctx.strokeText("→ Key : To Next Page", cvs.width/8,cvs.height/8+200);
+    ctx.strokeText("→ : To Next Page", cvs.width/8,cvs.height/8+280);
     ctx.fillStyle = "#FFFFFF";
-    ctx.fillText("→ Key : To Next Page", cvs.width/8,cvs.height/8+200);
+    ctx.fillText("→ : To Next Page", cvs.width/8,cvs.height/8+280);
     ctx.strokeStyle = "#343434";
-    ctx.strokeText("→ Key : To Next Page", cvs.width/8,cvs.height/8+250);
+    ctx.strokeText("→ : To Next Page", cvs.width/8,cvs.height/8+350);
     ctx.fillStyle = "#FFFFFF";
-    ctx.fillText("→ Key : To Next Page", cvs.width/8,cvs.height/8+250);
+    ctx.fillText("→ : To Next Page", cvs.width/8,cvs.height/8+350);
     ctx.strokeStyle = "#343434";
-    ctx.strokeText("esc Key : Back To Home", cvs.width/8,cvs.height/8+300);
+    ctx.strokeText("esc : Back To Home", cvs.width/8,cvs.height/8+420);
     ctx.fillStyle = "#FFFFFF";
-    ctx.fillText("esc Key : Back To Home", cvs.width/8,cvs.height/8+300);
+    ctx.fillText("esc : Back To Home", cvs.width/8,cvs.height/8+420);
 
   }
 

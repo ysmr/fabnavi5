@@ -35,16 +35,24 @@ const EditProject = React.createClass({
     this.setState(this.getStateFromStores());
   },
   getInitialState: function(){
-    return this.getStateFromStores();
+    return  {
+          name : "",
+          description : "",
+        },
+        this.getStateFromStores();
   },
 
   getDefaultProps: function(){
     return {
+      project : null,
       id_array : [],
+      name: "",
+      description:"",
     };
   },
 
   getImage: function(){
+    console.log("getImage ouou");
   let project ={};
   project.content_array=[];
   project.figure=[];
@@ -74,6 +82,13 @@ const EditProject = React.createClass({
   delete_num: function(){
     let num = "DELETE"+String(this.props.id_array.length);
     return num;
+  },
+
+  handleNameChange : function( e ){
+    this.setState({ name : e.target.value });
+  },
+  handleDescriptionChange : function( e ){
+    this.setState({ description : e.target.value });
   },
 
 

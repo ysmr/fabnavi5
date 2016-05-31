@@ -1,15 +1,33 @@
-- var selected_num = String(this.props.id_array.length);
+- var contents = this.getImage();
 div.editproject
-  h1 EditProject 
-  button.btn(type ="submit" onClick = this.onclick) D E L E T E
-  
+  h1 EditProject
   hr
-  - var contents = this.getImage();
+  h1.subtitle Edit Name and Description
+  form.form-box-edit
+    .field_edit
+      p.edit Name
+      input.form-edit( 
+        onChange=this.handleNameChange 　
+        value=this.state.name
+        type="text"
+        ) 
+    .field_edit
+      p.edit Description
+      textarea.form-edit(
+       onChange=this.handleDescriptionChange 
+       value=this.state.description
+       rows=10
+       )
+  button.btn(type ="submit" onClick = this.onclick) C O N F I R M
+  hr
+  h1.subtitle Delete Contents
+  button.btn(type ="submit" onClick = this.onclick) D E L E T E
+
   div.edit-pic
     - for(var i in contents.content_array) 
       EditContent(
         id=contents.figure_id[i]
         src=contents.figure[i]
-        id_array = this.props.id_array ) 
+        id_array = this.props.id_array )  
     
       

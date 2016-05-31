@@ -52,11 +52,46 @@ const MainView = function(){
   function drawWaitingMessage(){
     ctx.font = "100px NotoSans-Regular, sans-serif";
     ctx.textBaseline = 'top';
-    ctx.lineWidth = 10.0;
-    ctx.strokeStyle = "#777777";
+    ctx.lineWidth = 5.0;
+    ctx.strokeStyle = "#343434";
     ctx.strokeText("Now Loading...", cvs.width/2-300,cvs.height/2);
     ctx.fillStyle = "#FFFFFF";
     ctx.fillText("Now Loading...", cvs.width/2-300,cvs.height/2);
+  }
+
+  function drawInstructionMessage(){
+    ctx.font = "40px NotoSans-Regular, sans-serif";
+    ctx.textBaseline = 'top';
+    ctx.lineWidth = 5.0;
+    ctx.strokeStyle = "#343434";
+    ctx.strokeText("C Key : Calibration Mode", cvs.width/8,cvs.height/8);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText("C Key : Calibration Mode", cvs.width/8,cvs.height/8);
+    ctx.strokeStyle = "#343434";
+    ctx.strokeText("↑ Key : Expand", cvs.width/8,cvs.height/8+50);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText("↑ Key : Expand", cvs.width/8,cvs.height/8+50);
+    ctx.strokeStyle = "#343434";
+    ctx.strokeText("↓ Key : Shrink", cvs.width/8,cvs.height/8+100);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText("↓ Key : Shrink", cvs.width/8,cvs.height/8+100);
+    ctx.strokeStyle = "#343434";
+    ctx.strokeText("← Key : To Privious Page", cvs.width/8,cvs.height/8+150);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText("← Key : To Privious Page", cvs.width/8,cvs.height/8+150);
+    ctx.strokeStyle = "#343434";
+    ctx.strokeText("→ Key : To Next Page", cvs.width/8,cvs.height/8+200);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText("→ Key : To Next Page", cvs.width/8,cvs.height/8+200);
+    ctx.strokeStyle = "#343434";
+    ctx.strokeText("→ Key : To Next Page", cvs.width/8,cvs.height/8+250);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText("→ Key : To Next Page", cvs.width/8,cvs.height/8+250);
+    ctx.strokeStyle = "#343434";
+    ctx.strokeText("esc Key : Back To Home", cvs.width/8,cvs.height/8+300);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText("esc Key : Back To Home", cvs.width/8,cvs.height/8+300);
+
   }
 
   function drawShootingMessage(){
@@ -107,6 +142,7 @@ const MainView = function(){
     init:init,
     draw:draw,
     showWaitMessage:drawWaitingMessage,
+    showInstructionMessage:drawInstructionMessage,
     showCalibrateLine:drawCalibrateLine,
     clear:clear,
     redraw:redraw,

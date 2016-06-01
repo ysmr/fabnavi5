@@ -17,8 +17,7 @@ function setHeader(){
 }
 
 function clearHeader(){
-  localStorage.removeItem("header");
-  localStorage.removeItem("currentuser");
+  localStorage.clear();
 }
 
 function loadHeader(){

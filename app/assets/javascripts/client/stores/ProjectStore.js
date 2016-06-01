@@ -408,7 +408,7 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
     case ActionTypes.EDIT_CONTENT:
       _project = action.project;
       _delContent = action.content_array;
-      console.log("action edit content:")
+      console.log("action edit content:");
       console.log(_project);
       console.log(_delContent);
       ProjectStore.toggleDestroyContent();

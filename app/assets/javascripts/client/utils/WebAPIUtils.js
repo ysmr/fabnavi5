@@ -17,7 +17,8 @@ function setHeader(){
 }
 
 function clearHeader(){
-  localStorage.clear();
+  localStorage.removeItem('header');
+  localStorage.removeItem("currentuser");
 }
 
 function loadHeader(){
@@ -358,14 +359,12 @@ const WebAPIUtils = {
     setHeader();
   },
 
-  signedOut : function(){
-    ServerActionCreator.signOut();
-  },
-
   signOut : function(){
     clearHeader();
     window.location.reload();
-    signedOut();
+    setTimeout(function(){
+      ServerActionCreator.signOut();
+    }, 0);
   }
 };
 

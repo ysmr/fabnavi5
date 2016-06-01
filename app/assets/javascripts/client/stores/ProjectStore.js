@@ -180,6 +180,7 @@ const ProjectStore = Object.assign({}, EventEmitter.prototype, {
   changeTitle:function(){
     _project.name = _name;
     _project.description = _description;
+    _project._edited = true;
     this.emitChange();
   },
 
@@ -432,11 +433,13 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       _description = action.description;
       console.log("ProjectStore: " + _name);
       ProjectStore.changeTitle();
-      setTimeout(function(){
-        ProjectActionCreator.updateProject({
-          project:ProjectStore.getProject()
-        });
-      }, 0);
+      if(window.confirm('Ok?')){
+        setTimeout(function(){
+          ProjectActionCreator.updateProject({
+            project:ProjectStore.getProject()
+          });
+        }, 0);
+      }
       break;
     default :
       break;

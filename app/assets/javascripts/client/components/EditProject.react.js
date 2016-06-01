@@ -1,6 +1,7 @@
 const
     React = require('react'),
     EditContent = require('./EditContent.react.js'),
+    EditTitle = require('./EditTitle.react.js'),
     ProjectListStore = require('../stores/ProjectListStore'),
     ProjectStore = require('../stores/ProjectStore'),
     ProjectActionCreator = require('../actions/ProjectActionCreator'),
@@ -46,8 +47,6 @@ const EditProject = React.createClass({
     return {
       project : null,
       id_array : [],
-      name: "",
-      description:"",
     };
   },
 
@@ -74,10 +73,11 @@ const EditProject = React.createClass({
   },
 
   onclick: function(){
-    var a = this.getImage();
+    let a = this.getImage();
     console.log("button onclick: " + this.props.id_array);
     ProjectActionCreator.editContent(a.project_id,this.props.id_array);
   },
+
 
   delete_num: function(){
     let num = "DELETE"+String(this.props.id_array.length);

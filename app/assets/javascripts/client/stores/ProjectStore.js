@@ -14,6 +14,8 @@ let
     STEP = 10,
     _shooting = false,
     _project = null,
+    _name = null,
+    _description = null,
     _delContent = [],
     _currentPage = 0,
     _uploadQueue = [
@@ -172,6 +174,12 @@ const ProjectStore = Object.assign({}, EventEmitter.prototype, {
         }
       }
     }
+    this.emitChange();
+  },
+
+  changeTitle:function(){
+    _project.name = _name;
+    _project.description = _description;
     this.emitChange();
   },
 
@@ -412,6 +420,18 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       console.log(_project);
       console.log(_delContent);
       ProjectStore.toggleDestroyContent();
+      setTimeout(function(){
+        ProjectActionCreator.updateProject({
+          project:ProjectStore.getProject()
+        });
+      }, 0);
+      break;
+    case ActionTypes.EDIT_TITLE:
+      _project = action.project;
+      _name = action.name;
+      _description = action.description;
+      console.log("ProjectStore: " + _name);
+      ProjectStore.changeTitle();
       setTimeout(function(){
         ProjectActionCreator.updateProject({
           project:ProjectStore.getProject()

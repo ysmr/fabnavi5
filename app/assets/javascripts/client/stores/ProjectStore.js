@@ -433,7 +433,7 @@ ProjectStore.dispatchToken = AppDispatcher.register(function( action ){
       _description = action.description;
       console.log("ProjectStore: " + _name);
       ProjectStore.changeTitle();
-      if(window.confirm('Ok?')){
+      if(confirm('Ok?')){
         setTimeout(function(){
           ProjectActionCreator.updateProject({
             project:ProjectStore.getProject()
